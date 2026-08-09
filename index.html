@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZICO Energy Drink | UNLEASH YOUR ENERGY</title>
+    
+    <!-- React & ReactDOM CDN -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    
+    <!-- Babel Compiler for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome Real Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        zicoBlue: '#0066ff',
+                        zicoOrange: '#ff6600',
+                        zicoPurple: '#8a2be2',
+                        zicoGreen: '#00cc66',
+                        zicoPink: '#ff66cc',
+                        zicoDark: '#050508',
+                        zicoCard: '#0f1019'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&display=swap');
+        
+        body {
+            background-color: #050508;
+            color: #ffffff;
+            font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .glow-text {
+            text-shadow: 0 0 20px rgba(255, 102, 0, 0.6);
+        }
+
+        .product-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0d0e15;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #ff6600;
+            border-radius: 4px;
+        }
+
+        .lightning-bg {
+            background: radial-gradient(circle at 50% 30%, rgba(255, 102, 0, 0.15) 0%, rgba(5, 5, 8, 1) 70%);
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // وێنەی سەرەکی بەنەر و قوتییەکان
+        const HERO_BANNER = "uploaded:image.png-0f40c372-103d-4a8c-a266-104cd22cb039";
+
+        const PRODUCTS = [
+            {
+                id: 'zico-60',
+                name: 'ZICO 60 - Fruit Candy',
+                number: '60',
+                flavorBadini: 'تاما حەلویێن میوا (بێ شەکر)',
+                flavorSorani: 'تامی شیرینی میوەیی (بێ شەکر)',
+                flavorArabic: 'نكهة حلویات الفواكه (خالي من السكر)',
+                tagline: 'ENERGY • INSPIRED BY SPEED',
+                image: 'uploaded:image.png-8070e764-3ac0-42f4-9fa2-f79bfafe88d0',
+                color: 'from-pink-500/30 via-rose-900/20 to-transparent',
+                borderColor: 'border-pink-500/40',
+                badgeBg: 'bg-pink-500 text-white',
+                price: '1,250 IQD',
+                size: '250 ml',
+                sugar: 'No Sugar / No Carbs',
+                caffeine: 'Caffeine | Taurine | Vitamins',
+                benefits: [
+                    'تامی ناوازەی شیرینی میوەیی بێ بونی شەکر',
+                    'پڕ لە ڤیتامین B بۆ پاراستنی وزەی لەش',
+                    'گونجاو بۆ دایت و وەرزشوانان'
+                ]
+            },
+            {
+                id: 'zico-55',
+                name: 'ZICO 55 - Sugar Free',
+                number: '55',
+                flavorBadini: 'تاما ئۆریجینال بێ شەکر',
+                flavorSorani: 'تامی ئۆریجیناڵ بێ شەکر',
+                flavorArabic: 'الطعم الأصلي خالي من السكر',
+                tagline: 'BOOST • REFRESH • REVIVE',
+                image: 'uploaded:image.png-e9fda190-3db4-40e1-86bb-e9dfd0a950ff',
+                color: 'from-slate-400/30 via-slate-800/20 to-transparent',
+                borderColor: 'border-slate-400/40',
+                badgeBg: 'bg-slate-200 text-slate-900',
+                price: '1,000 IQD',
+                size: '250 ml',
+                sugar: 'Sugar Free',
+                caffeine: 'High Caffeine Content',
+                benefits: [
+                    'رێژەی بەرزی کافاین بۆ تەرکیزێکی خێرا',
+                    'بێ کالۆری و شەکر',
+                    'دابینکردنی چاڵاکی دەستبەجێ'
+                ]
+            },
+            {
+                id: 'zico-66',
+                name: 'ZICO 66 - Original Blue',
+                number: '66',
+                flavorBadini: 'تاما ئۆریجینال یا کلاسیک',
+                flavorSorani: 'تامی ئۆریجیناڵی کلاسیک',
+                flavorArabic: 'النكهة الأصلية الكلاسيكية',
+                tagline: 'ENERGY • INSPIRED BY SPEED',
+                image: 'uploaded:image.png-781278e6-769c-4a2d-a46a-30b748d35580',
+                color: 'from-blue-600/30 via-indigo-950/20 to-transparent',
+                borderColor: 'border-blue-500/40',
+                badgeBg: 'bg-blue-500 text-white',
+                price: '1,000 IQD',
+                size: '250 ml',
+                sugar: 'Standard Sugar',
+                caffeine: 'Caffeine | Taurine | Vitamins',
+                benefits: [
+                    'تامی کلاسیکی پڕ لە وزە و درەوشانەوە',
+                    'بەهێزکردنی تەرکیز و بڕیاردان',
+                    'دابینکردنی تۆرین بۆ جووڵەی ماسولکەکان'
+                ]
+            },
+            {
+                id: 'zico-63',
+                name: 'ZICO 63 - Açaí',
+                number: '63',
+                flavorBadini: 'تاما تایبەتا ئەسایی (Açaí)',
+                flavorSorani: 'تامی تایبەتی ئەسایی (Açaí)',
+                flavorArabic: 'نكهة الآساي المميزة',
+                tagline: 'ENERGY • INSPIRED BY SPEED',
+                image: 'uploaded:image.png-39c6c5f2-a20d-49d6-a4ce-5e564b2b2194',
+                color: 'from-purple-600/30 via-fuchsia-950/20 to-transparent',
+                borderColor: 'border-purple-500/40',
+                badgeBg: 'bg-purple-500 text-white',
+                price: '1,250 IQD',
+                size: '250 ml',
+                sugar: 'Natural Fruit Sugar',
+                caffeine: 'Caffeine | Taurine | Vitamins',
+                benefits: [
+                    'عەمباری دژەئۆکسێنەرەکان بە تامی ئەسایی',
+                    'تايبەت ب كەسێن حەز ب تامیێن میوەیی دکەن',
+                    'بەهێزکەری سیستم و چالاکی'
+                ]
+            },
+            {
+                id: 'zico-69',
+                name: 'ZICO 69 - Speed Orange',
+                number: '69',
+                flavorBadini: 'تاما پڕتەقاڵا پر وزە',
+                flavorSorani: 'تامی پرتەقاڵی پڕ وزە',
+                flavorArabic: 'نكهة البرتقال المليئة بالطاقة',
+                tagline: 'ENERGY • INSPIRED BY SPEED',
+                image: 'uploaded:image.png-02532137-9531-4bb7-8c8a-2ba628a9f381',
+                color: 'from-orange-500/30 via-amber-950/20 to-transparent',
+                borderColor: 'border-orange-500/40',
+                badgeBg: 'bg-orange-500 text-white',
+                price: '1,000 IQD',
+                size: '250 ml',
+                sugar: 'Standard Sugar',
+                caffeine: 'Caffeine | Taurine | Vitamins',
+                benefits: [
+                    'تامی فێنکی پرتەقاڵ بە وزەیەکی بێسنوور',
+                    'سەرچاوەی بەهێزی ڤیتامین',
+                    'گەیاندنی خێرایی بە ڕۆژەکەت'
+                ]
+            },
+            {
+                id: 'zico-65',
+                name: 'ZICO 65 - Melon Mojito',
+                number: '65',
+                flavorBadini: 'تاما کاڵەکی / گۆزێ فریش',
+                flavorSorani: 'تامی کاڵەکی تەڕ و تازە',
+                flavorArabic: 'نكهة الشمام المنعشة',
+                tagline: 'ENERGY • INSPIRED BY SPEED',
+                image: 'uploaded:image.png-f6acc412-36e0-4deb-a0d7-14ffeab5e413',
+                color: 'from-emerald-600/30 via-green-950/20 to-transparent',
+                borderColor: 'border-emerald-500/40',
+                badgeBg: 'bg-emerald-500 text-white',
+                price: '1,000 IQD',
+                size: '250 ml',
+                sugar: 'Standard Sugar',
+                caffeine: 'Caffeine | Taurine | Vitamins',
+                benefits: [
+                    'فێنککەرەوەی سەرەکی وەرز گەرمی',
+                    'تامی گۆزێ و موهیتۆی جیاواز',
+                    'بەهێزکردنی ئاستی فیزیکی'
+                ]
+            }
+        ];
+
+        // دەقی زمانەکان
+        const TRANSLATIONS = {
+            badini: {
+                navShop: 'بەرهەم (Shopping)',
+                navAgents: 'بریکارێن سەرەکی',
+                navDev: 'پەڕێ دێڤلۆپەری ⚡',
+                heroTitle: 'وزەیەکا بێسنوور بۆ جەستە و مێشکێ تە',
+                heroSub: 'نۆشابا وزەبەخشا ZICO ب بەرزترین کوالیتی دگەل پێکهاتێن کافاین، تۆرین و ڤیتامینان.',
+                ourProducts: 'بەرهەمێن ZICO Energy',
+                selectFlavor: 'تاما دڵخواز هەڵبژێرە و ڕاستەوخۆ داوا بکە',
+                addToCart: 'زێدەکرن بۆ سەبەتێ 🛒',
+                details: 'زانیاری 🔍',
+                agentsTitle: 'بریکارێن سەرەکی و پەیوەندی',
+                agentsSub: 'ژبوو داواکرنا کۆم یان تاک یان بونە مەندوب، ڕاستەوخۆ پەیوەندیێ ب بریکارێ سەرەکی بکن.',
+                badinanAgent: 'بریکارێ سەرەکی ل بادینان',
+                erbilAgent: 'بریکارێ سەرەکی ل هەولێر',
+                devTitle: 'پەڕێ دیزاینەر & دێڤلۆپەری',
+                devBio: 'ئەزموون د دروستکرنا باشترین و مۆدێرنترین سیستەم، ئاپڵیکەیشن و وێبسایتان دا ب بەرزترین کوالیتی و بهایەکێ زۆر گونجایی.',
+                cartTitle: 'سەبەتەیا داواکاریان',
+                sendWhatsapp: 'ناردنا داواکاریێ ب واتسئاپێ 💬',
+                emptyCart: 'سەبەتەیا تە بەتالە!',
+                services: 'خزمەتگوزاریێن ئەز پێشکێش دکەم:'
+            },
+            sorani: {
+                navShop: 'بەرهەمەکان (Shopping)',
+                navAgents: 'بریکارە سەرەکییەکان',
+                navDev: 'پەڕەی دیڤلۆپەر ⚡',
+                heroTitle: 'وزەیەکی بێسنوور بۆ جەستە و مێشکت',
+                heroSub: 'نۆشابەی وزەبەخشی ZICO بە بەرزترین کوالیتی لەگەڵ پێکهاتەکانی کافاین، تۆرین و ڤیتامینەکان.',
+                ourProducts: 'بەرهەمەکانی ZICO Energy',
+                selectFlavor: 'تامی دڵخوازی خۆت هەڵبژێرە و ڕاستەوخۆ داوای بکە',
+                addToCart: 'زیادکردن بۆ سەبەتە 🛒',
+                details: 'زانیاری 🔍',
+                agentsTitle: 'بریکارە سەرەکییەکان و پەیوەندی',
+                agentsSub: 'بۆ داواکردنی کۆم یان تاک یان بوون بە مەندوب، ڕاستەوخۆ پەیوەندی بە بریکاری سەرەکی بکەن.',
+                badinanAgent: 'بریکاری سەرەکی لە بادینان',
+                erbilAgent: 'بریکاری سەرەکی لە هەولێر',
+                devTitle: 'پەڕەی دیزاینەر & دیڤلۆپەر',
+                devBio: 'ئەزموون لە دروستکردنی باشترین و مۆدێرنترین سیستەم، ئەپڵیکەیشن و وێبسایت بە کوالیتی زۆر بەرز و بە نرخێکی زۆر گونجاو.',
+                cartTitle: 'سەبەتەی داواکارییەکان',
+                sendWhatsapp: 'ناردنی داواکاری لە واتسئاپ 💬',
+                emptyCart: 'سەبەتەکەت بەتاڵە!',
+                services: 'ئەو خزمەتگوزارییانەی پێشکەشی دەکەم:'
+            },
+            arabic: {
+                navShop: 'المنتجات (Shopping)',
+                navAgents: 'الوكلاء المعتمدون',
+                navDev: 'صفحة المطور ⚡',
+                heroTitle: 'طاقة لا حدود لها لجسمك وعقلك',
+                heroSub: 'مشروب الطاقة ZICO بأعلى جودة مع الكافيين والتورين والفيتامينات المقوية.',
+                ourProducts: 'منتجات ZICO Energy',
+                selectFlavor: 'اختر نكهتك المفضلة واطلب مباشرة',
+                addToCart: 'إضافة إلى السلة 🛒',
+                details: 'التفاصيل 🔍',
+                agentsTitle: 'الوكلاء المعتمدون والتواصل',
+                agentsSub: 'لطلبات الجملة والمفرد أو لتصبح مندوباً، اتصل مباشرة بالوكيل المعتمد.',
+                badinanAgent: 'الوكيل الرئيسي في بادينان',
+                erbilAgent: 'الوكيل الرئيسي في أربيل',
+                devTitle: 'صفحة المصمم والمطور',
+                devBio: 'خبرة في تصميم وتطوير أحدث الأنظمة، التطبيقات، والمواقع الإلكترونية بأعلى جودة وأنسب الأسعار.',
+                cartTitle: 'سلة الطلبات',
+                sendWhatsapp: 'إرسال الطلب عبر الواتساب 💬',
+                emptyCart: 'سلتك فارغة حالياً!',
+                services: 'الخدمات التي أقدمها:'
+            }
+        };
+
+        function App() {
+            const [lang, setLang] = useState('badini');
+            const [activeTab, setActiveTab] = useState('shop');
+            const [selectedProduct, setSelectedProduct] = useState(null);
+            const [cart, setCart] = useState([]);
+            const [cartOpen, setCartOpen] = useState(false);
+
+            const t = TRANSLATIONS[lang];
+
+            const addToCart = (product) => {
+                const existing = cart.find(item => item.id === product.id);
+                if (existing) {
+                    setCart(cart.map(item => item.id === product.id ? { ...item, qty: item.qty + 1 } : item));
+                } else {
+                    setCart([...cart, { ...product, qty: 1 }]);
+                }
+            };
+
+            const removeFromCart = (id) => {
+                setCart(cart.filter(item => item.id !== id));
+            };
+
+            const sendCartOrder = () => {
+                if (cart.length === 0) return;
+                let text = `داواکاری نوێی ZICO Energy:%0A%0A`;
+                cart.forEach((item, index) => {
+                    const flavor = lang === 'badini' ? item.flavorBadini : lang === 'sorani' ? item.flavorSorani : item.flavorArabic;
+                    text += `${index + 1}. ${item.name} (${flavor}) - بڕ: ${item.qty}%0A`;
+                });
+                window.open(`https://wa.me/9647504696517?text=${text}`, '_blank');
+            };
+
+            const getFlavorText = (prod) => {
+                if (lang === 'badini') return prod.flavorBadini;
+                if (lang === 'sorani') return prod.flavorSorani;
+                return prod.flavorArabic;
+            };
+
+            return (
+                <div className="min-h-screen flex flex-col bg-[#050508] text-slate-100 selection:bg-orange-500 selection:text-white">
+                    
+                    {/* Header */}
+                    <header className="sticky top-0 z-50 bg-[#090a12]/90 backdrop-blur-xl border-b border-slate-800/80 px-4 lg:px-8 py-3">
+                        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+                            
+                            {/* Logo */}
+                            <div className="flex items-center gap-3 cursor-pointer" onClick={() => setActiveTab('shop')}>
+                                <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-orange-500 via-amber-500 to-yellow-400 flex items-center justify-center text-2xl text-slate-950 font-black shadow-lg shadow-orange-500/30">
+                                    ⚡
+                                </div>
+                                <div>
+                                    <h1 className="text-2xl font-black tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-100 to-orange-400">
+                                        ZICO
+                                    </h1>
+                                    <p className="text-[9px] tracking-widest text-orange-400 uppercase font-black -mt-1">
+                                        ENERGY DRINK
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Center Navigation Links */}
+                            <nav className="hidden md:flex items-center gap-1 bg-slate-900/90 p-1.5 rounded-2xl border border-slate-800">
+                                <button 
+                                    onClick={() => setActiveTab('shop')}
+                                    className={`px-5 py-2 rounded-xl text-xs font-bold transition-all ${activeTab === 'shop' ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/30' : 'text-slate-400 hover:text-white'}`}
+                                >
+                                    {t.navShop}
+                                </button>
+                                <button 
+                                    onClick={() => setActiveTab('distributors')}
+                                    className={`px-5 py-2 rounded-xl text-xs font-bold transition-all ${activeTab === 'distributors' ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30' : 'text-slate-400 hover:text-white'}`}
+                                >
+                                    {t.navAgents}
+                                </button>
+                                <button 
+                                    onClick={() => setActiveTab('developer')}
+                                    className={`px-5 py-2 rounded-xl text-xs font-bold transition-all ${activeTab === 'developer' ? 'bg-purple-600 text-white shadow-lg shadow-purple-600/30' : 'text-slate-400 hover:text-white'}`}
+                                >
+                                    {t.navDev}
+                                </button>
+                            </nav>
+
+                            {/* Right Controls: Language Selector & Cart */}
+                            <div className="flex items-center gap-3">
+                                
+                                {/* Language Selector */}
+                                <div className="relative bg-slate-900 border border-slate-800 rounded-xl px-2 py-1 flex items-center text-xs font-bold">
+                                    <span className="mr-1 text-slate-400">🌐</span>
+                                    <select 
+                                        value={lang} 
+                                        onChange={(e) => setLang(e.target.value)}
+                                        className="bg-transparent text-slate-200 outline-none cursor-pointer py-1"
+                                    >
+                                        <option value="badini" className="bg-slate-900 text-white">کوردی (بادینی)</option>
+                                        <option value="sorani" className="bg-slate-900 text-white">کوردی (سۆرانی)</option>
+                                        <option value="arabic" className="bg-slate-900 text-white">العربية</option>
+                                    </select>
+                                </div>
+
+                                {/* Cart Button */}
+                                <button 
+                                    onClick={() => setCartOpen(true)}
+                                    className="relative p-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-orange-500/50 transition-all text-slate-200"
+                                >
+                                    <span className="text-lg">🛒</span>
+                                    {cart.length > 0 && (
+                                        <span className="absolute -top-1.5 -right-1.5 bg-orange-500 text-white text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center animate-pulse">
+                                            {cart.reduce((a, b) => a + b.qty, 0)}
+                                        </span>
+                                    )}
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Mobile Navigation bar */}
+                        <div className="flex md:hidden items-center justify-around mt-3 pt-2 border-t border-slate-800/60 text-xs font-bold">
+                            <button 
+                                onClick={() => setActiveTab('shop')}
+                                className={`pb-1 ${activeTab === 'shop' ? 'text-orange-400 border-b-2 border-orange-400' : 'text-slate-400'}`}
+                            >
+                                {t.navShop}
+                            </button>
+                            <button 
+                                onClick={() => setActiveTab('distributors')}
+                                className={`pb-1 ${activeTab === 'distributors' ? 'text-blue-400 border-b-2 border-blue-400' : 'text-slate-400'}`}
+                            >
+                                {t.navAgents}
+                            </button>
+                            <button 
+                                onClick={() => setActiveTab('developer')}
+                                className={`pb-1 ${activeTab === 'developer' ? 'text-purple-400 border-b-2 border-purple-400' : 'text-slate-400'}`}
+                            >
+                                {t.navDev}
+                            </button>
+                        </div>
+                    </header>
+
+                    {/* Main Content */}
+                    <main className="flex-grow">
+                        
+                        {/* TAB 1: SHOPPING & PRODUCTS */}
+                        {activeTab === 'shop' && (
+                            <div>
+                                {/* Hero Section with Uploaded Unleash Banner */}
+                                <section className="relative overflow-hidden py-10 px-4 lg:px-8 lightning-bg">
+                                    <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                                        
+                                        <div className="lg:col-span-5 text-center lg:text-right z-10">
+                                            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-black uppercase tracking-widest mb-4">
+                                                <span>⚡ INSPIRED BY SPEED</span>
+                                            </div>
+                                            <h2 className="text-4xl md:text-6xl font-black text-white leading-tight mb-4">
+                                                UNLEASH <br />
+                                                <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-pink-500 to-purple-400 glow-text">
+                                                    YOUR ENERGY
+                                                </span>
+                                            </h2>
+                                            <p className="text-slate-300 text-base md:text-lg mb-6 leading-relaxed">
+                                                {t.heroSub}
+                                            </p>
+                                            
+                                            <div className="grid grid-cols-3 gap-3 max-w-md mx-auto lg:mx-0 mb-8 text-center text-xs">
+                                                <div className="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800">
+                                                    <span className="block text-lg mb-1">⚡</span>
+                                                    <span className="font-bold text-slate-200">CAFFEINE</span>
+                                                </div>
+                                                <div className="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800">
+                                                    <span className="block text-lg mb-1">🧪</span>
+                                                    <span className="font-bold text-slate-200">TAURINE</span>
+                                                </div>
+                                                <div className="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800">
+                                                    <span className="block text-lg mb-1">💊</span>
+                                                    <span className="font-bold text-slate-200">VITAMINS</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="lg:col-span-7 relative flex justify-center">
+                                            <div className="relative w-full max-w-2xl rounded-3xl overflow-hidden border border-orange-500/30 shadow-2xl shadow-orange-500/10 group">
+                                                <img 
+                                                    src={HERO_BANNER} 
+                                                    alt="ZICO Unleash Your Energy Showcase" 
+                                                    className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
+                                                />
+                                                <div className="absolute inset-0 bg-gradient-to-t from-[#050508] via-transparent to-transparent opacity-40"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                {/* Products Grid */}
+                                <section className="max-w-7xl mx-auto px-4 lg:px-8 py-12">
+                                    <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-4 border-b border-slate-800">
+                                        <div>
+                                            <h3 className="text-3xl font-black text-white">{t.ourProducts}</h3>
+                                            <p className="text-slate-400 text-sm mt-1">{t.selectFlavor}</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                                        {PRODUCTS.map((prod) => (
+                                            <div 
+                                                key={prod.id} 
+                                                className={`product-card bg-[#0b0c14] border ${prod.borderColor} rounded-3xl overflow-hidden flex flex-col justify-between relative group`}
+                                            >
+                                                <div className={`absolute inset-0 bg-gradient-to-b ${prod.color} opacity-40 group-hover:opacity-70 transition-opacity`}></div>
+
+                                                <div className="p-6 relative z-10">
+                                                    <div className="flex items-center justify-between mb-4">
+                                                        <span className={`px-3 py-1 rounded-full text-xs font-black ${prod.badgeBg}`}>
+                                                            # {prod.number}
+                                                        </span>
+                                                        <span className="text-[10px] font-bold text-slate-400 tracking-wider uppercase">
+                                                            {prod.size}
+                                                        </span>
+                                                    </div>
+
+                                                    <div className="h-72 flex items-center justify-center my-2">
+                                                        <img 
+                                                            src={prod.image} 
+                                                            alt={prod.name} 
+                                                            className="h-64 object-contain filter drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)] group-hover:scale-110 transition-transform duration-500"
+                                                        />
+                                                    </div>
+
+                                                    <h4 className="text-xl font-black text-white mt-2">{prod.name}</h4>
+                                                    <p className="text-orange-400 text-xs font-bold mt-1 mb-3">{getFlavorText(prod)}</p>
+                                                    <p className="text-slate-400 text-[11px] font-medium">{prod.caffeine}</p>
+                                                </div>
+
+                                                <div className="p-6 pt-0 relative z-10 flex items-center gap-3">
+                                                    <button 
+                                                        onClick={() => setSelectedProduct(prod)}
+                                                        className="flex-1 py-3 bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700/80 font-bold rounded-xl text-xs transition-all text-center"
+                                                    >
+                                                        {t.details}
+                                                    </button>
+                                                    <button 
+                                                        onClick={() => addToCart(prod)}
+                                                        className="flex-1 py-3 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-xl text-xs transition-all text-center shadow-lg shadow-orange-500/20"
+                                                    >
+                                                        {t.addToCart}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </section>
+                            </div>
+                        )}
+
+                        {/* TAB 2: DISTRIBUTORS & AGENTS */}
+                        {activeTab === 'distributors' && (
+                            <div className="max-w-5xl mx-auto px-4 py-12">
+                                <div className="text-center mb-12">
+                                    <h2 className="text-3xl md:text-5xl font-black text-white mb-3">
+                                        {t.agentsTitle}
+                                    </h2>
+                                    <p className="text-slate-400 text-sm md:text-base max-w-xl mx-auto">
+                                        {t.agentsSub}
+                                    </p>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                    {/* Badinan Agent */}
+                                    <div className="bg-[#0c0d16] border border-blue-500/30 rounded-3xl p-8 relative overflow-hidden flex flex-col justify-between">
+                                        <div className="absolute top-0 right-0 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl"></div>
+                                        
+                                        <div>
+                                            <div className="inline-block px-3 py-1 rounded-lg bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-bold mb-4">
+                                                دەڤەرا بادینان / دهۆک
+                                            </div>
+                                            <h3 className="text-2xl font-black text-white mb-6">{t.badinanAgent}</h3>
+
+                                            <div className="space-y-4 mb-8">
+                                                <a 
+                                                    href="https://wa.me/9647504696517"
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                    className="flex items-center justify-between p-4 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 transition-all group"
+                                                >
+                                                    <div className="flex items-center gap-3">
+                                                        <i className="fa-brands fa-whatsapp text-2xl text-emerald-400"></i>
+                                                        <div>
+                                                            <p className="text-xs text-slate-400 font-medium">Korek Phone & WhatsApp</p>
+                                                            <p className="text-base font-bold text-white tracking-wider dir-ltr" style={{direction: 'ltr'}}>+964 750 469 6517</p>
+                                                        </div>
+                                                    </div>
+                                                    <i className="fa-solid fa-arrow-left text-slate-500 group-hover:text-emerald-400 transition-colors"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <a 
+                                            href="https://www.tiktok.com/@zikoenrgy?_r=1&_t=ZT-98k7QK6wpDB" 
+                                            target="_blank" 
+                                            rel="noreferrer"
+                                            className="flex items-center justify-center gap-3 w-full py-3.5 rounded-2xl bg-black border border-slate-700 text-white font-bold transition-all hover:bg-slate-900 shadow-lg"
+                                        >
+                                            <i className="fa-brands fa-tiktok text-xl text-pink-500"></i>
+                                            <span>تیک تۆک: @zikoenrgy</span>
+                                        </a>
+                                    </div>
+
+                                    {/* Erbil Agent */}
+                                    <div className="bg-[#0c0d16] border border-orange-500/30 rounded-3xl p-8 relative overflow-hidden flex flex-col justify-between">
+                                        <div className="absolute top-0 right-0 w-40 h-40 bg-orange-500/10 rounded-full blur-3xl"></div>
+                                        
+                                        <div>
+                                            <div className="inline-block px-3 py-1 rounded-lg bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-bold mb-4">
+                                                پارێزگای هەولێر و دەوروبەر
+                                            </div>
+                                            <h3 className="text-2xl font-black text-white mb-6">{t.erbilAgent}</h3>
+
+                                            <div className="space-y-3 mb-8">
+                                                <a href="https://wa.me/9647504489125" target="_blank" rel="noreferrer" className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 transition-all">
+                                                    <div className="flex items-center gap-3">
+                                                        <i className="fa-brands fa-whatsapp text-xl text-emerald-400"></i>
+                                                        <span className="text-sm font-bold text-white dir-ltr" style={{direction: 'ltr'}}>+964 750 448 9125</span>
+                                                    </div>
+                                                    <span className="text-xs text-slate-400">Korek</span>
+                                                </a>
+                                                <a href="https://wa.me/9647502615202" target="_blank" rel="noreferrer" className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 transition-all">
+                                                    <div className="flex items-center gap-3">
+                                                        <i className="fa-brands fa-whatsapp text-xl text-emerald-400"></i>
+                                                        <span className="text-sm font-bold text-white dir-ltr" style={{direction: 'ltr'}}>+964 750 261 5202</span>
+                                                    </div>
+                                                    <span className="text-xs text-slate-400">Korek</span>
+                                                </a>
+                                                <a href="https://wa.me/9647745445542" target="_blank" rel="noreferrer" className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 transition-all">
+                                                    <div className="flex items-center gap-3">
+                                                        <i className="fa-brands fa-whatsapp text-xl text-emerald-400"></i>
+                                                        <span className="text-sm font-bold text-white dir-ltr" style={{direction: 'ltr'}}>+964 774 544 5542</span>
+                                                    </div>
+                                                    <span className="text-xs text-slate-400">Asiacell</span>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <a 
+                                            href="https://www.tiktok.com/@zico.company?_r=1&_t=ZT-98k7cbbvgxp" 
+                                            target="_blank" 
+                                            rel="noreferrer"
+                                            className="flex items-center justify-center gap-3 w-full py-3.5 rounded-2xl bg-black border border-slate-700 text-white font-bold transition-all hover:bg-slate-900 shadow-lg"
+                                        >
+                                            <i className="fa-brands fa-tiktok text-xl text-pink-500"></i>
+                                            <span>تیک تۆک: @zico.company</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* TAB 3: DEVELOPER PORTFOLIO (Zaniyar Al-Mzurii) */}
+                        {activeTab === 'developer' && (
+                            <div className="max-w-4xl mx-auto px-4 py-12">
+                                <div className="bg-[#0c0d16] border border-purple-500/40 rounded-3xl p-8 lg:p-12 relative overflow-hidden shadow-2xl">
+                                    <div className="absolute -top-20 -left-20 w-72 h-72 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+                                    <div className="flex flex-col md:flex-row items-center gap-6 mb-10 pb-8 border-b border-slate-800">
+                                        <div className="w-28 h-28 rounded-3xl bg-gradient-to-tr from-purple-600 via-pink-500 to-amber-400 p-1 flex-shrink-0 shadow-xl shadow-purple-500/20">
+                                            <div className="w-full h-full bg-slate-950 rounded-[22px] flex items-center justify-center font-black text-4xl text-purple-400">
+                                                Z
+                                            </div>
+                                        </div>
+                                        <div className="text-center md:text-right">
+                                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-xs font-bold mb-2">
+                                                <span>⚡ FULL-STACK DEVELOPER</span>
+                                            </div>
+                                            <h2 className="text-3xl md:text-4xl font-black text-white">Zaniyar Al-Mzurii</h2>
+                                            <p className="text-purple-400 text-xs font-bold tracking-wider uppercase mt-1 mb-3">Web App & Mobile App & System Engineer</p>
+                                            <p className="text-slate-300 text-sm leading-relaxed max-w-xl">
+                                                {t.devBio}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div className="mb-10">
+                                        <h3 className="text-lg font-black text-white mb-4">{t.services}</h3>
+                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                            <div className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800">
+                                                <i className="fa-solid fa-laptop-code text-2xl text-purple-400 mb-3 block"></i>
+                                                <h4 className="font-bold text-white text-sm mb-1">Web Applications</h4>
+                                                <p className="text-slate-400 text-xs">دروستکردنی وێبسایت و وێب ئەپی بەرزترین ئاست</p>
+                                            </div>
+                                            <div className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800">
+                                                <i className="fa-solid fa-mobile-screen-button text-2xl text-pink-400 mb-3 block"></i>
+                                                <h4 className="font-bold text-white text-sm mb-1">Mobile Apps</h4>
+                                                <p className="text-slate-400 text-xs">ئەپڵیکەیشنی iOS و Android بۆ هەر بزنسێک</p>
+                                            </div>
+                                            <div className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800">
+                                                <i className="fa-solid fa-network-wired text-2xl text-amber-400 mb-3 block"></i>
+                                                <h4 className="font-bold text-white text-sm mb-1">Custom Systems</h4>
+                                                <p className="text-slate-400 text-xs">سیستەمی بەڕێوەبردن بۆ کۆمپانیا و مارکێتەکان</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <h3 className="text-lg font-black text-white mb-6">سۆشیال میدیا و پەیوەندی ڕاستەوخۆ:</h3>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                                            
+                                            <a href="https://wa.me/9647506045491" target="_blank" rel="noreferrer" className="p-4 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 transition-all flex items-center gap-3 group">
+                                                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl">
+                                                    <i className="fa-brands fa-whatsapp"></i>
+                                                </div>
+                                                <div>
+                                                    <p className="text-[10px] text-slate-400">Phone & WhatsApp</p>
+                                                    <p className="text-xs font-bold text-white dir-ltr" style={{direction: 'ltr'}}>+964 750 604 5491</p>
+                                                </div>
+                                            </a>
+
+                                            <a href="https://www.tiktok.com/@444.uw?_r=1&_t=ZT-98k8K08VPbh" target="_blank" rel="noreferrer" className="p-4 rounded-2xl bg-slate-900 border border-slate-800 hover:border-pink-500/50 transition-all flex items-center gap-3 group">
+                                                <div className="w-10 h-10 rounded-xl bg-pink-500/10 text-pink-400 flex items-center justify-center text-xl">
+                                                    <i className="fa-brands fa-tiktok"></i>
+                                                </div>
+                                                <div>
+                                                    <p className="text-[10px] text-slate-400">TikTok</p>
+                                                    <p className="text-xs font-bold text-white dir-ltr" style={{direction: 'ltr'}}>@444.uw</p>
+                                                </div>
+                                            </a>
+
+                                            <a href="https://www.instagram.com/z44nko?igsh=MWtldmkwYWN2NW5udw%3D%3D&utm_source=qr" target="_blank" rel="noreferrer" className="p-4 rounded-2xl bg-slate-900 border border-slate-800 hover:border-rose-500/50 transition-all flex items-center gap-3 group">
+                                                <div className="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-xl">
+                                                    <i className="fa-brands fa-instagram"></i>
+                                                </div>
+                                                <div>
+                                                    <p className="text-[10px] text-slate-400">Instagram</p>
+                                                    <p className="text-xs font-bold text-white dir-ltr" style={{direction: 'ltr'}}>@z44nko</p>
+                                                </div>
+                                            </a>
+
+                                            <a href="https://snapchat.com/t/qvFriEM9" target="_blank" rel="noreferrer" className="p-4 rounded-2xl bg-slate-900 border border-slate-800 hover:border-yellow-500/50 transition-all flex items-center gap-3 group">
+                                                <div className="w-10 h-10 rounded-xl bg-yellow-500/10 text-yellow-400 flex items-center justify-center text-xl">
+                                                    <i className="fa-brands fa-snapchat"></i>
+                                                </div>
+                                                <div>
+                                                    <p className="text-[10px] text-slate-400">Snapchat</p>
+                                                    <p className="text-xs font-bold text-white">Snapchat Profile</p>
+                                                </div>
+                                            </a>
+
+                                            <a href="https://t.me/z_14x" target="_blank" rel="noreferrer" className="p-4 rounded-2xl bg-slate-900 border border-slate-800 hover:border-sky-500/50 transition-all flex items-center gap-3 group">
+                                                <div className="w-10 h-10 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center text-xl">
+                                                    <i className="fa-brands fa-telegram"></i>
+                                                </div>
+                                                <div>
+                                                    <p className="text-[10px] text-slate-400">Telegram</p>
+                                                    <p className="text-xs font-bold text-white dir-ltr" style={{direction: 'ltr'}}>@z_14x</p>
+                                                </div>
+                                            </a>
+
+                                            <a href="mailto:z.14x@outlook.com" target="_blank" rel="noreferrer" className="p-4 rounded-2xl bg-slate-900 border border-slate-800 hover:border-purple-500/50 transition-all flex items-center gap-3 group">
+                                                <div className="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl">
+                                                    <i className="fa-solid fa-envelope"></i>
+                                                </div>
+                                                <div>
+                                                    <p className="text-[10px] text-slate-400">Email Address</p>
+                                                    <p className="text-xs font-bold text-white dir-ltr" style={{direction: 'ltr'}}>z.14x@outlook.com</p>
+                                                </div>
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                    </main>
+
+                    {/* Footer */}
+                    <footer className="bg-[#030305] border-t border-slate-800/80 py-8 px-4 lg:px-8 mt-12 text-slate-500 text-xs text-center">
+                        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+                            <p>© 2026 ZICO Energy Drinks. All Rights Reserved.</p>
+                            <p className="flex items-center justify-center gap-2">
+                                <span>گەشەپێدان لەلایەن:</span>
+                                <button 
+                                    onClick={() => setActiveTab('developer')}
+                                    className="text-purple-400 font-bold hover:underline"
+                                >
+                                    Zaniyar Al-Mzurii
+                                </button>
+                            </p>
+                        </div>
+                    </footer>
+
+                    {/* Product Modal */}
+                    {selectedProduct && (
+                        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+                            <div className="bg-[#0e0f18] border border-slate-800 rounded-3xl max-w-xl w-full p-6 relative">
+                                <button 
+                                    onClick={() => setSelectedProduct(null)}
+                                    className="absolute top-4 left-4 w-9 h-9 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center font-bold hover:bg-slate-700"
+                                >
+                                    ✕
+                                </button>
+
+                                <div className="text-center">
+                                    <img src={selectedProduct.image} alt={selectedProduct.name} className="h-64 object-contain mx-auto mb-4 filter drop-shadow-2xl" />
+                                    <h3 className="text-2xl font-black text-white">{selectedProduct.name}</h3>
+                                    <p className="text-orange-400 font-bold text-sm mb-4">{getFlavorText(selectedProduct)}</p>
+                                    
+                                    <div className="bg-slate-900/90 rounded-2xl p-4 text-xs text-slate-300 mb-6 space-y-2 text-right">
+                                        <p>• <strong>قەبارە:</strong> {selectedProduct.size}</p>
+                                        <p>• <strong>شەکر:</strong> {selectedProduct.sugar}</p>
+                                        <p>• <strong>پێکهاتەکان:</strong> {selectedProduct.caffeine}</p>
+                                        <div className="pt-2 border-t border-slate-800 mt-2">
+                                            <strong>مفایێت سەرەکی:</strong>
+                                            <ul className="list-disc list-inside mt-1 space-y-1 text-slate-400">
+                                                {selectedProduct.benefits.map((benefit, idx) => (
+                                                    <li key={idx}>{benefit}</li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <button 
+                                        onClick={() => {
+                                            addToCart(selectedProduct);
+                                            setSelectedProduct(null);
+                                        }}
+                                        className="w-full py-3.5 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-2xl text-sm transition-all shadow-lg shadow-orange-500/20"
+                                    >
+                                        {t.addToCart}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Cart Modal */}
+                    {cartOpen && (
+                        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex justify-end">
+                            <div className="bg-[#0b0c14] w-full max-w-md h-full border-r border-slate-800 p-6 flex flex-col justify-between">
+                                <div>
+                                    <div className="flex items-center justify-between pb-4 border-b border-slate-800 mb-6">
+                                        <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                                            <span>🛒</span>
+                                            <span>{t.cartTitle}</span>
+                                        </h3>
+                                        <button 
+                                            onClick={() => setCartOpen(false)}
+                                            className="w-8 h-8 rounded-full bg-slate-900 text-slate-400 flex items-center justify-center"
+                                        >
+                                            ✕
+                                        </button>
+                                    </div>
+
+                                    {cart.length === 0 ? (
+                                        <div className="text-center py-12 text-slate-500 text-sm">
+                                            {t.emptyCart}
+                                        </div>
+                                    ) : (
+                                        <div className="space-y-4 max-h-[60vh] overflow-y-auto custom-scrollbar pr-1">
+                                            {cart.map((item) => (
+                                                <div key={item.id} className="p-3 bg-slate-900 rounded-2xl border border-slate-800 flex items-center gap-3">
+                                                    <img src={item.image} alt={item.name} className="w-12 h-16 object-contain" />
+                                                    <div className="flex-grow">
+                                                        <h4 className="text-xs font-bold text-white">{item.name}</h4>
+                                                        <p className="text-[10px] text-slate-400">{getFlavorText(item)}</p>
+                                                        <p className="text-xs font-bold text-orange-400 mt-1">ژمارە: {item.qty}</p>
+                                                    </div>
+                                                    <button 
+                                                        onClick={() => removeFromCart(item.id)}
+                                                        className="text-rose-500 text-xs p-2 hover:bg-rose-500/10 rounded-lg"
+                                                    >
+                                                        سڕینەوە
+                                                    </button>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+
+                                {cart.length > 0 && (
+                                    <div className="pt-4 border-t border-slate-800">
+                                        <button 
+                                            onClick={sendCartOrder}
+                                            className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-2xl text-sm transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-900/30"
+                                        >
+                                            <span>{t.sendWhatsapp}</span>
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    )}
+
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
