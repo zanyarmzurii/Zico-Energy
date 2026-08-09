@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ku" dir="rtl">
 <head>
@@ -80,8 +81,8 @@
     <script type="text/babel">
         const { useState, useEffect } = React;
 
-        // وێنەی سەرەکی بەنەر و قوتییەکان
-        const HERO_BANNER = "uploaded:image.png-0f40c372-103d-4a8c-a266-104cd22cb039";
+        // ئادرەسی ڕاستەوخۆی وێنەکان لە ناو فۆڵدەری GitHub / Vercel
+        const HERO_BANNER = "assets/images/hero-banner.jpg";
 
         const PRODUCTS = [
             {
@@ -92,7 +93,7 @@
                 flavorSorani: 'تامی شیرینی میوەیی (بێ شەکر)',
                 flavorArabic: 'نكهة حلویات الفواكه (خالي من السكر)',
                 tagline: 'ENERGY • INSPIRED BY SPEED',
-                image: 'uploaded:image.png-8070e764-3ac0-42f4-9fa2-f79bfafe88d0',
+                image: 'assets/images/zico-60.png',
                 color: 'from-pink-500/30 via-rose-900/20 to-transparent',
                 borderColor: 'border-pink-500/40',
                 badgeBg: 'bg-pink-500 text-white',
@@ -114,7 +115,7 @@
                 flavorSorani: 'تامی ئۆریجیناڵ بێ شەکر',
                 flavorArabic: 'الطعم الأصلي خالي من السكر',
                 tagline: 'BOOST • REFRESH • REVIVE',
-                image: 'uploaded:image.png-e9fda190-3db4-40e1-86bb-e9dfd0a950ff',
+                image: 'assets/images/zico-55.png',
                 color: 'from-slate-400/30 via-slate-800/20 to-transparent',
                 borderColor: 'border-slate-400/40',
                 badgeBg: 'bg-slate-200 text-slate-900',
@@ -136,7 +137,7 @@
                 flavorSorani: 'تامی ئۆریجیناڵی کلاسیک',
                 flavorArabic: 'النكهة الأصلية الكلاسيكية',
                 tagline: 'ENERGY • INSPIRED BY SPEED',
-                image: 'uploaded:image.png-781278e6-769c-4a2d-a46a-30b748d35580',
+                image: 'assets/images/zico-66.png',
                 color: 'from-blue-600/30 via-indigo-950/20 to-transparent',
                 borderColor: 'border-blue-500/40',
                 badgeBg: 'bg-blue-500 text-white',
@@ -158,7 +159,7 @@
                 flavorSorani: 'تامی تایبەتی ئەسایی (Açaí)',
                 flavorArabic: 'نكهة الآساي المميزة',
                 tagline: 'ENERGY • INSPIRED BY SPEED',
-                image: 'uploaded:image.png-39c6c5f2-a20d-49d6-a4ce-5e564b2b2194',
+                image: 'assets/images/zico-63.png',
                 color: 'from-purple-600/30 via-fuchsia-950/20 to-transparent',
                 borderColor: 'border-purple-500/40',
                 badgeBg: 'bg-purple-500 text-white',
@@ -180,7 +181,7 @@
                 flavorSorani: 'تامی پرتەقاڵی پڕ وزە',
                 flavorArabic: 'نكهة البرتقال المليئة بالطاقة',
                 tagline: 'ENERGY • INSPIRED BY SPEED',
-                image: 'uploaded:image.png-02532137-9531-4bb7-8c8a-2ba628a9f381',
+                image: 'assets/images/zico-69.png',
                 color: 'from-orange-500/30 via-amber-950/20 to-transparent',
                 borderColor: 'border-orange-500/40',
                 badgeBg: 'bg-orange-500 text-white',
@@ -202,7 +203,7 @@
                 flavorSorani: 'تامی کاڵەکی تەڕ و تازە',
                 flavorArabic: 'نكهة الشمام المنعشة',
                 tagline: 'ENERGY • INSPIRED BY SPEED',
-                image: 'uploaded:image.png-f6acc412-36e0-4deb-a0d7-14ffeab5e413',
+                image: 'assets/images/zico-65.png',
                 color: 'from-emerald-600/30 via-green-950/20 to-transparent',
                 borderColor: 'border-emerald-500/40',
                 badgeBg: 'bg-emerald-500 text-white',
@@ -428,7 +429,7 @@
                         {/* TAB 1: SHOPPING & PRODUCTS */}
                         {activeTab === 'shop' && (
                             <div>
-                                {/* Hero Section with Uploaded Unleash Banner */}
+                                {/* Hero Section with Banner */}
                                 <section className="relative overflow-hidden py-10 px-4 lg:px-8 lightning-bg">
                                     <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                                         
@@ -468,6 +469,7 @@
                                                     src={HERO_BANNER} 
                                                     alt="ZICO Unleash Your Energy Showcase" 
                                                     className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
+                                                    onError={(e) => { e.target.src = 'assets/images/zico-60.png'; }}
                                                 />
                                                 <div className="absolute inset-0 bg-gradient-to-t from-[#050508] via-transparent to-transparent opacity-40"></div>
                                             </div>
@@ -882,3 +884,5 @@
     </script>
 </body>
 </html>
+
+```
