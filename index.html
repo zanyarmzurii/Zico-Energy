@@ -240,7 +240,8 @@
                 cartTitle: 'سەبەتەیا داواکاریان',
                 sendWhatsapp: 'ناردنا داواکاریێ ب واتسئاپێ 💬',
                 emptyCart: 'سەبەتەیا تە بەتالە!',
-                services: 'خزمەتگوزاریێن ئەز پێشکێش دکەم:'
+                services: 'خزمەتگوزاریێن ئەز پێشکێش دکەم:',
+                selectAgentModalTitle: 'بریکارەکێ هەڵبژێرە ژبوو شاندنا داواکاریێ:'
             },
             sorani: {
                 navShop: 'بەرهەمەکان (Shopping)',
@@ -261,7 +262,8 @@
                 cartTitle: 'سەبەتەی داواکارییەکان',
                 sendWhatsapp: 'ناردنی داواکاری لە واتسئاپ 💬',
                 emptyCart: 'سەبەتەکەت بەتاڵە!',
-                services: 'ئەو خزمەتگوزارییانەی پێشکەشی دەکەم:'
+                services: 'ئەو خزمەتگوزارییانەی پێشکەشی دەکەم:',
+                selectAgentModalTitle: 'بریکارێک هەڵبژێرە بۆ ناردنی داواکاری:'
             },
             arabic: {
                 navShop: 'المنتجات (Shopping)',
@@ -282,7 +284,8 @@
                 cartTitle: 'سلة الطلبات',
                 sendWhatsapp: 'إرسال الطلب عبر الواتساب 💬',
                 emptyCart: 'سلتك فارغة حالياً!',
-                services: 'الخدمات التي أقدمها:'
+                services: 'الخدمات التي أقدمها:',
+                selectAgentModalTitle: 'اختر الوكيل لإرسال الطلب:'
             }
         };
 
@@ -292,6 +295,7 @@
             const [selectedProduct, setSelectedProduct] = useState(null);
             const [cart, setCart] = useState([]);
             const [cartOpen, setCartOpen] = useState(false);
+            const [agentModalOpen, setAgentModalOpen] = useState(false);
 
             const t = TRANSLATIONS[lang];
 
@@ -308,14 +312,16 @@
                 setCart(cart.filter(item => item.id !== id));
             };
 
-            const sendCartOrder = () => {
+            const sendCartOrderToNumber = (phoneNumber) => {
                 if (cart.length === 0) return;
                 let text = `داواکاری نوێی ZICO Energy:%0A%0A`;
                 cart.forEach((item, index) => {
                     const flavor = lang === 'badini' ? item.flavorBadini : lang === 'sorani' ? item.flavorSorani : item.flavorArabic;
                     text += `${index + 1}. ${item.name} (${flavor}) - بڕ: ${item.qty}%0A`;
                 });
-                window.open(`https://wa.me/9647504696517?text=${text}`, '_blank');
+                const cleanNum = phoneNumber.replace(/[^0-9]/g, '');
+                window.open(`https://wa.me/${cleanNum}?text=${text}`, '_blank');
+                setAgentModalOpen(false);
             };
 
             const getFlavorText = (prod) => {
@@ -817,7 +823,7 @@
                         </div>
                     )}
 
-                    {/* Cart Modal */}
+                    {/* Cart Modal Drawer */}
                     {cartOpen && (
                         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex justify-end">
                             <div className="bg-[#0b0c14] w-full max-w-md h-full border-r border-slate-800 p-6 flex flex-col justify-between">
@@ -864,13 +870,82 @@
                                 {cart.length > 0 && (
                                     <div className="pt-4 border-t border-slate-800">
                                         <button 
-                                            onClick={sendCartOrder}
+                                            onClick={() => setAgentModalOpen(true)}
                                             className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-2xl text-sm transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-900/30"
                                         >
                                             <span>{t.sendWhatsapp}</span>
                                         </button>
                                     </div>
                                 )}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* SELECT AGENT WHATSAPP MODAL */}
+                    {agentModalOpen && (
+                        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-lg flex items-center justify-center p-4">
+                            <div className="bg-[#0e0f18] border border-emerald-500/40 rounded-3xl max-w-lg w-full p-6 relative shadow-2xl">
+                                <button 
+                                    onClick={() => setAgentModalOpen(false)}
+                                    className="absolute top-4 left-4 w-9 h-9 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center font-bold hover:bg-slate-700"
+                                >
+                                    ✕
+                                </button>
+
+                                <div className="text-center mb-6">
+                                    <div className="w-12 h-12 bg-emerald-500/20 text-emerald-400 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-3">
+                                        <i className="fa-brands fa-whatsapp"></i>
+                                    </div>
+                                    <h3 className="text-xl font-black text-white">{t.selectAgentModalTitle}</h3>
+                                </div>
+
+                                <div className="space-y-4">
+                                    {/* Badinan Option */}
+                                    <div className="bg-slate-900/90 border border-blue-500/30 rounded-2xl p-4">
+                                        <div className="flex items-center justify-between mb-3">
+                                            <span className="text-xs font-bold text-blue-400 bg-blue-500/10 px-2.5 py-1 rounded-lg">ئۆپشنێ ١</span>
+                                            <span className="text-sm font-bold text-white">{t.badinanAgent}</span>
+                                        </div>
+                                        <button 
+                                            onClick={() => sendCartOrderToNumber('+964 750 469 6517')}
+                                            className="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-between px-4"
+                                        >
+                                            <span dir="ltr" className="font-mono text-sm">+964 750 469 6517</span>
+                                            <span>ناردنا داواکاریێ ب واتسئاپێ 💬</span>
+                                        </button>
+                                    </div>
+
+                                    {/* Erbil Options */}
+                                    <div className="bg-slate-900/90 border border-orange-500/30 rounded-2xl p-4">
+                                        <div className="flex items-center justify-between mb-3">
+                                            <span className="text-xs font-bold text-orange-400 bg-orange-500/10 px-2.5 py-1 rounded-lg">ئۆپشنێ ٢</span>
+                                            <span className="text-sm font-bold text-white">{t.erbilAgent}</span>
+                                        </div>
+                                        <div className="space-y-2">
+                                            <button 
+                                                onClick={() => sendCartOrderToNumber('+964 750 448 9125')}
+                                                className="w-full py-2.5 bg-slate-800 hover:bg-emerald-600/80 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-between px-4 border border-slate-700 hover:border-emerald-500"
+                                            >
+                                                <span dir="ltr" className="font-mono text-xs">+964 750 448 9125 (Korek)</span>
+                                                <span>واتسئاپ 💬</span>
+                                            </button>
+                                            <button 
+                                                onClick={() => sendCartOrderToNumber('+964 750 261 5202')}
+                                                className="w-full py-2.5 bg-slate-800 hover:bg-emerald-600/80 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-between px-4 border border-slate-700 hover:border-emerald-500"
+                                            >
+                                                <span dir="ltr" className="font-mono text-xs">+964 750 261 5202 (Korek)</span>
+                                                <span>واتسئاپ 💬</span>
+                                            </button>
+                                            <button 
+                                                onClick={() => sendCartOrderToNumber('+964 774 544 5542')}
+                                                className="w-full py-2.5 bg-slate-800 hover:bg-emerald-600/80 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-between px-4 border border-slate-700 hover:border-emerald-500"
+                                            >
+                                                <span dir="ltr" className="font-mono text-xs">+964 774 544 5542 (Asiacell)</span>
+                                                <span>واتسئاپ 💬</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     )}
