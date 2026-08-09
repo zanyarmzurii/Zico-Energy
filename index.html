@@ -56,7 +56,7 @@
         }
 
         .product-card:hover {
-            transform: translateY(-10px) scale(1.02);
+            transform: translateY(-8px) scale(1.01);
         }
 
         .custom-scrollbar::-webkit-scrollbar {
@@ -81,7 +81,7 @@
     <script type="text/babel">
         const { useState, useEffect } = React;
 
-        // ئادرەسی ڕاستەوخۆی وێنەکان لە ناو فۆڵدەری GitHub / Vercel
+        // ئادرەسی وێنەکان لە ناو فۆڵدەری GitHub / Vercel
         const HERO_BANNER = "assets/images/hero-banner.jpg";
 
         const PRODUCTS = [
@@ -97,7 +97,8 @@
                 color: 'from-pink-500/30 via-rose-900/20 to-transparent',
                 borderColor: 'border-pink-500/40',
                 badgeBg: 'bg-pink-500 text-white',
-                price: '1,250 IQD',
+                priceSingle: 1500,
+                priceBundle: 30000,
                 size: '250 ml',
                 sugar: 'No Sugar / No Carbs',
                 caffeine: 'Caffeine | Taurine | Vitamins',
@@ -119,7 +120,8 @@
                 color: 'from-slate-400/30 via-slate-800/20 to-transparent',
                 borderColor: 'border-slate-400/40',
                 badgeBg: 'bg-slate-200 text-slate-900',
-                price: '1,000 IQD',
+                priceSingle: 1500,
+                priceBundle: 30000,
                 size: '250 ml',
                 sugar: 'Sugar Free',
                 caffeine: 'High Caffeine Content',
@@ -141,7 +143,8 @@
                 color: 'from-blue-600/30 via-indigo-950/20 to-transparent',
                 borderColor: 'border-blue-500/40',
                 badgeBg: 'bg-blue-500 text-white',
-                price: '1,000 IQD',
+                priceSingle: 1500,
+                priceBundle: 30000,
                 size: '250 ml',
                 sugar: 'Standard Sugar',
                 caffeine: 'Caffeine | Taurine | Vitamins',
@@ -163,7 +166,8 @@
                 color: 'from-purple-600/30 via-fuchsia-950/20 to-transparent',
                 borderColor: 'border-purple-500/40',
                 badgeBg: 'bg-purple-500 text-white',
-                price: '1,250 IQD',
+                priceSingle: 1500,
+                priceBundle: 30000,
                 size: '250 ml',
                 sugar: 'Natural Fruit Sugar',
                 caffeine: 'Caffeine | Taurine | Vitamins',
@@ -185,7 +189,8 @@
                 color: 'from-orange-500/30 via-amber-950/20 to-transparent',
                 borderColor: 'border-orange-500/40',
                 badgeBg: 'bg-orange-500 text-white',
-                price: '1,000 IQD',
+                priceSingle: 1500,
+                priceBundle: 30000,
                 size: '250 ml',
                 sugar: 'Standard Sugar',
                 caffeine: 'Caffeine | Taurine | Vitamins',
@@ -207,7 +212,8 @@
                 color: 'from-emerald-600/30 via-green-950/20 to-transparent',
                 borderColor: 'border-emerald-500/40',
                 badgeBg: 'bg-emerald-500 text-white',
-                price: '1,000 IQD',
+                priceSingle: 1500,
+                priceBundle: 30000,
                 size: '250 ml',
                 sugar: 'Standard Sugar',
                 caffeine: 'Caffeine | Taurine | Vitamins',
@@ -241,7 +247,13 @@
                 sendWhatsapp: 'ناردنا داواکاریێ ب واتسئاپێ 💬',
                 emptyCart: 'سەبەتەیا تە بەتالە!',
                 services: 'خزمەتگوزاریێن ئەز پێشکێش دکەم:',
-                selectAgentModalTitle: 'بریکارەکێ هەڵبژێرە ژبوو شاندنا داواکاریێ:'
+                selectAgentModalTitle: 'بریکارەکێ هەڵبژێرە ژبوو شاندنا داواکاریێ:',
+                unitPiece: 'لب (قطعە)',
+                unitBundle: 'ربطە',
+                priceLabelSingle: '1,500 د.ع',
+                priceLabelBundle: '30,000 د.ع',
+                totalLabel: 'کۆی گشتی:',
+                qtyLabel: 'ژمارە / بڕ:'
             },
             sorani: {
                 navShop: 'بەرهەمەکان (Shopping)',
@@ -263,7 +275,13 @@
                 sendWhatsapp: 'ناردنی داواکاری لە واتسئاپ 💬',
                 emptyCart: 'سەبەتەکەت بەتاڵە!',
                 services: 'ئەو خزمەتگوزارییانەی پێشکەشی دەکەم:',
-                selectAgentModalTitle: 'بریکارێک هەڵبژێرە بۆ ناردنی داواکاری:'
+                selectAgentModalTitle: 'بریکارێک هەڵبژێرە بۆ ناردنی داواکاری:',
+                unitPiece: 'دانە (قطعە)',
+                unitBundle: 'ربطە',
+                priceLabelSingle: '1,500 د.ع',
+                priceLabelBundle: '30,000 د.ع',
+                totalLabel: 'کۆی گشتی:',
+                qtyLabel: 'ژمارە / بڕ:'
             },
             arabic: {
                 navShop: 'المنتجات (Shopping)',
@@ -285,7 +303,13 @@
                 sendWhatsapp: 'إرسال الطلب عبر الواتساب 💬',
                 emptyCart: 'سلتك فارغة حالياً!',
                 services: 'الخدمات التي أقدمها:',
-                selectAgentModalTitle: 'اختر الوكيل لإرسال الطلب:'
+                selectAgentModalTitle: 'اختر الوكيل لإرسال الطلب:',
+                unitPiece: 'قطعة واحدة',
+                unitBundle: 'ربطة',
+                priceLabelSingle: '1,500 د.ع',
+                priceLabelBundle: '30,000 د.ع',
+                totalLabel: 'المجموع الكلي:',
+                qtyLabel: 'الكمية:'
             }
         };
 
@@ -297,19 +321,74 @@
             const [cartOpen, setCartOpen] = useState(false);
             const [agentModalOpen, setAgentModalOpen] = useState(false);
 
+            // State for Card Quantity & Types per product
+            const [cardInputs, setCardInputs] = useState({});
+
+            useEffect(() => {
+                const initialInputs = {};
+                PRODUCTS.forEach(p => {
+                    initialInputs[p.id] = { type: 'bundle', qty: 1 }; // default to bundle with qty 1
+                });
+                setCardInputs(initialInputs);
+            }, []);
+
             const t = TRANSLATIONS[lang];
 
-            const addToCart = (product) => {
-                const existing = cart.find(item => item.id === product.id);
+            const handleTypeChange = (prodId, newType) => {
+                setCardInputs(prev => ({
+                    ...prev,
+                    [prodId]: { ...prev[prodId], type: newType }
+                }));
+            };
+
+            const handleQtyChange = (prodId, newQty) => {
+                const val = parseInt(newQty) || 1;
+                setCardInputs(prev => ({
+                    ...prev,
+                    [prodId]: { ...prev[prodId], qty: val < 1 ? 1 : val }
+                }));
+            };
+
+            const addToCartWithSettings = (product, settings) => {
+                const itemType = settings.type; // 'piece' or 'bundle'
+                const qtyToAdd = settings.qty || 1;
+                const unitPrice = itemType === 'bundle' ? product.priceBundle : product.priceSingle;
+                const cartItemId = `${product.id}-${itemType}`;
+
+                const existing = cart.find(item => item.cartItemId === cartItemId);
                 if (existing) {
-                    setCart(cart.map(item => item.id === product.id ? { ...item, qty: item.qty + 1 } : item));
+                    setCart(cart.map(item => 
+                        item.cartItemId === cartItemId 
+                            ? { ...item, qty: item.qty + qtyToAdd } 
+                            : item
+                    ));
                 } else {
-                    setCart([...cart, { ...product, qty: 1 }]);
+                    setCart([...cart, {
+                        ...product,
+                        cartItemId,
+                        itemType,
+                        unitPrice,
+                        qty: qtyToAdd
+                    }]);
                 }
             };
 
-            const removeFromCart = (id) => {
-                setCart(cart.filter(item => item.id !== id));
+            const removeFromCart = (cartItemId) => {
+                setCart(cart.filter(item => item.cartItemId !== cartItemId));
+            };
+
+            const updateCartQty = (cartItemId, delta) => {
+                setCart(cart.map(item => {
+                    if (item.cartItemId === cartItemId) {
+                        const newQty = item.qty + delta;
+                        return newQty > 0 ? { ...item, qty: newQty } : item;
+                    }
+                    return item;
+                }));
+            };
+
+            const calculateCartTotal = () => {
+                return cart.reduce((total, item) => total + (item.unitPrice * item.qty), 0);
             };
 
             const sendCartOrderToNumber = (phoneNumber) => {
@@ -317,8 +396,12 @@
                 let text = `داواکاری نوێی ZICO Energy:%0A%0A`;
                 cart.forEach((item, index) => {
                     const flavor = lang === 'badini' ? item.flavorBadini : lang === 'sorani' ? item.flavorSorani : item.flavorArabic;
-                    text += `${index + 1}. ${item.name} (${flavor}) - بڕ: ${item.qty}%0A`;
+                    const packName = item.itemType === 'bundle' ? (lang === 'arabic' ? 'ربطة' : 'ربطە') : (lang === 'arabic' ? 'قطعة' : 'لب');
+                    const totalItemPrice = (item.unitPrice * item.qty).toLocaleString();
+                    text += `${index + 1}. ${item.name} (${flavor})%0A   بڕ: ${item.qty} ${packName} - نرخ: ${totalItemPrice} IQD%0A%0A`;
                 });
+                text += `کۆی گشتی: ${calculateCartTotal().toLocaleString()} IQD`;
+
                 const cleanNum = phoneNumber.replace(/[^0-9]/g, '');
                 window.open(`https://wa.me/${cleanNum}?text=${text}`, '_blank');
                 setAgentModalOpen(false);
@@ -493,52 +576,115 @@
                                     </div>
 
                                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                                        {PRODUCTS.map((prod) => (
-                                            <div 
-                                                key={prod.id} 
-                                                className={`product-card bg-[#0b0c14] border ${prod.borderColor} rounded-3xl overflow-hidden flex flex-col justify-between relative group`}
-                                            >
-                                                <div className={`absolute inset-0 bg-gradient-to-b ${prod.color} opacity-40 group-hover:opacity-70 transition-opacity`}></div>
+                                        {PRODUCTS.map((prod) => {
+                                            const settings = cardInputs[prod.id] || { type: 'bundle', qty: 1 };
+                                            const currentUnitPrice = settings.type === 'bundle' ? prod.priceBundle : prod.priceSingle;
+                                            const calculatedPrice = currentUnitPrice * settings.qty;
 
-                                                <div className="p-6 relative z-10">
-                                                    <div className="flex items-center justify-between mb-4">
-                                                        <span className={`px-3 py-1 rounded-full text-xs font-black ${prod.badgeBg}`}>
-                                                            # {prod.number}
-                                                        </span>
-                                                        <span className="text-[10px] font-bold text-slate-400 tracking-wider uppercase">
-                                                            {prod.size}
-                                                        </span>
+                                            return (
+                                                <div 
+                                                    key={prod.id} 
+                                                    className={`product-card bg-[#0b0c14] border ${prod.borderColor} rounded-3xl overflow-hidden flex flex-col justify-between relative group`}
+                                                >
+                                                    <div className={`absolute inset-0 bg-gradient-to-b ${prod.color} opacity-40 group-hover:opacity-70 transition-opacity`}></div>
+
+                                                    <div className="p-6 relative z-10">
+                                                        <div className="flex items-center justify-between mb-4">
+                                                            <span className={`px-3 py-1 rounded-full text-xs font-black ${prod.badgeBg}`}>
+                                                                # {prod.number}
+                                                            </span>
+                                                            <span className="text-[10px] font-bold text-slate-400 tracking-wider uppercase">
+                                                                {prod.size}
+                                                            </span>
+                                                        </div>
+
+                                                        <div className="h-64 flex items-center justify-center my-2">
+                                                            <img 
+                                                                src={prod.image} 
+                                                                alt={prod.name} 
+                                                                className="h-56 object-contain filter drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)] group-hover:scale-110 transition-transform duration-500"
+                                                            />
+                                                        </div>
+
+                                                        <h4 className="text-xl font-black text-white mt-2">{prod.name}</h4>
+                                                        <p className="text-orange-400 text-xs font-bold mt-1 mb-4">{getFlavorText(prod)}</p>
+
+                                                        {/* Price Tag & Selector UI */}
+                                                        <div className="bg-slate-900/90 rounded-2xl p-3 border border-slate-800 mb-4">
+                                                            
+                                                            {/* Type Toggle: 1 Piece vs 1 Bundle */}
+                                                            <div className="grid grid-cols-2 gap-1.5 p-1 bg-black/40 rounded-xl mb-3">
+                                                                <button
+                                                                    onClick={() => handleTypeChange(prod.id, 'bundle')}
+                                                                    className={`py-1.5 rounded-lg text-xs font-bold transition-all ${settings.type === 'bundle' ? 'bg-orange-500 text-white shadow-md' : 'text-slate-400 hover:text-white'}`}
+                                                                >
+                                                                    📦 {t.unitBundle} (30,000 د.ع)
+                                                                </button>
+                                                                <button
+                                                                    onClick={() => handleTypeChange(prod.id, 'piece')}
+                                                                    className={`py-1.5 rounded-lg text-xs font-bold transition-all ${settings.type === 'piece' ? 'bg-orange-500 text-white shadow-md' : 'text-slate-400 hover:text-white'}`}
+                                                                >
+                                                                    🥫 {t.unitPiece} (1,500 د.ع)
+                                                                </button>
+                                                            </div>
+
+                                                            {/* Quantity Input Field */}
+                                                            <div className="flex items-center justify-between">
+                                                                <span className="text-xs font-bold text-slate-300">{t.qtyLabel}</span>
+                                                                <div className="flex items-center gap-1.5">
+                                                                    <button 
+                                                                        onClick={() => handleQtyChange(prod.id, settings.qty - 1)}
+                                                                        className="w-7 h-7 rounded-lg bg-slate-800 text-white font-bold text-sm hover:bg-slate-700 active:scale-95 transition-transform"
+                                                                    >
+                                                                        -
+                                                                    </button>
+                                                                    
+                                                                    {/* Direct Input for numbers e.g. 5 */}
+                                                                    <input 
+                                                                        type="number" 
+                                                                        min="1" 
+                                                                        value={settings.qty}
+                                                                        onChange={(e) => handleQtyChange(prod.id, e.target.value)}
+                                                                        className="w-12 h-7 rounded-lg bg-black/60 border border-slate-700 text-center font-bold text-xs text-orange-400 outline-none"
+                                                                    />
+
+                                                                    <button 
+                                                                        onClick={() => handleQtyChange(prod.id, settings.qty + 1)}
+                                                                        className="w-7 h-7 rounded-lg bg-slate-800 text-white font-bold text-sm hover:bg-slate-700 active:scale-95 transition-transform"
+                                                                    >
+                                                                        +
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+
+                                                            {/* Dynamic Calculated Total */}
+                                                            <div className="flex items-center justify-between pt-2.5 mt-2 border-t border-slate-800 text-xs">
+                                                                <span className="text-slate-400">{t.totalLabel}</span>
+                                                                <span className="font-black text-sm text-emerald-400">
+                                                                    {calculatedPrice.toLocaleString()} IQD
+                                                                </span>
+                                                            </div>
+
+                                                        </div>
                                                     </div>
 
-                                                    <div className="h-72 flex items-center justify-center my-2">
-                                                        <img 
-                                                            src={prod.image} 
-                                                            alt={prod.name} 
-                                                            className="h-64 object-contain filter drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)] group-hover:scale-110 transition-transform duration-500"
-                                                        />
+                                                    <div className="p-6 pt-0 relative z-10 flex items-center gap-3">
+                                                        <button 
+                                                            onClick={() => setSelectedProduct(prod)}
+                                                            className="flex-1 py-3 bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700/80 font-bold rounded-xl text-xs transition-all text-center"
+                                                        >
+                                                            {t.details}
+                                                        </button>
+                                                        <button 
+                                                            onClick={() => addToCartWithSettings(prod, settings)}
+                                                            className="flex-1 py-3 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-xl text-xs transition-all text-center shadow-lg shadow-orange-500/20 active:scale-95"
+                                                        >
+                                                            {t.addToCart}
+                                                        </button>
                                                     </div>
-
-                                                    <h4 className="text-xl font-black text-white mt-2">{prod.name}</h4>
-                                                    <p className="text-orange-400 text-xs font-bold mt-1 mb-3">{getFlavorText(prod)}</p>
-                                                    <p className="text-slate-400 text-[11px] font-medium">{prod.caffeine}</p>
                                                 </div>
-
-                                                <div className="p-6 pt-0 relative z-10 flex items-center gap-3">
-                                                    <button 
-                                                        onClick={() => setSelectedProduct(prod)}
-                                                        className="flex-1 py-3 bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700/80 font-bold rounded-xl text-xs transition-all text-center"
-                                                    >
-                                                        {t.details}
-                                                    </button>
-                                                    <button 
-                                                        onClick={() => addToCart(prod)}
-                                                        className="flex-1 py-3 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-xl text-xs transition-all text-center shadow-lg shadow-orange-500/20"
-                                                    >
-                                                        {t.addToCart}
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        ))}
+                                            );
+                                        })}
                                     </div>
                                 </section>
                             </div>
@@ -779,7 +925,7 @@
                         </div>
                     </footer>
 
-                    {/* Product Modal */}
+                    {/* Product Modal Details */}
                     {selectedProduct && (
                         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
                             <div className="bg-[#0e0f18] border border-slate-800 rounded-3xl max-w-xl w-full p-6 relative">
@@ -796,6 +942,8 @@
                                     <p className="text-orange-400 font-bold text-sm mb-4">{getFlavorText(selectedProduct)}</p>
                                     
                                     <div className="bg-slate-900/90 rounded-2xl p-4 text-xs text-slate-300 mb-6 space-y-2 text-right">
+                                        <p>• <strong>نرخی ١ لب (قطعە):</strong> 1,500 د.ع</p>
+                                        <p>• <strong>نرخی ١ ربطە:</strong> 30,000 د.ع</p>
                                         <p>• <strong>قەبارە:</strong> {selectedProduct.size}</p>
                                         <p>• <strong>شەکر:</strong> {selectedProduct.sugar}</p>
                                         <p>• <strong>پێکهاتەکان:</strong> {selectedProduct.caffeine}</p>
@@ -811,7 +959,8 @@
 
                                     <button 
                                         onClick={() => {
-                                            addToCart(selectedProduct);
+                                            const settings = cardInputs[selectedProduct.id] || { type: 'bundle', qty: 1 };
+                                            addToCartWithSettings(selectedProduct, settings);
                                             setSelectedProduct(null);
                                         }}
                                         className="w-full py-3.5 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-2xl text-sm transition-all shadow-lg shadow-orange-500/20"
@@ -846,21 +995,48 @@
                                             {t.emptyCart}
                                         </div>
                                     ) : (
-                                        <div className="space-y-4 max-h-[60vh] overflow-y-auto custom-scrollbar pr-1">
+                                        <div className="space-y-4 max-h-[55vh] overflow-y-auto custom-scrollbar pr-1">
                                             {cart.map((item) => (
-                                                <div key={item.id} className="p-3 bg-slate-900 rounded-2xl border border-slate-800 flex items-center gap-3">
+                                                <div key={item.cartItemId} className="p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800 flex items-center gap-3">
                                                     <img src={item.image} alt={item.name} className="w-12 h-16 object-contain" />
                                                     <div className="flex-grow">
                                                         <h4 className="text-xs font-bold text-white">{item.name}</h4>
                                                         <p className="text-[10px] text-slate-400">{getFlavorText(item)}</p>
-                                                        <p className="text-xs font-bold text-orange-400 mt-1">ژمارە: {item.qty}</p>
+                                                        
+                                                        <div className="flex items-center gap-2 mt-1">
+                                                            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-orange-500/20 text-orange-400">
+                                                                {item.itemType === 'bundle' ? t.unitBundle : t.unitPiece}
+                                                            </span>
+                                                            <span className="text-xs font-bold text-emerald-400">
+                                                                {(item.unitPrice * item.qty).toLocaleString()} IQD
+                                                            </span>
+                                                        </div>
                                                     </div>
-                                                    <button 
-                                                        onClick={() => removeFromCart(item.id)}
-                                                        className="text-rose-500 text-xs p-2 hover:bg-rose-500/10 rounded-lg"
-                                                    >
-                                                        سڕینەوە
-                                                    </button>
+
+                                                    {/* Cart Item Quantity Controls */}
+                                                    <div className="flex flex-col items-center gap-1">
+                                                        <div className="flex items-center gap-1.5 bg-black/40 p-1 rounded-lg">
+                                                            <button 
+                                                                onClick={() => updateCartQty(item.cartItemId, -1)}
+                                                                className="w-5 h-5 rounded bg-slate-800 text-white font-bold text-xs"
+                                                            >
+                                                                -
+                                                            </button>
+                                                            <span className="text-xs font-bold text-white px-1">{item.qty}</span>
+                                                            <button 
+                                                                onClick={() => updateCartQty(item.cartItemId, 1)}
+                                                                className="w-5 h-5 rounded bg-slate-800 text-white font-bold text-xs"
+                                                            >
+                                                                +
+                                                            </button>
+                                                        </div>
+                                                        <button 
+                                                            onClick={() => removeFromCart(item.cartItemId)}
+                                                            className="text-rose-500 text-[10px] hover:underline mt-1"
+                                                        >
+                                                            سڕینەوە
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             ))}
                                         </div>
@@ -868,7 +1044,14 @@
                                 </div>
 
                                 {cart.length > 0 && (
-                                    <div className="pt-4 border-t border-slate-800">
+                                    <div className="pt-4 border-t border-slate-800 space-y-4">
+                                        <div className="flex items-center justify-between text-sm">
+                                            <span className="text-slate-400 font-bold">{t.totalLabel}</span>
+                                            <span className="font-black text-xl text-emerald-400">
+                                                {calculateCartTotal().toLocaleString()} IQD
+                                            </span>
+                                        </div>
+
                                         <button 
                                             onClick={() => setAgentModalOpen(true)}
                                             className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-2xl text-sm transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-900/30"
