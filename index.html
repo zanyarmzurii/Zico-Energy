@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ZICO Energy Drink | UNLEASH YOUR ENERGY</title>
+    <title>ZICO Energy Drink | Sweden 🇸🇪 & Kurdistan ☀️</title>
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -48,7 +48,7 @@
             transition: background-color 0.8s ease;
         }
 
-        /* Glassmorphic Cards */
+        /* Glassmorphism Dynamic UI */
         .glass-panel {
             background: rgba(10, 12, 24, 0.85);
             backdrop-filter: blur(20px);
@@ -101,7 +101,7 @@
             position: relative;
         }
 
-        /* Dynamic Glow Backdrop */
+        /* Ambient Glow Backdrop Background */
         #ambient-glow {
             position: fixed;
             top: 20%;
@@ -115,6 +115,7 @@
             pointer-events: none;
         }
 
+        /* Canvas Background styling */
         #liquid-canvas {
             position: fixed;
             top: 0;
@@ -128,13 +129,13 @@
 </head>
 <body class="min-h-screen flex flex-col relative selection:bg-orange-500 selection:text-white">
 
-    <!-- Canvas Animation Background -->
+    <!-- Dynamic Canvas Particle Background -->
     <canvas id="liquid-canvas"></canvas>
     
-    <!-- Ambient Dynamic Glow -->
+    <!-- Ambient Glow Background -->
     <div id="ambient-glow"></div>
 
-    <!-- Sound Control Button -->
+    <!-- Sound Control Toggle Button -->
     <div class="fixed bottom-20 left-4 z-40">
         <button onclick="toggleSound()" id="sound-btn" class="p-2.5 rounded-full glass-panel border border-slate-700 text-xs font-bold text-slate-300 hover:text-white shadow-xl flex items-center gap-2">
             <span id="sound-icon">🔊</span>
@@ -146,10 +147,14 @@
     <header class="sticky top-0 z-50 glass-panel px-4 lg:px-8 py-2.5 border-b border-slate-800/80">
         <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
             
-            <!-- ZICO Gold Logo -->
+            <!-- ZICO Vector Gold Logo (Inline SVG for Guaranteed Display) -->
             <div class="flex items-center gap-3 cursor-pointer group" onclick="switchTab('shop')">
-                <div class="w-12 h-12 rounded-full overflow-hidden shadow-lg shadow-amber-500/20 group-hover:scale-105 transition-transform border border-amber-500/40 bg-black flex items-center justify-center">
-                    <img src="uploaded:image.png-6768487b-0336-4a78-a80c-f73571bcda70" alt="ZICO Gold Logo" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='assets/images/zico-gold-logo.png';">
+                <div class="w-12 h-12 rounded-full overflow-hidden shadow-lg shadow-amber-500/20 group-hover:scale-105 transition-transform border border-amber-500/50 bg-gradient-to-tr from-amber-600 via-yellow-500 to-amber-300 flex items-center justify-center p-2">
+                    <!-- Inline Gold SVG Logo -->
+                    <svg viewBox="0 0 100 100" class="w-full h-full fill-slate-950 font-black">
+                        <path d="M15,25 L85,25 L40,75 L85,75 L85,85 L15,85 L60,35 L15,35 Z" fill="#000" />
+                        <path d="M70,30 L85,30 L75,55 L85,50 L60,80 L68,58 L58,62 Z" fill="#ff6600" />
+                    </svg>
                 </div>
                 <div>
                     <h1 class="text-2xl font-black tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-amber-200 via-yellow-400 to-orange-500">
@@ -161,7 +166,7 @@
                 </div>
             </div>
 
-            <!-- Navigation Links -->
+            <!-- Desktop Navigation Links -->
             <nav class="hidden md:flex items-center gap-1 bg-slate-950/80 p-1.5 rounded-2xl border border-slate-800/80">
                 <button id="nav-shop" onclick="switchTab('shop')" class="px-5 py-2 rounded-xl text-xs font-bold transition-all bg-orange-500 text-white shadow-lg shadow-orange-500/30">
                     بەرهەمەکان (Shopping)
@@ -174,8 +179,9 @@
                 </button>
             </nav>
 
-            <!-- Language & Cart Controls -->
+            <!-- Right Actions: Language Selector & Floating Cart -->
             <div class="flex items-center gap-3">
+                <!-- Language Selector -->
                 <div class="relative bg-slate-900/90 border border-slate-800 rounded-xl px-2 py-1 flex items-center text-xs font-bold shadow-inner">
                     <span class="mr-1 text-slate-400">🌐</span>
                     <select id="language-select" onchange="changeLanguage(this.value)" class="bg-transparent text-slate-200 outline-none cursor-pointer py-1 font-bold">
@@ -185,6 +191,7 @@
                     </select>
                 </div>
 
+                <!-- Shopping Cart Trigger -->
                 <button onclick="toggleCartModal(true)" class="relative p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-orange-500/50 transition-all text-slate-200 active:scale-95 shadow-md">
                     <span class="text-xl">🛒</span>
                     <span id="cart-count-badge" class="hidden absolute -top-1.5 -right-1.5 bg-gradient-to-r from-orange-500 to-amber-500 text-white text-[10px] font-black w-5.5 h-5.5 rounded-full items-center justify-center animate-bounce shadow-lg shadow-orange-500/50">
@@ -194,7 +201,7 @@
             </div>
         </div>
 
-        <!-- Mobile Navigation Bar -->
+        <!-- Mobile Quick Navigation Bar -->
         <div class="flex md:hidden items-center justify-around mt-2 pt-2 border-t border-slate-800/60 text-xs font-bold">
             <button id="mob-nav-shop" onclick="switchTab('shop')" class="pb-1 text-orange-400 border-b-2 border-orange-400">
                 بەرهەمەکان
@@ -208,21 +215,21 @@
         </div>
     </header>
 
-    <!-- Main Content Container -->
+    <!-- Main Dynamic Content -->
     <main class="flex-grow">
         
         <!-- SECTION 1: SHOPPING & PRODUCTS -->
         <section id="tab-shop" class="block">
             
-            <!-- 16:9 ASPECT RATIO HERO SLIDESHOW -->
-            <div class="relative max-w-6xl mx-auto px-4 lg:px-8 pt-4 pb-4">
+            <!-- 16:9 ASPECT RATIO HERO SLIDESHOW CONTAINER -->
+            <div class="relative max-w-6xl mx-auto px-4 lg:px-8 pt-4 pb-2">
                 <div id="slideshow-wrapper" class="relative w-full aspect-[16/9] max-h-[480px] rounded-3xl overflow-hidden glass-card border border-orange-500/30 shadow-2xl shadow-orange-500/10">
                     
                     <div id="slides-container" class="w-full h-full relative">
-                        <!-- Slides dynamically rendered -->
+                        <!-- Slides rendered dynamically via JS -->
                     </div>
 
-                    <!-- Slide Controls -->
+                    <!-- Slide Controls Overlays -->
                     <button onclick="prevSlide()" class="absolute top-1/2 left-3 -translate-y-1/2 w-10 h-10 rounded-xl glass-panel text-white flex items-center justify-center text-sm hover:bg-orange-500/80 hover:border-orange-400 transition-all z-20 active:scale-95">
                         <i class="fa-solid fa-chevron-left"></i>
                     </button>
@@ -238,7 +245,7 @@
             </div>
 
             <!-- INTERACTIVE 3D FLAVOR AMBIENT SELECTOR -->
-            <div class="max-w-7xl mx-auto px-4 lg:px-8 py-4">
+            <div class="max-w-7xl mx-auto px-4 lg:px-8 py-2">
                 <div class="glass-panel rounded-3xl p-5 lg:p-6 border border-slate-800">
                     <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-4">
                         <div>
@@ -318,25 +325,25 @@
                 </div>
 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div class="relative h-60 rounded-2xl overflow-hidden glass-card border border-slate-800 group">
-                        <img src="uploaded:image.png-3b15b5f3-3475-4a5d-8a66-646a348c92d0" alt="ZICO Beach" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80"></div>
-                        <span id="gal-cap-1" class="absolute bottom-3 right-3 text-xs font-bold text-white">🏖️ کەنار دەریا و فێنکی</span>
+                    <div class="relative h-60 rounded-2xl overflow-hidden glass-card border border-slate-800 group p-4 flex flex-col justify-end bg-gradient-to-tr from-blue-900/60 to-slate-900">
+                        <img src="assets/images/zico-66.png" alt="ZICO Original" class="w-full h-44 object-contain mx-auto group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.style.display='none';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+                        <span id="gal-cap-1" class="relative z-10 text-xs font-bold text-white">🏖️ ZICO Original Blue 66</span>
                     </div>
-                    <div class="relative h-60 rounded-2xl overflow-hidden glass-card border border-slate-800 group">
-                        <img src="uploaded:image.png-5f74e05d-28b3-4761-b6f8-8be40335dd64" alt="ZICO Focus" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80"></div>
-                        <span id="gal-cap-2" class="absolute bottom-3 right-3 text-xs font-bold text-white">💻 کار و تەرکیز</span>
+                    <div class="relative h-60 rounded-2xl overflow-hidden glass-card border border-slate-800 group p-4 flex flex-col justify-end bg-gradient-to-tr from-emerald-900/60 to-slate-900">
+                        <img src="assets/images/zico-65.png" alt="ZICO Mojito" class="w-full h-44 object-contain mx-auto group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.style.display='none';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+                        <span id="gal-cap-2" class="relative z-10 text-xs font-bold text-white">🍋 ZICO Mojito Lime 65</span>
                     </div>
-                    <div class="relative h-60 rounded-2xl overflow-hidden glass-card border border-slate-800 group">
-                        <img src="uploaded:image.png-1524ead8-0072-4bc4-839f-67b6185475e4" alt="ZICO Fruit Candy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80"></div>
-                        <span id="gal-cap-3" class="absolute bottom-3 right-3 text-xs font-bold text-white">🏎️ خێرایی & نیۆن</span>
+                    <div class="relative h-60 rounded-2xl overflow-hidden glass-card border border-slate-800 group p-4 flex flex-col justify-end bg-gradient-to-tr from-pink-900/60 to-slate-900">
+                        <img src="assets/images/zico-60.png" alt="ZICO Fruit Candy" class="w-full h-44 object-contain mx-auto group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.style.display='none';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+                        <span id="gal-cap-3" class="relative z-10 text-xs font-bold text-white">🍬 ZICO Fruit Candy 60</span>
                     </div>
-                    <div class="relative h-60 rounded-2xl overflow-hidden glass-card border border-slate-800 group">
-                        <img src="uploaded:image.png-8339bafe-62be-43cc-aa1d-67fdf898713e" alt="ZICO Luxury" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80"></div>
-                        <span id="gal-cap-4" class="absolute bottom-3 right-3 text-xs font-bold text-white">🍇 شازی تامی ئەسایی</span>
+                    <div class="relative h-60 rounded-2xl overflow-hidden glass-card border border-slate-800 group p-4 flex flex-col justify-end bg-gradient-to-tr from-purple-900/60 to-slate-900">
+                        <img src="assets/images/zico-63.png" alt="ZICO Acai" class="w-full h-44 object-contain mx-auto group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.style.display='none';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+                        <span id="gal-cap-4" class="relative z-10 text-xs font-bold text-white">🍇 ZICO Açaí Berry 63</span>
                     </div>
                 </div>
             </div>
@@ -941,40 +948,32 @@
     <script>
         const SLIDES = [
             {
-                image: 'uploaded:image.png-a7fb9a90-e72a-40a0-9f72-30745e8938e7',
-                fallback: 'assets/images/sweden-flag.jpg',
-                badge: '🇸🇪 FORMULATED IN SWEDEN',
-                title: 'SWEDISH HIGH QUALITY',
+                image: 'assets/images/zico-66.png',
+                fallback: 'assets/images/zico-66.png',
+                badge: '🇸🇪 SWEDISH FORMULA',
+                title: 'ORIGINAL BLUE 66',
                 subtitle: 'بەرزترین کوالیتی و ستانداری جیهانی سویدی',
                 ctaProduct: 'zico-66'
             },
             {
-                image: 'uploaded:image.png-cb156063-dcec-4700-a857-ee438229d5f2',
-                fallback: 'assets/images/kurdistan-flag.jpg',
+                image: 'assets/images/zico-60.png',
+                fallback: 'assets/images/zico-60.png',
                 badge: '☀️ NOW AVAILABLE IN KURDISTAN',
-                title: 'کوردستان • دابینکردنی فەرمی',
+                title: 'FRUIT CANDY 60',
                 subtitle: 'ئێستا ل هەموو کوردستانێ بەردەستە (بادینان & هەولێر)',
                 ctaProduct: 'zico-60'
             },
             {
-                image: 'uploaded:image.png-3b15b5f3-3475-4a5d-8a66-646a348c92d0',
-                fallback: 'assets/images/slide-1.jpg',
+                image: 'assets/images/zico-65.png',
+                fallback: 'assets/images/zico-65.png',
                 badge: '🇸🇪 CUBAN MOJITO 65',
                 title: 'REFRESH YOUR RHYTHM',
                 subtitle: 'تامی موهیتۆیی فێنک ب لیمۆ و نەعناع! 🍋🌿',
                 ctaProduct: 'zico-65'
             },
             {
-                image: 'uploaded:image.png-1524ead8-0072-4bc4-839f-67b6185475e4',
-                fallback: 'assets/images/slide-2.jpg',
-                badge: '🍬 FRUIT CANDY 60',
-                title: 'NO SUGAR • NO CARBS',
-                subtitle: 'وزەیەکی بێسنوور بێ کالۆری و بێ شەکر! ⚡',
-                ctaProduct: 'zico-60'
-            },
-            {
-                image: 'uploaded:image.png-8339bafe-62be-43cc-aa1d-67fdf898713e',
-                fallback: 'assets/images/slide-4.jpg',
+                image: 'assets/images/zico-63.png',
+                fallback: 'assets/images/zico-63.png',
                 badge: '🍇 AMAZON AÇAÍ 63',
                 title: 'LUXURY & PERFORMANCE',
                 subtitle: 'تامی ئەسایی شاهانە پڕ لە دژەئۆکسێنەر',
@@ -1146,10 +1145,8 @@
             currentLanguage = lang;
             const dict = DICTIONARY[lang];
 
-            // Apply direction
             document.documentElement.dir = 'rtl';
 
-            // Dynamic Text Replacement across all static IDs
             Object.keys(dict).forEach(key => {
                 const el = document.getElementById(key);
                 if (el) {
