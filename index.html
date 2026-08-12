@@ -50,7 +50,7 @@
 
         /* Glassmorphism Dynamic UI */
         .glass-panel {
-            background: rgba(10, 12, 24, 0.85);
+            background: rgba(10, 12, 24, 0.82);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -147,10 +147,9 @@
     <header class="sticky top-0 z-50 glass-panel px-4 lg:px-8 py-2.5 border-b border-slate-800/80">
         <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
             
-            <!-- ZICO Vector Gold Logo (Inline SVG for Guaranteed Display) -->
+            <!-- ZICO Vector Gold Logo -->
             <div class="flex items-center gap-3 cursor-pointer group" onclick="switchTab('shop')">
                 <div class="w-12 h-12 rounded-full overflow-hidden shadow-lg shadow-amber-500/20 group-hover:scale-105 transition-transform border border-amber-500/50 bg-gradient-to-tr from-amber-600 via-yellow-500 to-amber-300 flex items-center justify-center p-2">
-                    <!-- Inline Gold SVG Logo -->
                     <svg viewBox="0 0 100 100" class="w-full h-full fill-slate-950 font-black">
                         <path d="M15,25 L85,25 L40,75 L85,75 L85,85 L15,85 L60,35 L15,35 Z" fill="#000" />
                         <path d="M70,30 L85,30 L75,55 L85,50 L60,80 L68,58 L58,62 Z" fill="#ff6600" />
@@ -797,10 +796,10 @@
                 ourProductsTitle: "بەرهەمێن ZICO Energy Drink",
                 ourProductsSub: "تاما دڵخواز هەڵبژێرە و ڕاستەوخۆ داوا بکە (کۆم و تاک)",
                 galleryTitle: "چێژ و وزە لە هەموو شوێنێک",
-                galCap1: "🏖️ کەنار دەریا و فێنکی",
-                galCap2: "💻 کار و تەرکیز",
-                galCap3: "🏎️ خێرایی & نیۆن",
-                galCap4: "🍇 شازی تامی ئەسایی",
+                galCap1: "🏖️ ZICO Original Blue 66",
+                galCap2: "🍋 ZICO Mojito Lime 65",
+                galCap3: "🍬 ZICO Fruit Candy 60",
+                galCap4: "🍇 ZICO Açaí Berry 63",
                 distributorsTitle: "بریکارێن سەرەکی و پەیوەندی",
                 distributorsSub: "ژبوو داواکرنا کۆم یان تاک یان بونە مەندوب، ڕاستەوخۆ پەیوەندیێ ب بریکارێ سەرەکی بکن.",
                 badinanRegionTag: "دەڤەرا بادینان / دهۆک 📍",
@@ -849,10 +848,10 @@
                 ourProductsTitle: "بەرهەمەکانی ZICO Energy Drink",
                 ourProductsSub: "تامی دڵخواز هەڵبژێرە و ڕاستەوخۆ داوا بکە (کۆم و تاک)",
                 galleryTitle: "چێژ و وزە لە هەموو شوێنێک",
-                galCap1: "🏖️ کەنار دەریا و فێنکی",
-                galCap2: "💻 کار و تەرکیز",
-                galCap3: "🏎️ خێرایی & نیۆن",
-                galCap4: "🍇 شازی تامی ئەسایی",
+                galCap1: "🏖️ ZICO Original Blue 66",
+                galCap2: "🍋 ZICO Mojito Lime 65",
+                galCap3: "🍬 ZICO Fruit Candy 60",
+                galCap4: "🍇 ZICO Açaí Berry 63",
                 distributorsTitle: "بریکارە سەرەکییەکان و پەیوەندی",
                 distributorsSub: "بۆ داواکردنی کۆم یان تاک یان بوون بە مەندوب، ڕاستەوخۆ پەیوەندی بە بریکاری سەرەکی بکەن.",
                 badinanRegionTag: "ناوچەی بادینان / دهۆک 📍",
@@ -901,10 +900,10 @@
                 ourProductsTitle: "منتجات مشروب الطاقة ZICO",
                 ourProductsSub: "اختر نكهتك المفضلة واطلب مباشرة (جملة ومفرد)",
                 galleryTitle: "الطاقة والانتعاش في كل مكان",
-                galCap1: "🏖️ الشاطئ والانتعاش",
-                galCap2: "💻 العمل والتركيز",
-                galCap3: "🏎️ السرعة والنيون",
-                galCap4: "🍇 نكهة الآساي الفاخرة",
+                galCap1: "🏖️ ZICO Original Blue 66",
+                galCap2: "🍋 ZICO Mojito Lime 65",
+                galCap3: "🍬 ZICO Fruit Candy 60",
+                galCap4: "🍇 ZICO Açaí Berry 63",
                 distributorsTitle: "الوكلاء المعتمدون والتواصل",
                 distributorsSub: "لطلبات الجملة والمفرد أو لتصبح مندوباً، اتصل مباشرة بالوكيل المعتمد.",
                 badinanRegionTag: "منطقة بادينان / دهوك 📍",
@@ -1169,8 +1168,8 @@
                 
                 const slideHtml = `
                     <div class="slide-item ${isActive}" data-slide="${idx}">
-                        <img src="${slide.image}" alt="${slide.title}" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='${slide.fallback}';">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#030408] via-black/40 to-transparent"></div>
+                        <img src="${slide.image}" alt="${slide.title}" class="w-full h-full object-contain p-4 bg-slate-950/80" onerror="this.onerror=null; this.src='${slide.fallback}';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#030408] via-black/30 to-transparent pointer-events-none"></div>
                         
                         <div class="absolute bottom-6 left-4 right-4 lg:left-8 lg:right-8 z-10 flex flex-col md:flex-row items-start md:items-end justify-between gap-3">
                             <div class="max-w-lg">
