@@ -781,16 +781,218 @@
         }
     </script>
 
-    <!-- TRANSLATIONS DICTIONARY FOR 3 LANGUAGES -->
+    <!-- Main Logic Engine -->
     <script>
+        const PRODUCTS = [
+            {
+                id: 'zico-60',
+                number: '60',
+                name: 'ZICO Fruit Candy 60',
+                flavorBadini: 'تاما شیرینیا میوان (0% شەکر)',
+                flavorSorani: 'تامی شیرینی میوەکان (0% شەکر)',
+                flavorArabic: 'نكهة حلويات الفواكه (0% سكر)',
+                priceSingle: 1500,
+                priceBundle: 30000,
+                image: 'assets/images/zico-60.png',
+                color: 'from-pink-900/40 to-slate-900',
+                borderColor: 'border-pink-500/40',
+                badgeBg: 'bg-pink-500/20 text-pink-300',
+                glowColor: 'rgba(255, 102, 204, 0.25)',
+                sugar: '0% (Zero Sugar)',
+                caffeine: '32mg / 100ml + Vitamin B Complex',
+                benefits: ['وزەیەکی زۆر بەهێز بەبێ شەکر', 'دەوڵەمەند بە ڤیتامین B6 و B12', 'گونجاو بۆ ڕێژیم و وەرزش']
+            },
+            {
+                id: 'zico-55',
+                number: '55',
+                name: 'ZICO Sugar Free 55',
+                flavorBadini: 'کافاینا بەرز - بێ شەکر',
+                flavorSorani: 'کافاینی بەرز - بێ شەکر',
+                flavorArabic: 'كافيين عالي - خالي من السكر',
+                priceSingle: 1500,
+                priceBundle: 30000,
+                image: 'assets/images/zico-55.png',
+                color: 'from-slate-700/40 to-slate-900',
+                borderColor: 'border-slate-400/40',
+                badgeBg: 'bg-slate-400/20 text-slate-200',
+                glowColor: 'rgba(200, 200, 200, 0.25)',
+                sugar: '0% (Zero Sugar)',
+                caffeine: '32mg / 100ml + Taurine',
+                benefits: ['کافاینی بەرز بۆ زیاتر بێداربوونەوە', 'بێ شەکری زیادکراو', 'تەمەرکوز زیاد دەکات']
+            },
+            {
+                id: 'zico-66',
+                number: '66',
+                name: 'ZICO Original Blue 66',
+                flavorBadini: 'تاما ئۆرجیناڵ یا کۆلاسیک',
+                flavorSorani: 'تامی ئۆرجیناڵی کلاسیک',
+                flavorArabic: 'النكهة الأصلية الكلاسيكية',
+                priceSingle: 1500,
+                priceBundle: 30000,
+                image: 'assets/images/zico-66.png',
+                color: 'from-blue-900/40 to-slate-900',
+                borderColor: 'border-blue-500/40',
+                badgeBg: 'bg-blue-500/20 text-blue-300',
+                glowColor: 'rgba(0, 102, 255, 0.25)',
+                sugar: 'ڕێژەی کەم',
+                caffeine: '32mg / 100ml + B-Group Vitamins',
+                benefits: ['تامی ڕەسەن و سەرەکی زیکۆ', 'بەخشینی وزەی دەستبەجێ', 'باشترین هەڵبژاردن بۆ ڕۆژانە']
+            },
+            {
+                id: 'zico-63',
+                number: '63',
+                name: 'ZICO Açaí Berry 63',
+                flavorBadini: 'تاما تووی ئاسای و ئەنتی ئۆکسیدانت',
+                flavorSorani: 'تامی تووی ئاسای و ئەنتی ئۆکسیدانت',
+                flavorArabic: 'نكهة توت الآساي ومضادات الأكسدة',
+                priceSingle: 1500,
+                priceBundle: 30000,
+                image: 'assets/images/zico-63.png',
+                color: 'from-purple-900/40 to-slate-900',
+                borderColor: 'border-purple-500/40',
+                badgeBg: 'bg-purple-500/20 text-purple-300',
+                glowColor: 'rgba(138, 43, 226, 0.25)',
+                sugar: 'کەم شەکر',
+                caffeine: '32mg / 100ml + Natural Extracts',
+                benefits: ['دژە ئۆکسێنەری سروشتی', 'تامی میوەیی تایبەت و خۆش', 'تازەبوونەوەی جەستە']
+            },
+            {
+                id: 'zico-69',
+                number: '69',
+                name: 'ZICO Mango Fresh 69',
+                flavorBadini: 'تاما مانگۆ یا ئەستوایی',
+                flavorSorani: 'تامی مانگۆی کەمەرەیی',
+                flavorArabic: 'نكهة المانجو الاستوائية',
+                priceSingle: 1500,
+                priceBundle: 30000,
+                image: 'assets/images/zico-69.png',
+                color: 'from-orange-900/40 to-slate-900',
+                borderColor: 'border-orange-500/40',
+                badgeBg: 'bg-orange-500/20 text-orange-300',
+                glowColor: 'rgba(255, 102, 0, 0.25)',
+                sugar: 'کەم شەکر',
+                caffeine: '32mg / 100ml',
+                benefits: ['تامی فێنککەرەوەی مانگۆ', 'بەخشینی وزەی بەردەوام', 'زۆر شیاو بۆ وەرزی هاوین']
+            },
+            {
+                id: 'zico-65',
+                number: '65',
+                name: 'ZICO Mojito Lime 65',
+                flavorBadini: 'تاما موهیتۆ و لیمۆ و پشکنین',
+                flavorSorani: 'تامی موهیتۆ و لیمۆ و نەعنا',
+                flavorArabic: 'نكهة الموهيتو والليمون والنعناع',
+                priceSingle: 1500,
+                priceBundle: 30000,
+                image: 'assets/images/zico-65.png',
+                color: 'from-emerald-900/40 to-slate-900',
+                borderColor: 'border-emerald-500/40',
+                badgeBg: 'bg-emerald-500/20 text-emerald-300',
+                glowColor: 'rgba(0, 204, 102, 0.25)',
+                sugar: 'کەم شەکر',
+                caffeine: '32mg / 100ml',
+                benefits: ['تامی سەوز و فێنککەرەوە', 'کەمکردنەوەی ماندوێتی', 'بەخشینی هەستی تازەیی']
+            }
+        ];
+
+        const SLIDES = [
+            {
+                image: 'assets/images/slide1.jpg',
+                fallback: 'https://placehold.co/1200x675/0a0c18/ff6600?text=ZICO+Original+Blue+66',
+                badge: '🇸🇪 ZICO SWEDEN',
+                title: 'وزەیا بێ سنوور ژ سوێدێ',
+                subtitle: 'چێژێ ژ ئۆرجیناڵترین تاما زیکۆ وەرگرە ل سەرانسەری کوردستانێ',
+                ctaProduct: 'zico-66'
+            },
+            {
+                image: 'assets/images/slide2.jpg',
+                fallback: 'https://placehold.co/1200x675/0a0c18/ff66cc?text=ZICO+Fruit+Candy+60',
+                badge: '🍬 FRUIT CANDY 60',
+                title: 'شیرینیا بێ شەکر و پڕ وزە',
+                subtitle: 'تاما میوه‌یێن جۆراوجۆر ب بێ شه‌كرا زێدەده‌ست كه‌ڤه‌',
+                ctaProduct: 'zico-60'
+            },
+            {
+                image: 'assets/images/slide3.jpg',
+                fallback: 'https://placehold.co/1200x675/0a0c18/00cc66?text=ZICO+Mojito+Lime+65',
+                badge: '🍋 MOJITO LIME 65',
+                title: 'فێنکاهیا لیمۆ و پشکنین',
+                subtitle: 'بۆ رۆژێن گەرم تاما موهیتۆ یا فێنککەرەوە',
+                ctaProduct: 'zico-65'
+            },
+            {
+                image: 'assets/images/slide4.jpg',
+                fallback: 'https://placehold.co/1200x675/0a0c18/8a2be2?text=ZICO+Acai+Berry+63',
+                badge: '🍇 AÇAÍ BERRY 63',
+                title: 'ئەنتی ئۆکسیدانت و هێز',
+                subtitle: 'تاما تووی ئاسای ب پێکهاتەیێن تەندروست',
+                ctaProduct: 'zico-63'
+            },
+            {
+                image: 'assets/images/slide5.jpg',
+                fallback: 'https://placehold.co/1200x675/0a0c18/ff9900?text=ZICO+Mango+Fresh+69',
+                badge: '🥭 MANGO FRESH 69',
+                title: 'تاما مانگۆیا ترۆپیکاڵ',
+                subtitle: 'سەرچاوەی وزە و تازەیی بۆ ڕۆژانە',
+                ctaProduct: 'zico-69'
+            },
+            {
+                image: 'assets/images/slide6.jpg',
+                fallback: 'https://placehold.co/1200x675/0a0c18/94a3b8?text=ZICO+Sugar+Free+55',
+                badge: '⚡ SUGAR FREE 55',
+                title: 'کافاینا بەرز بێ شەکر',
+                subtitle: 'تایبەت بۆ وەرزشڤان و کەسێن بێ شەکر دەوێن',
+                ctaProduct: 'zico-55'
+            },
+            {
+                image: 'assets/images/slide7.jpg',
+                fallback: 'https://placehold.co/1200x675/0a0c18/0066ff?text=KURDISTAN+SUPPLY',
+                badge: '☀️ KURDISTAN DISTRIBUTION',
+                title: 'بڵاوکردنەوەی گشتی ل دهۆک و هەولێر',
+                subtitle: 'داواکاریێن کۆم و تاک ب خێراترین کات بگەیەنە',
+                ctaProduct: 'zico-66'
+            },
+            {
+                image: 'assets/images/slide8.jpg',
+                fallback: 'https://placehold.co/1200x675/0a0c18/8a2be2?text=DEVELOPER+PORTFOLIO',
+                badge: '⚡ SYSTEM & WEB DEV',
+                title: 'گەشەپێدانی سۆفتوێر و ئەپلیکەیشن',
+                subtitle: 'دروستکردنی سیستەم ب کوالیتییا سویدی ب دەستێ Zaniyar Al-Mzurii',
+                ctaProduct: 'developer-tab'
+            },
+            {
+                image: 'assets/images/slide9.jpg',
+                fallback: 'https://placehold.co/1200x675/0a0c18/ff6600?text=SPECIAL+WHOLESALE',
+                badge: '📦 BUNDLE OFFERS',
+                title: 'داواکرنا ربطان ب نرخێ کۆم',
+                subtitle: 'بۆ مارکێت و کافێیان ب داشکاندنی تایبەت',
+                ctaProduct: 'zico-60'
+            },
+            {
+                image: 'assets/images/slide10.jpg',
+                fallback: 'https://placehold.co/1200x675/0a0c18/00cc66?text=NATURAL+INGREDIENTS',
+                badge: '🌿 VITAMIN B COMPLEX',
+                title: 'تەندرۆست و بێ زیان',
+                subtitle: 'دەوڵەمەند ب ڤیتامینێن B3, B5, B6, B12',
+                ctaProduct: 'zico-65'
+            },
+            {
+                image: 'assets/images/slide11.jpg',
+                fallback: 'https://placehold.co/1200x675/0a0c18/ff66cc?text=SWEDISH+QUALITY',
+                badge: '🇸🇪 FORMULATED IN SWEDEN',
+                title: 'ستانداردا جیهانی ل کوردستانێ',
+                subtitle: 'باشترین خواردنەوەی وزەبەخش بۆ چالاکیا ڕۆژانە',
+                ctaProduct: 'zico-60'
+            }
+        ];
+
         const DICTIONARY = {
             badini: {
-                navShop: "بەرهەمەکان (Shopping)",
-                navAgents: "بریکارێن سەرەکی",
-                navDev: "پەڕێ دێڤلۆپەری ⚡",
-                mobNavShop: "بەرهەمەکان",
-                mobNavAgents: "بریکارێن سەرەکی",
-                mobNavDev: "دێڤلۆپەر ⚡",
+                unitBundleText: "ربطە (24 قوتی)",
+                unitPieceText: "لب (1 قوتی)",
+                qtyLabel: "بڕ (چەندین):",
+                totalTextLabel: "کۆی گشتی:",
+                detailsBtnText: "تایبەتمەندی ⚡",
+                addCartBtnText: "زێدەکرن 🛒",
                 badgeSwedishOrigin: "🇸🇪 FORMULATED IN SWEDEN • NOW IN KURDISTAN ☀️",
                 ambientSelectorTitle: "تامی دڵخواز هەڵبژێرە بۆ گۆڕینی دیزاینی وێبسایتەکە:",
                 btnSeeAllCans: "سەیرکردنی تەواوی قوتییەکان 🛒",
@@ -823,38 +1025,32 @@
                 devSocialTitle: "سۆشیال میدیا و پەیوەندی ڕاستەوخۆ:",
                 footerDevLabel: "گەشەپێدان و دیزاین:",
                 cartDrawerTitle: "سەبەتەیا داواکاریان",
-                totalTextLabel: "کۆی گشتی:",
                 btnSendWhatsappText: "ناردنا داواکاریێ ب واتسئاپێ 💬",
                 selectAgentModalTitle: "بریکارەکێ هەڵبژێرە ژبوو شاندنا داواکاریێ:",
                 opt1Label: "ئۆپشنێ ١",
-                opt2Label: "ئۆپشنێ ٢",
                 badinanOptName: "بریکارێ سەرەکی ل بادینان",
-                erbilOptName: "بریکارێ سەرەکی ل هەولێر",
                 btnBadinanSend: "ناردنا داواکاریێ ب واتسئاپێ 💬",
-                unitBundleText: "ربطە",
-                unitPieceText: "لب",
+                opt2Label: "ئۆپشنێ ٢",
+                erbilOptName: "بریکارێ سەرەکی ل هەولێر",
                 lblOrigin: "دروستکراو:",
                 lblPriceSingle: "نرخی ١ لب (قطعە):",
                 lblPriceBundle: "نرخی ١ ربطە:",
                 lblSize: "قەبارە:",
                 lblSugar: "شەکر:",
                 lblCaffeine: "پێکهاتەکان:",
-                lblBenefits: "مفایێت سەرەکی:",
-                addCartBtnText: "زێدەکرن بۆ سەبەتێ 🛒",
-                qtyLabel: "ژمارە / بڕ:",
-                detailsBtnText: "زانیاری 🔍"
+                lblBenefits: "مفایێت سەرەکی:"
             },
             sorani: {
-                navShop: "بەرهەمەکان (Shopping)",
-                navAgents: "بریکارە سەرەکییەکان",
-                navDev: "پەڕەی دیڤلۆپەر ⚡",
-                mobNavShop: "بەرهەمەکان",
-                mobNavAgents: "بریکارەکان",
-                mobNavDev: "دیڤلۆپەر ⚡",
-                badgeSwedishOrigin: "🇸🇪 FORMULATED IN SWEDEN • NOW IN KURDISTAN ☀️",
-                ambientSelectorTitle: "تامی دڵخواز هەڵبژێرە بۆ گۆڕینی دیزاینی وێبسایتەکە:",
-                btnSeeAllCans: "سەیرکردنی تەواوی قوتییەکان 🛒",
-                ourProductsTitle: "بەرهەمەکانی ZICO Energy Drink",
+                unitBundleText: "ڕەبطە (24 قوتی)",
+                unitPieceText: "دانە (1 قوتی)",
+                qtyLabel: "بڕی داواکراو:",
+                totalTextLabel: "کۆی گشتی:",
+                detailsBtnText: "تایبەتمەندی ⚡",
+                addCartBtnText: "زیادکردن 🛒",
+                badgeSwedishOrigin: "🇸🇪 بەرهەمی سوید • ئێستا لە کوردستان ☀️",
+                ambientSelectorTitle: "تامی دڵخوازت هەڵبژێرە بۆ گۆڕینی ڕەنگی ماڵپەڕەکە:",
+                btnSeeAllCans: "بینینی هەموو بەرھەمەکان 🛒",
+                ourProductsTitle: "بەرھەمەکانی ZICO Energy Drink",
                 ourProductsSub: "تامی دڵخواز هەڵبژێرە و ڕاستەوخۆ داوا بکە (کۆم و تاک)",
                 badgeSwedenStandard: "🇸🇪 Sweden Standard • ☀️ Kurdistan Supply",
                 badgeGallery: "📸 ZICO LIFESTYLE & MOMENTS IN KURDISTAN",
@@ -869,10 +1065,10 @@
                 badinanRegionTag: "ناوچەی بادینان / دهۆک 📍",
                 badinanAgentName: "بریکاری سەرەکی لە بادینان",
                 badinanTiktokBtn: "تیک تۆک: @zikoenrgy",
-                erbilRegionTag: "پارێزگای هەولێر و دەوروبەر 📍",
+                erbilRegionTag: "پارێزگای هەولێر و دەوروبەری 📍",
                 erbilAgentName: "بریکاری سەرەکی لە هەولێر",
                 erbilTiktokBtn: "تیک تۆک: @zico.company",
-                devBioText: "ئەزموون لە دروستکردنی باشترین و مۆدێرنترین سیستەم، ئەپڵیکەیشن و وێبسایت بە کوالیتی زۆر بەرز و بە نرخێکی زۆر گونجاو.",
+                devBioText: "ئەزموون لە دروستکردنی باشترین و مۆدێرنترین سیستەم، ئەپلیکەیشن و وێبسایت بە بەرزترین کوالیتی و گونجاوترین نرخ.",
                 devServicesTitle: "ئەو خزمەتگوزارییانەی پێشکەشی دەکەم:",
                 srvWebTitle: "Web Applications",
                 srvWebDesc: "دروستکردنی وێبسایت و وێب ئەپی مۆدێرن و خێرا",
@@ -883,324 +1079,76 @@
                 devSocialTitle: "سۆشیال میدیا و پەیوەندی ڕاستەوخۆ:",
                 footerDevLabel: "گەشەپێدان و دیزاین:",
                 cartDrawerTitle: "سەبەتەی داواکارییەکان",
-                totalTextLabel: "کۆی گشتی:",
-                btnSendWhatsappText: "ناردنی داواکاری لە واتسئاپ 💬",
-                selectAgentModalTitle: "بریکارێک هەڵبژێرە بۆ ناردنی داواکاری:",
+                btnSendWhatsappText: "ناردنی داواکاری بە واتسئاپ 💬",
+                selectAgentModalTitle: "بریکارێک هەڵبژێرە بۆ ناردنی داواکاریەکەت:",
                 opt1Label: "ئۆپشنی ١",
-                opt2Label: "ئۆپشنی ٢",
                 badinanOptName: "بریکاری سەرەکی لە بادینان",
+                btnBadinanSend: "ناردنی داواکاری بە واتسئاپ 💬",
+                opt2Label: "ئۆپشنی ٢",
                 erbilOptName: "بریکاری سەرەکی لە هەولێر",
-                btnBadinanSend: "ناردنی داواکاری لە واتسئاپ 💬",
-                unitBundleText: "ربطە",
-                unitPieceText: "دانە",
                 lblOrigin: "دروستکراو:",
-                lblPriceSingle: "نرخی ١ دانە (قطعە):",
-                lblPriceBundle: "نرخی ١ ربطە:",
+                lblPriceSingle: "نرخی ١ دانە:",
+                lblPriceBundle: "نرخی ١ ڕەبطە:",
                 lblSize: "قەبارە:",
                 lblSugar: "شەکر:",
                 lblCaffeine: "پێکهاتەکان:",
-                lblBenefits: "سودە سەرەکییەکان:",
-                addCartBtnText: "زیادکردن بۆ سەبەتە 🛒",
-                qtyLabel: "ژمارە / بڕ:",
-                detailsBtnText: "زانیاری 🔍"
+                lblBenefits: "سوودە سەرەکییەکان:"
             },
             arabic: {
-                navShop: "المنتجات (Shopping)",
-                navAgents: "الوكلاء المعتمدون",
-                navDev: "صفحة المطور ⚡",
-                mobNavShop: "المنتجات",
-                mobNavAgents: "الوكلاء",
-                mobNavDev: "المطور ⚡",
-                badgeSwedishOrigin: "🇸🇪 FORMULATED IN SWEDEN • NOW IN KURDISTAN ☀️",
-                ambientSelectorTitle: "اختر نكهتك المفضلة لتغيير تصميم الموقع:",
-                btnSeeAllCans: "عرض كافة المنتجات 🛒",
+                unitBundleText: "شدّة (24 علبة)",
+                unitPieceText: "علبة واحدة",
+                qtyLabel: "الكمية المطلوبة:",
+                totalTextLabel: "المجموع الكلي:",
+                detailsBtnText: "التفاصيل ⚡",
+                addCartBtnText: "إضافة للسلة 🛒",
+                badgeSwedishOrigin: "🇸🇪 مصنع في السويد • متوفر الآن في كوردستان ☀️",
+                ambientSelectorTitle: "اختر النكهة المفضلة لتغيير مظهر الموقع:",
+                btnSeeAllCans: "عرض جميع المنتجات 🛒",
                 ourProductsTitle: "منتجات مشروب الطاقة ZICO",
                 ourProductsSub: "اختر نكهتك المفضلة واطلب مباشرة (جملة ومفرد)",
                 badgeSwedenStandard: "🇸🇪 Sweden Standard • ☀️ Kurdistan Supply",
                 badgeGallery: "📸 ZICO LIFESTYLE & MOMENTS IN KURDISTAN",
-                galleryTitle: "الطاقة والانتعاش في كل مكان",
+                galleryTitle: "الطاقة والمتعة في كل مكان",
                 galCap1: "🏖️ ZICO Original Blue 66",
                 galCap2: "🍋 ZICO Mojito Lime 65",
                 galCap3: "🍬 ZICO Fruit Candy 60",
                 galCap4: "🍇 ZICO Açaí Berry 63",
-                badgeDistributors: "📍 لایەنی فەرمی بڵاوکردنەوە",
-                distributorsTitle: "الوكلاء المعتمدون والتواصل",
-                distributorsSub: "لطلبات الجملة والمفرد أو لتصبح مندوباً، اتصل مباشرة بالوكيل المعتمد.",
+                badgeDistributors: "📍 الوكلاء المعتمدون",
+                distributorsTitle: "الوكلاء الرئيسييون والتواصل",
+                distributorsSub: "لطلبات الجملة أو المفرد أو للانضمام كمندوب، تواصل مباشرة مع الوكيل الرئيسي.",
                 badinanRegionTag: "منطقة بادينان / دهوك 📍",
                 badinanAgentName: "الوكيل الرئيسي في بادينان",
                 badinanTiktokBtn: "تيك توك: @zikoenrgy",
-                erbilRegionTag: "محافظة أربيل وأطرافها 📍",
+                erbilRegionTag: "محافظة أربيل ونواحيها 📍",
                 erbilAgentName: "الوكيل الرئيسي في أربيل",
                 erbilTiktokBtn: "تيك توك: @zico.company",
-                devBioText: "خبرة في تصميم وتطوير أحدث الأنظمة، التطبيقات، والمواقع الإلكترونية بأعلى جودة وأنسب الأسعار.",
-                devServicesTitle: "الخدمات التي أقدمها:",
-                srvWebTitle: "تطبيقات الويب",
-                srvWebDesc: "تصميم مواقع وتطبيقات ويب حديثة وسريعة",
-                srvMobTitle: "تطبيقات الموبايل",
-                srvMobDesc: "تطبيقات iOS و Android لأي نشاط تجاري",
-                srvSysTitle: "الأنظمة المخصصة",
-                srvSysDesc: "أنظمة إدارة متكاملة للشركات والمتاجر",
-                devSocialTitle: "وسائل التواصل الاجتماعي والتواصل المباشر:",
+                devBioText: "خبرة في تصميم وتطوير أحدث الأنظمة والتطبيقات والمواقع الإلكترونية بأعلى جودة وأفضل الأسعار.",
+                devServicesTitle: "الخدمات المقدمة:",
+                srvWebTitle: "Web Applications",
+                srvWebDesc: "تطوير مواقع وتطبيقات ويب حديثة وسريعة",
+                srvMobTitle: "Mobile Apps",
+                srvMobDesc: "تطبيقات iOS و Android لجميع أنواع الأعمال",
+                srvSysTitle: "Custom Systems",
+                srvSysDesc: "أنظمة إدارة مخصصة للشركات والمتاجر",
+                devSocialTitle: "وسائل التواصل الاجتماعي والاتصال المباشر:",
                 footerDevLabel: "التطوير والتصميم:",
                 cartDrawerTitle: "سلة الطلبات",
-                totalTextLabel: "المجموع الكلي:",
                 btnSendWhatsappText: "إرسال الطلب عبر الواتساب 💬",
-                selectAgentModalTitle: "اختر الوكيل لإرسال الطلب:",
+                selectAgentModalTitle: "اختر الوكيل لإرسال طلبك:",
                 opt1Label: "الخيار ١",
-                opt2Label: "الخيار ٢",
                 badinanOptName: "الوكيل الرئيسي في بادينان",
-                erbilOptName: "الوكيل الرئيسي في أربيل",
                 btnBadinanSend: "إرسال الطلب عبر الواتساب 💬",
-                unitBundleText: "ربطة",
-                unitPieceText: "قطعة",
-                lblOrigin: "صنع في:",
-                lblPriceSingle: "سعر القطعة الواحدة:",
-                lblPriceBundle: "سعر الربطة الواحدة:",
+                opt2Label: "الخيار ٢",
+                erbilOptName: "الوكيل الرئيسي في أربيل",
+                lblOrigin: "بلد الصنع:",
+                lblPriceSingle: "سعر العلبة الواحدة:",
+                lblPriceBundle: "سعر الشدّة (24 علبة):",
                 lblSize: "الحجم:",
                 lblSugar: "السكر:",
                 lblCaffeine: "المكونات:",
-                lblBenefits: "الفوائد الرئيسية:",
-                addCartBtnText: "إضافة إلى السلة 🛒",
-                qtyLabel: "الكمية:",
-                detailsBtnText: "التفاصيل 🔍"
+                lblBenefits: "الفوائد الرئيسية:"
             }
         };
-    </script>
-
-    <!-- Main Logic Engine -->
-    <script>
-        // 11 Commercial Slides featuring Slide-11 first and Slide-6 Website Sponsorship Ad
-        const SLIDES = [
-            {
-                image: 'assets/images/slide-11.jpg',
-                fallback: 'assets/images/zico-66.png',
-                badge: '🇸🇪 ZICO SWEDEN PREMIUM',
-                title: 'UNLEASH YOUR ENERGY',
-                subtitle: 'بەرزترین کوالیتی و تامی بێوێنەی نۆشابەی وزەبەخشی ZICO',
-                ctaProduct: 'zico-66'
-            },
-            {
-                image: 'assets/images/slide-1.jpg',
-                fallback: 'assets/images/zico-65.png',
-                badge: '🍋 CUBAN MOJITO 65',
-                title: 'REFRESH YOUR RHYTHM',
-                subtitle: 'تامی موهیتۆیی فێنک ب لیمۆ و نەعناع! 🍋🌿',
-                ctaProduct: 'zico-65'
-            },
-            {
-                image: 'assets/images/slide-2.jpg',
-                fallback: 'assets/images/zico-60.png',
-                badge: '🍬 FRUIT CANDY 60',
-                title: 'NO SUGAR • NO CARBS',
-                subtitle: 'وزەیەکی بێسنوور بێ کالۆری و بێ شەکر! ⚡',
-                ctaProduct: 'zico-60'
-            },
-            {
-                image: 'assets/images/slide-3.jpg',
-                fallback: 'assets/images/zico-63.png',
-                badge: '🍇 AMAZON AÇAÍ 63',
-                title: 'LUXURY & PERFORMANCE',
-                subtitle: 'تامی ئەسایی شاهانە پڕ لە دژەئۆکسێنەر',
-                ctaProduct: 'zico-63'
-            },
-            {
-                image: 'assets/images/slide-4.jpg',
-                fallback: 'assets/images/zico-69.png',
-                badge: '🥭 MANGO FRESH 69',
-                title: 'TROPICAL ENERGY BOOST',
-                subtitle: 'تامی مانگۆی سروشتی و فێنک بۆ ڕۆژێکی پڕ لە چالاکی',
-                ctaProduct: 'zico-69'
-            },
-            {
-                image: 'assets/images/slide-5.jpg',
-                fallback: 'assets/images/zico-55.png',
-                badge: '⚡ SUGAR FREE 55',
-                title: 'HIGH CAFFEINE FORMULA',
-                subtitle: 'تەرکیزی بەرز و بێ شەکر بۆ وەرزش و کارکردن',
-                ctaProduct: 'zico-55'
-            },
-            {
-                image: 'assets/images/slide-6.jpg',
-                fallback: 'assets/images/zico-66.png',
-                badge: '📢 WEBSITE SPONSORSHIP & ADS',
-                title: 'ڕیکلام و سپۆنسەری وێبسایت',
-                subtitle: 'ژبوو ڕیکلام و سپۆنسەرکرنێ دناڤا وێبسایتێ مە دا، ڕاستەوخۆ پەیوەندیێ ب مە بکەن! 💼',
-                ctaProduct: 'developer-tab'
-            },
-            {
-                image: 'assets/images/slide-7.jpg',
-                fallback: 'assets/images/zico-65.png',
-                badge: '🏝️ SUMMER VIBES',
-                title: 'REFRESHING EVERY MOMENT',
-                subtitle: 'چێژ لە ژیان وەربگرە بە زیکۆ ئینێرجیا فێنک!',
-                ctaProduct: 'zico-65'
-            },
-            {
-                image: 'assets/images/slide-8.jpg',
-                fallback: 'assets/images/zico-60.png',
-                badge: '🏁 SPEED & PERFORMANCE',
-                title: 'POWERED BY SPEED ⚡',
-                subtitle: 'ئاستێکی باڵای توانای جەستەیی و مێشکی',
-                ctaProduct: 'zico-60'
-            },
-            {
-                image: 'assets/images/slide-9.jpg',
-                fallback: 'assets/images/zico-63.png',
-                badge: '🍇 AÇAÍ POWER',
-                title: 'PREMIUM BERRY BOOST',
-                subtitle: 'تامی ناوازەی میوەیی بۆ گەنجانی پێشەنگ',
-                ctaProduct: 'zico-63'
-            },
-            {
-                image: 'assets/images/slide-10.jpg',
-                fallback: 'assets/images/zico-69.png',
-                badge: '☀️ KURDISTAN OFFICIAL',
-                title: 'ZICO IN KURDISTAN',
-                subtitle: 'دابینکردنی فەرمی لە تەواوی شارەکانی کوردستان',
-                ctaProduct: 'zico-69'
-            }
-        ];
-
-        const PRODUCTS = [
-            {
-                id: 'zico-60',
-                name: 'ZICO 60 - Fruit Candy',
-                number: '60',
-                glowColor: 'rgba(255, 102, 204, 0.25)',
-                flavorBadini: 'تاما حەلویێن میوا (بێ شەکر 🍬)',
-                flavorSorani: 'تامی شیرینی میوەیی (بێ شەکر 🍬)',
-                flavorArabic: 'نكهة حلويات الفواكه (خالي من السكر 🍬)',
-                image: 'assets/images/zico-60.png',
-                color: 'from-pink-500/30 via-rose-900/20 to-transparent',
-                borderColor: 'border-pink-500/40',
-                badgeBg: 'bg-pink-500 text-white',
-                priceSingle: 1500,
-                priceBundle: 30000,
-                size: '250 ml',
-                sugar: 'No Sugar / No Carbs (0% Calorie)',
-                caffeine: 'Caffeine | Taurine | Vitamins',
-                benefits: [
-                    'تامی ناوازەی شیرینی میوەیی بێ بونی شەکر',
-                    'پڕ لە ڤیتامین B بۆ پاراستنی وزەی لەش',
-                    'گونجاو بۆ دایت، کێتۆ و وەرزشوانان'
-                ]
-            },
-            {
-                id: 'zico-55',
-                name: 'ZICO 55 - Sugar Free',
-                number: '55',
-                glowColor: 'rgba(192, 192, 192, 0.25)',
-                flavorBadini: 'تاما ئۆریجینال بێ شەکر⚡',
-                flavorSorani: 'تامی ئۆریجیناڵ بێ شەکر⚡',
-                flavorArabic: 'الطعم الأصلي خالي من السكر⚡',
-                image: 'assets/images/zico-55.png',
-                color: 'from-slate-400/30 via-slate-800/20 to-transparent',
-                borderColor: 'border-slate-400/40',
-                badgeBg: 'bg-slate-200 text-slate-900',
-                priceSingle: 1500,
-                priceBundle: 30000,
-                size: '250 ml',
-                sugar: 'Sugar Free (0% Sugar)',
-                caffeine: 'High Caffeine Formula',
-                benefits: [
-                    'رێژەی بەرزی کافاین بۆ تەرکیزێکی خێرا',
-                    'بێ کالۆری و شەکر بۆ تەندروستی باڵا',
-                    'دابینکردنی چاڵاکی دەستبەجێ'
-                ]
-            },
-            {
-                id: 'zico-66',
-                name: 'ZICO 66 - Original Blue',
-                number: '66',
-                glowColor: 'rgba(0, 102, 255, 0.25)',
-                flavorBadini: 'تاما ئۆریجینال یا کلاسیک 💙',
-                flavorSorani: 'تامی ئۆریجیناڵی کلاسیک 💙',
-                flavorArabic: 'النكهة الأصلية الكلاسيكية 💙',
-                image: 'assets/images/zico-66.png',
-                color: 'from-blue-600/30 via-indigo-950/20 to-transparent',
-                borderColor: 'border-blue-500/40',
-                badgeBg: 'bg-blue-500 text-white',
-                priceSingle: 1500,
-                priceBundle: 30000,
-                size: '250 ml',
-                sugar: 'Standard Energy Sugar',
-                caffeine: 'Caffeine | Taurine | Vitamins',
-                benefits: [
-                    'تامی کلاسیکی پڕ لە وزە و درەوشانەوە',
-                    'بەهێزکردنی تەرکیز و بڕیاردانی خێرا',
-                    'دابینکردنی تۆرین بۆ جووڵەی ماسولکەکان'
-                ]
-            },
-            {
-                id: 'zico-63',
-                name: 'ZICO 63 - Açaí Berry',
-                number: '63',
-                glowColor: 'rgba(138, 43, 226, 0.25)',
-                flavorBadini: 'تاما تایبەتا ئەسایی (Açaí 🍇)',
-                flavorSorani: 'تامی تایبەتی ئەسایی (Açaí 🍇)',
-                flavorArabic: 'نكهة الآساي المميزة (Açaí 🍇)',
-                image: 'assets/images/zico-63.png',
-                color: 'from-purple-600/30 via-fuchsia-950/20 to-transparent',
-                borderColor: 'border-purple-500/40',
-                badgeBg: 'bg-purple-500 text-white',
-                priceSingle: 1500,
-                priceBundle: 30000,
-                size: '250 ml',
-                sugar: 'Natural Fruit Sugar',
-                caffeine: 'Caffeine | Taurine | Vitamins',
-                benefits: [
-                    'عەمباری دژەئۆکسێنەرەکان بە تامی ئەسایی سویدی',
-                    'تايبەت ب كەسێن حەز ب تامیێن میوەیی دکەن',
-                    'بەهێزکەری سیستم و چالاکی مێشک'
-                ]
-            },
-            {
-                id: 'zico-69',
-                name: 'ZICO 69 - Mango Fresh',
-                number: '69',
-                glowColor: 'rgba(255, 102, 0, 0.25)',
-                flavorBadini: 'تاما مانگۆیێ (🥭 Mango)',
-                flavorSorani: 'تامی مانگۆ (🥭 Mango)',
-                flavorArabic: 'نكهة المانجو (🥭 Mango)',
-                image: 'assets/images/zico-69.png',
-                color: 'from-orange-500/30 via-amber-950/20 to-transparent',
-                borderColor: 'border-orange-500/40',
-                badgeBg: 'bg-orange-500 text-white',
-                priceSingle: 1500,
-                priceBundle: 30000,
-                size: '250 ml',
-                sugar: 'Standard Energy Sugar',
-                caffeine: 'Caffeine | Taurine | Vitamins',
-                benefits: [
-                    'تامی فێنک و سەرنجڕاکێشی مانگۆی سروشتی',
-                    'سەرچاوەی بەهێزی ڤیتامین و وزە',
-                    'گەیاندنی خێرایی بە ڕۆژەکەت'
-                ]
-            },
-            {
-                id: 'zico-65',
-                name: 'ZICO 65 - Mojito Lime',
-                number: '65',
-                glowColor: 'rgba(0, 204, 102, 0.25)',
-                flavorBadini: 'تاما موهیتۆ (لیمۆ و نەعناع 🍋🌿)',
-                flavorSorani: 'تامی موهیتۆ (لیمۆ و نەعناع 🍋🌿)',
-                flavorArabic: 'نكهة الموهيتو (ليمون ونعناع 🍋🌿)',
-                image: 'assets/images/zico-65.png',
-                color: 'from-emerald-600/30 via-green-950/20 to-transparent',
-                borderColor: 'border-emerald-500/40',
-                badgeBg: 'bg-emerald-500 text-white',
-                priceSingle: 1500,
-                priceBundle: 30000,
-                size: '250 ml',
-                sugar: 'Standard Energy Sugar',
-                caffeine: 'Caffeine | Taurine | Vitamins',
-                benefits: [
-                    'فێنککەرەوەیەکی باو و خۆش بە تامی لیمۆ و نەعناع',
-                    'تامی موهیتۆی فریش و پر وزە',
-                    'بەهێزکردنی ئاستی فیزیکی و تەرکیز'
-                ]
-            }
-        ];
 
         let currentLanguage = 'badini';
         let currentTab = 'shop';
@@ -1405,7 +1353,7 @@
                                         📦 ${unitBundleText} (30,000 د.ع)
                                     </button>
                                     <button onclick="setPackType('${prod.id}', 'piece')" class="py-1.5 rounded-lg text-xs font-bold transition-all ${pieceClass}">
-                                        🥫 ${unitPieceText} (1,500 د.ع)
+                                        刊 ${unitPieceText} (1,500 د.ع)
                                     </button>
                                 </div>
 
