@@ -1,9 +1,10 @@
+```html
 <!DOCTYPE html>
 <html lang="ku" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ZICO Energy Drink | Sweden 🇸🇪 & Kurdistan ☀️</title>
+    <title>ZICO Energy Drink Sweden 🇸🇪</title>
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -50,7 +51,7 @@
 
         /* Glassmorphism Dynamic UI */
         .glass-panel {
-            background: rgba(10, 12, 24, 0.82);
+            background: rgba(10, 12, 24, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -135,7 +136,7 @@
     <!-- Ambient Glow Background -->
     <div id="ambient-glow"></div>
 
-    <!-- Sound Control Toggle Button -->
+    <!-- Sound Control Button -->
     <div class="fixed bottom-20 left-4 z-40">
         <button onclick="toggleSound()" id="sound-btn" class="p-2.5 rounded-full glass-panel border border-slate-700 text-xs font-bold text-slate-300 hover:text-white shadow-xl flex items-center gap-2">
             <span id="sound-icon">🔊</span>
@@ -167,13 +168,13 @@
 
             <!-- Desktop Navigation Links -->
             <nav class="hidden md:flex items-center gap-1 bg-slate-950/80 p-1.5 rounded-2xl border border-slate-800/80">
-                <button id="nav-shop" onclick="switchTab('shop')" class="px-5 py-2 rounded-xl text-xs font-bold transition-all bg-orange-500 text-white shadow-lg shadow-orange-500/30">
+                <button id="navShop" onclick="switchTab('shop')" class="px-5 py-2 rounded-xl text-xs font-bold transition-all bg-orange-500 text-white shadow-lg shadow-orange-500/30">
                     بەرهەمەکان (Shopping)
                 </button>
-                <button id="nav-distributors" onclick="switchTab('distributors')" class="px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white">
+                <button id="navAgents" onclick="switchTab('distributors')" class="px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white">
                     بریکارێن سەرەکی
                 </button>
-                <button id="nav-developer" onclick="switchTab('developer')" class="px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white">
+                <button id="navDev" onclick="switchTab('developer')" class="px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white">
                     پەڕێ دێڤلۆپەری ⚡
                 </button>
             </nav>
@@ -202,13 +203,13 @@
 
         <!-- Mobile Quick Navigation Bar -->
         <div class="flex md:hidden items-center justify-around mt-2 pt-2 border-t border-slate-800/60 text-xs font-bold">
-            <button id="mob-nav-shop" onclick="switchTab('shop')" class="pb-1 text-orange-400 border-b-2 border-orange-400">
+            <button id="mobNavShop" onclick="switchTab('shop')" class="pb-1 text-orange-400 border-b-2 border-orange-400">
                 بەرهەمەکان
             </button>
-            <button id="mob-nav-distributors" onclick="switchTab('distributors')" class="pb-1 text-slate-400">
+            <button id="mobNavAgents" onclick="switchTab('distributors')" class="pb-1 text-slate-400">
                 بریکارێن سەرەکی
             </button>
-            <button id="mob-nav-developer" onclick="switchTab('developer')" class="pb-1 text-slate-400">
+            <button id="mobNavDev" onclick="switchTab('developer')" class="pb-1 text-slate-400">
                 دێڤلۆپەر ⚡
             </button>
         </div>
@@ -225,7 +226,7 @@
                 <div id="slideshow-wrapper" class="relative w-full aspect-[16/9] max-h-[480px] rounded-3xl overflow-hidden glass-card border border-orange-500/30 shadow-2xl shadow-orange-500/10">
                     
                     <div id="slides-container" class="w-full h-full relative">
-                        <!-- Slides rendered dynamically via JS -->
+                        <!-- 11 Commercial Slides rendered dynamically via JS -->
                     </div>
 
                     <!-- Slide Controls Overlays -->
@@ -248,12 +249,12 @@
                 <div class="glass-panel rounded-3xl p-5 lg:p-6 border border-slate-800">
                     <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-4">
                         <div>
-                            <span id="badge-swedish-origin" class="bg-amber-500/20 text-amber-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                            <span id="badgeSwedishOrigin" class="bg-amber-500/20 text-amber-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
                                 🇸🇪 FORMULATED IN SWEDEN • NOW IN KURDISTAN ☀️
                             </span>
-                            <h3 id="ambient-selector-title" class="text-xl font-black text-white mt-1">تامی دڵخواز هەڵبژێرە بۆ گۆڕینی دیزاینی وێبسایتەکە:</h3>
+                            <h3 id="ambientSelectorTitle" class="text-xl font-black text-white mt-1">تامی دڵخواز هەڵبژێرە بۆ گۆڕینی دیزاینی وێبسایتەکە:</h3>
                         </div>
-                        <button id="btn-see-all-cans" onclick="scrollToProducts()" class="px-5 py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-black text-xs rounded-xl shadow-lg transition-all active:scale-95">
+                        <button id="btnSeeAllCans" onclick="scrollToProducts()" class="px-5 py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-black text-xs rounded-xl shadow-lg transition-all active:scale-95">
                             سەیرکردنی تەواوی قوتییەکان 🛒
                         </button>
                     </div>
@@ -297,12 +298,12 @@
             <div id="catalog-section" class="max-w-7xl mx-auto px-4 lg:px-8 py-10">
                 <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-slate-800">
                     <div>
-                        <h3 id="our-products-title" class="text-3xl font-black text-white">بەرهەمێن ZICO Energy Drink</h3>
-                        <p id="our-products-sub" class="text-slate-400 text-sm mt-1">تاما دڵخواز هەڵبژێرە و ڕاستەوخۆ داوا بکە (کۆم و تاک)</p>
+                        <h3 id="ourProductsTitle" class="text-3xl font-black text-white">بەرهەمێن ZICO Energy Drink</h3>
+                        <p id="ourProductsSub" class="text-slate-400 text-sm mt-1">تاما دڵخواز هەڵبژێرە و ڕاستەوخۆ داوا بکە (کۆم و تاک)</p>
                     </div>
                     
                     <div class="mt-4 md:mt-0 flex items-center gap-2">
-                        <span id="badge-sweden-standard" class="text-xs font-bold bg-slate-900 border border-slate-800 text-slate-300 px-3 py-1.5 rounded-xl">
+                        <span id="badgeSwedenStandard" class="text-xs font-bold bg-slate-900 border border-slate-800 text-slate-300 px-3 py-1.5 rounded-xl">
                             🇸🇪 Sweden Standard • ☀️ Kurdistan Supply
                         </span>
                     </div>
@@ -317,32 +318,32 @@
             <!-- LIFESTYLE GALLERY SECTION -->
             <div class="max-w-7xl mx-auto px-4 lg:px-8 pb-16">
                 <div class="text-center mb-8">
-                    <span id="badge-gallery" class="bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold px-3 py-1 rounded-full uppercase">
+                    <span id="badgeGallery" class="bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold px-3 py-1 rounded-full uppercase">
                         📸 ZICO LIFESTYLE & MOMENTS IN KURDISTAN
                     </span>
-                    <h3 id="gallery-title" class="text-3xl font-black text-white mt-2">چێژ و وزە لە هەموو شوێنێک</h3>
+                    <h3 id="galleryTitle" class="text-3xl font-black text-white mt-2">چێژ و وزە لە هەموو شوێنێک</h3>
                 </div>
 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div class="relative h-60 rounded-2xl overflow-hidden glass-card border border-slate-800 group p-4 flex flex-col justify-end bg-gradient-to-tr from-blue-900/60 to-slate-900">
                         <img src="assets/images/zico-66.png" alt="ZICO Original" class="w-full h-44 object-contain mx-auto group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.style.display='none';">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 pointer-events-none"></div>
-                        <span id="gal-cap-1" class="relative z-10 text-xs font-bold text-white">🏖️ ZICO Original Blue 66</span>
+                        <span id="galCap1" class="relative z-10 text-xs font-bold text-white">🏖️ ZICO Original Blue 66</span>
                     </div>
                     <div class="relative h-60 rounded-2xl overflow-hidden glass-card border border-slate-800 group p-4 flex flex-col justify-end bg-gradient-to-tr from-emerald-900/60 to-slate-900">
                         <img src="assets/images/zico-65.png" alt="ZICO Mojito" class="w-full h-44 object-contain mx-auto group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.style.display='none';">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 pointer-events-none"></div>
-                        <span id="gal-cap-2" class="relative z-10 text-xs font-bold text-white">🍋 ZICO Mojito Lime 65</span>
+                        <span id="galCap2" class="relative z-10 text-xs font-bold text-white">🍋 ZICO Mojito Lime 65</span>
                     </div>
                     <div class="relative h-60 rounded-2xl overflow-hidden glass-card border border-slate-800 group p-4 flex flex-col justify-end bg-gradient-to-tr from-pink-900/60 to-slate-900">
                         <img src="assets/images/zico-60.png" alt="ZICO Fruit Candy" class="w-full h-44 object-contain mx-auto group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.style.display='none';">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 pointer-events-none"></div>
-                        <span id="gal-cap-3" class="relative z-10 text-xs font-bold text-white">🍬 ZICO Fruit Candy 60</span>
+                        <span id="galCap3" class="relative z-10 text-xs font-bold text-white">🍬 ZICO Fruit Candy 60</span>
                     </div>
                     <div class="relative h-60 rounded-2xl overflow-hidden glass-card border border-slate-800 group p-4 flex flex-col justify-end bg-gradient-to-tr from-purple-900/60 to-slate-900">
                         <img src="assets/images/zico-63.png" alt="ZICO Acai" class="w-full h-44 object-contain mx-auto group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.style.display='none';">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 pointer-events-none"></div>
-                        <span id="gal-cap-4" class="relative z-10 text-xs font-bold text-white">🍇 ZICO Açaí Berry 63</span>
+                        <span id="galCap4" class="relative z-10 text-xs font-bold text-white">🍇 ZICO Açaí Berry 63</span>
                     </div>
                 </div>
             </div>
@@ -352,13 +353,13 @@
         <section id="tab-distributors" class="hidden">
             <div class="max-w-5xl mx-auto px-4 py-12">
                 <div class="text-center mb-12">
-                    <span id="badge-distributors" class="bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-bold px-3 py-1 rounded-full uppercase">
+                    <span id="badgeDistributors" class="bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-bold px-3 py-1 rounded-full uppercase">
                         📍 لایەنی فەرمی بڵاوکردنەوە
                     </span>
-                    <h2 id="distributors-title" class="text-3xl md:text-5xl font-black text-white mt-3 mb-3">
+                    <h2 id="distributorsTitle" class="text-3xl md:text-5xl font-black text-white mt-3 mb-3">
                         بریکارێن سەرەکی و پەیوەندی
                     </h2>
-                    <p id="distributors-sub" class="text-slate-400 text-sm md:text-base max-w-xl mx-auto">
+                    <p id="distributorsSub" class="text-slate-400 text-sm md:text-base max-w-xl mx-auto">
                         ژبوو داواکرنا کۆم یان تاک یان بونە مەندوب، ڕاستەوخۆ پەیوەندیێ ب بریکارێ سەرەکی بکن.
                     </p>
                 </div>
@@ -369,10 +370,10 @@
                         <div class="absolute top-0 right-0 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl"></div>
                         
                         <div>
-                            <div id="badinan-region-tag" class="inline-block px-3 py-1 rounded-lg bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-bold mb-4">
+                            <div id="badinanRegionTag" class="inline-block px-3 py-1 rounded-lg bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-bold mb-4">
                                 دەڤەرا بادینان / دهۆک 📍
                             </div>
-                            <h3 id="badinan-agent-name" class="text-2xl font-black text-white mb-6">بریکارێ سەرەکی ل بادینان</h3>
+                            <h3 id="badinanAgentName" class="text-2xl font-black text-white mb-6">بریکارێ سەرەکی ل بادینان</h3>
 
                             <div class="space-y-4 mb-8">
                                 <a href="https://wa.me/9647504696517" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-emerald-500/50 transition-all group">
@@ -390,7 +391,7 @@
 
                         <a href="https://www.tiktok.com/@zikoenrgy?_r=1&_t=ZT-98k7QK6wpDB" target="_blank" class="flex items-center justify-center gap-3 w-full py-3.5 rounded-2xl bg-black border border-slate-700 text-white font-bold transition-all hover:bg-slate-900 shadow-lg">
                             <i class="fa-brands fa-tiktok text-xl text-pink-500"></i>
-                            <span id="badinan-tiktok-btn">تیک تۆک: @zikoenrgy</span>
+                            <span id="badinanTiktokBtn">تیک تۆک: @zikoenrgy</span>
                         </a>
                     </div>
 
@@ -399,10 +400,10 @@
                         <div class="absolute top-0 right-0 w-40 h-40 bg-orange-500/10 rounded-full blur-3xl"></div>
                         
                         <div>
-                            <div id="erbil-region-tag" class="inline-block px-3 py-1 rounded-lg bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-bold mb-4">
+                            <div id="erbilRegionTag" class="inline-block px-3 py-1 rounded-lg bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-bold mb-4">
                                 پارێزگای هەولێر و دەوروبەر 📍
                             </div>
-                            <h3 id="erbil-agent-name" class="text-2xl font-black text-white mb-6">بریکارێ سەرەکی ل هەولێر</h3>
+                            <h3 id="erbilAgentName" class="text-2xl font-black text-white mb-6">بریکارێ سەرەکی ل هەولێر</h3>
 
                             <div class="space-y-3 mb-8">
                                 <a href="https://wa.me/9647504489125" target="_blank" class="flex items-center justify-between p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-emerald-500/50 transition-all">
@@ -431,7 +432,7 @@
 
                         <a href="https://www.tiktok.com/@zico.company?_r=1&_t=ZT-98k7cbbvgxp" target="_blank" class="flex items-center justify-center gap-3 w-full py-3.5 rounded-2xl bg-black border border-slate-700 text-white font-bold transition-all hover:bg-slate-900 shadow-lg">
                             <i class="fa-brands fa-tiktok text-xl text-pink-500"></i>
-                            <span id="erbil-tiktok-btn">تیک تۆک: @zico.company</span>
+                            <span id="erbilTiktokBtn">تیک تۆک: @zico.company</span>
                         </a>
                     </div>
                 </div>
@@ -456,35 +457,35 @@
                             </div>
                             <h2 class="text-3xl md:text-4xl font-black text-white">Zaniyar Al-Mzurii</h2>
                             <p class="text-purple-400 text-xs font-bold tracking-wider uppercase mt-1 mb-3">Web App & Mobile App & System Engineer</p>
-                            <p id="dev-bio-text" class="text-slate-300 text-sm leading-relaxed max-w-xl">
+                            <p id="devBioText" class="text-slate-300 text-sm leading-relaxed max-w-xl">
                                 ئەزموون د دروستکرنا باشترین و مۆدێرنترین سیستەم، ئاپڵیکەیشن و وێبسایتان دا ب بەرزترین کوالیتی و بهایەکێ زۆر گونجایی.
                             </p>
                         </div>
                     </div>
 
                     <div class="mb-10">
-                        <h3 id="dev-services-title" class="text-lg font-black text-white mb-4">ئەو خزمەتگوزاریێن ئەز پێشکێش دکەم:</h3>
+                        <h3 id="devServicesTitle" class="text-lg font-black text-white mb-4">ئەو خزمەتگوزاریێن ئەز پێشکێش دکەم:</h3>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-purple-500/40 transition-all">
                                 <i class="fa-solid fa-laptop-code text-2xl text-purple-400 mb-3 block"></i>
-                                <h4 id="srv-web-title" class="font-bold text-white text-sm mb-1">Web Applications</h4>
-                                <p id="srv-web-desc" class="text-slate-400 text-xs">دروستکردنی وێبسایت و وێب ئەپی مۆدێرن و خێرا</p>
+                                <h4 id="srvWebTitle" class="font-bold text-white text-sm mb-1">Web Applications</h4>
+                                <p id="srvWebDesc" class="text-slate-400 text-xs">دروستکردنی وێبسایت و وێب ئەپی مۆدێرن و خێرا</p>
                             </div>
                             <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-pink-500/40 transition-all">
                                 <i class="fa-solid fa-mobile-screen-button text-2xl text-pink-400 mb-3 block"></i>
-                                <h4 id="srv-mob-title" class="font-bold text-white text-sm mb-1">Mobile Apps</h4>
-                                <p id="srv-mob-desc" class="text-slate-400 text-xs">ئەپڵیکەیشنی iOS و Android بۆ هەر بزنسێک</p>
+                                <h4 id="srvMobTitle" class="font-bold text-white text-sm mb-1">Mobile Apps</h4>
+                                <p id="srvMobDesc" class="text-slate-400 text-xs">ئەپڵیکەیشنی iOS و Android بۆ هەر بزنسێک</p>
                             </div>
                             <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-amber-500/40 transition-all">
                                 <i class="fa-solid fa-network-wired text-2xl text-amber-400 mb-3 block"></i>
-                                <h4 id="srv-sys-title" class="font-bold text-white text-sm mb-1">Custom Systems</h4>
-                                <p id="srv-sys-desc" class="text-slate-400 text-xs">سیستەمی بەڕێوەبردن بۆ کۆمپانیا و مارکێتەکان</p>
+                                <h4 id="srvSysTitle" class="font-bold text-white text-sm mb-1">Custom Systems</h4>
+                                <p id="srvSysDesc" class="text-slate-400 text-xs">سیستەمی بەڕێوەبردن بۆ کۆمپانیا و مارکێتەکان</p>
                             </div>
                         </div>
                     </div>
 
                     <div>
-                        <h3 id="dev-social-title" class="text-lg font-black text-white mb-6">سۆشیال میدیا و پەیوەندی ڕاستەوخۆ:</h3>
+                        <h3 id="devSocialTitle" class="text-lg font-black text-white mb-6">سۆشیال میدیا و پەیوەندی ڕاستەوخۆ:</h3>
                         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                             <a href="https://wa.me/9647506045491" target="_blank" class="p-4 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 transition-all flex items-center gap-3">
                                 <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl">
@@ -558,7 +559,7 @@
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
             <p>© 2026 ZICO Energy Drinks Sweden 🇸🇪. All Rights Reserved.</p>
             <p class="flex items-center justify-center gap-2">
-                <span id="footer-dev-label">گەشەپێدان و دیزاین:</span>
+                <span id="footerDevLabel">گەشەپێدان و دیزاین:</span>
                 <button onclick="switchTab('developer')" class="text-purple-400 font-bold hover:underline">
                     Zaniyar Al-Mzurii
                 </button>
@@ -578,14 +579,14 @@
                 <p id="detail-flavor" class="text-orange-400 font-bold text-sm mb-4"></p>
                 
                 <div class="bg-slate-950/90 rounded-2xl p-4 text-xs text-slate-300 mb-6 space-y-2 text-right border border-slate-800">
-                    <p>• <strong id="lbl-origin">دروستکراو:</strong> سوید 🇸🇪 (Sweden Standard)</p>
-                    <p>• <strong id="lbl-price-single">نرخی ١ لب (قطعە):</strong> 1,500 د.ع</p>
-                    <p>• <strong id="lbl-price-bundle">نرخی ١ ربطە:</strong> 30,000 د.ع</p>
-                    <p>• <strong id="lbl-size">قەبارە:</strong> 250 ml</p>
-                    <p>• <strong id="lbl-sugar">شەکر:</strong> <span id="detail-sugar"></span></p>
-                    <p>• <strong id="lbl-caffeine">پێکهاتەکان:</strong> <span id="detail-caffeine"></span></p>
+                    <p>• <strong id="lblOrigin">دروستکراو:</strong> سوید 🇸🇪 (Sweden Standard)</p>
+                    <p>• <strong id="lblPriceSingle">نرخی ١ لب (قطعە):</strong> 1,500 د.ع</p>
+                    <p>• <strong id="lblPriceBundle">نرخی ١ ربطە:</strong> 30,000 د.ع</p>
+                    <p>• <strong id="lblSize">قەبارە:</strong> 250 ml</p>
+                    <p>• <strong id="lblSugar">شەکر:</strong> <span id="detail-sugar"></span></p>
+                    <p>• <strong id="lblCaffeine">پێکهاتەکان:</strong> <span id="detail-caffeine"></span></p>
                     <div class="pt-2 border-t border-slate-800 mt-2">
-                        <strong id="lbl-benefits">مفایێت سەرەکی:</strong>
+                        <strong id="lblBenefits">مفایێت سەرەکی:</strong>
                         <ul id="detail-benefits" class="list-disc list-inside mt-1 space-y-1 text-slate-400"></ul>
                     </div>
                 </div>
@@ -604,7 +605,7 @@
                 <div class="flex items-center justify-between pb-4 border-b border-slate-800 mb-6">
                     <h3 class="text-xl font-bold text-white flex items-center gap-2">
                         <span>🛒</span>
-                        <span id="cart-drawer-title">سەبەتەیا داواکاریان</span>
+                        <span id="cartDrawerTitle">سەبەتەیا داواکاریان</span>
                     </h3>
                     <button onclick="toggleCartModal(false)" class="w-8 h-8 rounded-full bg-slate-900 text-slate-400 flex items-center justify-center">
                         ✕
@@ -618,12 +619,12 @@
 
             <div id="cart-footer-area" class="pt-4 border-t border-slate-800 space-y-4">
                 <div class="flex items-center justify-between text-sm">
-                    <span id="total-text-label" class="text-slate-400 font-bold">کۆی گشتی:</span>
+                    <span id="totalTextLabel" class="text-slate-400 font-bold">کۆی گشتی:</span>
                     <span id="cart-total-price" class="font-black text-xl text-emerald-400">0 IQD</span>
                 </div>
 
                 <button onclick="toggleAgentModal(true)" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-2xl text-sm transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-900/30">
-                    <span id="btn-send-whatsapp-text">ناردنا داواکاریێ ب واتسئاپێ 💬</span>
+                    <span id="btnSendWhatsappText">ناردنا داواکاریێ ب واتسئاپێ 💬</span>
                 </button>
             </div>
         </div>
@@ -640,27 +641,27 @@
                 <div class="w-12 h-12 bg-emerald-500/20 text-emerald-400 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-3">
                     <i class="fa-brands fa-whatsapp"></i>
                 </div>
-                <h3 id="select-agent-modal-title" class="text-xl font-black text-white">بریکارەکێ هەڵبژێرە ژبوو شاندنا داواکاریێ:</h3>
+                <h3 id="selectAgentModalTitle" class="text-xl font-black text-white">بریکارەکێ هەڵبژێرە ژبوو شاندنا داواکاریێ:</h3>
             </div>
 
             <div class="space-y-4">
                 <!-- Badinan Agent Option -->
                 <div class="bg-slate-900/90 border border-blue-500/30 rounded-2xl p-4">
                     <div class="flex items-center justify-between mb-3">
-                        <span id="opt-1-label" class="text-xs font-bold text-blue-400 bg-blue-500/10 px-2.5 py-1 rounded-lg">ئۆپشنێ ١</span>
-                        <span id="badinan-opt-name" class="text-sm font-bold text-white">بریکارێ سەرەکی ل بادینان</span>
+                        <span id="opt1Label" class="text-xs font-bold text-blue-400 bg-blue-500/10 px-2.5 py-1 rounded-lg">ئۆپشنێ ١</span>
+                        <span id="badinanOptName" class="text-sm font-bold text-white">بریکارێ سەرەکی ل بادینان</span>
                     </div>
                     <button onclick="sendOrderViaWhatsApp('+9647504696517')" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-between px-4">
                         <span dir="ltr" class="font-mono text-sm">+964 750 469 6517</span>
-                        <span id="btn-badinan-send">ناردنا داواکاریێ ب واتسئاپێ 💬</span>
+                        <span id="btnBadinanSend">ناردنا داواکاریێ ب واتسئاپێ 💬</span>
                     </button>
                 </div>
 
                 <!-- Erbil Agent Options -->
                 <div class="bg-slate-900/90 border border-orange-500/30 rounded-2xl p-4">
                     <div class="flex items-center justify-between mb-3">
-                        <span id="opt-2-label" class="text-xs font-bold text-orange-400 bg-orange-500/10 px-2.5 py-1 rounded-lg">ئۆپشنێ ٢</span>
-                        <span id="erbil-opt-name" class="text-sm font-bold text-white">بریکارێ سەرەکی ل هەولێر</span>
+                        <span id="opt2Label" class="text-xs font-bold text-orange-400 bg-orange-500/10 px-2.5 py-1 rounded-lg">ئۆپشنێ ٢</span>
+                        <span id="erbilOptName" class="text-sm font-bold text-white">بریکارێ سەرەکی ل هەولێر</span>
                     </div>
                     <div class="space-y-2">
                         <button onclick="sendOrderViaWhatsApp('+9647504489125')" class="w-full py-2.5 bg-slate-800 hover:bg-emerald-600/80 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-between px-4 border border-slate-700 hover:border-emerald-500">
@@ -791,21 +792,27 @@
                 mobNavShop: "بەرهەمەکان",
                 mobNavAgents: "بریکارێن سەرەکی",
                 mobNavDev: "دێڤلۆپەر ⚡",
-                ambientTitle: "تامی دڵخواز هەڵبژێرە بۆ گۆڕینی دیزاینی وێبسایتەکە:",
-                btnSeeAll: "سەیرکردنی تەواوی قوتییەکان 🛒",
+                badgeSwedishOrigin: "🇸🇪 FORMULATED IN SWEDEN • NOW IN KURDISTAN ☀️",
+                ambientSelectorTitle: "تامی دڵخواز هەڵبژێرە بۆ گۆڕینی دیزاینی وێبسایتەکە:",
+                btnSeeAllCans: "سەیرکردنی تەواوی قوتییەکان 🛒",
                 ourProductsTitle: "بەرهەمێن ZICO Energy Drink",
                 ourProductsSub: "تاما دڵخواز هەڵبژێرە و ڕاستەوخۆ داوا بکە (کۆم و تاک)",
+                badgeSwedenStandard: "🇸🇪 Sweden Standard • ☀️ Kurdistan Supply",
+                badgeGallery: "📸 ZICO LIFESTYLE & MOMENTS IN KURDISTAN",
                 galleryTitle: "چێژ و وزە لە هەموو شوێنێک",
                 galCap1: "🏖️ ZICO Original Blue 66",
                 galCap2: "🍋 ZICO Mojito Lime 65",
                 galCap3: "🍬 ZICO Fruit Candy 60",
                 galCap4: "🍇 ZICO Açaí Berry 63",
+                badgeDistributors: "📍 لایەنی فەرمی بڵاوکردنەوە",
                 distributorsTitle: "بریکارێن سەرەکی و پەیوەندی",
                 distributorsSub: "ژبوو داواکرنا کۆم یان تاک یان بونە مەندوب، ڕاستەوخۆ پەیوەندیێ ب بریکارێ سەرەکی بکن.",
                 badinanRegionTag: "دەڤەرا بادینان / دهۆک 📍",
                 badinanAgentName: "بریکارێ سەرەکی ل بادینان",
+                badinanTiktokBtn: "تیک تۆک: @zikoenrgy",
                 erbilRegionTag: "پارێزگای هەولێر و دەوروبەر 📍",
                 erbilAgentName: "بریکارێ سەرەکی ل هەولێر",
+                erbilTiktokBtn: "تیک تۆک: @zico.company",
                 devBioText: "ئەزموون د دروستکرنا باشترین و مۆدێرنترین سیستەم، ئاپڵیکەیشن و وێبسایتان دا ب بەرزترین کوالیتی و بهایەکێ زۆر گونجایی.",
                 devServicesTitle: "ئەو خزمەتگوزاریێن ئەز پێشکێش دکەم:",
                 srvWebTitle: "Web Applications",
@@ -822,6 +829,8 @@
                 selectAgentModalTitle: "بریکارەکێ هەڵبژێرە ژبوو شاندنا داواکاریێ:",
                 opt1Label: "ئۆپشنێ ١",
                 opt2Label: "ئۆپشنێ ٢",
+                badinanOptName: "بریکارێ سەرەکی ل بادینان",
+                erbilOptName: "بریکارێ سەرەکی ل هەولێر",
                 btnBadinanSend: "ناردنا داواکاریێ ب واتسئاپێ 💬",
                 unitBundleText: "ربطە",
                 unitPieceText: "لب",
@@ -843,21 +852,27 @@
                 mobNavShop: "بەرهەمەکان",
                 mobNavAgents: "بریکارەکان",
                 mobNavDev: "دیڤلۆپەر ⚡",
-                ambientTitle: "تامی دڵخواز هەڵبژێرە بۆ گۆڕینی دیزاینی وێبسایتەکە:",
-                btnSeeAll: "سەیرکردنی تەواوی قوتییەکان 🛒",
+                badgeSwedishOrigin: "🇸🇪 FORMULATED IN SWEDEN • NOW IN KURDISTAN ☀️",
+                ambientSelectorTitle: "تامی دڵخواز هەڵبژێرە بۆ گۆڕینی دیزاینی وێبسایتەکە:",
+                btnSeeAllCans: "سەیرکردنی تەواوی قوتییەکان 🛒",
                 ourProductsTitle: "بەرهەمەکانی ZICO Energy Drink",
                 ourProductsSub: "تامی دڵخواز هەڵبژێرە و ڕاستەوخۆ داوا بکە (کۆم و تاک)",
+                badgeSwedenStandard: "🇸🇪 Sweden Standard • ☀️ Kurdistan Supply",
+                badgeGallery: "📸 ZICO LIFESTYLE & MOMENTS IN KURDISTAN",
                 galleryTitle: "چێژ و وزە لە هەموو شوێنێک",
                 galCap1: "🏖️ ZICO Original Blue 66",
                 galCap2: "🍋 ZICO Mojito Lime 65",
                 galCap3: "🍬 ZICO Fruit Candy 60",
                 galCap4: "🍇 ZICO Açaí Berry 63",
+                badgeDistributors: "📍 لایەنی فەرمی بڵاوکردنەوە",
                 distributorsTitle: "بریکارە سەرەکییەکان و پەیوەندی",
                 distributorsSub: "بۆ داواکردنی کۆم یان تاک یان بوون بە مەندوب، ڕاستەوخۆ پەیوەندی بە بریکاری سەرەکی بکەن.",
                 badinanRegionTag: "ناوچەی بادینان / دهۆک 📍",
                 badinanAgentName: "بریکاری سەرەکی لە بادینان",
+                badinanTiktokBtn: "تیک تۆک: @zikoenrgy",
                 erbilRegionTag: "پارێزگای هەولێر و دەوروبەر 📍",
                 erbilAgentName: "بریکاری سەرەکی لە هەولێر",
+                erbilTiktokBtn: "تیک تۆک: @zico.company",
                 devBioText: "ئەزموون لە دروستکردنی باشترین و مۆدێرنترین سیستەم، ئەپڵیکەیشن و وێبسایت بە کوالیتی زۆر بەرز و بە نرخێکی زۆر گونجاو.",
                 devServicesTitle: "ئەو خزمەتگوزارییانەی پێشکەشی دەکەم:",
                 srvWebTitle: "Web Applications",
@@ -874,6 +889,8 @@
                 selectAgentModalTitle: "بریکارێک هەڵبژێرە بۆ ناردنی داواکاری:",
                 opt1Label: "ئۆپشنی ١",
                 opt2Label: "ئۆپشنی ٢",
+                badinanOptName: "بریکاری سەرەکی لە بادینان",
+                erbilOptName: "بریکاری سەرەکی لە هەولێر",
                 btnBadinanSend: "ناردنی داواکاری لە واتسئاپ 💬",
                 unitBundleText: "ربطە",
                 unitPieceText: "دانە",
@@ -895,21 +912,27 @@
                 mobNavShop: "المنتجات",
                 mobNavAgents: "الوكلاء",
                 mobNavDev: "المطور ⚡",
-                ambientTitle: "اختر نكهتك المفضلة لتغيير تصميم الموقع:",
-                btnSeeAll: "عرض كافة المنتجات 🛒",
+                badgeSwedishOrigin: "🇸🇪 FORMULATED IN SWEDEN • NOW IN KURDISTAN ☀️",
+                ambientSelectorTitle: "اختر نكهتك المفضلة لتغيير تصميم الموقع:",
+                btnSeeAllCans: "عرض كافة المنتجات 🛒",
                 ourProductsTitle: "منتجات مشروب الطاقة ZICO",
                 ourProductsSub: "اختر نكهتك المفضلة واطلب مباشرة (جملة ومفرد)",
+                badgeSwedenStandard: "🇸🇪 Sweden Standard • ☀️ Kurdistan Supply",
+                badgeGallery: "📸 ZICO LIFESTYLE & MOMENTS IN KURDISTAN",
                 galleryTitle: "الطاقة والانتعاش في كل مكان",
                 galCap1: "🏖️ ZICO Original Blue 66",
                 galCap2: "🍋 ZICO Mojito Lime 65",
                 galCap3: "🍬 ZICO Fruit Candy 60",
                 galCap4: "🍇 ZICO Açaí Berry 63",
+                badgeDistributors: "📍 لایەنی فەرمی بڵاوکردنەوە",
                 distributorsTitle: "الوكلاء المعتمدون والتواصل",
                 distributorsSub: "لطلبات الجملة والمفرد أو لتصبح مندوباً، اتصل مباشرة بالوكيل المعتمد.",
                 badinanRegionTag: "منطقة بادينان / دهوك 📍",
                 badinanAgentName: "الوكيل الرئيسي في بادينان",
+                badinanTiktokBtn: "تيك توك: @zikoenrgy",
                 erbilRegionTag: "محافظة أربيل وأطرافها 📍",
                 erbilAgentName: "الوكيل الرئيسي في أربيل",
+                erbilTiktokBtn: "تيك توك: @zico.company",
                 devBioText: "خبرة في تصميم وتطوير أحدث الأنظمة، التطبيقات، والمواقع الإلكترونية بأعلى جودة وأنسب الأسعار.",
                 devServicesTitle: "الخدمات التي أقدمها:",
                 srvWebTitle: "تطبيقات الويب",
@@ -926,6 +949,8 @@
                 selectAgentModalTitle: "اختر الوكيل لإرسال الطلب:",
                 opt1Label: "الخيار ١",
                 opt2Label: "الخيار ٢",
+                badinanOptName: "الوكيل الرئيسي في بادينان",
+                erbilOptName: "الوكيل الرئيسي في أربيل",
                 btnBadinanSend: "إرسال الطلب عبر الواتساب 💬",
                 unitBundleText: "ربطة",
                 unitPieceText: "قطعة",
@@ -945,38 +970,95 @@
 
     <!-- Main Logic Engine -->
     <script>
+        // 11 Commercial Slides featuring Slide-11 first and Slide-6 Website Sponsorship Ad
         const SLIDES = [
             {
-                image: 'assets/images/zico-66.png',
+                image: 'assets/images/slide-11.jpg',
                 fallback: 'assets/images/zico-66.png',
-                badge: '🇸🇪 SWEDISH FORMULA',
-                title: 'ORIGINAL BLUE 66',
-                subtitle: 'بەرزترین کوالیتی و ستانداری جیهانی سویدی',
+                badge: '🇸🇪 ZICO SWEDEN PREMIUM',
+                title: 'UNLEASH YOUR ENERGY',
+                subtitle: 'بەرزترین کوالیتی و تامی بێوێنەی نۆشابەی وزەبەخشی ZICO',
                 ctaProduct: 'zico-66'
             },
             {
-                image: 'assets/images/zico-60.png',
-                fallback: 'assets/images/zico-60.png',
-                badge: '☀️ NOW AVAILABLE IN KURDISTAN',
-                title: 'FRUIT CANDY 60',
-                subtitle: 'ئێستا ل هەموو کوردستانێ بەردەستە (بادینان & هەولێر)',
-                ctaProduct: 'zico-60'
-            },
-            {
-                image: 'assets/images/zico-65.png',
+                image: 'assets/images/slide-1.jpg',
                 fallback: 'assets/images/zico-65.png',
-                badge: '🇸🇪 CUBAN MOJITO 65',
+                badge: '🍋 CUBAN MOJITO 65',
                 title: 'REFRESH YOUR RHYTHM',
                 subtitle: 'تامی موهیتۆیی فێنک ب لیمۆ و نەعناع! 🍋🌿',
                 ctaProduct: 'zico-65'
             },
             {
-                image: 'assets/images/zico-63.png',
+                image: 'assets/images/slide-2.jpg',
+                fallback: 'assets/images/zico-60.png',
+                badge: '🍬 FRUIT CANDY 60',
+                title: 'NO SUGAR • NO CARBS',
+                subtitle: 'وزەیەکی بێسنوور بێ کالۆری و بێ شەکر! ⚡',
+                ctaProduct: 'zico-60'
+            },
+            {
+                image: 'assets/images/slide-3.jpg',
                 fallback: 'assets/images/zico-63.png',
                 badge: '🍇 AMAZON AÇAÍ 63',
                 title: 'LUXURY & PERFORMANCE',
                 subtitle: 'تامی ئەسایی شاهانە پڕ لە دژەئۆکسێنەر',
                 ctaProduct: 'zico-63'
+            },
+            {
+                image: 'assets/images/slide-4.jpg',
+                fallback: 'assets/images/zico-69.png',
+                badge: '🥭 MANGO FRESH 69',
+                title: 'TROPICAL ENERGY BOOST',
+                subtitle: 'تامی مانگۆی سروشتی و فێنک بۆ ڕۆژێکی پڕ لە چالاکی',
+                ctaProduct: 'zico-69'
+            },
+            {
+                image: 'assets/images/slide-5.jpg',
+                fallback: 'assets/images/zico-55.png',
+                badge: '⚡ SUGAR FREE 55',
+                title: 'HIGH CAFFEINE FORMULA',
+                subtitle: 'تەرکیزی بەرز و بێ شەکر بۆ وەرزش و کارکردن',
+                ctaProduct: 'zico-55'
+            },
+            {
+                image: 'assets/images/slide-6.jpg',
+                fallback: 'assets/images/zico-66.png',
+                badge: '📢 WEBSITE SPONSORSHIP & ADS',
+                title: 'ڕیکلام و سپۆنسەری وێبسایت',
+                subtitle: 'ژبوو ڕیکلام و سپۆنسەرکرنێ دناڤا وێبسایتێ مە دا، ڕاستەوخۆ پەیوەندیێ ب مە بکەن! 💼',
+                ctaProduct: 'developer-tab'
+            },
+            {
+                image: 'assets/images/slide-7.jpg',
+                fallback: 'assets/images/zico-65.png',
+                badge: '🏝️ SUMMER VIBES',
+                title: 'REFRESHING EVERY MOMENT',
+                subtitle: 'چێژ لە ژیان وەربگرە بە زیکۆ ئینێرجیا فێنک!',
+                ctaProduct: 'zico-65'
+            },
+            {
+                image: 'assets/images/slide-8.jpg',
+                fallback: 'assets/images/zico-60.png',
+                badge: '🏁 SPEED & PERFORMANCE',
+                title: 'POWERED BY SPEED ⚡',
+                subtitle: 'ئاستێکی باڵای توانای جەستەیی و مێشکی',
+                ctaProduct: 'zico-60'
+            },
+            {
+                image: 'assets/images/slide-9.jpg',
+                fallback: 'assets/images/zico-63.png',
+                badge: '🍇 AÇAÍ POWER',
+                title: 'PREMIUM BERRY BOOST',
+                subtitle: 'تامی ناوازەی میوەیی بۆ گەنجانی پێشەنگ',
+                ctaProduct: 'zico-63'
+            },
+            {
+                image: 'assets/images/slide-10.jpg',
+                fallback: 'assets/images/zico-69.png',
+                badge: '☀️ KURDISTAN OFFICIAL',
+                title: 'ZICO IN KURDISTAN',
+                subtitle: 'دابینکردنی فەرمی لە تەواوی شارەکانی کوردستان',
+                ctaProduct: 'zico-69'
             }
         ];
 
@@ -1165,11 +1247,18 @@
 
             SLIDES.forEach((slide, idx) => {
                 const isActive = idx === 0 ? 'active' : '';
-                
+                const clickAction = slide.ctaProduct === 'developer-tab' 
+                    ? `switchTab('developer')` 
+                    : `showProductDetails('${slide.ctaProduct}')`;
+
+                const btnText = slide.ctaProduct === 'developer-tab'
+                    ? 'پەیوەندی بکە / Sponsors 💬'
+                    : 'بینینی تایبەتمەندی ⚡';
+
                 const slideHtml = `
                     <div class="slide-item ${isActive}" data-slide="${idx}">
-                        <img src="${slide.image}" alt="${slide.title}" class="w-full h-full object-contain p-4 bg-slate-950/80" onerror="this.onerror=null; this.src='${slide.fallback}';">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#030408] via-black/30 to-transparent pointer-events-none"></div>
+                        <img src="${slide.image}" alt="${slide.title}" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='${slide.fallback}';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#030408] via-black/40 to-transparent"></div>
                         
                         <div class="absolute bottom-6 left-4 right-4 lg:left-8 lg:right-8 z-10 flex flex-col md:flex-row items-start md:items-end justify-between gap-3">
                             <div class="max-w-lg">
@@ -1180,8 +1269,8 @@
                                 <p class="text-slate-200 text-xs sm:text-sm font-semibold drop-shadow-md">${slide.subtitle}</p>
                             </div>
 
-                            <button onclick="showProductDetails('${slide.ctaProduct}')" class="px-5 py-2.5 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-black rounded-xl text-xs transition-all shadow-xl shadow-orange-500/30 active:scale-95">
-                                بینینی تایبەتمەندی ⚡
+                            <button onclick="${clickAction}" class="px-5 py-2.5 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-black rounded-xl text-xs transition-all shadow-xl shadow-orange-500/30 active:scale-95">
+                                ${btnText}
                             </button>
                         </div>
                     </div>
@@ -1576,3 +1665,5 @@
     </script>
 </body>
 </html>
+
+```
