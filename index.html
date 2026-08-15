@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="ku" dir="rtl">
 <head>
@@ -868,6 +867,8 @@
                 totalTextLabel: "کۆی گشتی:",
                 detailsBtnText: "تایبەتمەندی ⚡",
                 addCartBtnText: "زێدەکرن 🛒",
+                soldOutText: "نەماییە ⛔",
+                soldOutMsg: "ئەڤ بەرهەمە بۆ چەند رۆژەکێ نەماییە",
                 badgeSwedishOrigin: "🇸🇪 FORMULATED IN SWEDEN • NOW IN KURDISTAN ☀️",
                 ambientSelectorTitle: "تامی دڵخواز هەڵبژێرە بۆ گۆڕینی دیزاینی وێبسایتەکە:",
                 btnSeeAllCans: "سەیرکردنی تەواوی قوتییەکان 🛒",
@@ -928,6 +929,8 @@
                 totalTextLabel: "کۆی گشتی:",
                 detailsBtnText: "تایبەتمەندی ⚡",
                 addCartBtnText: "زیادکردن 🛒",
+                soldOutText: "نەماوە ⛔",
+                soldOutMsg: "ئەم بەرهەمە بۆ ماوەیەک نەماوە",
                 badgeSwedishOrigin: "🇸🇪 بەرهەمی سوید • ئێستا لە کوردستان ☀️",
                 ambientSelectorTitle: "تامی دڵخوازت هەڵبژێرە بۆ گۆڕینی ڕەنگی ماڵپەڕەکە:",
                 btnSeeAllCans: "بینینی هەموو بەرھەمەکان 🛒",
@@ -988,6 +991,8 @@
                 totalTextLabel: "المجموع الكلي:",
                 detailsBtnText: "التفاصيل ⚡",
                 addCartBtnText: "إضافة للسلة 🛒",
+                soldOutText: "غير متوفر ⛔",
+                soldOutMsg: "هذا المنتج غير متوفر حالياً",
                 badgeSwedishOrigin: "🇸🇪 مصنع في السويد • متوفر الآن في كوردستان ☀️",
                 ambientSelectorTitle: "اختر النكهة المفضلة لتغيير مظهر الموقع:",
                 btnSeeAllCans: "عرض جميع المنتجات 🛒",
@@ -1247,6 +1252,7 @@
                 glowColor: 'rgba(200, 200, 200, 0.25)',
                 sugar: 'Sugar Free (0% Sugar)',
                 caffeine: 'High Caffeine Formula',
+                soldOut: true,
                 benefits: ['رێژەی بەرزی کافاین بۆ تەرکیزێکی خێرا', 'بێ کالۆری و شەکر بۆ تەندروستی باڵا', 'دابینکردنی چاڵاکی دەستبەجێ']
             },
             {
@@ -1323,6 +1329,7 @@
             }
         ];
 
+        let currentLanguage = 'badini';
         let currentTab = 'shop';
         let cart = [];
         let cardState = {};
@@ -1385,59 +1392,103 @@
                 const unitBundleText = dict.unitBundleText;
                 const unitPieceText = dict.unitPieceText;
 
-                const cardHtml = `
-                    <div class="glass-card border ${prod.borderColor} rounded-3xl overflow-hidden flex flex-col justify-between relative group">
-                        <div class="absolute inset-0 bg-gradient-to-b ${prod.color} opacity-40 group-hover:opacity-75 transition-opacity"></div>
+                let cardHtml;
 
-                        <div class="p-6 relative z-10">
-                            <div class="flex items-center justify-between mb-4">
-                                <span class="px-3 py-1 rounded-full text-xs font-black ${prod.badgeBg}"># ${prod.number}</span>
-                                <span class="text-[10px] font-bold text-slate-300 bg-slate-900/80 px-2 py-0.5 rounded-md border border-slate-800">🇸🇪 SWEDEN</span>
+                if (prod.soldOut) {
+                    // SOLD OUT CARD (grayscale, disabled, no cart actions)
+                    cardHtml = `
+                        <div class="glass-card border ${prod.borderColor} rounded-3xl overflow-hidden flex flex-col justify-between relative group opacity-60 grayscale-[40%]">
+                            <div class="absolute inset-0 bg-gradient-to-b ${prod.color} opacity-30"></div>
+
+                            <div class="absolute top-4 left-4 z-20 bg-rose-600 text-white text-[10px] font-black px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1">
+                                ⛔ ${dict.soldOutText}
                             </div>
 
-                            <div class="h-60 flex items-center justify-center my-2 cursor-pointer" onclick="setThemeFlavor('${prod.id}')">
-                                <img src="${prod.image}" alt="${prod.name}" class="h-52 object-contain filter drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)] group-hover:scale-110 transition-transform duration-500" onerror="handleMultiSrcImgError(this, '${prod.id}', '${prod.name}')">
-                            </div>
-
-                            <h4 class="text-xl font-black text-white mt-2">${prod.name}</h4>
-                            <p class="text-orange-400 text-xs font-bold mt-1 mb-4">${getFlavorText(prod)}</p>
-
-                            <div class="bg-slate-950/90 rounded-2xl p-3 border border-slate-800/80 mb-4">
-                                <div class="grid grid-cols-2 gap-1.5 p-1 bg-black/50 rounded-xl mb-3">
-                                    <button onclick="setPackType('${prod.id}', 'bundle')" class="py-1.5 rounded-lg text-xs font-bold transition-all ${bundleClass}">
-                                        📦 ${unitBundleText} (30,000 د.ع)
-                                    </button>
-                                    <button onclick="setPackType('${prod.id}', 'piece')" class="py-1.5 rounded-lg text-xs font-bold transition-all ${pieceClass}">
-                                        🥫 ${unitPieceText} (1,500 د.ع)
-                                    </button>
+                            <div class="p-6 relative z-10">
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="px-3 py-1 rounded-full text-xs font-black ${prod.badgeBg}"># ${prod.number}</span>
+                                    <span class="text-[10px] font-bold text-slate-300 bg-slate-900/80 px-2 py-0.5 rounded-md border border-slate-800">🇸🇪 SWEDEN</span>
                                 </div>
 
-                                <div class="flex items-center justify-between">
-                                    <span class="text-xs font-bold text-slate-300">${dict.qtyLabel}</span>
-                                    <div class="flex items-center gap-1.5">
-                                        <button onclick="changeQty('${prod.id}', -1)" class="w-7 h-7 rounded-lg bg-slate-800 text-white font-bold text-sm hover:bg-slate-700 active:scale-95">-</button>
-                                        <input type="number" min="1" value="${state.qty}" onchange="setCustomQty('${prod.id}', this.value)" class="w-12 h-7 rounded-lg bg-black/70 border border-slate-700 text-center font-bold text-xs text-orange-400 outline-none">
-                                        <button onclick="changeQty('${prod.id}', 1)" class="w-7 h-7 rounded-lg bg-slate-800 text-white font-bold text-sm hover:bg-slate-700 active:scale-95">+</button>
+                                <div class="h-60 flex items-center justify-center my-2 relative">
+                                    <img src="${prod.image}" alt="${prod.name}" class="h-52 object-contain grayscale filter drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)]" onerror="handleMultiSrcImgError(this, '${prod.id}', '${prod.name}')">
+                                </div>
+
+                                <h4 class="text-xl font-black text-white mt-2">${prod.name}</h4>
+                                <p class="text-orange-400 text-xs font-bold mt-1 mb-4">${getFlavorText(prod)}</p>
+
+                                <div class="bg-slate-950/90 rounded-2xl p-4 border border-rose-900/50 mb-4 text-center">
+                                    <span class="text-rose-400 font-bold text-xs">${dict.soldOutMsg}</span>
+                                </div>
+                            </div>
+
+                            <div class="p-6 pt-0 relative z-10 flex items-center gap-3">
+                                <button onclick="showProductDetails('${prod.id}')" class="flex-1 py-3 bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700/80 font-bold rounded-xl text-xs transition-all text-center">
+                                    ${dict.detailsBtnText}
+                                </button>
+                                <button disabled class="flex-1 py-3 bg-slate-800 text-slate-500 font-bold rounded-xl text-xs text-center cursor-not-allowed">
+                                    ⛔ ${dict.soldOutText}
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // NORMAL AVAILABLE CARD
+                    cardHtml = `
+                        <div class="glass-card border ${prod.borderColor} rounded-3xl overflow-hidden flex flex-col justify-between relative group">
+                            <div class="absolute inset-0 bg-gradient-to-b ${prod.color} opacity-40 group-hover:opacity-75 transition-opacity"></div>
+
+                            <div class="p-6 relative z-10">
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="px-3 py-1 rounded-full text-xs font-black ${prod.badgeBg}"># ${prod.number}</span>
+                                    <span class="text-[10px] font-bold text-slate-300 bg-slate-900/80 px-2 py-0.5 rounded-md border border-slate-800">🇸🇪 SWEDEN</span>
+                                </div>
+
+                                <div class="h-60 flex items-center justify-center my-2 cursor-pointer" onclick="setThemeFlavor('${prod.id}')">
+                                    <img src="${prod.image}" alt="${prod.name}" class="h-52 object-contain filter drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)] group-hover:scale-110 transition-transform duration-500" onerror="handleMultiSrcImgError(this, '${prod.id}', '${prod.name}')">
+                                </div>
+
+                                <h4 class="text-xl font-black text-white mt-2">${prod.name}</h4>
+                                <p class="text-orange-400 text-xs font-bold mt-1 mb-4">${getFlavorText(prod)}</p>
+
+                                <div class="bg-slate-950/90 rounded-2xl p-3 border border-slate-800/80 mb-4">
+                                    <div class="grid grid-cols-2 gap-1.5 p-1 bg-black/50 rounded-xl mb-3">
+                                        <button onclick="setPackType('${prod.id}', 'bundle')" class="py-1.5 rounded-lg text-xs font-bold transition-all ${bundleClass}">
+                                            📦 ${unitBundleText} (30,000 د.ع)
+                                        </button>
+                                        <button onclick="setPackType('${prod.id}', 'piece')" class="py-1.5 rounded-lg text-xs font-bold transition-all ${pieceClass}">
+                                            🥫 ${unitPieceText} (1,500 د.ع)
+                                        </button>
+                                    </div>
+
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs font-bold text-slate-300">${dict.qtyLabel}</span>
+                                        <div class="flex items-center gap-1.5">
+                                            <button onclick="changeQty('${prod.id}', -1)" class="w-7 h-7 rounded-lg bg-slate-800 text-white font-bold text-sm hover:bg-slate-700 active:scale-95">-</button>
+                                            <input type="number" min="1" value="${state.qty}" onchange="setCustomQty('${prod.id}', this.value)" class="w-12 h-7 rounded-lg bg-black/70 border border-slate-700 text-center font-bold text-xs text-orange-400 outline-none">
+                                            <button onclick="changeQty('${prod.id}', 1)" class="w-7 h-7 rounded-lg bg-slate-800 text-white font-bold text-sm hover:bg-slate-700 active:scale-95">+</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center justify-between pt-2.5 mt-2 border-t border-slate-800 text-xs">
+                                        <span class="text-slate-400">${dict.totalTextLabel}</span>
+                                        <span class="font-black text-sm text-emerald-400">${calcTotal.toLocaleString()} IQD</span>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="flex items-center justify-between pt-2.5 mt-2 border-t border-slate-800 text-xs">
-                                    <span class="text-slate-400">${dict.totalTextLabel}</span>
-                                    <span class="font-black text-sm text-emerald-400">${calcTotal.toLocaleString()} IQD</span>
-                                </div>
+                            <div class="p-6 pt-0 relative z-10 flex items-center gap-3">
+                                <button onclick="showProductDetails('${prod.id}')" class="flex-1 py-3 bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700/80 font-bold rounded-xl text-xs transition-all text-center">
+                                    ${dict.detailsBtnText}
+                                </button>
+                                <button onclick="addToCart('${prod.id}')" class="flex-1 py-3 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold rounded-xl text-xs transition-all text-center shadow-lg shadow-orange-500/20 active:scale-95">
+                                    ${dict.addCartBtnText}
+                                </button>
                             </div>
                         </div>
+                    `;
+                }
 
-                        <div class="p-6 pt-0 relative z-10 flex items-center gap-3">
-                            <button onclick="showProductDetails('${prod.id}')" class="flex-1 py-3 bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700/80 font-bold rounded-xl text-xs transition-all text-center">
-                                ${dict.detailsBtnText}
-                            </button>
-                            <button onclick="addToCart('${prod.id}')" class="flex-1 py-3 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold rounded-xl text-xs transition-all text-center shadow-lg shadow-orange-500/20 active:scale-95">
-                                ${dict.addCartBtnText}
-                            </button>
-                        </div>
-                    </div>
-                `;
                 container.insertAdjacentHTML('beforeend', cardHtml);
             });
         }
@@ -1461,6 +1512,8 @@
 
         function addToCart(prodId) {
             const prod = PRODUCTS.find(p => p.id === prodId);
+            if (!prod || prod.soldOut) return;
+
             const state = cardState[prodId];
             const itemType = state.type;
             const qtyToAdd = state.qty;
@@ -1647,10 +1700,23 @@
                 benefitsUl.insertAdjacentHTML('beforeend', `<li>${b}</li>`);
             });
 
-            document.getElementById('detail-add-btn').onclick = function() {
-                addToCart(prodId);
-                toggleDetailModal(false);
-            };
+            const detailBtn = document.getElementById('detail-add-btn');
+            const dict = DICTIONARY[currentLanguage];
+
+            if (prod.soldOut) {
+                detailBtn.innerText = `⛔ ${dict.soldOutText}`;
+                detailBtn.disabled = true;
+                detailBtn.className = "w-full py-3.5 bg-slate-800 text-slate-500 font-black rounded-2xl text-sm cursor-not-allowed";
+                detailBtn.onclick = null;
+            } else {
+                detailBtn.innerText = "زێدەکرن بۆ سەبەتێ 🛒";
+                detailBtn.disabled = false;
+                detailBtn.className = "w-full py-3.5 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-black rounded-2xl text-sm transition-all shadow-lg shadow-orange-500/20 active:scale-95";
+                detailBtn.onclick = function() {
+                    addToCart(prodId);
+                    toggleDetailModal(false);
+                };
+            }
 
             toggleDetailModal(true);
         }
@@ -1684,5 +1750,3 @@
     </script>
 </body>
 </html>
-
-```
