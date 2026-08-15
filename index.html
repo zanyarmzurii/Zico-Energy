@@ -84,21 +84,18 @@
             border-radius: 4px;
         }
 
-        /* 16:9 Slide Item Transition */
-        .slide-item {
-            opacity: 0;
-            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 5s cubic-bezier(0.1, 1, 0.1, 1);
-            transform: scale(1.12);
-            pointer-events: none;
-            position: absolute;
-            inset: 0;
+        /* Custom Swiper Dots */
+        .custom-dot {
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
-
-        .slide-item.active {
-            opacity: 1;
-            transform: scale(1);
-            pointer-events: auto;
-            position: relative;
+        .custom-dot.active {
+            width: 24px;
+            background: #f59e0b;
         }
 
         /* Ambient Glow Backdrop Background */
@@ -220,28 +217,88 @@
         <!-- SECTION 1: SHOPPING & PRODUCTS -->
         <section id="tab-shop" class="block">
             
-            <!-- 16:9 ASPECT RATIO HERO SLIDESHOW CONTAINER -->
-            <div class="relative max-w-6xl mx-auto px-4 lg:px-8 pt-4 pb-2">
-                <div id="slideshow-wrapper" class="relative w-full aspect-[16/9] max-h-[480px] rounded-3xl overflow-hidden glass-card border border-orange-500/30 shadow-2xl shadow-orange-500/10">
+            <!-- SWIPER / SLIDER SECTION -->
+            <section class="max-w-4xl mx-auto px-4 py-6">
+                <div class="relative bg-[#131927] border border-gray-800 rounded-3xl p-2 shadow-2xl overflow-hidden">
                     
-                    <div id="slides-container" class="w-full h-full relative">
-                        <!-- 11 Commercial Slides rendered dynamically via JS -->
+                    <div id="sliderWrapper" class="relative overflow-hidden rounded-2xl">
+                        <div id="sliderSlides" class="flex transition-transform duration-500 ease-out">
+                            
+                            <!-- 1. Slide 11 (سەرەکی) -->
+                            <div class="min-w-full flex-shrink-0">
+                                <img src="assets/images/slide11.jpg" alt="Zico Banner Main" class="w-full h-auto max-h-[420px] object-cover rounded-2xl">
+                            </div>
+
+                            <!-- 2. Slide 1 -->
+                            <div class="min-w-full flex-shrink-0">
+                                <img src="assets/images/slide1.jpg" alt="Zico Banner 1" class="w-full h-auto max-h-[420px] object-cover rounded-2xl">
+                            </div>
+
+                            <!-- 3. Slide 2 -->
+                            <div class="min-w-full flex-shrink-0">
+                                <img src="assets/images/slide2.jpg" alt="Zico Banner 2" class="w-full h-auto max-h-[420px] object-cover rounded-2xl">
+                            </div>
+
+                            <!-- 4. Slide 3 -->
+                            <div class="min-w-full flex-shrink-0">
+                                <img src="assets/images/slide3.jpg" alt="Zico Banner 3" class="w-full h-auto max-h-[420px] object-cover rounded-2xl">
+                            </div>
+
+                            <!-- 5. Slide 4 -->
+                            <div class="min-w-full flex-shrink-0">
+                                <img src="assets/images/slide4.jpg" alt="Zico Banner 4" class="w-full h-auto max-h-[420px] object-cover rounded-2xl">
+                            </div>
+
+                            <!-- 6. Slide 5 -->
+                            <div class="min-w-full flex-shrink-0">
+                                <img src="assets/images/slide5.jpg" alt="Zico Banner 5" class="w-full h-auto max-h-[420px] object-cover rounded-2xl">
+                            </div>
+
+                            <!-- 7. Slide 6 (تایبەت ب سپۆنسەر و ڕیکلامێ) -->
+                            <div class="min-w-full flex-shrink-0 cursor-pointer">
+                                <a href="https://t.me/ProDownOfficial_Bot" target="_blank" title="ببە سپۆنسەر یان ڕیکلامێ بکە">
+                                    <img src="assets/images/slide6.jpg" alt="Sponsor & Advertising" class="w-full h-auto max-h-[420px] object-cover rounded-2xl border-2 border-amber-500/50 hover:opacity-95 transition">
+                                </a>
+                            </div>
+
+                            <!-- 8. Slide 7 -->
+                            <div class="min-w-full flex-shrink-0">
+                                <img src="assets/images/slide7.jpg" alt="Zico Banner 7" class="w-full h-auto max-h-[420px] object-cover rounded-2xl">
+                            </div>
+
+                            <!-- 9. Slide 8 -->
+                            <div class="min-w-full flex-shrink-0">
+                                <img src="assets/images/slide8.jpg" alt="Zico Banner 8" class="w-full h-auto max-h-[420px] object-cover rounded-2xl">
+                            </div>
+
+                            <!-- 10. Slide 9 -->
+                            <div class="min-w-full flex-shrink-0">
+                                <img src="assets/images/slide9.jpg" alt="Zico Banner 9" class="w-full h-auto max-h-[420px] object-cover rounded-2xl">
+                            </div>
+
+                            <!-- 11. Slide 10 -->
+                            <div class="min-w-full flex-shrink-0">
+                                <img src="assets/images/slide10.jpg" alt="Zico Banner 10" class="w-full h-auto max-h-[420px] object-cover rounded-2xl">
+                            </div>
+
+                        </div>
                     </div>
 
-                    <!-- Slide Controls Overlays -->
-                    <button onclick="prevSlide()" class="absolute top-1/2 left-3 -translate-y-1/2 w-10 h-10 rounded-xl glass-panel text-white flex items-center justify-center text-sm hover:bg-orange-500/80 hover:border-orange-400 transition-all z-20 active:scale-95">
+                    <!-- Navigation Buttons -->
+                    <button id="prevBtn" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white p-3 rounded-full backdrop-blur-sm border border-white/10 transition z-10">
                         <i class="fa-solid fa-chevron-left"></i>
                     </button>
-                    <button onclick="nextSlide()" class="absolute top-1/2 right-3 -translate-y-1/2 w-10 h-10 rounded-xl glass-panel text-white flex items-center justify-center text-sm hover:bg-orange-500/80 hover:border-orange-400 transition-all z-20 active:scale-95">
+                    <button id="nextBtn" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white p-3 rounded-full backdrop-blur-sm border border-white/10 transition z-10">
                         <i class="fa-solid fa-chevron-right"></i>
                     </button>
 
-                    <!-- Indicators Dots -->
-                    <div id="slide-dots" class="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 z-20 glass-panel px-3 py-1.5 rounded-full border border-slate-700/80">
+                    <!-- Indicators / Dots -->
+                    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-black/40 px-3 py-1.5 rounded-full backdrop-blur-md z-10" id="dotsContainer">
                         <!-- Dots rendered by JS -->
                     </div>
+
                 </div>
-            </div>
+            </section>
 
             <!-- INTERACTIVE 3D FLAVOR AMBIENT SELECTOR -->
             <div class="max-w-7xl mx-auto px-4 lg:px-8 py-2">
@@ -781,6 +838,78 @@
         }
     </script>
 
+    <!-- Slider Functionality JS -->
+    <script>
+        const slidesContainer = document.getElementById('sliderSlides');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const dotsContainer = document.getElementById('dotsContainer');
+
+        const totalSlides = 11;
+        let currentIndex = 0;
+        let autoSlideInterval;
+
+        function initSwiperSlider() {
+            dotsContainer.innerHTML = '';
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.className = `custom-dot ${i === 0 ? 'active' : ''}`;
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
+            startAutoSlide();
+        }
+
+        function updateSlider() {
+            slidesContainer.style.transform = `translateX(${currentIndex * 100}%)`;
+            const dots = document.querySelectorAll('.custom-dot');
+            dots.forEach((dot, index) => {
+                if (index === currentIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        function goToSlide(index) {
+            currentIndex = index;
+            updateSlider();
+            resetAutoSlide();
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlider();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        }
+
+        if (nextBtn && prevBtn) {
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                resetAutoSlide();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                resetAutoSlide();
+            });
+        }
+
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(nextSlide, 4000);
+        }
+
+        function resetAutoSlide() {
+            clearInterval(autoSlideInterval);
+            startAutoSlide();
+        }
+    </script>
+
     <!-- Main Logic Engine -->
     <script>
         const PRODUCTS = [
@@ -891,97 +1020,6 @@
                 sugar: 'کەم شەکر',
                 caffeine: '32mg / 100ml',
                 benefits: ['تامی سەوز و فێنککەرەوە', 'کەمکردنەوەی ماندوێتی', 'بەخشینی هەستی تازەیی']
-            }
-        ];
-
-        const SLIDES = [
-            {
-                image: 'assets/images/slide1.jpg',
-                fallback: 'https://placehold.co/1200x675/0a0c18/ff6600?text=ZICO+Original+Blue+66',
-                badge: '🇸🇪 ZICO SWEDEN',
-                title: 'وزەیا بێ سنوور ژ سوێدێ',
-                subtitle: 'چێژێ ژ ئۆرجیناڵترین تاما زیکۆ وەرگرە ل سەرانسەری کوردستانێ',
-                ctaProduct: 'zico-66'
-            },
-            {
-                image: 'assets/images/slide2.jpg',
-                fallback: 'https://placehold.co/1200x675/0a0c18/ff66cc?text=ZICO+Fruit+Candy+60',
-                badge: '🍬 FRUIT CANDY 60',
-                title: 'شیرینیا بێ شەکر و پڕ وزە',
-                subtitle: 'تاما میوه‌یێن جۆراوجۆر ب بێ شه‌كرا زێدەده‌ست كه‌ڤه‌',
-                ctaProduct: 'zico-60'
-            },
-            {
-                image: 'assets/images/slide3.jpg',
-                fallback: 'https://placehold.co/1200x675/0a0c18/00cc66?text=ZICO+Mojito+Lime+65',
-                badge: '🍋 MOJITO LIME 65',
-                title: 'فێنکاهیا لیمۆ و پشکنین',
-                subtitle: 'بۆ رۆژێن گەرم تاما موهیتۆ یا فێنککەرەوە',
-                ctaProduct: 'zico-65'
-            },
-            {
-                image: 'assets/images/slide4.jpg',
-                fallback: 'https://placehold.co/1200x675/0a0c18/8a2be2?text=ZICO+Acai+Berry+63',
-                badge: '🍇 AÇAÍ BERRY 63',
-                title: 'ئەنتی ئۆکسیدانت و هێز',
-                subtitle: 'تاما تووی ئاسای ب پێکهاتەیێن تەندروست',
-                ctaProduct: 'zico-63'
-            },
-            {
-                image: 'assets/images/slide5.jpg',
-                fallback: 'https://placehold.co/1200x675/0a0c18/ff9900?text=ZICO+Mango+Fresh+69',
-                badge: '🥭 MANGO FRESH 69',
-                title: 'تاما مانگۆیا ترۆپیکاڵ',
-                subtitle: 'سەرچاوەی وزە و تازەیی بۆ ڕۆژانە',
-                ctaProduct: 'zico-69'
-            },
-            {
-                image: 'assets/images/slide6.jpg',
-                fallback: 'https://placehold.co/1200x675/0a0c18/94a3b8?text=ZICO+Sugar+Free+55',
-                badge: '⚡ SUGAR FREE 55',
-                title: 'کافاینا بەرز بێ شەکر',
-                subtitle: 'تایبەت بۆ وەرزشڤان و کەسێن بێ شەکر دەوێن',
-                ctaProduct: 'zico-55'
-            },
-            {
-                image: 'assets/images/slide7.jpg',
-                fallback: 'https://placehold.co/1200x675/0a0c18/0066ff?text=KURDISTAN+SUPPLY',
-                badge: '☀️ KURDISTAN DISTRIBUTION',
-                title: 'بڵاوکردنەوەی گشتی ل دهۆک و هەولێر',
-                subtitle: 'داواکاریێن کۆم و تاک ب خێراترین کات بگەیەنە',
-                ctaProduct: 'zico-66'
-            },
-            {
-                image: 'assets/images/slide8.jpg',
-                fallback: 'https://placehold.co/1200x675/0a0c18/8a2be2?text=DEVELOPER+PORTFOLIO',
-                badge: '⚡ SYSTEM & WEB DEV',
-                title: 'گەشەپێدانی سۆفتوێر و ئەپلیکەیشن',
-                subtitle: 'دروستکردنی سیستەم ب کوالیتییا سویدی ب دەستێ Zaniyar Al-Mzurii',
-                ctaProduct: 'developer-tab'
-            },
-            {
-                image: 'assets/images/slide9.jpg',
-                fallback: 'https://placehold.co/1200x675/0a0c18/ff6600?text=SPECIAL+WHOLESALE',
-                badge: '📦 BUNDLE OFFERS',
-                title: 'داواکرنا ربطان ب نرخێ کۆم',
-                subtitle: 'بۆ مارکێت و کافێیان ب داشکاندنی تایبەت',
-                ctaProduct: 'zico-60'
-            },
-            {
-                image: 'assets/images/slide10.jpg',
-                fallback: 'https://placehold.co/1200x675/0a0c18/00cc66?text=NATURAL+INGREDIENTS',
-                badge: '🌿 VITAMIN B COMPLEX',
-                title: 'تەندرۆست و بێ زیان',
-                subtitle: 'دەوڵەمەند ب ڤیتامینێن B3, B5, B6, B12',
-                ctaProduct: 'zico-65'
-            },
-            {
-                image: 'assets/images/slide11.jpg',
-                fallback: 'https://placehold.co/1200x675/0a0c18/ff66cc?text=SWEDISH+QUALITY',
-                badge: '🇸🇪 FORMULATED IN SWEDEN',
-                title: 'ستانداردا جیهانی ل کوردستانێ',
-                subtitle: 'باشترین خواردنەوەی وزەبەخش بۆ چالاکیا ڕۆژانە',
-                ctaProduct: 'zico-60'
             }
         ];
 
@@ -1154,8 +1192,6 @@
         let currentTab = 'shop';
         let cart = [];
         let cardState = {};
-        let currentSlideIndex = 0;
-        let slideTimer = null;
 
         PRODUCTS.forEach(p => {
             cardState[p.id] = { type: 'bundle', qty: 1 };
@@ -1184,122 +1220,6 @@
 
             renderProducts();
             updateCartUI();
-        }
-
-        function initSlideshow() {
-            const container = document.getElementById('slides-container');
-            const dotsContainer = document.getElementById('slide-dots');
-            container.innerHTML = '';
-            dotsContainer.innerHTML = '';
-
-            SLIDES.forEach((slide, idx) => {
-                const isActive = idx === 0 ? 'active' : '';
-                const clickAction = slide.ctaProduct === 'developer-tab' 
-                    ? `switchTab('developer')` 
-                    : `showProductDetails('${slide.ctaProduct}')`;
-
-                const btnText = slide.ctaProduct === 'developer-tab'
-                    ? 'پەیوەندی بکە / Sponsors 💬'
-                    : 'بینینی تایبەتمەندی ⚡';
-
-                const slideHtml = `
-                    <div class="slide-item ${isActive}" data-slide="${idx}">
-                        <img src="${slide.image}" alt="${slide.title}" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='${slide.fallback}';">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#030408] via-black/40 to-transparent"></div>
-                        
-                        <div class="absolute bottom-6 left-4 right-4 lg:left-8 lg:right-8 z-10 flex flex-col md:flex-row items-start md:items-end justify-between gap-3">
-                            <div class="max-w-lg">
-                                <span class="inline-block px-3 py-1 rounded-full bg-orange-500/80 backdrop-blur-md text-white text-[11px] font-black tracking-wider uppercase mb-1 shadow-lg">
-                                    ${slide.badge}
-                                </span>
-                                <h2 class="text-2xl sm:text-4xl font-black text-white glow-text-orange mb-1">${slide.title}</h2>
-                                <p class="text-slate-200 text-xs sm:text-sm font-semibold drop-shadow-md">${slide.subtitle}</p>
-                            </div>
-
-                            <button onclick="${clickAction}" class="px-5 py-2.5 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-black rounded-xl text-xs transition-all shadow-xl shadow-orange-500/30 active:scale-95">
-                                ${btnText}
-                            </button>
-                        </div>
-                    </div>
-                `;
-                container.insertAdjacentHTML('beforeend', slideHtml);
-
-                const dotHtml = `
-                    <button onclick="goToSlide(${idx})" class="w-2.5 h-2.5 rounded-full transition-all ${idx === 0 ? 'bg-orange-500 w-6' : 'bg-slate-600 hover:bg-slate-400'}" data-dot="${idx}"></button>
-                `;
-                dotsContainer.insertAdjacentHTML('beforeend', dotHtml);
-            });
-
-            startSlideTimer();
-            setupTouchSwipe();
-        }
-
-        function showSlide(index) {
-            const items = document.querySelectorAll('.slide-item');
-            const dots = document.querySelectorAll('[data-dot]');
-
-            items.forEach((item, idx) => {
-                if (idx === index) {
-                    item.classList.add('active');
-                } else {
-                    item.classList.remove('active');
-                }
-            });
-
-            dots.forEach((dot, idx) => {
-                if (idx === index) {
-                    dot.className = "w-6 h-2.5 rounded-full bg-orange-500 transition-all";
-                } else {
-                    dot.className = "w-2.5 h-2.5 rounded-full bg-slate-600 hover:bg-slate-400 transition-all";
-                }
-            });
-
-            currentSlideIndex = index;
-        }
-
-        function nextSlide() {
-            let nextIndex = (currentSlideIndex + 1) % SLIDES.length;
-            showSlide(nextIndex);
-            resetSlideTimer();
-        }
-
-        function prevSlide() {
-            let prevIndex = (currentSlideIndex - 1 + SLIDES.length) % SLIDES.length;
-            showSlide(prevIndex);
-            resetSlideTimer();
-        }
-
-        function goToSlide(idx) {
-            showSlide(idx);
-            resetSlideTimer();
-        }
-
-        function startSlideTimer() {
-            slideTimer = setInterval(nextSlide, 5000);
-        }
-
-        function resetSlideTimer() {
-            clearInterval(slideTimer);
-            startSlideTimer();
-        }
-
-        function setupTouchSwipe() {
-            const wrapper = document.getElementById('slideshow-wrapper');
-            let startX = 0;
-            let endX = 0;
-
-            wrapper.addEventListener('touchstart', (e) => {
-                startX = e.changedTouches[0].screenX;
-            }, { passive: true });
-
-            wrapper.addEventListener('touchend', (e) => {
-                endX = e.changedTouches[0].screenX;
-                if (startX - endX > 50) {
-                    nextSlide();
-                } else if (endX - startX > 50) {
-                    prevSlide();
-                }
-            }, { passive: true });
         }
 
         function getFlavorText(prod) {
@@ -1619,7 +1539,7 @@
         }
 
         document.addEventListener("DOMContentLoaded", function() {
-            initSlideshow();
+            initSwiperSlider();
             changeLanguage('badini');
         });
     </script>
