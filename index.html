@@ -235,12 +235,12 @@
         <!-- SECTION 1: SHOPPING & PRODUCTS -->
         <section id="tab-shop" class="block">
             
-            <!-- 16:9 ASPECT RATIO HERO SLIDESHOW CONTAINER (CLEAN COMMERCIAL SLIDESHOW) -->
+            <!-- 16:9 ASPECT RATIO HERO SLIDESHOW CONTAINER -->
             <div class="relative max-w-6xl mx-auto px-4 lg:px-8 pt-4 pb-2">
                 <div id="slideshow-wrapper" class="relative w-full aspect-[16/9] max-h-[480px] rounded-3xl overflow-hidden glass-card border border-orange-500/30 shadow-2xl shadow-orange-500/10">
                     
                     <div id="slides-container" class="w-full h-full relative">
-                        <!-- Clean 11 Slides rendered dynamically via JS -->
+                        <!-- 11 Clean Commercial Slides -->
                     </div>
 
                     <!-- Slide Controls Overlays -->
@@ -340,22 +340,22 @@
 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div class="relative h-60 rounded-2xl overflow-hidden glass-card border border-slate-800 group p-4 flex flex-col justify-end bg-gradient-to-tr from-blue-900/60 to-slate-900">
-                        <img src="assets/images/zico-66.png" alt="ZICO Original" class="w-full h-44 object-contain mx-auto group-hover:scale-110 transition-transform duration-500" onerror="handleImgError(this, '💙 ZICO 66')">
+                        <img src="assets/images/zico-66.png" data-alt-src="zico-66.png" alt="ZICO Original" class="w-full h-44 object-contain mx-auto group-hover:scale-110 transition-transform duration-500" onerror="handleMultiSrcImgError(this, 'zico-66', '💙 ZICO 66')">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 pointer-events-none"></div>
                         <span id="galCap1" class="relative z-10 text-xs font-bold text-white">🏖️ ZICO Original Blue 66</span>
                     </div>
                     <div class="relative h-60 rounded-2xl overflow-hidden glass-card border border-slate-800 group p-4 flex flex-col justify-end bg-gradient-to-tr from-emerald-900/60 to-slate-900">
-                        <img src="assets/images/zico-65.png" alt="ZICO Mojito" class="w-full h-44 object-contain mx-auto group-hover:scale-110 transition-transform duration-500" onerror="handleImgError(this, '🍋 ZICO 65')">
+                        <img src="assets/images/zico-65.png" data-alt-src="zico-65.png" alt="ZICO Mojito" class="w-full h-44 object-contain mx-auto group-hover:scale-110 transition-transform duration-500" onerror="handleMultiSrcImgError(this, 'zico-65', '🍋 ZICO 65')">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 pointer-events-none"></div>
                         <span id="galCap2" class="relative z-10 text-xs font-bold text-white">🍋 ZICO Mojito Lime 65</span>
                     </div>
                     <div class="relative h-60 rounded-2xl overflow-hidden glass-card border border-slate-800 group p-4 flex flex-col justify-end bg-gradient-to-tr from-pink-900/60 to-slate-900">
-                        <img src="assets/images/zico-60.png" alt="ZICO Fruit Candy" class="w-full h-44 object-contain mx-auto group-hover:scale-110 transition-transform duration-500" onerror="handleImgError(this, '🍬 ZICO 60')">
+                        <img src="assets/images/zico-60.png" data-alt-src="zico-60.png" alt="ZICO Fruit Candy" class="w-full h-44 object-contain mx-auto group-hover:scale-110 transition-transform duration-500" onerror="handleMultiSrcImgError(this, 'zico-60', '🍬 ZICO 60')">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 pointer-events-none"></div>
                         <span id="galCap3" class="relative z-10 text-xs font-bold text-white">🍬 ZICO Fruit Candy 60</span>
                     </div>
                     <div class="relative h-60 rounded-2xl overflow-hidden glass-card border border-slate-800 group p-4 flex flex-col justify-end bg-gradient-to-tr from-purple-900/60 to-slate-900">
-                        <img src="assets/images/zico-63.png" alt="ZICO Acai" class="w-full h-44 object-contain mx-auto group-hover:scale-110 transition-transform duration-500" onerror="handleImgError(this, '🍇 ZICO 63')">
+                        <img src="assets/images/zico-63.png" data-alt-src="zico-63.png" alt="ZICO Acai" class="w-full h-44 object-contain mx-auto group-hover:scale-110 transition-transform duration-500" onerror="handleMultiSrcImgError(this, 'zico-63', '🍇 ZICO 63')">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 pointer-events-none"></div>
                         <span id="galCap4" class="relative z-10 text-xs font-bold text-white">🍇 ZICO Açaí Berry 63</span>
                     </div>
@@ -795,20 +795,60 @@
             }
         }
 
-        // Smart SVG image error handler
-        function handleImgError(img, title) {
+        // Multi-Source Image Fallback (Tries root path, assets/images/, and alternative filenames)
+        function handleMultiSrcImgError(img, baseName, fallbackTitle) {
             img.onerror = null;
+            
+            // Try alternative path without assets/images/ prefix
+            const altSrc = `${baseName}.png`;
+            const altJpgSrc = `${baseName}.jpg`;
+            const altHyphenSrc = `assets/images/${baseName}.png`;
+
+            if (!img.dataset.triedAlt1) {
+                img.dataset.triedAlt1 = "true";
+                img.src = altSrc;
+                return;
+            }
+            if (!img.dataset.triedAlt2) {
+                img.dataset.triedAlt2 = "true";
+                img.src = altJpgSrc;
+                return;
+            }
+            if (!img.dataset.triedAlt3) {
+                img.dataset.triedAlt3 = "true";
+                img.src = altHyphenSrc;
+                return;
+            }
+
+            // Final SVG Fallback Card
             const parent = img.parentElement;
             if (parent) {
                 const svgFallback = document.createElement('div');
                 svgFallback.className = "w-full h-full flex flex-col items-center justify-center p-4 text-center bg-slate-900/90 rounded-2xl border border-slate-800";
                 svgFallback.innerHTML = `
                     <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-orange-500 to-amber-400 flex items-center justify-center text-3xl font-black text-slate-950 mb-2 shadow-lg">⚡</div>
-                    <span class="text-xs font-bold text-orange-400">${title}</span>
+                    <span class="text-xs font-bold text-orange-400">${fallbackTitle || baseName}</span>
                 `;
                 img.style.display = 'none';
                 parent.appendChild(svgFallback);
             }
+        }
+
+        function handleSlideImgError(img, altName) {
+            img.onerror = null;
+            if (!img.dataset.triedRoot) {
+                img.dataset.triedRoot = "true";
+                img.src = altName;
+                return;
+            }
+            if (!img.dataset.triedHyphen) {
+                img.dataset.triedHyphen = "true";
+                const hyphenated = altName.replace('slide', 'slide-');
+                img.src = hyphenated;
+                return;
+            }
+            // Final fallback to hero banner
+            img.src = 'hero-banner.jpg';
         }
     </script>
 
@@ -1003,58 +1043,58 @@
         // 11 Clean Commercial Slides (Slide11 is Primary, Slide6 is Sponsor/Ad Actionable)
         const SLIDES = [
             {
-                image: 'assets/images/slide11.jpg',
-                fallback: 'assets/images/slide-11.jpg',
+                image: 'assets/images/slide-11.jpg',
+                altImage: 'slide-11.jpg',
                 isSponsor: false
             },
             {
-                image: 'assets/images/slide1.jpg',
-                fallback: 'assets/images/slide-1.jpg',
+                image: 'assets/images/slide-1.jpg',
+                altImage: 'slide-1.jpg',
                 isSponsor: false
             },
             {
-                image: 'assets/images/slide2.jpg',
-                fallback: 'assets/images/slide-2.jpg',
+                image: 'assets/images/slide-2.jpg',
+                altImage: 'slide-2.jpg',
                 isSponsor: false
             },
             {
-                image: 'assets/images/slide3.jpg',
-                fallback: 'assets/images/slide-3.jpg',
+                image: 'assets/images/slide-3.jpg',
+                altImage: 'slide-3.jpg',
                 isSponsor: false
             },
             {
-                image: 'assets/images/slide4.jpg',
-                fallback: 'assets/images/slide-4.jpg',
+                image: 'assets/images/slide-4.jpg',
+                altImage: 'slide-4.jpg',
                 isSponsor: false
             },
             {
-                image: 'assets/images/slide5.jpg',
-                fallback: 'assets/images/slide-5.jpg',
+                image: 'assets/images/slide-5.jpg',
+                altImage: 'slide-5.jpg',
                 isSponsor: false
             },
             {
-                image: 'assets/images/slide6.jpg',
-                fallback: 'assets/images/slide-6.jpg',
+                image: 'assets/images/slide-6.jpg',
+                altImage: 'slide-6.jpg',
                 isSponsor: true
             },
             {
-                image: 'assets/images/slide7.jpg',
-                fallback: 'assets/images/slide-7.jpg',
+                image: 'assets/images/slide-7.jpg',
+                altImage: 'slide-7.jpg',
                 isSponsor: false
             },
             {
-                image: 'assets/images/slide8.jpg',
-                fallback: 'assets/images/slide-8.jpg',
+                image: 'assets/images/slide-8.jpg',
+                altImage: 'slide-8.jpg',
                 isSponsor: false
             },
             {
-                image: 'assets/images/slide9.jpg',
-                fallback: 'assets/images/slide-9.jpg',
+                image: 'assets/images/slide-9.jpg',
+                altImage: 'slide-9.jpg',
                 isSponsor: false
             },
             {
-                image: 'assets/images/slide10.jpg',
-                fallback: 'assets/images/slide-10.jpg',
+                image: 'assets/images/slide-10.jpg',
+                altImage: 'slide-10.jpg',
                 isSponsor: false
             }
         ];
@@ -1075,7 +1115,7 @@
 
                 const slideHtml = `
                     <div class="slide-item ${isActive} ${slide.isSponsor ? 'cursor-pointer' : ''}" data-slide="${idx}" ${slide.isSponsor ? 'onclick="switchTab(\'developer\')"' : ''}>
-                        <img src="${slide.image}" alt="ZICO Slide" class="w-full h-full object-cover rounded-2xl" onerror="this.onerror=null; this.src='${slide.fallback}';">
+                        <img src="${slide.image}" alt="ZICO Slide" class="w-full h-full object-cover rounded-2xl" onerror="handleSlideImgError(this, '${slide.altImage}')">
                         <div class="absolute inset-0 bg-gradient-to-t from-[#030408]/60 via-transparent to-transparent pointer-events-none"></div>
                         
                         ${slide.isSponsor ? `
@@ -1356,7 +1396,7 @@
                             </div>
 
                             <div class="h-60 flex items-center justify-center my-2 cursor-pointer" onclick="setThemeFlavor('${prod.id}')">
-                                <img src="${prod.image}" alt="${prod.name}" class="h-52 object-contain filter drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)] group-hover:scale-110 transition-transform duration-500" onerror="handleImgError(this, '${prod.name}')">
+                                <img src="${prod.image}" alt="${prod.name}" class="h-52 object-contain filter drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)] group-hover:scale-110 transition-transform duration-500" onerror="handleMultiSrcImgError(this, '${prod.id}', '${prod.name}')">
                             </div>
 
                             <h4 class="text-xl font-black text-white mt-2">${prod.name}</h4>
@@ -1478,7 +1518,7 @@
 
                     const itemHtml = `
                         <div class="p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800 flex items-center gap-3">
-                            <img src="${item.image}" alt="${item.name}" class="w-12 h-16 object-contain" onerror="handleImgError(this, '${item.name}')">
+                            <img src="${item.image}" alt="${item.name}" class="w-12 h-16 object-contain" onerror="handleMultiSrcImgError(this, '${item.id}', '${item.name}')">
                             <div class="flex-grow">
                                 <h4 class="text-xs font-bold text-white">${item.name}</h4>
                                 <p class="text-[10px] text-slate-400">${getFlavorText(item)}</p>
