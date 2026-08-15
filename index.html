@@ -167,13 +167,13 @@
 
             <!-- Desktop Navigation Links -->
             <nav class="hidden md:flex items-center gap-1 bg-slate-950/80 p-1.5 rounded-2xl border border-slate-800/80">
-                <button id="navShop" onclick="switchTab('shop')" class="px-5 py-2 rounded-xl text-xs font-bold transition-all bg-orange-500 text-white shadow-lg shadow-orange-500/30">
+                <button id="nav-shop" onclick="switchTab('shop')" class="px-5 py-2 rounded-xl text-xs font-bold transition-all bg-orange-500 text-white shadow-lg shadow-orange-500/30">
                     بەرهەمەکان (Shopping)
                 </button>
-                <button id="navAgents" onclick="switchTab('distributors')" class="px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white">
+                <button id="nav-distributors" onclick="switchTab('distributors')" class="px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white">
                     بریکارێن سەرەکی
                 </button>
-                <button id="navDev" onclick="switchTab('developer')" class="px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white">
+                <button id="nav-developer" onclick="switchTab('developer')" class="px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white">
                     پەڕێ دێڤلۆپەری ⚡
                 </button>
             </nav>
@@ -202,13 +202,13 @@
 
         <!-- Mobile Quick Navigation Bar -->
         <div class="flex md:hidden items-center justify-around mt-2 pt-2 border-t border-slate-800/60 text-xs font-bold">
-            <button id="mobNavShop" onclick="switchTab('shop')" class="pb-1 text-orange-400 border-b-2 border-orange-400">
+            <button id="mob-nav-shop" onclick="switchTab('shop')" class="pb-1 text-orange-400 border-b-2 border-orange-400">
                 بەرهەمەکان
             </button>
-            <button id="mobNavAgents" onclick="switchTab('distributors')" class="pb-1 text-slate-400">
+            <button id="mob-nav-distributors" onclick="switchTab('distributors')" class="pb-1 text-slate-400">
                 بریکارێن سەرەکی
             </button>
-            <button id="mobNavDev" onclick="switchTab('developer')" class="pb-1 text-slate-400">
+            <button id="mob-nav-developer" onclick="switchTab('developer')" class="pb-1 text-slate-400">
                 دێڤلۆپەر ⚡
             </button>
         </div>
@@ -325,22 +325,22 @@
 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div class="relative h-60 rounded-2xl overflow-hidden glass-card border border-slate-800 group p-4 flex flex-col justify-end bg-gradient-to-tr from-blue-900/60 to-slate-900">
-                        <img src="/assets/images/zico-66.png" alt="ZICO Original" class="w-full h-44 object-contain mx-auto group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.style.display='none';">
+                        <img src="assets/images/zico-66.png" alt="ZICO Original" class="w-full h-44 object-contain mx-auto group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.style.display='none';">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 pointer-events-none"></div>
                         <span id="galCap1" class="relative z-10 text-xs font-bold text-white">🏖️ ZICO Original Blue 66</span>
                     </div>
                     <div class="relative h-60 rounded-2xl overflow-hidden glass-card border border-slate-800 group p-4 flex flex-col justify-end bg-gradient-to-tr from-emerald-900/60 to-slate-900">
-                        <img src="/assets/images/zico-65.png" alt="ZICO Mojito" class="w-full h-44 object-contain mx-auto group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.style.display='none';">
+                        <img src="assets/images/zico-65.png" alt="ZICO Mojito" class="w-full h-44 object-contain mx-auto group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.style.display='none';">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 pointer-events-none"></div>
                         <span id="galCap2" class="relative z-10 text-xs font-bold text-white">🍋 ZICO Mojito Lime 65</span>
                     </div>
                     <div class="relative h-60 rounded-2xl overflow-hidden glass-card border border-slate-800 group p-4 flex flex-col justify-end bg-gradient-to-tr from-pink-900/60 to-slate-900">
-                        <img src="/assets/images/zico-60.png" alt="ZICO Fruit Candy" class="w-full h-44 object-contain mx-auto group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.style.display='none';">
+                        <img src="assets/images/zico-60.png" alt="ZICO Fruit Candy" class="w-full h-44 object-contain mx-auto group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.style.display='none';">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 pointer-events-none"></div>
                         <span id="galCap3" class="relative z-10 text-xs font-bold text-white">🍬 ZICO Fruit Candy 60</span>
                     </div>
                     <div class="relative h-60 rounded-2xl overflow-hidden glass-card border border-slate-800 group p-4 flex flex-col justify-end bg-gradient-to-tr from-purple-900/60 to-slate-900">
-                        <img src="/assets/images/zico-63.png" alt="ZICO Acai" class="w-full h-44 object-contain mx-auto group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.style.display='none';">
+                        <img src="assets/images/zico-63.png" alt="ZICO Acai" class="w-full h-44 object-contain mx-auto group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.style.display='none';">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 pointer-events-none"></div>
                         <span id="galCap4" class="relative z-10 text-xs font-bold text-white">🍇 ZICO Açaí Berry 63</span>
                     </div>
@@ -793,7 +793,7 @@
                 flavorArabic: 'نكهة حلويات الفواكه (0% سكر)',
                 priceSingle: 1500,
                 priceBundle: 30000,
-                image: '/assets/images/zico-60.png',
+                image: 'assets/images/zico-60.png',
                 color: 'from-pink-900/40 to-slate-900',
                 borderColor: 'border-pink-500/40',
                 badgeBg: 'bg-pink-500/20 text-pink-300',
@@ -811,7 +811,7 @@
                 flavorArabic: 'كافيين عالي - خالي من السكر',
                 priceSingle: 1500,
                 priceBundle: 30000,
-                image: '/assets/images/zico-55.png',
+                image: 'assets/images/zico-55.png',
                 color: 'from-slate-700/40 to-slate-900',
                 borderColor: 'border-slate-400/40',
                 badgeBg: 'bg-slate-400/20 text-slate-200',
@@ -829,7 +829,7 @@
                 flavorArabic: 'النكهة الأصلية الكلاسيكية',
                 priceSingle: 1500,
                 priceBundle: 30000,
-                image: '/assets/images/zico-66.png',
+                image: 'assets/images/zico-66.png',
                 color: 'from-blue-900/40 to-slate-900',
                 borderColor: 'border-blue-500/40',
                 badgeBg: 'bg-blue-500/20 text-blue-300',
@@ -847,7 +847,7 @@
                 flavorArabic: 'نكهة توت الآساي ومضادات الأكسدة',
                 priceSingle: 1500,
                 priceBundle: 30000,
-                image: '/assets/images/zico-63.png',
+                image: 'assets/images/zico-63.png',
                 color: 'from-purple-900/40 to-slate-900',
                 borderColor: 'border-purple-500/40',
                 badgeBg: 'bg-purple-500/20 text-purple-300',
@@ -865,7 +865,7 @@
                 flavorArabic: 'نكهة المانجو الاستوائية',
                 priceSingle: 1500,
                 priceBundle: 30000,
-                image: '/assets/images/zico-69.png',
+                image: 'assets/images/zico-69.png',
                 color: 'from-orange-900/40 to-slate-900',
                 borderColor: 'border-orange-500/40',
                 badgeBg: 'bg-orange-500/20 text-orange-300',
@@ -883,7 +883,7 @@
                 flavorArabic: 'نكهة الموهيتو والليمون والنعناع',
                 priceSingle: 1500,
                 priceBundle: 30000,
-                image: '/assets/images/zico-65.png',
+                image: 'assets/images/zico-65.png',
                 color: 'from-emerald-900/40 to-slate-900',
                 borderColor: 'border-emerald-500/40',
                 badgeBg: 'bg-emerald-500/20 text-emerald-300',
@@ -894,51 +894,94 @@
             }
         ];
 
-        /* Slide List starting with slide11 as primary, followed by slide1 through slide10 */
         const SLIDES = [
             {
-                image: '/assets/images/slide11.jpg',
-                isSponsor: false
+                image: 'assets/images/slide1.jpg',
+                fallback: 'https://placehold.co/1200x675/0a0c18/ff6600?text=ZICO+Original+Blue+66',
+                badge: '🇸🇪 ZICO SWEDEN',
+                title: 'وزەیا بێ سنوور ژ سوێدێ',
+                subtitle: 'چێژێ ژ ئۆرجیناڵترین تاما زیکۆ وەرگرە ل سەرانسەری کوردستانێ',
+                ctaProduct: 'zico-66'
             },
             {
-                image: '/assets/images/slide1.jpg',
-                isSponsor: false
+                image: 'assets/images/slide2.jpg',
+                fallback: 'https://placehold.co/1200x675/0a0c18/ff66cc?text=ZICO+Fruit+Candy+60',
+                badge: '🍬 FRUIT CANDY 60',
+                title: 'شیرینیا بێ شەکر و پڕ وزە',
+                subtitle: 'تاما میوه‌یێن جۆراوجۆر ب بێ شه‌كرا زێدەده‌ست كه‌ڤه‌',
+                ctaProduct: 'zico-60'
             },
             {
-                image: '/assets/images/slide2.jpg',
-                isSponsor: false
+                image: 'assets/images/slide3.jpg',
+                fallback: 'https://placehold.co/1200x675/0a0c18/00cc66?text=ZICO+Mojito+Lime+65',
+                badge: '🍋 MOJITO LIME 65',
+                title: 'فێنکاهیا لیمۆ و پشکنین',
+                subtitle: 'بۆ رۆژێن گەرم تاما موهیتۆ یا فێنککەرەوە',
+                ctaProduct: 'zico-65'
             },
             {
-                image: '/assets/images/slide3.jpg',
-                isSponsor: false
+                image: 'assets/images/slide4.jpg',
+                fallback: 'https://placehold.co/1200x675/0a0c18/8a2be2?text=ZICO+Acai+Berry+63',
+                badge: '🍇 AÇAÍ BERRY 63',
+                title: 'ئەنتی ئۆکسیدانت و هێز',
+                subtitle: 'تاما تووی ئاسای ب پێکهاتەیێن تەندروست',
+                ctaProduct: 'zico-63'
             },
             {
-                image: '/assets/images/slide4.jpg',
-                isSponsor: false
+                image: 'assets/images/slide5.jpg',
+                fallback: 'https://placehold.co/1200x675/0a0c18/ff9900?text=ZICO+Mango+Fresh+69',
+                badge: '🥭 MANGO FRESH 69',
+                title: 'تاما مانگۆیا ترۆپیکاڵ',
+                subtitle: 'سەرچاوەی وزە و تازەیی بۆ ڕۆژانە',
+                ctaProduct: 'zico-69'
             },
             {
-                image: '/assets/images/slide5.jpg',
-                isSponsor: false
+                image: 'assets/images/slide6.jpg',
+                fallback: 'https://placehold.co/1200x675/0a0c18/94a3b8?text=ZICO+Sugar+Free+55',
+                badge: '⚡ SUGAR FREE 55',
+                title: 'کافاینا بەرز بێ شەکر',
+                subtitle: 'تایبەت بۆ وەرزشڤان و کەسێن بێ شەکر دەوێن',
+                ctaProduct: 'zico-55'
             },
             {
-                image: '/assets/images/slide6.jpg',
-                isSponsor: true // Dedicated slide for Ads/Sponsors
+                image: 'assets/images/slide7.jpg',
+                fallback: 'https://placehold.co/1200x675/0a0c18/0066ff?text=KURDISTAN+SUPPLY',
+                badge: '☀️ KURDISTAN DISTRIBUTION',
+                title: 'بڵاوکردنەوەی گشتی ل دهۆک و هەولێر',
+                subtitle: 'داواکاریێن کۆم و تاک ب خێراترین کات بگەیەنە',
+                ctaProduct: 'zico-66'
             },
             {
-                image: '/assets/images/slide7.jpg',
-                isSponsor: false
+                image: 'assets/images/slide8.jpg',
+                fallback: 'https://placehold.co/1200x675/0a0c18/8a2be2?text=DEVELOPER+PORTFOLIO',
+                badge: '⚡ SYSTEM & WEB DEV',
+                title: 'گەشەپێدانی سۆفتوێر و ئەپلیکەیشن',
+                subtitle: 'دروستکردنی سیستەم ب کوالیتییا سویدی ب دەستێ Zaniyar Al-Mzurii',
+                ctaProduct: 'developer-tab'
             },
             {
-                image: '/assets/images/slide8.jpg',
-                isSponsor: false
+                image: 'assets/images/slide9.jpg',
+                fallback: 'https://placehold.co/1200x675/0a0c18/ff6600?text=SPECIAL+WHOLESALE',
+                badge: '📦 BUNDLE OFFERS',
+                title: 'داواکرنا ربطان ب نرخێ کۆم',
+                subtitle: 'بۆ مارکێت و کافێیان ب داشکاندنی تایبەت',
+                ctaProduct: 'zico-60'
             },
             {
-                image: '/assets/images/slide9.jpg',
-                isSponsor: false
+                image: 'assets/images/slide10.jpg',
+                fallback: 'https://placehold.co/1200x675/0a0c18/00cc66?text=NATURAL+INGREDIENTS',
+                badge: '🌿 VITAMIN B COMPLEX',
+                title: 'تەندرۆست و بێ زیان',
+                subtitle: 'دەوڵەمەند ب ڤیتامینێن B3, B5, B6, B12',
+                ctaProduct: 'zico-65'
             },
             {
-                image: '/assets/images/slide10.jpg',
-                isSponsor: false
+                image: 'assets/images/slide11.jpg',
+                fallback: 'https://placehold.co/1200x675/0a0c18/ff66cc?text=SWEDISH+QUALITY',
+                badge: '🇸🇪 FORMULATED IN SWEDEN',
+                title: 'ستانداردا جیهانی ل کوردستانێ',
+                subtitle: 'باشترین خواردنەوەی وزەبەخش بۆ چالاکیا ڕۆژانە',
+                ctaProduct: 'zico-60'
             }
         ];
 
@@ -1151,20 +1194,32 @@
 
             SLIDES.forEach((slide, idx) => {
                 const isActive = idx === 0 ? 'active' : '';
-                
-                // If it's slide6 (Sponsor slide), add a subtle button overlay at bottom
-                const sponsorOverlay = slide.isSponsor ? `
-                    <div class="absolute bottom-6 left-4 right-4 z-10 flex justify-end">
-                        <button onclick="switchTab('developer')" class="px-4 py-2 bg-purple-600/90 hover:bg-purple-600 text-white font-bold rounded-xl text-xs transition-all shadow-xl backdrop-blur-md active:scale-95 border border-purple-400/40">
-                            داواکرنا ڕیکلام / پەیوەندی 💬
-                        </button>
-                    </div>
-                ` : '';
+                const clickAction = slide.ctaProduct === 'developer-tab' 
+                    ? `switchTab('developer')` 
+                    : `showProductDetails('${slide.ctaProduct}')`;
+
+                const btnText = slide.ctaProduct === 'developer-tab'
+                    ? 'پەیوەندی بکە / Sponsors 💬'
+                    : 'بینینی تایبەتمەندی ⚡';
 
                 const slideHtml = `
                     <div class="slide-item ${isActive}" data-slide="${idx}">
-                        <img src="${slide.image}" alt="Slide ${idx + 1}" class="w-full h-full object-cover">
-                        ${sponsorOverlay}
+                        <img src="${slide.image}" alt="${slide.title}" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='${slide.fallback}';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#030408] via-black/40 to-transparent"></div>
+                        
+                        <div class="absolute bottom-6 left-4 right-4 lg:left-8 lg:right-8 z-10 flex flex-col md:flex-row items-start md:items-end justify-between gap-3">
+                            <div class="max-w-lg">
+                                <span class="inline-block px-3 py-1 rounded-full bg-orange-500/80 backdrop-blur-md text-white text-[11px] font-black tracking-wider uppercase mb-1 shadow-lg">
+                                    ${slide.badge}
+                                </span>
+                                <h2 class="text-2xl sm:text-4xl font-black text-white glow-text-orange mb-1">${slide.title}</h2>
+                                <p class="text-slate-200 text-xs sm:text-sm font-semibold drop-shadow-md">${slide.subtitle}</p>
+                            </div>
+
+                            <button onclick="${clickAction}" class="px-5 py-2.5 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-black rounded-xl text-xs transition-all shadow-xl shadow-orange-500/30 active:scale-95">
+                                ${btnText}
+                            </button>
+                        </div>
                     </div>
                 `;
                 container.insertAdjacentHTML('beforeend', slideHtml);
@@ -1286,7 +1341,7 @@
                             </div>
 
                             <div class="h-60 flex items-center justify-center my-2 cursor-pointer" onclick="setThemeFlavor('${prod.id}')">
-                                <img src="${prod.image}" alt="${prod.name}" class="h-52 object-contain filter drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)] group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.src='/assets/images/zico-60.png';">
+                                <img src="${prod.image}" alt="${prod.name}" class="h-52 object-contain filter drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)] group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.src='assets/images/zico-60.png';">
                             </div>
 
                             <h4 class="text-xl font-black text-white mt-2">${prod.name}</h4>
@@ -1405,7 +1460,7 @@
 
                     const itemHtml = `
                         <div class="p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800 flex items-center gap-3">
-                            <img src="${item.image}" alt="${item.name}" class="w-12 h-16 object-contain" onerror="this.onerror=null; this.src='/assets/images/zico-60.png';">
+                            <img src="${item.image}" alt="${item.name}" class="w-12 h-16 object-contain" onerror="this.onerror=null; this.src='assets/images/zico-60.png';">
                             <div class="flex-grow">
                                 <h4 class="text-xs font-bold text-white">${item.name}</h4>
                                 <p class="text-[10px] text-slate-400">${getFlavorText(item)}</p>
@@ -1455,19 +1510,30 @@
             document.getElementById('tab-distributors').classList.add('hidden');
             document.getElementById('tab-developer').classList.add('hidden');
 
-            document.getElementById(`tab-${tabName}`).classList.remove('hidden');
+            const targetTab = document.getElementById(`tab-${tabName}`);
+            if (targetTab) {
+                targetTab.classList.remove('hidden');
+            }
 
             const navs = ['shop', 'distributors', 'developer'];
             navs.forEach(n => {
                 const btn = document.getElementById(`nav-${n}`);
                 const mobBtn = document.getElementById(`mob-nav-${n}`);
                 
-                if (n === tabName) {
-                    btn.className = "px-5 py-2 rounded-xl text-xs font-bold transition-all bg-orange-500 text-white shadow-lg shadow-orange-500/30";
-                    if (mobBtn) mobBtn.className = "pb-1 text-orange-400 border-b-2 border-orange-400";
-                } else {
-                    btn.className = "px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white";
-                    if (mobBtn) mobBtn.className = "pb-1 text-slate-400";
+                if (btn) {
+                    if (n === tabName) {
+                        btn.className = "px-5 py-2 rounded-xl text-xs font-bold transition-all bg-orange-500 text-white shadow-lg shadow-orange-500/30";
+                    } else {
+                        btn.className = "px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white";
+                    }
+                }
+
+                if (mobBtn) {
+                    if (n === tabName) {
+                        mobBtn.className = "pb-1 text-orange-400 border-b-2 border-orange-400";
+                    } else {
+                        mobBtn.className = "pb-1 text-slate-400";
+                    }
                 }
             });
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1508,6 +1574,8 @@
 
         function showProductDetails(prodId) {
             const prod = PRODUCTS.find(p => p.id === prodId);
+            if (!prod) return;
+
             document.getElementById('detail-img').src = prod.image;
             document.getElementById('detail-name').innerText = prod.name;
             document.getElementById('detail-flavor').innerText = getFlavorText(prod);
