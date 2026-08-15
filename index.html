@@ -85,7 +85,7 @@
             border-radius: 4px;
         }
 
-        /* Slide Transition */
+        /* 16:9 Slide Item Transition */
         .slide-item {
             opacity: 0;
             transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 5s cubic-bezier(0.1, 1, 0.1, 1);
@@ -235,12 +235,12 @@
         <!-- SECTION 1: SHOPPING & PRODUCTS -->
         <section id="tab-shop" class="block">
             
-            <!-- 16:9 ASPECT RATIO HERO SLIDESHOW CONTAINER -->
+            <!-- 16:9 ASPECT RATIO HERO SLIDESHOW CONTAINER (CLEAN COMMERCIAL SLIDESHOW) -->
             <div class="relative max-w-6xl mx-auto px-4 lg:px-8 pt-4 pb-2">
                 <div id="slideshow-wrapper" class="relative w-full aspect-[16/9] max-h-[480px] rounded-3xl overflow-hidden glass-card border border-orange-500/30 shadow-2xl shadow-orange-500/10">
                     
                     <div id="slides-container" class="w-full h-full relative">
-                        <!-- 11 Commercial Slides rendered dynamically via JS -->
+                        <!-- Clean 11 Slides rendered dynamically via JS -->
                     </div>
 
                     <!-- Slide Controls Overlays -->
@@ -1000,95 +1000,62 @@
 
     <!-- Slider JS -->
     <script>
-        // 11 Slides Slider with Relative File Paths
+        // 11 Clean Commercial Slides (Slide11 is Primary, Slide6 is Sponsor/Ad Actionable)
         const SLIDES = [
             {
-                image: 'assets/images/slide-11.jpg',
-                fallback: 'assets/images/zico-66.png',
-                badge: '🇸🇪 ZICO SWEDEN PREMIUM',
-                title: 'UNLEASH YOUR ENERGY',
-                subtitle: 'بەرزترین کوالیتی و تامی بێوێنەی نۆشابەی وزەبەخشی ZICO',
-                ctaProduct: 'zico-66'
+                image: 'assets/images/slide11.jpg',
+                fallback: 'assets/images/slide-11.jpg',
+                isSponsor: false
             },
             {
-                image: 'assets/images/slide-1.jpg',
-                fallback: 'assets/images/zico-65.png',
-                badge: '🍋 CUBAN MOJITO 65',
-                title: 'REFRESH YOUR RHYTHM',
-                subtitle: 'تامی موهیتۆیی فێنک ب لیمۆ و نەعناع! 🍋🌿',
-                ctaProduct: 'zico-65'
+                image: 'assets/images/slide1.jpg',
+                fallback: 'assets/images/slide-1.jpg',
+                isSponsor: false
             },
             {
-                image: 'assets/images/slide-2.jpg',
-                fallback: 'assets/images/zico-60.png',
-                badge: '🍬 FRUIT CANDY 60',
-                title: 'NO SUGAR • NO CARBS',
-                subtitle: 'وزەیەکی بێسنوور بێ کالۆری و بێ شەکر! ⚡',
-                ctaProduct: 'zico-60'
+                image: 'assets/images/slide2.jpg',
+                fallback: 'assets/images/slide-2.jpg',
+                isSponsor: false
             },
             {
-                image: 'assets/images/slide-3.jpg',
-                fallback: 'assets/images/zico-63.png',
-                badge: '🍇 AMAZON AÇAÍ 63',
-                title: 'LUXURY & PERFORMANCE',
-                subtitle: 'تامی ئەسایی شاهانە پڕ لە دژەئۆکسێنەر',
-                ctaProduct: 'zico-63'
+                image: 'assets/images/slide3.jpg',
+                fallback: 'assets/images/slide-3.jpg',
+                isSponsor: false
             },
             {
-                image: 'assets/images/slide-4.jpg',
-                fallback: 'assets/images/zico-69.png',
-                badge: '🥭 MANGO FRESH 69',
-                title: 'TROPICAL ENERGY BOOST',
-                subtitle: 'تامی مانگۆی سروشتی و فێنک بۆ ڕۆژێکی پڕ لە چالاکی',
-                ctaProduct: 'zico-69'
+                image: 'assets/images/slide4.jpg',
+                fallback: 'assets/images/slide-4.jpg',
+                isSponsor: false
             },
             {
-                image: 'assets/images/slide-5.jpg',
-                fallback: 'assets/images/zico-55.png',
-                badge: '⚡ SUGAR FREE 55',
-                title: 'HIGH CAFFEINE FORMULA',
-                subtitle: 'تەرکیزی بەرز و بێ شەکر بۆ وەرزش و کارکردن',
-                ctaProduct: 'zico-55'
+                image: 'assets/images/slide5.jpg',
+                fallback: 'assets/images/slide-5.jpg',
+                isSponsor: false
             },
             {
-                image: 'assets/images/slide-6.jpg',
-                fallback: 'assets/images/zico-66.png',
-                badge: '📢 WEBSITE SPONSORSHIP & ADS',
-                title: 'ڕیکلام و سپۆنسەری وێبسایت',
-                subtitle: 'ژبوو ڕیکلام و سپۆنسەرکرنێ دناڤا وێبسایتێ مە دا، ڕاستەوخۆ پەیوەندیێ ب مە بکەن! 💼',
-                ctaProduct: 'developer-tab'
+                image: 'assets/images/slide6.jpg',
+                fallback: 'assets/images/slide-6.jpg',
+                isSponsor: true
             },
             {
-                image: 'assets/images/slide-7.jpg',
-                fallback: 'assets/images/zico-65.png',
-                badge: '🏝️ SUMMER VIBES',
-                title: 'REFRESHING EVERY MOMENT',
-                subtitle: 'چێژ لە ژیان وەربگرە بە زیکۆ ئینێرجیا فێنک!',
-                ctaProduct: 'zico-65'
+                image: 'assets/images/slide7.jpg',
+                fallback: 'assets/images/slide-7.jpg',
+                isSponsor: false
             },
             {
-                image: 'assets/images/slide-8.jpg',
-                fallback: 'assets/images/zico-60.png',
-                badge: '🏁 SPEED & PERFORMANCE',
-                title: 'POWERED BY SPEED ⚡',
-                subtitle: 'ئاستێکی باڵای توانای جەستەیی و مێشکی',
-                ctaProduct: 'zico-60'
+                image: 'assets/images/slide8.jpg',
+                fallback: 'assets/images/slide-8.jpg',
+                isSponsor: false
             },
             {
-                image: 'assets/images/slide-9.jpg',
-                fallback: 'assets/images/zico-63.png',
-                badge: '🍇 AÇAÍ POWER',
-                title: 'PREMIUM BERRY BOOST',
-                subtitle: 'تامی ناوازەی میوەیی بۆ گەنجانی پێشەنگ',
-                ctaProduct: 'zico-63'
+                image: 'assets/images/slide9.jpg',
+                fallback: 'assets/images/slide-9.jpg',
+                isSponsor: false
             },
             {
-                image: 'assets/images/slide-10.jpg',
-                fallback: 'assets/images/zico-69.png',
-                badge: '☀️ KURDISTAN OFFICIAL',
-                title: 'ZICO IN KURDISTAN',
-                subtitle: 'دابینکردنی فەرمی لە تەواوی شارەکانی کوردستان',
-                ctaProduct: 'zico-69'
+                image: 'assets/images/slide10.jpg',
+                fallback: 'assets/images/slide-10.jpg',
+                isSponsor: false
             }
         ];
 
@@ -1105,32 +1072,20 @@
 
             SLIDES.forEach((slide, idx) => {
                 const isActive = idx === 0 ? 'active' : '';
-                const clickAction = slide.ctaProduct === 'developer-tab' 
-                    ? `switchTab('developer')` 
-                    : `showProductDetails('${slide.ctaProduct}')`;
-
-                const btnText = slide.ctaProduct === 'developer-tab'
-                    ? 'پەیوەندی بکە / Sponsors 💬'
-                    : 'بینینی تایبەتمەندی ⚡';
 
                 const slideHtml = `
-                    <div class="slide-item ${isActive}" data-slide="${idx}">
-                        <img src="${slide.image}" alt="${slide.title}" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='${slide.fallback}';">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#030408] via-black/40 to-transparent"></div>
+                    <div class="slide-item ${isActive} ${slide.isSponsor ? 'cursor-pointer' : ''}" data-slide="${idx}" ${slide.isSponsor ? 'onclick="switchTab(\'developer\')"' : ''}>
+                        <img src="${slide.image}" alt="ZICO Slide" class="w-full h-full object-cover rounded-2xl" onerror="this.onerror=null; this.src='${slide.fallback}';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#030408]/60 via-transparent to-transparent pointer-events-none"></div>
                         
-                        <div class="absolute bottom-6 left-4 right-4 lg:left-8 lg:right-8 z-10 flex flex-col md:flex-row items-start md:items-end justify-between gap-3">
-                            <div class="max-w-lg">
-                                <span class="inline-block px-3 py-1 rounded-full bg-orange-500/80 backdrop-blur-md text-white text-[11px] font-black tracking-wider uppercase mb-1 shadow-lg">
-                                    ${slide.badge}
-                                </span>
-                                <h2 class="text-2xl sm:text-4xl font-black text-white glow-text-orange mb-1">${slide.title}</h2>
-                                <p class="text-slate-200 text-xs sm:text-sm font-semibold drop-shadow-md">${slide.subtitle}</p>
+                        ${slide.isSponsor ? `
+                            <div class="absolute bottom-4 right-4 z-20">
+                                <button onclick="event.stopPropagation(); switchTab('developer');" class="px-4 py-2 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-slate-950 font-black rounded-xl text-xs shadow-lg shadow-amber-500/30 flex items-center gap-2 active:scale-95 transition-transform">
+                                    <i class="fa-solid fa-bullhorn"></i>
+                                    <span>📢 سپۆنسەر و ڕیکلام (Sponsor / Ads)</span>
+                                </button>
                             </div>
-
-                            <button onclick="${clickAction}" class="px-5 py-2.5 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-black rounded-xl text-xs transition-all shadow-xl shadow-orange-500/30 active:scale-95">
-                                ${btnText}
-                            </button>
-                        </div>
+                        ` : ''}
                     </div>
                 `;
                 container.insertAdjacentHTML('beforeend', slideHtml);
