@@ -143,6 +143,39 @@
 </head>
 <body class="min-h-screen flex flex-col relative selection:bg-orange-500 selection:text-white">
 
+    <!-- FULL-SCREEN YOUTUBE AD OVERLAY (Shows on page load, skip after 5s) -->
+    <div id="youtube-ad-overlay" class="fixed inset-0 z-[999] bg-black flex items-center justify-center">
+        <!-- Video Player Container -->
+        <div class="absolute inset-0 w-full h-full">
+            <iframe id="youtube-ad-iframe"
+                class="w-full h-full"
+                src="https://www.youtube.com/embed/Ge9bfuYx44g?autoplay=1&mute=0&controls=0&rel=0&playsinline=1&modestbranding=1&enablejsapi=1"
+                title="ZICO Energy Drink Ad"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <!-- Top-right controls: Ad label + Countdown/Skip -->
+        <div class="absolute top-4 right-4 z-10 flex items-center gap-2">
+            <span class="bg-black/70 text-white text-[10px] font-bold px-3 py-1.5 rounded-lg border border-white/20">
+                📢 ڕیکلام / Ad
+            </span>
+
+            <!-- Countdown Circle (visible before 5s) -->
+            <div id="ad-countdown-badge" class="w-9 h-9 rounded-full bg-black/70 border border-white/30 text-white text-xs font-bold flex items-center justify-center">
+                5
+            </div>
+
+            <!-- Skip/Close Button (hidden until 5s passes) -->
+            <button id="ad-skip-btn" onclick="closeYoutubeAd()" class="hidden items-center gap-2 bg-white/95 hover:bg-white text-slate-900 text-xs font-black px-4 py-2 rounded-lg shadow-xl transition-all active:scale-95">
+                <span>تێپەڕاندن / Skip</span>
+                <span class="text-base leading-none">✕</span>
+            </button>
+        </div>
+    </div>
+
     <!-- Dynamic Canvas Particle Background -->
     <canvas id="liquid-canvas"></canvas>
     
@@ -1746,7 +1779,58 @@
         document.addEventListener("DOMContentLoaded", function() {
             initSwiperSlider();
             changeLanguage('badini');
+            initYoutubeAdOverlay();
         });
+    </script>
+
+    <!-- YouTube Ad Overlay Logic -->
+    <script>
+        let adCountdownInterval = null;
+
+        function initYoutubeAdOverlay() {
+            const overlay = document.getElementById('youtube-ad-overlay');
+            const badge = document.getElementById('ad-countdown-badge');
+            const skipBtn = document.getElementById('ad-skip-btn');
+            if (!overlay) return;
+
+            // Lock page scroll while ad is showing
+            document.body.style.overflow = 'hidden';
+
+            let secondsLeft = 5;
+            badge.innerText = secondsLeft;
+
+            adCountdownInterval = setInterval(() => {
+                secondsLeft -= 1;
+                if (secondsLeft > 0) {
+                    badge.innerText = secondsLeft;
+                } else {
+                    clearInterval(adCountdownInterval);
+                    badge.classList.add('hidden');
+                    skipBtn.classList.remove('hidden');
+                    skipBtn.classList.add('flex');
+                }
+            }, 1000);
+        }
+
+        function closeYoutubeAd() {
+            const overlay = document.getElementById('youtube-ad-overlay');
+            const iframe = document.getElementById('youtube-ad-iframe');
+            if (adCountdownInterval) clearInterval(adCountdownInterval);
+
+            if (overlay) {
+                overlay.style.transition = 'opacity 0.4s ease';
+                overlay.style.opacity = '0';
+                setTimeout(() => {
+                    overlay.remove();
+                    document.body.style.overflow = '';
+                }, 400);
+            }
+
+            // Stop video playback by clearing the iframe src
+            if (iframe) {
+                iframe.src = '';
+            }
+        }
     </script>
 </body>
 </html>
