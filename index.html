@@ -1,1108 +1,1559 @@
 <!DOCTYPE html>
 <html lang="ku" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Ziman — AI & Language Ecosystem</title>
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html,
-    body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      font-family:
-        "Noto Sans Kurdish",
-        "Noto Sans Arabic",
-        Arial,
-        sans-serif;
-      background: #000;
-    }
-
-    body {
-      color: #fff;
-    }
-
-    /* =========================
-       SLIDER
-    ========================== */
-
-    .slider {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      background: #000;
-    }
-
-    .slides {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
-
-    .slide {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-
-      opacity: 0;
-      visibility: hidden;
-
-      transition:
-        opacity 0.9s ease,
-        visibility 0.9s ease;
-
-      background: #000;
-      z-index: 0;
-    }
-
-    .slide.active {
-      opacity: 1;
-      visibility: visible;
-      z-index: 2;
-    }
-
-    /* =========================
-       IMAGE
-    ========================== */
-
-    .slide-image {
-      position: absolute;
-      inset: 0;
-
-      width: 100%;
-      height: 100%;
-
-      object-fit: cover;
-      object-position: center;
-
-      display: block;
-
-      transform: scale(1.02);
-
-      transition:
-        transform 7s ease,
-        opacity 0.8s ease;
-    }
-
-    .slide.active .slide-image {
-      transform: scale(1);
-    }
-
-    /* =========================
-       DARK OVERLAY
-    ========================== */
-
-    .slide::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-
-      background:
-        linear-gradient(
-          180deg,
-          rgba(0, 0, 0, 0.18) 0%,
-          rgba(0, 0, 0, 0.05) 35%,
-          rgba(0, 0, 0, 0.35) 100%
-        );
-
-      pointer-events: none;
-    }
-
-    /* =========================
-       TEXT
-    ========================== */
-
-    .slide-content {
-      position: absolute;
-      z-index: 5;
-
-      left: 50%;
-      bottom: 10%;
-
-      transform: translateX(-50%);
-
-      width: min(90%, 900px);
-
-      text-align: center;
-
-      pointer-events: none;
-    }
-
-    .slide-title,
-    .slide-description {
-      display: none;
-    }
-
-    /*
-      Intentionally no visible text.
-      All slide content remains image-based.
-    */
-
-    /* =========================
-       SPONSOR SLIDE
-    ========================== */
-
-    .sponsor-slide {
-      cursor: pointer;
-    }
-
-    .sponsor-slide .slide-image {
-      cursor: pointer;
-    }
-
-    /* =========================
-       NAVIGATION ARROWS
-    ========================== */
-
-    .arrow {
-      position: absolute;
-      z-index: 20;
-
-      top: 50%;
-      transform: translateY(-50%);
-
-      width: 48px;
-      height: 48px;
-
-      border: 1px solid rgba(255, 255, 255, 0.25);
-
-      border-radius: 50%;
-
-      background: rgba(0, 0, 0, 0.28);
-
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-
-      color: #fff;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 26px;
-
-      cursor: pointer;
-
-      opacity: 0;
-
-      transition:
-        opacity 0.3s ease,
-        background 0.3s ease,
-        transform 0.3s ease;
-    }
-
-    .slider:hover .arrow {
-      opacity: 1;
-    }
-
-    .arrow:hover {
-      background: rgba(255, 255, 255, 0.15);
-    }
-
-    .arrow:active {
-      transform: translateY(-50%) scale(0.92);
-    }
-
-    .arrow.prev {
-      left: 25px;
-    }
-
-    .arrow.next {
-      right: 25px;
-    }
-
-    /* =========================
-       DOTS
-    ========================== */
-
-    .dots {
-      position: absolute;
-
-      z-index: 30;
-
-      bottom: 24px;
-      left: 50%;
-
-      transform: translateX(-50%);
-
-      display: flex;
-      align-items: center;
-      gap: 7px;
-
-      padding: 8px 12px;
-
-      border-radius: 50px;
-
-      background: rgba(0, 0, 0, 0.25);
-
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-
-    .dot {
-      width: 7px;
-      height: 7px;
-
-      border-radius: 50%;
-
-      background: rgba(255, 255, 255, 0.4);
-
-      cursor: pointer;
-
-      transition:
-        width 0.3s ease,
-        background 0.3s ease;
-    }
-
-    .dot.active {
-      width: 24px;
-      border-radius: 20px;
-      background: #fff;
-    }
-
-    /* =========================
-       PROGRESS BAR
-    ========================== */
-
-    .progress {
-      position: absolute;
-
-      z-index: 40;
-
-      top: 0;
-      left: 0;
-
-      width: 100%;
-      height: 2px;
-
-      background: rgba(255, 255, 255, 0.12);
-    }
-
-    .progress-bar {
-      width: 0%;
-      height: 100%;
-
-      background: rgba(255, 255, 255, 0.9);
-
-      transition: width linear;
-    }
-
-    /* =========================
-       MOBILE
-    ========================== */
-
-    @media (max-width: 768px) {
-      .arrow {
-        width: 40px;
-        height: 40px;
-
-        font-size: 21px;
-
-        opacity: 0.7;
-      }
-
-      .arrow.prev {
-        left: 12px;
-      }
-
-      .arrow.next {
-        right: 12px;
-      }
-
-      .dots {
-        bottom: 16px;
-      }
-
-      .dot {
-        width: 6px;
-        height: 6px;
-      }
-
-      .dot.active {
-        width: 20px;
-      }
-    }
-
-    /* =========================
-       ACCESSIBILITY
-    ========================== */
-
-    @media (prefers-reduced-motion: reduce) {
-      .slide,
-      .slide-image,
-      .arrow,
-      .dot,
-      .progress-bar {
-        transition: none !important;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ZICO Energy Drink Sweden 🇸🇪</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FontAwesome 6 Real Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        zicoBlue: '#0066ff',
+                        zicoOrange: '#ff6600',
+                        zicoPurple: '#8a2be2',
+                        zicoGreen: '#00cc66',
+                        zicoPink: '#ff66cc',
+                        zicoDark: '#030408',
+                        zicoCard: '#080a14'
+                    },
+                    aspectRatio: {
+                        '16/9': '16 / 9',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800;900&display=swap');
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #030408;
+            color: #ffffff;
+            font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+            overflow-x: hidden;
+            transition: background-color 0.8s ease;
+        }
+
+        /* Glassmorphism Dynamic UI */
+        .glass-panel {
+            background: rgba(10, 12, 24, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: linear-gradient(145deg, rgba(16, 20, 36, 0.85) 0%, rgba(6, 8, 16, 0.95) 100%);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px) scale(1.015);
+            border-color: rgba(255, 102, 0, 0.5);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 102, 0, 0.2);
+        }
+
+        .glow-text-orange {
+            text-shadow: 0 0 20px rgba(255, 102, 0, 0.7), 0 0 40px rgba(255, 102, 0, 0.3);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #05060c;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #ff6600;
+            border-radius: 4px;
+        }
+
+        /* 16:9 Slide Item Transition */
+        .slide-item {
+            opacity: 0;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 5s cubic-bezier(0.1, 1, 0.1, 1);
+            transform: scale(1.12);
+            pointer-events: none;
+            position: absolute;
+            inset: 0;
+        }
+
+        .slide-item.active {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+            position: relative;
+        }
+
+        /* Ambient Glow Backdrop Background */
+        #ambient-glow {
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--glow-color, rgba(255, 102, 0, 0.18)) 0%, rgba(0,0,0,0) 70%);
+            z-index: -2;
+            transition: background 1s ease;
+            pointer-events: none;
+        }
+
+        /* Canvas Background styling */
+        #liquid-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+        }
+    </style>
 </head>
+<body class="min-h-screen flex flex-col relative selection:bg-orange-500 selection:text-white">
 
-<body>
+    <!-- Dynamic Canvas Particle Background -->
+    <canvas id="liquid-canvas"></canvas>
+    
+    <!-- Ambient Glow Background -->
+    <div id="ambient-glow"></div>
 
-  <main class="slider" id="slider">
-
-    <!-- =========================
-         PROGRESS
-    ========================== -->
-
-    <div class="progress">
-      <div class="progress-bar" id="progressBar"></div>
+    <!-- Sound Control Button -->
+    <div class="fixed bottom-20 left-4 z-40">
+        <button onclick="toggleSound()" id="sound-btn" class="p-2.5 rounded-full glass-panel border border-slate-700 text-xs font-bold text-slate-300 hover:text-white shadow-xl flex items-center gap-2">
+            <span id="sound-icon">🔊</span>
+            <span id="sound-status">Sound ON</span>
+        </button>
     </div>
 
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 glass-panel px-4 lg:px-8 py-2.5 border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+            
+            <!-- ZICO Vector Gold Logo -->
+            <div class="flex items-center gap-3 cursor-pointer group" onclick="switchTab('shop')">
+                <div class="w-12 h-12 rounded-full overflow-hidden shadow-lg shadow-amber-500/20 group-hover:scale-105 transition-transform border border-amber-500/50 bg-gradient-to-tr from-amber-600 via-yellow-500 to-amber-300 flex items-center justify-center p-2">
+                    <svg viewBox="0 0 100 100" class="w-full h-full fill-slate-950 font-black">
+                        <path d="M15,25 L85,25 L40,75 L85,75 L85,85 L15,85 L60,35 L15,35 Z" fill="#000" />
+                        <path d="M70,30 L85,30 L75,55 L85,50 L60,80 L68,58 L58,62 Z" fill="#ff6600" />
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-black tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-amber-200 via-yellow-400 to-orange-500">
+                        ZICO
+                    </h1>
+                    <p class="text-[9px] tracking-widest text-orange-400 uppercase font-black -mt-1">
+                        ENERGY DRINK 🇸🇪 ☀️
+                    </p>
+                </div>
+            </div>
 
-    <!-- =========================
-         SLIDES
-         
-         slide11 = MAIN / FIRST
-    ========================== -->
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden md:flex items-center gap-1 bg-slate-950/80 p-1.5 rounded-2xl border border-slate-800/80">
+                <button id="navShop" onclick="switchTab('shop')" class="px-5 py-2 rounded-xl text-xs font-bold transition-all bg-orange-500 text-white shadow-lg shadow-orange-500/30">
+                    بەرهەمەکان (Shopping)
+                </button>
+                <button id="navAgents" onclick="switchTab('distributors')" class="px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white">
+                    بریکارێن سەرەکی
+                </button>
+                <button id="navDev" onclick="switchTab('developer')" class="px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white">
+                    پەڕێ دێڤلۆپەری ⚡
+                </button>
+            </nav>
 
-    <div class="slides" id="slides">
+            <!-- Right Actions: Language Selector & Floating Cart -->
+            <div class="flex items-center gap-3">
+                <!-- Language Selector -->
+                <div class="relative bg-slate-900/90 border border-slate-800 rounded-xl px-2 py-1 flex items-center text-xs font-bold shadow-inner">
+                    <span class="mr-1 text-slate-400">🌐</span>
+                    <select id="language-select" onchange="changeLanguage(this.value)" class="bg-transparent text-slate-200 outline-none cursor-pointer py-1 font-bold">
+                        <option value="badini" class="bg-slate-900 text-white">کوردی (بادینی)</option>
+                        <option value="sorani" class="bg-slate-900 text-white">کوردی (سۆرانی)</option>
+                        <option value="arabic" class="bg-slate-900 text-white">العربية</option>
+                    </select>
+                </div>
 
-      <!-- 01 — MAIN -->
-      <section
-        class="slide active"
-        data-index="0"
-        data-image="assets/images/slide11.jpg"
-      >
-        <img
-          class="slide-image"
-          src="assets/images/slide11.jpg"
-          alt=""
-          draggable="false"
-        />
-      </section>
+                <!-- Shopping Cart Trigger -->
+                <button onclick="toggleCartModal(true)" class="relative p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-orange-500/50 transition-all text-slate-200 active:scale-95 shadow-md">
+                    <span class="text-xl">🛒</span>
+                    <span id="cart-count-badge" class="hidden absolute -top-1.5 -right-1.5 bg-gradient-to-r from-orange-500 to-amber-500 text-white text-[10px] font-black w-5.5 h-5.5 rounded-full items-center justify-center animate-bounce shadow-lg shadow-orange-500/50">
+                        0
+                    </span>
+                </button>
+            </div>
+        </div>
 
+        <!-- Mobile Quick Navigation Bar -->
+        <div class="flex md:hidden items-center justify-around mt-2 pt-2 border-t border-slate-800/60 text-xs font-bold">
+            <button id="mobNavShop" onclick="switchTab('shop')" class="pb-1 text-orange-400 border-b-2 border-orange-400">
+                بەرهەمەکان
+            </button>
+            <button id="mobNavAgents" onclick="switchTab('distributors')" class="pb-1 text-slate-400">
+                بریکارێن سەرەکی
+            </button>
+            <button id="mobNavDev" onclick="switchTab('developer')" class="pb-1 text-slate-400">
+                دێڤلۆپەر ⚡
+            </button>
+        </div>
+    </header>
 
-      <!-- 02 -->
-      <section
-        class="slide"
-        data-index="1"
-        data-image="assets/images/slide1.jpg"
-      >
-        <img
-          class="slide-image"
-          src="assets/images/slide1.jpg"
-          alt=""
-          draggable="false"
-        />
-      </section>
+    <!-- Main Dynamic Content -->
+    <main class="flex-grow">
+        
+        <!-- SECTION 1: SHOPPING & PRODUCTS -->
+        <section id="tab-shop" class="block">
+            
+            <!-- 16:9 ASPECT RATIO HERO SLIDESHOW CONTAINER -->
+            <div class="relative max-w-6xl mx-auto px-4 lg:px-8 pt-4 pb-2">
+                <div id="slideshow-wrapper" class="relative w-full aspect-[16/9] max-h-[480px] rounded-3xl overflow-hidden glass-card border border-orange-500/30 shadow-2xl shadow-orange-500/10">
+                    
+                    <div id="slides-container" class="w-full h-full relative">
+                        <!-- 11 Commercial Slides rendered dynamically via JS -->
+                    </div>
 
+                    <!-- Slide Controls Overlays -->
+                    <button onclick="prevSlide()" class="absolute top-1/2 left-3 -translate-y-1/2 w-10 h-10 rounded-xl glass-panel text-white flex items-center justify-center text-sm hover:bg-orange-500/80 hover:border-orange-400 transition-all z-20 active:scale-95">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <button onclick="nextSlide()" class="absolute top-1/2 right-3 -translate-y-1/2 w-10 h-10 rounded-xl glass-panel text-white flex items-center justify-center text-sm hover:bg-orange-500/80 hover:border-orange-400 transition-all z-20 active:scale-95">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
 
-      <!-- 03 -->
-      <section
-        class="slide"
-        data-index="2"
-        data-image="assets/images/slide2.jpg"
-      >
-        <img
-          class="slide-image"
-          src="assets/images/slide2.jpg"
-          alt=""
-          draggable="false"
-        />
-      </section>
+                    <!-- Indicators Dots -->
+                    <div id="slide-dots" class="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 z-20 glass-panel px-3 py-1.5 rounded-full border border-slate-700/80">
+                        <!-- Dots rendered by JS -->
+                    </div>
+                </div>
+            </div>
 
+            <!-- INTERACTIVE 3D FLAVOR AMBIENT SELECTOR -->
+            <div class="max-w-7xl mx-auto px-4 lg:px-8 py-2">
+                <div class="glass-panel rounded-3xl p-5 lg:p-6 border border-slate-800">
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-4">
+                        <div>
+                            <span id="badgeSwedishOrigin" class="bg-amber-500/20 text-amber-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                                🇸🇪 FORMULATED IN SWEDEN • NOW IN KURDISTAN ☀️
+                            </span>
+                            <h3 id="ambientSelectorTitle" class="text-xl font-black text-white mt-1">تامی دڵخواز هەڵبژێرە بۆ گۆڕینی دیزاینی وێبسایتەکە:</h3>
+                        </div>
+                        <button id="btnSeeAllCans" onclick="scrollToProducts()" class="px-5 py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-black text-xs rounded-xl shadow-lg transition-all active:scale-95">
+                            سەیرکردنی تەواوی قوتییەکان 🛒
+                        </button>
+                    </div>
 
-      <!-- 04 -->
-      <section
-        class="slide"
-        data-index="3"
-        data-image="assets/images/slide3.jpg"
-      >
-        <img
-          class="slide-image"
-          src="assets/images/slide3.jpg"
-          alt=""
-          draggable="false"
-        />
-      </section>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5">
+                        <button onclick="setThemeFlavor('zico-60')" class="p-2.5 rounded-2xl bg-gradient-to-tr from-pink-500/20 to-rose-900/30 border border-pink-500/40 text-center hover:scale-105 transition-transform active:scale-95">
+                            <span class="text-lg block mb-0.5">🍬</span>
+                            <span class="text-xs font-bold text-pink-300 block">Fruit Candy 60</span>
+                            <span class="text-[9px] text-slate-400">0% Sugar</span>
+                        </button>
+                        <button onclick="setThemeFlavor('zico-55')" class="p-2.5 rounded-2xl bg-gradient-to-tr from-slate-400/20 to-slate-800/30 border border-slate-400/40 text-center hover:scale-105 transition-transform active:scale-95">
+                            <span class="text-lg block mb-0.5">⚡</span>
+                            <span class="text-xs font-bold text-slate-200 block">Sugar Free 55</span>
+                            <span class="text-[9px] text-slate-400">High Caffeine</span>
+                        </button>
+                        <button onclick="setThemeFlavor('zico-66')" class="p-2.5 rounded-2xl bg-gradient-to-tr from-blue-600/20 to-indigo-900/30 border border-blue-500/40 text-center hover:scale-105 transition-transform active:scale-95">
+                            <span class="text-lg block mb-0.5">💙</span>
+                            <span class="text-xs font-bold text-blue-300 block">Original Blue 66</span>
+                            <span class="text-[9px] text-slate-400">Classic Power</span>
+                        </button>
+                        <button onclick="setThemeFlavor('zico-63')" class="p-2.5 rounded-2xl bg-gradient-to-tr from-purple-600/20 to-fuchsia-900/30 border border-purple-500/40 text-center hover:scale-105 transition-transform active:scale-95">
+                            <span class="text-lg block mb-0.5">🍇</span>
+                            <span class="text-xs font-bold text-purple-300 block">Açaí Berry 63</span>
+                            <span class="text-[9px] text-slate-400">Antioxidants</span>
+                        </button>
+                        <button onclick="setThemeFlavor('zico-69')" class="p-2.5 rounded-2xl bg-gradient-to-tr from-orange-500/20 to-amber-900/30 border border-orange-500/40 text-center hover:scale-105 transition-transform active:scale-95">
+                            <span class="text-lg block mb-0.5">🥭</span>
+                            <span class="text-xs font-bold text-orange-300 block">Mango Fresh 69</span>
+                            <span class="text-[9px] text-slate-400">Tropical Energy</span>
+                        </button>
+                        <button onclick="setThemeFlavor('zico-65')" class="p-2.5 rounded-2xl bg-gradient-to-tr from-emerald-600/20 to-green-900/30 border border-emerald-500/40 text-center hover:scale-105 transition-transform active:scale-95">
+                            <span class="text-lg block mb-0.5">🍋</span>
+                            <span class="text-xs font-bold text-emerald-300 block">Mojito Lime 65</span>
+                            <span class="text-[9px] text-slate-400">Cool Refresher</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
 
+            <!-- Products Catalog Grid Section -->
+            <div id="catalog-section" class="max-w-7xl mx-auto px-4 lg:px-8 py-10">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-slate-800">
+                    <div>
+                        <h3 id="ourProductsTitle" class="text-3xl font-black text-white">بەرهەمێن ZICO Energy Drink</h3>
+                        <p id="ourProductsSub" class="text-slate-400 text-sm mt-1">تاما دڵخواز هەڵبژێرە و ڕاستەوخۆ داوا بکە (کۆم و تاک)</p>
+                    </div>
+                    
+                    <div class="mt-4 md:mt-0 flex items-center gap-2">
+                        <span id="badgeSwedenStandard" class="text-xs font-bold bg-slate-900 border border-slate-800 text-slate-300 px-3 py-1.5 rounded-xl">
+                            🇸🇪 Sweden Standard • ☀️ Kurdistan Supply
+                        </span>
+                    </div>
+                </div>
 
-      <!-- 05 -->
-      <section
-        class="slide"
-        data-index="4"
-        data-image="assets/images/slide4.jpg"
-      >
-        <img
-          class="slide-image"
-          src="assets/images/slide4.jpg"
-          alt=""
-          draggable="false"
-        />
-      </section>
+                <!-- Product Grid Container -->
+                <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Dynamic Product Cards -->
+                </div>
+            </div>
 
+            <!-- LIFESTYLE GALLERY SECTION -->
+            <div class="max-w-7xl mx-auto px-4 lg:px-8 pb-16">
+                <div class="text-center mb-8">
+                    <span id="badgeGallery" class="bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold px-3 py-1 rounded-full uppercase">
+                        📸 ZICO LIFESTYLE & MOMENTS IN KURDISTAN
+                    </span>
+                    <h3 id="galleryTitle" class="text-3xl font-black text-white mt-2">چێژ و وزە لە هەموو شوێنێک</h3>
+                </div>
 
-      <!-- 06 -->
-      <section
-        class="slide"
-        data-index="5"
-        data-image="assets/images/slide5.jpg"
-      >
-        <img
-          class="slide-image"
-          src="assets/images/slide5.jpg"
-          alt=""
-          draggable="false"
-        />
-      </section>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="relative h-60 rounded-2xl overflow-hidden glass-card border border-slate-800 group p-4 flex flex-col justify-end bg-gradient-to-tr from-blue-900/60 to-slate-900">
+                        <img src="assets/images/zico-66.png" alt="ZICO Original" class="w-full h-44 object-contain mx-auto group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.style.display='none';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+                        <span id="galCap1" class="relative z-10 text-xs font-bold text-white">🏖️ ZICO Original Blue 66</span>
+                    </div>
+                    <div class="relative h-60 rounded-2xl overflow-hidden glass-card border border-slate-800 group p-4 flex flex-col justify-end bg-gradient-to-tr from-emerald-900/60 to-slate-900">
+                        <img src="assets/images/zico-65.png" alt="ZICO Mojito" class="w-full h-44 object-contain mx-auto group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.style.display='none';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+                        <span id="galCap2" class="relative z-10 text-xs font-bold text-white">🍋 ZICO Mojito Lime 65</span>
+                    </div>
+                    <div class="relative h-60 rounded-2xl overflow-hidden glass-card border border-slate-800 group p-4 flex flex-col justify-end bg-gradient-to-tr from-pink-900/60 to-slate-900">
+                        <img src="assets/images/zico-60.png" alt="ZICO Fruit Candy" class="w-full h-44 object-contain mx-auto group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.style.display='none';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+                        <span id="galCap3" class="relative z-10 text-xs font-bold text-white">🍬 ZICO Fruit Candy 60</span>
+                    </div>
+                    <div class="relative h-60 rounded-2xl overflow-hidden glass-card border border-slate-800 group p-4 flex flex-col justify-end bg-gradient-to-tr from-purple-900/60 to-slate-900">
+                        <img src="assets/images/zico-63.png" alt="ZICO Acai" class="w-full h-44 object-contain mx-auto group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.style.display='none';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+                        <span id="galCap4" class="relative z-10 text-xs font-bold text-white">🍇 ZICO Açaí Berry 63</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <!-- SECTION 2: DISTRIBUTORS & AGENTS -->
+        <section id="tab-distributors" class="hidden">
+            <div class="max-w-5xl mx-auto px-4 py-12">
+                <div class="text-center mb-12">
+                    <span id="badgeDistributors" class="bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-bold px-3 py-1 rounded-full uppercase">
+                        📍 لایەنی فەرمی بڵاوکردنەوە
+                    </span>
+                    <h2 id="distributorsTitle" class="text-3xl md:text-5xl font-black text-white mt-3 mb-3">
+                        بریکارێن سەرەکی و پەیوەندی
+                    </h2>
+                    <p id="distributorsSub" class="text-slate-400 text-sm md:text-base max-w-xl mx-auto">
+                        ژبوو داواکرنا کۆم یان تاک یان بونە مەندوب، ڕاستەوخۆ پەیوەندیێ ب بریکارێ سەرەکی بکن.
+                    </p>
+                </div>
 
-      <!-- 07 — SPONSOR / ADVERTISING -->
-      <section
-        class="slide sponsor-slide"
-        data-index="6"
-        data-image="assets/images/slide6.jpg"
-        id="sponsorSlide"
-      >
-        <img
-          class="slide-image"
-          src="assets/images/slide6.jpg"
-          alt=""
-          draggable="false"
-        />
-      </section>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Badinan Agent -->
+                    <div class="glass-card rounded-3xl p-8 relative overflow-hidden flex flex-col justify-between border-blue-500/30">
+                        <div class="absolute top-0 right-0 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl"></div>
+                        
+                        <div>
+                            <div id="badinanRegionTag" class="inline-block px-3 py-1 rounded-lg bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-bold mb-4">
+                                دەڤەرا بادینان / دهۆک 📍
+                            </div>
+                            <h3 id="badinanAgentName" class="text-2xl font-black text-white mb-6">بریکارێ سەرەکی ل بادینان</h3>
 
+                            <div class="space-y-4 mb-8">
+                                <a href="https://wa.me/9647504696517" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-emerald-500/50 transition-all group">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fa-brands fa-whatsapp text-2xl text-emerald-400"></i>
+                                        <div>
+                                            <p class="text-xs text-slate-400 font-medium">Korek Phone & WhatsApp</p>
+                                            <p class="text-base font-bold text-white tracking-wider" dir="ltr">+964 750 469 6517</p>
+                                        </div>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-left text-slate-500 group-hover:text-emerald-400 transition-colors"></i>
+                                </a>
+                            </div>
+                        </div>
 
-      <!-- 08 -->
-      <section
-        class="slide"
-        data-index="7"
-        data-image="assets/images/slide7.jpg"
-      >
-        <img
-          class="slide-image"
-          src="assets/images/slide7.jpg"
-          alt=""
-          draggable="false"
-        />
-      </section>
+                        <a href="https://www.tiktok.com/@zikoenrgy?_r=1&_t=ZT-98k7QK6wpDB" target="_blank" class="flex items-center justify-center gap-3 w-full py-3.5 rounded-2xl bg-black border border-slate-700 text-white font-bold transition-all hover:bg-slate-900 shadow-lg">
+                            <i class="fa-brands fa-tiktok text-xl text-pink-500"></i>
+                            <span id="badinanTiktokBtn">تیک تۆک: @zikoenrgy</span>
+                        </a>
+                    </div>
 
+                    <!-- Erbil Agent -->
+                    <div class="glass-card rounded-3xl p-8 relative overflow-hidden flex flex-col justify-between border-orange-500/30">
+                        <div class="absolute top-0 right-0 w-40 h-40 bg-orange-500/10 rounded-full blur-3xl"></div>
+                        
+                        <div>
+                            <div id="erbilRegionTag" class="inline-block px-3 py-1 rounded-lg bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-bold mb-4">
+                                پارێزگای هەولێر و دەوروبەر 📍
+                            </div>
+                            <h3 id="erbilAgentName" class="text-2xl font-black text-white mb-6">بریکارێ سەرەکی ل هەولێر</h3>
 
-      <!-- 09 -->
-      <section
-        class="slide"
-        data-index="8"
-        data-image="assets/images/slide8.jpg"
-      >
-        <img
-          class="slide-image"
-          src="assets/images/slide8.jpg"
-          alt=""
-          draggable="false"
-        />
-      </section>
+                            <div class="space-y-3 mb-8">
+                                <a href="https://wa.me/9647504489125" target="_blank" class="flex items-center justify-between p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-emerald-500/50 transition-all">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fa-brands fa-whatsapp text-xl text-emerald-400"></i>
+                                        <span class="text-sm font-bold text-white" dir="ltr">+964 750 448 9125</span>
+                                    </div>
+                                    <span class="text-xs text-slate-400">Korek</span>
+                                </a>
+                                <a href="https://wa.me/9647502615202" target="_blank" class="flex items-center justify-between p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-emerald-500/50 transition-all">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fa-brands fa-whatsapp text-xl text-emerald-400"></i>
+                                        <span class="text-sm font-bold text-white" dir="ltr">+964 750 261 5202</span>
+                                    </div>
+                                    <span class="text-xs text-slate-400">Korek</span>
+                                </a>
+                                <a href="https://wa.me/9647745445542" target="_blank" class="flex items-center justify-between p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-emerald-500/50 transition-all">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fa-brands fa-whatsapp text-xl text-emerald-400"></i>
+                                        <span class="text-sm font-bold text-white" dir="ltr">+964 774 544 5542</span>
+                                    </div>
+                                    <span class="text-xs text-slate-400">Asiacell</span>
+                                </a>
+                            </div>
+                        </div>
 
+                        <a href="https://www.tiktok.com/@zico.company?_r=1&_t=ZT-98k7cbbvgxp" target="_blank" class="flex items-center justify-center gap-3 w-full py-3.5 rounded-2xl bg-black border border-slate-700 text-white font-bold transition-all hover:bg-slate-900 shadow-lg">
+                            <i class="fa-brands fa-tiktok text-xl text-pink-500"></i>
+                            <span id="erbilTiktokBtn">تیک تۆک: @zico.company</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      <!-- 10 -->
-      <section
-        class="slide"
-        data-index="9"
-        data-image="assets/images/slide9.jpg"
-      >
-        <img
-          class="slide-image"
-          src="assets/images/slide9.jpg"
-          alt=""
-          draggable="false"
-        />
-      </section>
+        <!-- SECTION 3: DEVELOPER PORTFOLIO (Zaniyar Al-Mzurii) -->
+        <section id="tab-developer" class="hidden">
+            <div class="max-w-4xl mx-auto px-4 py-12">
+                <div class="glass-card rounded-3xl p-8 lg:p-12 relative overflow-hidden border-purple-500/40 shadow-2xl">
+                    <div class="absolute -top-20 -left-20 w-72 h-72 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
 
+                    <div class="flex flex-col md:flex-row items-center gap-6 mb-10 pb-8 border-b border-slate-800">
+                        <div class="w-28 h-28 rounded-3xl bg-gradient-to-tr from-purple-600 via-pink-500 to-amber-400 p-1 flex-shrink-0 shadow-xl shadow-purple-500/20">
+                            <div class="w-full h-full bg-slate-950 rounded-[22px] flex items-center justify-center font-black text-4xl text-purple-400">
+                                Z
+                            </div>
+                        </div>
+                        <div class="text-center md:text-right">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-xs font-bold mb-2">
+                                <span>⚡ FULL-STACK DEVELOPER & ENGINEER</span>
+                            </div>
+                            <h2 class="text-3xl md:text-4xl font-black text-white">Zaniyar Al-Mzurii</h2>
+                            <p class="text-purple-400 text-xs font-bold tracking-wider uppercase mt-1 mb-3">Web App & Mobile App & System Engineer</p>
+                            <p id="devBioText" class="text-slate-300 text-sm leading-relaxed max-w-xl">
+                                ئەزموون د دروستکرنا باشترین و مۆدێرنترین سیستەم، ئاپڵیکەیشن و وێبسایتان دا ب بەرزترین کوالیتی و بهایەکێ زۆر گونجایی.
+                            </p>
+                        </div>
+                    </div>
 
-      <!-- 11 -->
-      <section
-        class="slide"
-        data-index="10"
-        data-image="assets/images/slide10.jpg"
-      >
-        <img
-          class="slide-image"
-          src="assets/images/slide10.jpg"
-          alt=""
-          draggable="false"
-        />
-      </section>
+                    <div class="mb-10">
+                        <h3 id="devServicesTitle" class="text-lg font-black text-white mb-4">ئەو خزمەتگوزاریێن ئەز پێشکێش دکەم:</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-purple-500/40 transition-all">
+                                <i class="fa-solid fa-laptop-code text-2xl text-purple-400 mb-3 block"></i>
+                                <h4 id="srvWebTitle" class="font-bold text-white text-sm mb-1">Web Applications</h4>
+                                <p id="srvWebDesc" class="text-slate-400 text-xs">دروستکردنی وێبسایت و وێب ئەپی مۆدێرن و خێرا</p>
+                            </div>
+                            <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-pink-500/40 transition-all">
+                                <i class="fa-solid fa-mobile-screen-button text-2xl text-pink-400 mb-3 block"></i>
+                                <h4 id="srvMobTitle" class="font-bold text-white text-sm mb-1">Mobile Apps</h4>
+                                <p id="srvMobDesc" class="text-slate-400 text-xs">ئەپڵیکەیشنی iOS و Android بۆ هەر بزنسێک</p>
+                            </div>
+                            <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-amber-500/40 transition-all">
+                                <i class="fa-solid fa-network-wired text-2xl text-amber-400 mb-3 block"></i>
+                                <h4 id="srvSysTitle" class="font-bold text-white text-sm mb-1">Custom Systems</h4>
+                                <p id="srvSysDesc" class="text-slate-400 text-xs">سیستەمی بەڕێوەبردن بۆ کۆمپانیا و مارکێتەکان</p>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div>
+                        <h3 id="devSocialTitle" class="text-lg font-black text-white mb-6">سۆشیال میدیا و پەیوەندی ڕاستەوخۆ:</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                            <a href="https://wa.me/9647506045491" target="_blank" class="p-4 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 transition-all flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] text-slate-400">Phone & WhatsApp</p>
+                                    <p class="text-xs font-bold text-white" dir="ltr">+964 750 604 5491</p>
+                                </div>
+                            </a>
+
+                            <a href="https://www.tiktok.com/@444.uw?_r=1&_t=ZT-98k8K08VPbh" target="_blank" class="p-4 rounded-2xl bg-slate-900 border border-slate-800 hover:border-pink-500/50 transition-all flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-pink-500/10 text-pink-400 flex items-center justify-center text-xl">
+                                    <i class="fa-brands fa-tiktok"></i>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] text-slate-400">TikTok</p>
+                                    <p class="text-xs font-bold text-white" dir="ltr">@444.uw</p>
+                                </div>
+                            </a>
+
+                            <a href="https://www.instagram.com/z44nko?igsh=MWtldmkwYWN2NW5udw%3D%3D&utm_source=qr" target="_blank" class="p-4 rounded-2xl bg-slate-900 border border-slate-800 hover:border-rose-500/50 transition-all flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-xl">
+                                    <i class="fa-brands fa-instagram"></i>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] text-slate-400">Instagram</p>
+                                    <p class="text-xs font-bold text-white" dir="ltr">@z44nko</p>
+                                </div>
+                            </a>
+
+                            <a href="https://snapchat.com/t/qvFriEM9" target="_blank" class="p-4 rounded-2xl bg-slate-900 border border-slate-800 hover:border-yellow-500/50 transition-all flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-yellow-500/10 text-yellow-400 flex items-center justify-center text-xl">
+                                    <i class="fa-brands fa-snapchat"></i>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] text-slate-400">Snapchat</p>
+                                    <p class="text-xs font-bold text-white">Snapchat Profile</p>
+                                </div>
+                            </a>
+
+                            <a href="https://t.me/z_14x" target="_blank" class="p-4 rounded-2xl bg-slate-900 border border-slate-800 hover:border-sky-500/50 transition-all flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center text-xl">
+                                    <i class="fa-brands fa-telegram"></i>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] text-slate-400">Telegram</p>
+                                    <p class="text-xs font-bold text-white" dir="ltr">@z_14x</p>
+                                </div>
+                            </a>
+
+                            <a href="mailto:z.14x@outlook.com" target="_blank" class="p-4 rounded-2xl bg-slate-900 border border-slate-800 hover:border-purple-500/50 transition-all flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] text-slate-400">Email Address</p>
+                                    <p class="text-xs font-bold text-white" dir="ltr">z.14x@outlook.com</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#020306] border-t border-slate-800/80 py-8 px-4 lg:px-8 mt-12 text-slate-500 text-xs text-center relative z-10">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <p>© 2026 ZICO Energy Drinks Sweden 🇸🇪. All Rights Reserved.</p>
+            <p class="flex items-center justify-center gap-2">
+                <span id="footerDevLabel">گەشەپێدان و دیزاین:</span>
+                <button onclick="switchTab('developer')" class="text-purple-400 font-bold hover:underline">
+                    Zaniyar Al-Mzurii
+                </button>
+            </p>
+        </div>
+    </footer>
+
+    <!-- PRODUCT DETAILS MODAL -->
+    <div id="product-detail-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md items-center justify-center p-4">
+        <div class="glass-card rounded-3xl max-w-xl w-full p-6 relative border border-slate-700">
+            <button onclick="toggleDetailModal(false)" class="absolute top-4 left-4 w-9 h-9 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center font-bold hover:bg-slate-700">
+                ✕
+            </button>
+            <div class="text-center">
+                <img id="detail-img" src="" alt="" class="h-64 object-contain mx-auto mb-4 filter drop-shadow-2xl">
+                <h3 id="detail-name" class="text-2xl font-black text-white"></h3>
+                <p id="detail-flavor" class="text-orange-400 font-bold text-sm mb-4"></p>
+                
+                <div class="bg-slate-950/90 rounded-2xl p-4 text-xs text-slate-300 mb-6 space-y-2 text-right border border-slate-800">
+                    <p>• <strong id="lblOrigin">دروستکراو:</strong> سوید 🇸🇪 (Sweden Standard)</p>
+                    <p>• <strong id="lblPriceSingle">نرخی ١ لب (قطعە):</strong> 1,500 د.ع</p>
+                    <p>• <strong id="lblPriceBundle">نرخی ١ ربطە:</strong> 30,000 د.ع</p>
+                    <p>• <strong id="lblSize">قەبارە:</strong> 250 ml</p>
+                    <p>• <strong id="lblSugar">شەکر:</strong> <span id="detail-sugar"></span></p>
+                    <p>• <strong id="lblCaffeine">پێکهاتەکان:</strong> <span id="detail-caffeine"></span></p>
+                    <div class="pt-2 border-t border-slate-800 mt-2">
+                        <strong id="lblBenefits">مفایێت سەرەکی:</strong>
+                        <ul id="detail-benefits" class="list-disc list-inside mt-1 space-y-1 text-slate-400"></ul>
+                    </div>
+                </div>
+
+                <button id="detail-add-btn" onclick="" class="w-full py-3.5 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-black rounded-2xl text-sm transition-all shadow-lg shadow-orange-500/20 active:scale-95">
+                    زێدەکرن بۆ سەبەتێ 🛒
+                </button>
+            </div>
+        </div>
     </div>
 
+    <!-- CART MODAL DRAWER -->
+    <div id="cart-drawer-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md justify-end">
+        <div class="bg-[#090b14] w-full max-w-md h-full border-r border-slate-800 p-6 flex flex-col justify-between">
+            <div>
+                <div class="flex items-center justify-between pb-4 border-b border-slate-800 mb-6">
+                    <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                        <span>🛒</span>
+                        <span id="cartDrawerTitle">سەبەتەیا داواکاریان</span>
+                    </h3>
+                    <button onclick="toggleCartModal(false)" class="w-8 h-8 rounded-full bg-slate-900 text-slate-400 flex items-center justify-center">
+                        ✕
+                    </button>
+                </div>
 
-    <!-- =========================
-         PREVIOUS / NEXT
-    ========================== -->
+                <div id="cart-items-container" class="space-y-4 max-h-[55vh] overflow-y-auto custom-scrollbar pr-1">
+                    <!-- Dynamic Cart Items -->
+                </div>
+            </div>
 
-    <button
-      class="arrow prev"
-      id="prevBtn"
-      aria-label="Previous Slide"
-      type="button"
-    >
-      ❮
-    </button>
+            <div id="cart-footer-area" class="pt-4 border-t border-slate-800 space-y-4">
+                <div class="flex items-center justify-between text-sm">
+                    <span id="totalTextLabel" class="text-slate-400 font-bold">کۆی گشتی:</span>
+                    <span id="cart-total-price" class="font-black text-xl text-emerald-400">0 IQD</span>
+                </div>
 
-    <button
-      class="arrow next"
-      id="nextBtn"
-      aria-label="Next Slide"
-      type="button"
-    >
-      ❯
-    </button>
+                <button onclick="toggleAgentModal(true)" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-2xl text-sm transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-900/30">
+                    <span id="btnSendWhatsappText">ناردنا داواکاریێ ب واتسئاپێ 💬</span>
+                </button>
+            </div>
+        </div>
+    </div>
 
+    <!-- SELECT AGENT WHATSAPP ROUTER MODAL -->
+    <div id="agent-select-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-lg items-center justify-center p-4">
+        <div class="glass-card border border-emerald-500/40 rounded-3xl max-w-lg w-full p-6 relative shadow-2xl">
+            <button onclick="toggleAgentModal(false)" class="absolute top-4 left-4 w-9 h-9 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center font-bold hover:bg-slate-700">
+                ✕
+            </button>
 
-    <!-- =========================
-         DOT NAVIGATION
-    ========================== -->
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-emerald-500/20 text-emerald-400 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-3">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </div>
+                <h3 id="selectAgentModalTitle" class="text-xl font-black text-white">بریکارەکێ هەڵبژێرە ژبوو شاندنا داواکاریێ:</h3>
+            </div>
 
-    <div
-      class="dots"
-      id="dots"
-      aria-label="Slide Navigation"
-    ></div>
+            <div class="space-y-4">
+                <!-- Badinan Agent Option -->
+                <div class="bg-slate-900/90 border border-blue-500/30 rounded-2xl p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <span id="opt1Label" class="text-xs font-bold text-blue-400 bg-blue-500/10 px-2.5 py-1 rounded-lg">ئۆپشنێ ١</span>
+                        <span id="badinanOptName" class="text-sm font-bold text-white">بریکارێ سەرەکی ل بادینان</span>
+                    </div>
+                    <button onclick="sendOrderViaWhatsApp('+9647504696517')" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-between px-4">
+                        <span dir="ltr" class="font-mono text-sm">+964 750 469 6517</span>
+                        <span id="btnBadinanSend">ناردنا داواکاریێ ب واتسئاپێ 💬</span>
+                    </button>
+                </div>
 
-  </main>
+                <!-- Erbil Agent Options -->
+                <div class="bg-slate-900/90 border border-orange-500/30 rounded-2xl p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <span id="opt2Label" class="text-xs font-bold text-orange-400 bg-orange-500/10 px-2.5 py-1 rounded-lg">ئۆپشنێ ٢</span>
+                        <span id="erbilOptName" class="text-sm font-bold text-white">بریکارێ سەرەکی ل هەولێر</span>
+                    </div>
+                    <div class="space-y-2">
+                        <button onclick="sendOrderViaWhatsApp('+9647504489125')" class="w-full py-2.5 bg-slate-800 hover:bg-emerald-600/80 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-between px-4 border border-slate-700 hover:border-emerald-500">
+                            <span dir="ltr" class="font-mono text-xs">+964 750 448 9125 (Korek)</span>
+                            <span>واتسئاپ 💬</span>
+                        </button>
+                        <button onclick="sendOrderViaWhatsApp('+9647502615202')" class="w-full py-2.5 bg-slate-800 hover:bg-emerald-600/80 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-between px-4 border border-slate-700 hover:border-emerald-500">
+                            <span dir="ltr" class="font-mono text-xs">+964 750 261 5202 (Korek)</span>
+                            <span>واتسئاپ 💬</span>
+                        </button>
+                        <button onclick="sendOrderViaWhatsApp('+9647745445542')" class="w-full py-2.5 bg-slate-800 hover:bg-emerald-600/80 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-between px-4 border border-slate-700 hover:border-emerald-500">
+                            <span dir="ltr" class="font-mono text-xs">+964 774 544 5542 (Asiacell)</span>
+                            <span>واتسئاپ 💬</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- Canvas Liquid Background Particles Script -->
+    <script>
+        const canvas = document.getElementById('liquid-canvas');
+        const ctx = canvas.getContext('2d');
 
-  <script>
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
 
-    /* ==========================================
-       ZIMAN SLIDE SHOW
-       ========================================== */
+        const particles = [];
+        const particleCount = 32;
 
-    (() => {
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 2.8 + 1,
+                color: Math.random() > 0.5 ? 'rgba(255, 102, 0, ' : 'rgba(0, 102, 255, ',
+                alpha: Math.random() * 0.5 + 0.1,
+                vx: (Math.random() - 0.5) * 0.4,
+                vy: (Math.random() - 0.5) * 0.4
+            });
+        }
 
-      "use strict";
+        function animateCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+            particles.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
 
-      /* ==========================================
-         CONFIGURATION
-      ========================================== */
+                if (p.x < 0) p.x = canvas.width;
+                if (p.x > canvas.width) p.x = 0;
+                if (p.y < 0) p.y = canvas.height;
+                if (p.y > canvas.height) p.y = 0;
 
-      const SLIDE_DURATION = 6000;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = p.color + p.alpha + ')';
+                ctx.fill();
+            });
 
-      const AUTO_PLAY = true;
+            requestAnimationFrame(animateCanvas);
+        }
+        animateCanvas();
+    </script>
 
-      const LOOP = true;
+    <!-- Sound Synthesizer Engine -->
+    <script>
+        let isSoundEnabled = true;
+        let audioCtx = null;
 
+        function toggleSound() {
+            isSoundEnabled = !isSoundEnabled;
+            document.getElementById('sound-status').innerText = isSoundEnabled ? 'Sound ON' : 'Muted';
+            document.getElementById('sound-icon').innerText = isSoundEnabled ? '🔊' : '🔇';
+        }
 
-      /* ==========================================
-         ELEMENTS
-      ========================================== */
+        function playFizzSound() {
+            if (!isSoundEnabled) return;
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
 
-      const slider = document.getElementById("slider");
+                const bufferSize = audioCtx.sampleRate * 0.2;
+                const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+                const data = buffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) {
+                    data[i] = Math.random() * 2 - 1;
+                }
 
-      const slides = Array.from(
-        document.querySelectorAll(".slide")
-      );
+                const noise = audioCtx.createBufferSource();
+                noise.buffer = buffer;
 
-      const prevBtn = document.getElementById("prevBtn");
+                const filter = audioCtx.createBiquadFilter();
+                filter.type = 'highpass';
+                filter.frequency.value = 1200;
 
-      const nextBtn = document.getElementById("nextBtn");
+                const gain = audioCtx.createGain();
+                gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
 
-      const dotsContainer = document.getElementById("dots");
+                noise.connect(filter);
+                filter.connect(gain);
+                gain.connect(audioCtx.destination);
 
-      const progressBar =
-        document.getElementById("progressBar");
+                noise.start();
+            } catch (e) {
+                // Sound fallback
+            }
+        }
+    </script>
 
-      const sponsorSlide =
-        document.getElementById("sponsorSlide");
+    <!-- Main Logic Engine -->
+    <script>
+        const PRODUCTS = [
+            {
+                id: 'zico-60',
+                number: '60',
+                name: 'ZICO Fruit Candy 60',
+                flavorBadini: 'تاما شیرینیا میوان (0% شەکر)',
+                flavorSorani: 'تامی شیرینی میوەکان (0% شەکر)',
+                flavorArabic: 'نكهة حلويات الفواكه (0% سكر)',
+                priceSingle: 1500,
+                priceBundle: 30000,
+                image: 'assets/images/zico-60.png',
+                color: 'from-pink-900/40 to-slate-900',
+                borderColor: 'border-pink-500/40',
+                badgeBg: 'bg-pink-500/20 text-pink-300',
+                glowColor: 'rgba(255, 102, 204, 0.25)',
+                sugar: '0% (Zero Sugar)',
+                caffeine: '32mg / 100ml + Vitamin B Complex',
+                benefits: ['وزەیەکی زۆر بەهێز بەبێ شەکر', 'دەوڵەمەند بە ڤیتامین B6 و B12', 'گونجاو بۆ ڕێژیم و وەرزش']
+            },
+            {
+                id: 'zico-55',
+                number: '55',
+                name: 'ZICO Sugar Free 55',
+                flavorBadini: 'کافاینا بەرز - بێ شەکر',
+                flavorSorani: 'کافاینی بەرز - بێ شەکر',
+                flavorArabic: 'كافيين عالي - خالي من السكر',
+                priceSingle: 1500,
+                priceBundle: 30000,
+                image: 'assets/images/zico-55.png',
+                color: 'from-slate-700/40 to-slate-900',
+                borderColor: 'border-slate-400/40',
+                badgeBg: 'bg-slate-400/20 text-slate-200',
+                glowColor: 'rgba(200, 200, 200, 0.25)',
+                sugar: '0% (Zero Sugar)',
+                caffeine: '32mg / 100ml + Taurine',
+                benefits: ['کافاینی بەرز بۆ زیاتر بێداربوونەوە', 'بێ شەکری زیادکراو', 'تەمەرکوز زیاد دەکات']
+            },
+            {
+                id: 'zico-66',
+                number: '66',
+                name: 'ZICO Original Blue 66',
+                flavorBadini: 'تاما ئۆرجیناڵ یا کۆلاسیک',
+                flavorSorani: 'تامی ئۆرجیناڵی کلاسیک',
+                flavorArabic: 'النكهة الأصلية الكلاسيكية',
+                priceSingle: 1500,
+                priceBundle: 30000,
+                image: 'assets/images/zico-66.png',
+                color: 'from-blue-900/40 to-slate-900',
+                borderColor: 'border-blue-500/40',
+                badgeBg: 'bg-blue-500/20 text-blue-300',
+                glowColor: 'rgba(0, 102, 255, 0.25)',
+                sugar: 'ڕێژەی کەم',
+                caffeine: '32mg / 100ml + B-Group Vitamins',
+                benefits: ['تامی ڕەسەن و سەرەکی زیکۆ', 'بەخشینی وزەی دەستبەجێ', 'باشترین هەڵبژاردن بۆ ڕۆژانە']
+            },
+            {
+                id: 'zico-63',
+                number: '63',
+                name: 'ZICO Açaí Berry 63',
+                flavorBadini: 'تاما تووی ئاسای و ئەنتی ئۆکسیدانت',
+                flavorSorani: 'تامی تووی ئاسای و ئەنتی ئۆکسیدانت',
+                flavorArabic: 'نكهة توت الآساي ومضادات الأكسدة',
+                priceSingle: 1500,
+                priceBundle: 30000,
+                image: 'assets/images/zico-63.png',
+                color: 'from-purple-900/40 to-slate-900',
+                borderColor: 'border-purple-500/40',
+                badgeBg: 'bg-purple-500/20 text-purple-300',
+                glowColor: 'rgba(138, 43, 226, 0.25)',
+                sugar: 'کەم شەکر',
+                caffeine: '32mg / 100ml + Natural Extracts',
+                benefits: ['دژە ئۆکسێنەری سروشتی', 'تامی میوەیی تایبەت و خۆش', 'تازەبوونەوەی جەستە']
+            },
+            {
+                id: 'zico-69',
+                number: '69',
+                name: 'ZICO Mango Fresh 69',
+                flavorBadini: 'تاما مانگۆ یا ئەستوایی',
+                flavorSorani: 'تامی مانگۆی کەمەرەیی',
+                flavorArabic: 'نكهة المانجو الاستوائية',
+                priceSingle: 1500,
+                priceBundle: 30000,
+                image: 'assets/images/zico-69.png',
+                color: 'from-orange-900/40 to-slate-900',
+                borderColor: 'border-orange-500/40',
+                badgeBg: 'bg-orange-500/20 text-orange-300',
+                glowColor: 'rgba(255, 102, 0, 0.25)',
+                sugar: 'کەم شەکر',
+                caffeine: '32mg / 100ml',
+                benefits: ['تامی فێنککەرەوەی مانگۆ', 'بەخشینی وزەی بەردەوام', 'زۆر شیاو بۆ وەرزی هاوین']
+            },
+            {
+                id: 'zico-65',
+                number: '65',
+                name: 'ZICO Mojito Lime 65',
+                flavorBadini: 'تاما موهیتۆ و لیمۆ و پشکنین',
+                flavorSorani: 'تامی موهیتۆ و لیمۆ و نەعنا',
+                flavorArabic: 'نكهة الموهيتو والليمون والنعناع',
+                priceSingle: 1500,
+                priceBundle: 30000,
+                image: 'assets/images/zico-65.png',
+                color: 'from-emerald-900/40 to-slate-900',
+                borderColor: 'border-emerald-500/40',
+                badgeBg: 'bg-emerald-500/20 text-emerald-300',
+                glowColor: 'rgba(0, 204, 102, 0.25)',
+                sugar: 'کەم شەکر',
+                caffeine: '32mg / 100ml',
+                benefits: ['تامی سەوز و فێنککەرەوە', 'کەمکردنەوەی ماندوێتی', 'بەخشینی هەستی تازەیی']
+            }
+        ];
 
+        /* Slide List starting with slide11 as primary, followed by slide1 through slide10 */
+        const SLIDES = [
+            {
+                image: 'assets/images/slide11.jpg',
+                isSponsor: false
+            },
+            {
+                image: 'assets/images/slide1.jpg',
+                isSponsor: false
+            },
+            {
+                image: 'assets/images/slide2.jpg',
+                isSponsor: false
+            },
+            {
+                image: 'assets/images/slide3.jpg',
+                isSponsor: false
+            },
+            {
+                image: 'assets/images/slide4.jpg',
+                isSponsor: false
+            },
+            {
+                image: 'assets/images/slide5.jpg',
+                isSponsor: false
+            },
+            {
+                image: 'assets/images/slide6.jpg',
+                isSponsor: true // Dedicated slide for Ads/Sponsors
+            },
+            {
+                image: 'assets/images/slide7.jpg',
+                isSponsor: false
+            },
+            {
+                image: 'assets/images/slide8.jpg',
+                isSponsor: false
+            },
+            {
+                image: 'assets/images/slide9.jpg',
+                isSponsor: false
+            },
+            {
+                image: 'assets/images/slide10.jpg',
+                isSponsor: false
+            }
+        ];
 
-      /* ==========================================
-         STATE
-      ========================================== */
+        const DICTIONARY = {
+            badini: {
+                unitBundleText: "ربطە (24 قوتی)",
+                unitPieceText: "لب (1 قوتی)",
+                qtyLabel: "بڕ (چەندین):",
+                totalTextLabel: "کۆی گشتی:",
+                detailsBtnText: "تایبەتمەندی ⚡",
+                addCartBtnText: "زێدەکرن 🛒",
+                badgeSwedishOrigin: "🇸🇪 FORMULATED IN SWEDEN • NOW IN KURDISTAN ☀️",
+                ambientSelectorTitle: "تامی دڵخواز هەڵبژێرە بۆ گۆڕینی دیزاینی وێبسایتەکە:",
+                btnSeeAllCans: "سەیرکردنی تەواوی قوتییەکان 🛒",
+                ourProductsTitle: "بەرهەمێن ZICO Energy Drink",
+                ourProductsSub: "تاما دڵخواز هەڵبژێرە و ڕاستەوخۆ داوا بکە (کۆم و تاک)",
+                badgeSwedenStandard: "🇸🇪 Sweden Standard • ☀️ Kurdistan Supply",
+                badgeGallery: "📸 ZICO LIFESTYLE & MOMENTS IN KURDISTAN",
+                galleryTitle: "چێژ و وزە لە هەموو شوێنێک",
+                galCap1: "🏖️ ZICO Original Blue 66",
+                galCap2: "🍋 ZICO Mojito Lime 65",
+                galCap3: "🍬 ZICO Fruit Candy 60",
+                galCap4: "🍇 ZICO Açaí Berry 63",
+                badgeDistributors: "📍 لایەنی فەرمی بڵاوکردنەوە",
+                distributorsTitle: "بریکارێن سەرەکی و پەیوەندی",
+                distributorsSub: "ژبوو داواکرنا کۆم یان تاک یان بونە مەندوب، ڕاستەوخۆ پەیوەندیێ ب بریکارێ سەرەکی بکن.",
+                badinanRegionTag: "دەڤەرا بادینان / دهۆک 📍",
+                badinanAgentName: "بریکارێ سەرەکی ل بادینان",
+                badinanTiktokBtn: "تیک تۆک: @zikoenrgy",
+                erbilRegionTag: "پارێزگای هەولێر و دەوروبەر 📍",
+                erbilAgentName: "بریکارێ سەرەکی ل هەولێر",
+                erbilTiktokBtn: "تیک تۆک: @zico.company",
+                devBioText: "ئەزموون د دروستکرنا باشترین و مۆدێرنترین سیستەم، ئاپڵیکەیشن و وێبسایتان دا ب بەرزترین کوالیتی و بهایەکێ زۆر گونجایی.",
+                devServicesTitle: "ئەو خزمەتگوزاریێن ئەز پێشکێش دکەم:",
+                srvWebTitle: "Web Applications",
+                srvWebDesc: "دروستکردنی وێبسایت و وێب ئەپی مۆدێرن و خێرا",
+                srvMobTitle: "Mobile Apps",
+                srvMobDesc: "ئەپڵیکەیشنی iOS و Android بۆ هەر بزنسێک",
+                srvSysTitle: "Custom Systems",
+                srvSysDesc: "سیستەمی بەڕێوەبردن بۆ کۆمپانیا و مارکێتەکان",
+                devSocialTitle: "سۆشیال میدیا و پەیوەندی ڕاستەوخۆ:",
+                footerDevLabel: "گەشەپێدان و دیزاین:",
+                cartDrawerTitle: "سەبەتەیا داواکاریان",
+                btnSendWhatsappText: "ناردنا داواکاریێ ب واتسئاپێ 💬",
+                selectAgentModalTitle: "بریکارەکێ هەڵبژێرە ژبوو شاندنا داواکاریێ:",
+                opt1Label: "ئۆپشنێ ١",
+                badinanOptName: "بریکارێ سەرەکی ل بادینان",
+                btnBadinanSend: "ناردنا داواکاریێ ب واتسئاپێ 💬",
+                opt2Label: "ئۆپشنێ ٢",
+                erbilOptName: "بریکارێ سەرەکی ل هەولێر",
+                lblOrigin: "دروستکراو:",
+                lblPriceSingle: "نرخی ١ لب (قطعە):",
+                lblPriceBundle: "نرخی ١ ربطە:",
+                lblSize: "قەبارە:",
+                lblSugar: "شەکر:",
+                lblCaffeine: "پێکهاتەکان:",
+                lblBenefits: "مفایێت سەرەکی:"
+            },
+            sorani: {
+                unitBundleText: "ڕەبطە (24 قوتی)",
+                unitPieceText: "دانە (1 قوتی)",
+                qtyLabel: "بڕی داواکراو:",
+                totalTextLabel: "کۆی گشتی:",
+                detailsBtnText: "تایبەتمەندی ⚡",
+                addCartBtnText: "زیادکردن 🛒",
+                badgeSwedishOrigin: "🇸🇪 بەرهەمی سوید • ئێستا لە کوردستان ☀️",
+                ambientSelectorTitle: "تامی دڵخوازت هەڵبژێرە بۆ گۆڕینی ڕەنگی ماڵپەڕەکە:",
+                btnSeeAllCans: "بینینی هەموو بەرھەمەکان 🛒",
+                ourProductsTitle: "بەرھەمەکانی ZICO Energy Drink",
+                ourProductsSub: "تامی دڵخواز هەڵبژێرە و ڕاستەوخۆ داوا بکە (کۆم و تاک)",
+                badgeSwedenStandard: "🇸🇪 Sweden Standard • ☀️ Kurdistan Supply",
+                badgeGallery: "📸 ZICO LIFESTYLE & MOMENTS IN KURDISTAN",
+                galleryTitle: "چێژ و وزە لە هەموو شوێنێک",
+                galCap1: "🏖️ ZICO Original Blue 66",
+                galCap2: "🍋 ZICO Mojito Lime 65",
+                galCap3: "🍬 ZICO Fruit Candy 60",
+                galCap4: "🍇 ZICO Açaí Berry 63",
+                badgeDistributors: "📍 لایەنی فەرمی بڵاوکردنەوە",
+                distributorsTitle: "بریکارە سەرەکییەکان و پەیوەندی",
+                distributorsSub: "بۆ داواکردنی کۆم یان تاک یان بوون بە مەندوب، ڕاستەوخۆ پەیوەندی بە بریکاری سەرەکی بکەن.",
+                badinanRegionTag: "ناوچەی بادینان / دهۆک 📍",
+                badinanAgentName: "بریکاری سەرەکی لە بادینان",
+                badinanTiktokBtn: "تیک تۆک: @zikoenrgy",
+                erbilRegionTag: "پارێزگای هەولێر و دەوروبەری 📍",
+                erbilAgentName: "بریکاری سەرەکی لە هەولێر",
+                erbilTiktokBtn: "تیک تۆک: @zico.company",
+                devBioText: "ئەزموون لە دروستکردنی باشترین و مۆدێرنترین سیستەم، ئەپلیکەیشن و وێبسایت بە بەرزترین کوالیتی و گونجاوترین نرخ.",
+                devServicesTitle: "ئەو خزمەتگوزارییانەی پێشکەشی دەکەم:",
+                srvWebTitle: "Web Applications",
+                srvWebDesc: "دروستکردنی وێبسایت و وێب ئەپی مۆدێرن و خێرا",
+                srvMobTitle: "Mobile Apps",
+                srvMobDesc: "ئەپڵیکەیشنی iOS و Android بۆ هەر بزنسێک",
+                srvSysTitle: "Custom Systems",
+                srvSysDesc: "سیستەمی بەڕێوەبردن بۆ کۆمپانیا و مارکێتەکان",
+                devSocialTitle: "سۆشیال میدیا و پەیوەندی ڕاستەوخۆ:",
+                footerDevLabel: "گەشەپێدان و دیزاین:",
+                cartDrawerTitle: "سەبەتەی داواکارییەکان",
+                btnSendWhatsappText: "ناردنی داواکاری بە واتسئاپ 💬",
+                selectAgentModalTitle: "بریکارێک هەڵبژێرە بۆ ناردنی داواکاریەکەت:",
+                opt1Label: "ئۆپشنی ١",
+                badinanOptName: "بریکاری سەرەکی لە بادینان",
+                btnBadinanSend: "ناردنی داواکاری بە واتسئاپ 💬",
+                opt2Label: "ئۆپشنی ٢",
+                erbilOptName: "بریکاری سەرەکی لە هەولێر",
+                lblOrigin: "دروستکراو:",
+                lblPriceSingle: "نرخی ١ دانە:",
+                lblPriceBundle: "نرخی ١ ڕەبطە:",
+                lblSize: "قەبارە:",
+                lblSugar: "شەکر:",
+                lblCaffeine: "پێکهاتەکان:",
+                lblBenefits: "سوودە سەرەکییەکان:"
+            },
+            arabic: {
+                unitBundleText: "شدّة (24 علبة)",
+                unitPieceText: "علبة واحدة",
+                qtyLabel: "الكمية المطلوبة:",
+                totalTextLabel: "المجموع الكلي:",
+                detailsBtnText: "التفاصيل ⚡",
+                addCartBtnText: "إضافة للسلة 🛒",
+                badgeSwedishOrigin: "🇸🇪 مصنع في السويد • متوفر الآن في كوردستان ☀️",
+                ambientSelectorTitle: "اختر النكهة المفضلة لتغيير مظهر الموقع:",
+                btnSeeAllCans: "عرض جميع المنتجات 🛒",
+                ourProductsTitle: "منتجات مشروب الطاقة ZICO",
+                ourProductsSub: "اختر نكهتك المفضلة واطلب مباشرة (جملة ومفرد)",
+                badgeSwedenStandard: "🇸🇪 Sweden Standard • ☀️ Kurdistan Supply",
+                badgeGallery: "📸 ZICO LIFESTYLE & MOMENTS IN KURDISTAN",
+                galleryTitle: "الطاقة والمتعة في كل مكان",
+                galCap1: "🏖️ ZICO Original Blue 66",
+                galCap2: "🍋 ZICO Mojito Lime 65",
+                galCap3: "🍬 ZICO Fruit Candy 60",
+                galCap4: "🍇 ZICO Açaí Berry 63",
+                badgeDistributors: "📍 الوكلاء المعتمدون",
+                distributorsTitle: "الوكلاء الرئيسييون والتواصل",
+                distributorsSub: "لطلبات الجملة أو المفرد أو للانضمام كمندوب، تواصل مباشرة مع الوكيل الرئيسي.",
+                badinanRegionTag: "منطقة بادينان / دهوك 📍",
+                badinanAgentName: "الوكيل الرئيسي في بادينان",
+                badinanTiktokBtn: "تيك توك: @zikoenrgy",
+                erbilRegionTag: "محافظة أربيل ونواحيها 📍",
+                erbilAgentName: "الوكيل الرئيسي في أربيل",
+                erbilTiktokBtn: "تيك توك: @zico.company",
+                devBioText: "خبرة في تصميم وتطوير أحدث الأنظمة والتطبيقات والمواقع الإلكترونية بأعلى جودة وأفضل الأسعار.",
+                devServicesTitle: "الخدمات المقدمة:",
+                srvWebTitle: "Web Applications",
+                srvWebDesc: "تطوير مواقع وتطبيقات ويب حديثة وسريعة",
+                srvMobTitle: "Mobile Apps",
+                srvMobDesc: "تطبيقات iOS و Android لجميع أنواع الأعمال",
+                srvSysTitle: "Custom Systems",
+                srvSysDesc: "أنظمة إدارة مخصصة للشركات والمتاجر",
+                devSocialTitle: "وسائل التواصل الاجتماعي والاتصال المباشر:",
+                footerDevLabel: "التطوير والتصميم:",
+                cartDrawerTitle: "سلة الطلبات",
+                btnSendWhatsappText: "إرسال الطلب عبر الواتساب 💬",
+                selectAgentModalTitle: "اختر الوكيل لإرسال طلبك:",
+                opt1Label: "الخيار ١",
+                badinanOptName: "الوكيل الرئيسي في بادينان",
+                btnBadinanSend: "إرسال الطلب عبر الواتساب 💬",
+                opt2Label: "الخيار ٢",
+                erbilOptName: "الوكيل الرئيسي في أربيل",
+                lblOrigin: "بلد الصنع:",
+                lblPriceSingle: "سعر العلبة الواحدة:",
+                lblPriceBundle: "سعر الشدّة (24 علبة):",
+                lblSize: "الحجم:",
+                lblSugar: "السكر:",
+                lblCaffeine: "المكونات:",
+                lblBenefits: "الفوائد الرئيسية:"
+            }
+        };
 
-      let currentSlide = 0;
+        let currentLanguage = 'badini';
+        let currentTab = 'shop';
+        let cart = [];
+        let cardState = {};
+        let currentSlideIndex = 0;
+        let slideTimer = null;
 
-      let timer = null;
-
-      let progressTimer = null;
-
-      let touchStartX = 0;
-
-      let touchEndX = 0;
-
-
-      /* ==========================================
-         CREATE DOTS
-      ========================================== */
-
-      slides.forEach((slide, index) => {
-
-        const dot = document.createElement("button");
-
-        dot.type = "button";
-
-        dot.className = "dot";
-
-        dot.setAttribute(
-          "aria-label",
-          `Go to slide ${index + 1}`
-        );
-
-        dot.addEventListener("click", () => {
-
-          goToSlide(index);
-
+        PRODUCTS.forEach(p => {
+            cardState[p.id] = { type: 'bundle', qty: 1 };
         });
 
-        dotsContainer.appendChild(dot);
+        function setThemeFlavor(prodId) {
+            const prod = PRODUCTS.find(p => p.id === prodId);
+            if (prod) {
+                document.getElementById('ambient-glow').style.setProperty('--glow-color', prod.glowColor);
+                playFizzSound();
+            }
+        }
 
-      });
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            const dict = DICTIONARY[lang];
 
+            document.documentElement.dir = 'rtl';
 
-      const dots = Array.from(
-        document.querySelectorAll(".dot")
-      );
+            Object.keys(dict).forEach(key => {
+                const el = document.getElementById(key);
+                if (el) {
+                    el.innerText = dict[key];
+                }
+            });
 
+            renderProducts();
+            updateCartUI();
+        }
 
-      /* ==========================================
-         SHOW SLIDE
-      ========================================== */
+        function initSlideshow() {
+            const container = document.getElementById('slides-container');
+            const dotsContainer = document.getElementById('slide-dots');
+            container.innerHTML = '';
+            dotsContainer.innerHTML = '';
 
-      function showSlide(index) {
+            SLIDES.forEach((slide, idx) => {
+                const isActive = idx === 0 ? 'active' : '';
+                
+                // If it's slide6 (Sponsor slide), add a subtle button overlay at bottom
+                const sponsorOverlay = slide.isSponsor ? `
+                    <div class="absolute bottom-6 left-4 right-4 z-10 flex justify-end">
+                        <button onclick="switchTab('developer')" class="px-4 py-2 bg-purple-600/90 hover:bg-purple-600 text-white font-bold rounded-xl text-xs transition-all shadow-xl backdrop-blur-md active:scale-95 border border-purple-400/40">
+                            داواکرنا ڕیکلام / پەیوەندی 💬
+                        </button>
+                    </div>
+                ` : '';
 
-        if (!slides.length) return;
+                const slideHtml = `
+                    <div class="slide-item ${isActive}" data-slide="${idx}">
+                        <img src="${slide.image}" alt="ZICO Energy Slide" class="w-full h-full object-cover">
+                        ${sponsorOverlay}
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', slideHtml);
 
+                const dotHtml = `
+                    <button onclick="goToSlide(${idx})" class="w-2.5 h-2.5 rounded-full transition-all ${idx === 0 ? 'bg-orange-500 w-6' : 'bg-slate-600 hover:bg-slate-400'}" data-dot="${idx}"></button>
+                `;
+                dotsContainer.insertAdjacentHTML('beforeend', dotHtml);
+            });
 
-        slides.forEach((slide, i) => {
+            startSlideTimer();
+            setupTouchSwipe();
+        }
 
-          slide.classList.toggle(
-            "active",
-            i === index
-          );
+        function showSlide(index) {
+            const items = document.querySelectorAll('.slide-item');
+            const dots = document.querySelectorAll('[data-dot]');
 
+            items.forEach((item, idx) => {
+                if (idx === index) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+
+            dots.forEach((dot, idx) => {
+                if (idx === index) {
+                    dot.className = "w-6 h-2.5 rounded-full bg-orange-500 transition-all";
+                } else {
+                    dot.className = "w-2.5 h-2.5 rounded-full bg-slate-600 hover:bg-slate-400 transition-all";
+                }
+            });
+
+            currentSlideIndex = index;
+        }
+
+        function nextSlide() {
+            let nextIndex = (currentSlideIndex + 1) % SLIDES.length;
+            showSlide(nextIndex);
+            resetSlideTimer();
+        }
+
+        function prevSlide() {
+            let prevIndex = (currentSlideIndex - 1 + SLIDES.length) % SLIDES.length;
+            showSlide(prevIndex);
+            resetSlideTimer();
+        }
+
+        function goToSlide(idx) {
+            showSlide(idx);
+            resetSlideTimer();
+        }
+
+        function startSlideTimer() {
+            slideTimer = setInterval(nextSlide, 5000);
+        }
+
+        function resetSlideTimer() {
+            clearInterval(slideTimer);
+            startSlideTimer();
+        }
+
+        function setupTouchSwipe() {
+            const wrapper = document.getElementById('slideshow-wrapper');
+            let startX = 0;
+            let endX = 0;
+
+            wrapper.addEventListener('touchstart', (e) => {
+                startX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            wrapper.addEventListener('touchend', (e) => {
+                endX = e.changedTouches[0].screenX;
+                if (startX - endX > 50) {
+                    nextSlide();
+                } else if (endX - startX > 50) {
+                    prevSlide();
+                }
+            }, { passive: true });
+        }
+
+        function getFlavorText(prod) {
+            if (currentLanguage === 'badini') return prod.flavorBadini;
+            if (currentLanguage === 'sorani') return prod.flavorSorani;
+            return prod.flavorArabic;
+        }
+
+        function scrollToProducts() {
+            document.getElementById('catalog-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function renderProducts() {
+            const container = document.getElementById('products-grid');
+            container.innerHTML = '';
+
+            const dict = DICTIONARY[currentLanguage];
+
+            PRODUCTS.forEach(prod => {
+                const state = cardState[prod.id];
+                const unitPrice = state.type === 'bundle' ? prod.priceBundle : prod.priceSingle;
+                const calcTotal = unitPrice * state.qty;
+
+                const bundleActive = state.type === 'bundle';
+                const bundleClass = bundleActive ? 'bg-orange-500 text-white shadow-md' : 'text-slate-400 hover:text-white';
+                const pieceClass = !bundleActive ? 'bg-orange-500 text-white shadow-md' : 'text-slate-400 hover:text-white';
+
+                const unitBundleText = dict.unitBundleText;
+                const unitPieceText = dict.unitPieceText;
+
+                const cardHtml = `
+                    <div class="glass-card border ${prod.borderColor} rounded-3xl overflow-hidden flex flex-col justify-between relative group">
+                        <div class="absolute inset-0 bg-gradient-to-b ${prod.color} opacity-40 group-hover:opacity-75 transition-opacity"></div>
+
+                        <div class="p-6 relative z-10">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-3 py-1 rounded-full text-xs font-black ${prod.badgeBg}"># ${prod.number}</span>
+                                <span class="text-[10px] font-bold text-slate-300 bg-slate-900/80 px-2 py-0.5 rounded-md border border-slate-800">🇸🇪 SWEDEN</span>
+                            </div>
+
+                            <div class="h-60 flex items-center justify-center my-2 cursor-pointer" onclick="setThemeFlavor('${prod.id}')">
+                                <img src="${prod.image}" alt="${prod.name}" class="h-52 object-contain filter drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)] group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.src='assets/images/zico-60.png';">
+                            </div>
+
+                            <h4 class="text-xl font-black text-white mt-2">${prod.name}</h4>
+                            <p class="text-orange-400 text-xs font-bold mt-1 mb-4">${getFlavorText(prod)}</p>
+
+                            <div class="bg-slate-950/90 rounded-2xl p-3 border border-slate-800/80 mb-4">
+                                <div class="grid grid-cols-2 gap-1.5 p-1 bg-black/50 rounded-xl mb-3">
+                                    <button onclick="setPackType('${prod.id}', 'bundle')" class="py-1.5 rounded-lg text-xs font-bold transition-all ${bundleClass}">
+                                        📦 ${unitBundleText} (30,000 د.ع)
+                                    </button>
+                                    <button onclick="setPackType('${prod.id}', 'piece')" class="py-1.5 rounded-lg text-xs font-bold transition-all ${pieceClass}">
+                                        刊 ${unitPieceText} (1,500 د.ع)
+                                    </button>
+                                </div>
+
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xs font-bold text-slate-300">${dict.qtyLabel}</span>
+                                    <div class="flex items-center gap-1.5">
+                                        <button onclick="changeQty('${prod.id}', -1)" class="w-7 h-7 rounded-lg bg-slate-800 text-white font-bold text-sm hover:bg-slate-700 active:scale-95">-</button>
+                                        <input type="number" min="1" value="${state.qty}" onchange="setCustomQty('${prod.id}', this.value)" class="w-12 h-7 rounded-lg bg-black/70 border border-slate-700 text-center font-bold text-xs text-orange-400 outline-none">
+                                        <button onclick="changeQty('${prod.id}', 1)" class="w-7 h-7 rounded-lg bg-slate-800 text-white font-bold text-sm hover:bg-slate-700 active:scale-95">+</button>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center justify-between pt-2.5 mt-2 border-t border-slate-800 text-xs">
+                                    <span class="text-slate-400">${dict.totalTextLabel}</span>
+                                    <span class="font-black text-sm text-emerald-400">${calcTotal.toLocaleString()} IQD</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-6 pt-0 relative z-10 flex items-center gap-3">
+                            <button onclick="showProductDetails('${prod.id}')" class="flex-1 py-3 bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700/80 font-bold rounded-xl text-xs transition-all text-center">
+                                ${dict.detailsBtnText}
+                            </button>
+                            <button onclick="addToCart('${prod.id}')" class="flex-1 py-3 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold rounded-xl text-xs transition-all text-center shadow-lg shadow-orange-500/20 active:scale-95">
+                                ${dict.addCartBtnText}
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', cardHtml);
+            });
+        }
+
+        function setPackType(id, type) {
+            cardState[id].type = type;
+            renderProducts();
+        }
+
+        function changeQty(id, delta) {
+            const newQty = cardState[id].qty + delta;
+            cardState[id].qty = newQty > 0 ? newQty : 1;
+            renderProducts();
+        }
+
+        function setCustomQty(id, val) {
+            const parsed = parseInt(val) || 1;
+            cardState[id].qty = parsed > 0 ? parsed : 1;
+            renderProducts();
+        }
+
+        function addToCart(prodId) {
+            const prod = PRODUCTS.find(p => p.id === prodId);
+            const state = cardState[prodId];
+            const itemType = state.type;
+            const qtyToAdd = state.qty;
+            const unitPrice = itemType === 'bundle' ? prod.priceBundle : prod.priceSingle;
+            const cartItemId = `${prod.id}-${itemType}`;
+
+            const existing = cart.find(i => i.cartItemId === cartItemId);
+            if (existing) {
+                existing.qty += qtyToAdd;
+            } else {
+                cart.push({
+                    ...prod,
+                    cartItemId,
+                    itemType,
+                    unitPrice,
+                    qty: qtyToAdd
+                });
+            }
+
+            playFizzSound();
+            updateCartUI();
+            toggleCartModal(true);
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cart-count-badge');
+            const totalQty = cart.reduce((acc, item) => acc + item.qty, 0);
+
+            if (totalQty > 0) {
+                badge.innerText = totalQty;
+                badge.classList.remove('hidden');
+                badge.classList.add('flex');
+            } else {
+                badge.classList.add('hidden');
+                badge.classList.remove('flex');
+            }
+
+            const container = document.getElementById('cart-items-container');
+            container.innerHTML = '';
+
+            let totalPrice = 0;
+            const dict = DICTIONARY[currentLanguage];
+
+            if (cart.length === 0) {
+                container.innerHTML = `<div class="text-center py-12 text-slate-500 text-sm">سەبەتەیا تە بەتالە!</div>`;
+            } else {
+                cart.forEach(item => {
+                    const itemTotal = item.unitPrice * item.qty;
+                    totalPrice += itemTotal;
+
+                    const packText = item.itemType === 'bundle' ? dict.unitBundleText : dict.unitPieceText;
+
+                    const itemHtml = `
+                        <div class="p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800 flex items-center gap-3">
+                            <img src="${item.image}" alt="${item.name}" class="w-12 h-16 object-contain" onerror="this.onerror=null; this.src='assets/images/zico-60.png';">
+                            <div class="flex-grow">
+                                <h4 class="text-xs font-bold text-white">${item.name}</h4>
+                                <p class="text-[10px] text-slate-400">${getFlavorText(item)}</p>
+                                <div class="flex items-center gap-2 mt-1">
+                                    <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-orange-500/20 text-orange-400">${packText}</span>
+                                    <span class="text-xs font-bold text-emerald-400">${itemTotal.toLocaleString()} IQD</span>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col items-center gap-1">
+                                <div class="flex items-center gap-1.5 bg-black/40 p-1 rounded-lg">
+                                    <button onclick="updateCartItemQty('${item.cartItemId}', -1)" class="w-5 h-5 rounded bg-slate-800 text-white font-bold text-xs">-</button>
+                                    <span class="text-xs font-bold text-white px-1">${item.qty}</span>
+                                    <button onclick="updateCartItemQty('${item.cartItemId}', 1)" class="w-5 h-5 rounded bg-slate-800 text-white font-bold text-xs">+</button>
+                                </div>
+                                <button onclick="removeCartItem('${item.cartItemId}')" class="text-rose-500 text-[10px] hover:underline mt-1">سڕینەوە</button>
+                            </div>
+                        </div>
+                    `;
+                    container.insertAdjacentHTML('beforeend', itemHtml);
+                });
+            }
+
+            document.getElementById('cart-total-price').innerText = `${totalPrice.toLocaleString()} IQD`;
+        }
+
+        function updateCartItemQty(cartItemId, delta) {
+            const item = cart.find(i => i.cartItemId === cartItemId);
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) {
+                    cart = cart.filter(i => i.cartItemId !== cartItemId);
+                }
+            }
+            updateCartUI();
+        }
+
+        function removeCartItem(cartItemId) {
+            cart = cart.filter(i => i.cartItemId !== cartItemId);
+            updateCartUI();
+        }
+
+        function switchTab(tabName) {
+            currentTab = tabName;
+            
+            document.getElementById('tab-shop').classList.add('hidden');
+            document.getElementById('tab-distributors').classList.add('hidden');
+            document.getElementById('tab-developer').classList.add('hidden');
+
+            document.getElementById(`tab-${tabName}`).classList.remove('hidden');
+
+            const navs = ['shop', 'distributors', 'developer'];
+            navs.forEach(n => {
+                const btn = document.getElementById(`nav-${n}`);
+                const mobBtn = document.getElementById(`mob-nav-${n}`);
+                
+                if (n === tabName) {
+                    btn.className = "px-5 py-2 rounded-xl text-xs font-bold transition-all bg-orange-500 text-white shadow-lg shadow-orange-500/30";
+                    if (mobBtn) mobBtn.className = "pb-1 text-orange-400 border-b-2 border-orange-400";
+                } else {
+                    btn.className = "px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white";
+                    if (mobBtn) mobBtn.className = "pb-1 text-slate-400";
+                }
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleCartModal(show) {
+            const modal = document.getElementById('cart-drawer-modal');
+            if (show) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            } else {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        function toggleAgentModal(show) {
+            const modal = document.getElementById('agent-select-modal');
+            if (show) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            } else {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        function toggleDetailModal(show) {
+            const modal = document.getElementById('product-detail-modal');
+            if (show) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            } else {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        function showProductDetails(prodId) {
+            const prod = PRODUCTS.find(p => p.id === prodId);
+            document.getElementById('detail-img').src = prod.image;
+            document.getElementById('detail-name').innerText = prod.name;
+            document.getElementById('detail-flavor').innerText = getFlavorText(prod);
+            document.getElementById('detail-sugar').innerText = prod.sugar;
+            document.getElementById('detail-caffeine').innerText = prod.caffeine;
+
+            const benefitsUl = document.getElementById('detail-benefits');
+            benefitsUl.innerHTML = '';
+            prod.benefits.forEach(b => {
+                benefitsUl.insertAdjacentHTML('beforeend', `<li>${b}</li>`);
+            });
+
+            document.getElementById('detail-add-btn').onclick = function() {
+                addToCart(prodId);
+                toggleDetailModal(false);
+            };
+
+            toggleDetailModal(true);
+        }
+
+        function sendOrderViaWhatsApp(phoneNumber) {
+            if (cart.length === 0) return;
+            let text = `داواکاری نوێی ZICO Energy Sweden 🇸🇪:%0A%0A`;
+            let grandTotal = 0;
+            const dict = DICTIONARY[currentLanguage];
+
+            cart.forEach((item, index) => {
+                const flavor = getFlavorText(item);
+                const packName = item.itemType === 'bundle' ? dict.unitBundleText : dict.unitPieceText;
+                const totalItemPrice = item.unitPrice * item.qty;
+                grandTotal += totalItemPrice;
+                text += `${index + 1}. ${item.name} (${flavor})%0A   بڕ: ${item.qty} ${packName} - نرخ: ${totalItemPrice.toLocaleString()} IQD%0A%0A`;
+            });
+
+            text += `کۆی گشتی: ${grandTotal.toLocaleString()} IQD`;
+
+            const cleanNum = phoneNumber.replace(/[^0-9]/g, '');
+            window.open(`https://wa.me/${cleanNum}?text=${text}`, '_blank');
+            toggleAgentModal(false);
+            toggleCartModal(false);
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            initSlideshow();
+            changeLanguage('badini');
         });
-
-
-        dots.forEach((dot, i) => {
-
-          dot.classList.toggle(
-            "active",
-            i === index
-          );
-
-        });
-
-
-        currentSlide = index;
-
-
-        resetProgress();
-
-      }
-
-
-      /* ==========================================
-         NEXT
-      ========================================== */
-
-      function nextSlide() {
-
-        let nextIndex = currentSlide + 1;
-
-
-        if (nextIndex >= slides.length) {
-
-          if (LOOP) {
-
-            nextIndex = 0;
-
-          } else {
-
-            nextIndex = slides.length - 1;
-
-          }
-
-        }
-
-
-        showSlide(nextIndex);
-
-      }
-
-
-      /* ==========================================
-         PREVIOUS
-      ========================================== */
-
-      function previousSlide() {
-
-        let previousIndex = currentSlide - 1;
-
-
-        if (previousIndex < 0) {
-
-          if (LOOP) {
-
-            previousIndex =
-              slides.length - 1;
-
-          } else {
-
-            previousIndex = 0;
-
-          }
-
-        }
-
-
-        showSlide(previousIndex);
-
-      }
-
-
-      /* ==========================================
-         GO TO SPECIFIC SLIDE
-      ========================================== */
-
-      function goToSlide(index) {
-
-        if (
-          index < 0 ||
-          index >= slides.length
-        ) {
-          return;
-        }
-
-
-        showSlide(index);
-
-        restartAutoPlay();
-
-      }
-
-
-      /* ==========================================
-         AUTO PLAY
-      ========================================== */
-
-      function startAutoPlay() {
-
-        if (!AUTO_PLAY) return;
-
-
-        clearInterval(timer);
-
-
-        timer = setInterval(() => {
-
-          nextSlide();
-
-        }, SLIDE_DURATION);
-
-      }
-
-
-      function stopAutoPlay() {
-
-        clearInterval(timer);
-
-        timer = null;
-
-      }
-
-
-      function restartAutoPlay() {
-
-        stopAutoPlay();
-
-        startAutoPlay();
-
-      }
-
-
-      /* ==========================================
-         PROGRESS BAR
-      ========================================== */
-
-      function resetProgress() {
-
-        progressBar.style.transition = "none";
-
-        progressBar.style.width = "0%";
-
-
-        requestAnimationFrame(() => {
-
-          requestAnimationFrame(() => {
-
-            progressBar.style.transition =
-              `width ${SLIDE_DURATION}ms linear`;
-
-            progressBar.style.width = "100%";
-
-          });
-
-        });
-
-      }
-
-
-      /* ==========================================
-         BUTTONS
-      ========================================== */
-
-      nextBtn.addEventListener(
-        "click",
-        () => {
-
-          nextSlide();
-
-          restartAutoPlay();
-
-        }
-      );
-
-
-      prevBtn.addEventListener(
-        "click",
-        () => {
-
-          previousSlide();
-
-          restartAutoPlay();
-
-        }
-      );
-
-
-      /* ==========================================
-         KEYBOARD
-      ========================================== */
-
-      document.addEventListener(
-        "keydown",
-        (event) => {
-
-          if (event.key === "ArrowRight") {
-
-            nextSlide();
-
-            restartAutoPlay();
-
-          }
-
-
-          if (event.key === "ArrowLeft") {
-
-            previousSlide();
-
-            restartAutoPlay();
-
-          }
-
-        }
-      );
-
-
-      /* ==========================================
-         MOUSE HOVER
-      ========================================== */
-
-      slider.addEventListener(
-        "mouseenter",
-        () => {
-
-          stopAutoPlay();
-
-        }
-      );
-
-
-      slider.addEventListener(
-        "mouseleave",
-        () => {
-
-          startAutoPlay();
-
-        }
-      );
-
-
-      /* ==========================================
-         TOUCH / SWIPE
-      ========================================== */
-
-      slider.addEventListener(
-        "touchstart",
-        (event) => {
-
-          touchStartX =
-            event.changedTouches[0].screenX;
-
-          stopAutoPlay();
-
-        },
-        { passive: true }
-      );
-
-
-      slider.addEventListener(
-        "touchend",
-        (event) => {
-
-          touchEndX =
-            event.changedTouches[0].screenX;
-
-
-          handleSwipe();
-
-          startAutoPlay();
-
-        },
-        { passive: true }
-      );
-
-
-      function handleSwipe() {
-
-        const distance =
-          touchEndX - touchStartX;
-
-
-        const minimumSwipeDistance = 50;
-
-
-        if (
-          Math.abs(distance) <
-          minimumSwipeDistance
-        ) {
-
-          return;
-
-        }
-
-
-        /*
-          RTL-friendly navigation:
-          Swipe left  → next
-          Swipe right → previous
-        */
-
-        if (distance < 0) {
-
-          nextSlide();
-
-        } else {
-
-          previousSlide();
-
-        }
-
-      }
-
-
-      /* ==========================================
-         SPONSOR / ADVERTISEMENT SLIDE
-         
-         slide6.jpg is the dedicated
-         sponsor / advertising slide.
-
-         Change this URL to your actual
-         sponsor page when available.
-      ========================================== */
-
-      sponsorSlide.addEventListener(
-        "click",
-        () => {
-
-          /*
-            IMPORTANT:
-            Put your sponsor page here.
-
-            Example:
-
-            window.location.href =
-              "/sponsor.html";
-
-          */
-
-          window.location.href =
-            "/sponsor.html";
-
-        }
-      );
-
-
-      /* ==========================================
-         PRELOAD ALL IMAGES
-      ========================================== */
-
-      const imagePaths = [
-
-        "assets/images/slide1.jpg",
-        "assets/images/slide2.jpg",
-        "assets/images/slide3.jpg",
-        "assets/images/slide4.jpg",
-        "assets/images/slide5.jpg",
-        "assets/images/slide6.jpg",
-        "assets/images/slide7.jpg",
-        "assets/images/slide8.jpg",
-        "assets/images/slide9.jpg",
-        "assets/images/slide10.jpg",
-        "assets/images/slide11.jpg"
-
-      ];
-
-
-      imagePaths.forEach((src) => {
-
-        const image =
-          new Image();
-
-        image.src = src;
-
-      });
-
-
-      /* ==========================================
-         VISIBILITY
-      ========================================== */
-
-      document.addEventListener(
-        "visibilitychange",
-        () => {
-
-          if (
-            document.hidden
-          ) {
-
-            stopAutoPlay();
-
-          } else {
-
-            startAutoPlay();
-
-          }
-
-        }
-      );
-
-
-      /* ==========================================
-         INITIALIZE
-      ========================================== */
-
-      showSlide(0);
-
-      startAutoPlay();
-
-
-    })();
-
-  </script>
-
+    </script>
 </body>
 </html>
