@@ -48,7 +48,7 @@
             transition: background-color 0.8s ease;
         }
 
-        /* Glassmorphism Dynamic UI */
+        /* Ultra Dynamic Glassmorphism UI */
         .glass-panel {
             background: rgba(10, 12, 24, 0.85);
             backdrop-filter: blur(20px);
@@ -57,20 +57,16 @@
         }
 
         .glass-card {
-            background: linear-gradient(145deg, rgba(16, 20, 36, 0.85) 0%, rgba(6, 8, 16, 0.95) 100%);
-            backdrop-filter: blur(14px);
+            background: linear-gradient(145deg, rgba(18, 22, 40, 0.9) 0%, rgba(6, 8, 16, 0.95) 100%);
+            backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .glass-card:hover {
-            transform: translateY(-8px) scale(1.015);
-            border-color: rgba(255, 102, 0, 0.5);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 102, 0, 0.2);
-        }
-
-        .glow-text-orange {
-            text-shadow: 0 0 20px rgba(255, 102, 0, 0.7), 0 0 40px rgba(255, 102, 0, 0.3);
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(255, 102, 0, 0.6);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 35px rgba(255, 102, 0, 0.25);
         }
 
         .custom-scrollbar::-webkit-scrollbar {
@@ -101,7 +97,7 @@
             position: relative;
         }
 
-        /* Dots Styling */
+        /* Indicators Dots Styling */
         .custom-dot {
             width: 8px;
             height: 8px;
@@ -118,12 +114,12 @@
         /* Ambient Glow Backdrop Background */
         #ambient-glow {
             position: fixed;
-            top: 20%;
+            top: 25%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, var(--glow-color, rgba(255, 102, 0, 0.18)) 0%, rgba(0,0,0,0) 70%);
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, var(--glow-color, rgba(255, 102, 0, 0.22)) 0%, rgba(0,0,0,0) 70%);
             z-index: -2;
             transition: background 1s ease;
             pointer-events: none;
@@ -139,11 +135,98 @@
             z-index: -1;
             pointer-events: none;
         }
+
+        /* ========================================================
+           AXIS COLA ULTRA ANIMATION & TRUCK BUTTON STYLES 
+           ======================================================== */
+        .flavor-card-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1.75rem;
+            transition: transform 0.4s ease, border-color 0.4s ease;
+        }
+
+        /* Circular clip-path reveal layer */
+        .flavor-bg-layer {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            clip-path: circle(0% at 50% 45%);
+            transition: clip-path 0.85s cubic-bezier(0.25, 1, 0.5, 1);
+            pointer-events: none;
+        }
+
+        .flavor-bg-layer.is-open {
+            clip-path: circle(160% at 50% 45%);
+        }
+
+        /* Dynamic CAN Image animations */
+        .can-wrapper {
+            perspective: 1000px;
+        }
+
+        .can-img-anim {
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.5s ease;
+            transform-style: preserve-3d;
+        }
+
+        .can-img-anim.swapping {
+            transform: scale(0.65) rotateY(180deg) rotateZ(-12deg);
+            opacity: 0.3;
+            filter: blur(4px);
+        }
+
+        .can-img-anim:hover {
+            transform: scale(1.12) rotateZ(4deg) translateY(-6px);
+            filter: drop-shadow(0 25px 30px rgba(255, 102, 0, 0.5));
+        }
+
+        /* Delivery Truck Animated Add to Cart Button */
+        .truck-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .truck-btn .truck-icon {
+            position: absolute;
+            left: -40px;
+            top: 50%;
+            transform: translateY(-50%) scaleX(-1);
+            transition: left 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .truck-btn.is-shipping {
+            background: linear-gradient(90deg, #10b981, #059669) !important;
+        }
+
+        .truck-btn.is-shipping .truck-icon {
+            left: 105%;
+        }
+
+        .truck-btn.is-shipping .btn-text-content {
+            opacity: 0;
+            transform: scale(0.7);
+        }
+
+        .truck-btn .btn-text-content {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Pulse aura effect */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 0.4; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+        .animate-pulse-ring {
+            animation: pulse-ring 3s infinite ease-in-out;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col relative selection:bg-orange-500 selection:text-white">
 
-    <!-- FULL-SCREEN YOUTUBE AD OVERLAY (Shows on page load, skip after 5s) -->
+    <!-- FULL-SCREEN YOUTUBE AD OVERLAY -->
     <div id="youtube-ad-overlay" class="fixed inset-0 z-[999] bg-black flex items-center justify-center">
         <!-- Video Player Container -->
         <div class="absolute inset-0 w-full h-full">
@@ -163,12 +246,10 @@
                 📢 ڕیکلام / Ad
             </span>
 
-            <!-- Countdown Circle (visible before 5s) -->
             <div id="ad-countdown-badge" class="w-9 h-9 rounded-full bg-black/70 border border-white/30 text-white text-xs font-bold flex items-center justify-center">
                 5
             </div>
 
-            <!-- Skip/Close Button (hidden until 5s passes) -->
             <button id="ad-skip-btn" onclick="closeYoutubeAd()" class="hidden items-center gap-2 bg-white/95 hover:bg-white text-slate-900 text-xs font-black px-4 py-2 rounded-lg shadow-xl transition-all active:scale-95">
                 <span>تێپەڕاندن / Skip</span>
                 <span class="text-base leading-none">✕</span>
@@ -267,7 +348,7 @@
         <!-- SECTION 1: SHOPPING & PRODUCTS -->
         <section id="tab-shop" class="block">
             
-            <!-- 16:9 ASPECT RATIO HERO SLIDESHOW CONTAINER -->
+            <!-- HERO SLIDESHOW CONTAINER -->
             <div class="relative max-w-6xl mx-auto px-4 lg:px-8 pt-4 pb-2">
                 <div id="slideshow-wrapper" class="relative w-full aspect-[16/9] max-h-[480px] rounded-3xl overflow-hidden glass-card border border-orange-500/30 shadow-2xl shadow-orange-500/10">
                     
@@ -357,7 +438,7 @@
 
                 <!-- Product Grid Container -->
                 <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Dynamic Product Cards -->
+                    <!-- Dynamic Product Cards with Axis Cola Reveal Effect -->
                 </div>
             </div>
 
@@ -620,7 +701,7 @@
                 ✕
             </button>
             <div class="text-center">
-                <img id="detail-img" src="" alt="" class="h-64 object-contain mx-auto mb-4 filter drop-shadow-2xl" onerror="handleImgError(this, 'ZICO Drink')">
+                <img id="detail-img" src="" alt="" class="h-64 object-contain mx-auto mb-4 filter drop-shadow-2xl" onerror="handleMultiSrcImgError(this, 'zico-66', 'ZICO Drink')">
                 <h3 id="detail-name" class="text-2xl font-black text-white"></h3>
                 <p id="detail-flavor" class="text-orange-400 font-bold text-sm mb-4"></p>
                 
@@ -741,17 +822,17 @@
         window.addEventListener('resize', resizeCanvas);
 
         const particles = [];
-        const particleCount = 32;
+        const particleCount = 36;
 
         for (let i = 0; i < particleCount; i++) {
             particles.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
-                radius: Math.random() * 2.8 + 1,
+                radius: Math.random() * 3 + 1,
                 color: Math.random() > 0.5 ? 'rgba(255, 102, 0, ' : 'rgba(0, 102, 255, ',
                 alpha: Math.random() * 0.5 + 0.1,
-                vx: (Math.random() - 0.5) * 0.4,
-                vy: (Math.random() - 0.5) * 0.4
+                vx: (Math.random() - 0.5) * 0.45,
+                vy: (Math.random() - 0.5) * 0.45
             });
         }
 
@@ -799,7 +880,7 @@
                     audioCtx.resume();
                 }
 
-                const bufferSize = audioCtx.sampleRate * 0.2;
+                const bufferSize = audioCtx.sampleRate * 0.25;
                 const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
                 const data = buffer.getChannelData(0);
                 for (let i = 0; i < bufferSize; i++) {
@@ -811,11 +892,11 @@
 
                 const filter = audioCtx.createBiquadFilter();
                 filter.type = 'highpass';
-                filter.frequency.value = 1200;
+                filter.frequency.value = 1400;
 
                 const gain = audioCtx.createGain();
-                gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+                gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.25);
 
                 noise.connect(filter);
                 filter.connect(gain);
@@ -827,11 +908,10 @@
             }
         }
 
-        // Multi-Source Image Fallback (Tries root path, assets/images/, and alternative filenames)
+        // Multi-Source Image Fallback
         function handleMultiSrcImgError(img, baseName, fallbackTitle) {
             img.onerror = null;
             
-            // Try alternative path without assets/images/ prefix
             const altSrc = `${baseName}.png`;
             const altJpgSrc = `${baseName}.jpg`;
             const altHyphenSrc = `assets/images/${baseName}.png`;
@@ -852,7 +932,6 @@
                 return;
             }
 
-            // Final SVG Fallback Card
             const parent = img.parentElement;
             if (parent) {
                 const svgFallback = document.createElement('div');
@@ -879,7 +958,6 @@
                 img.src = hyphenated;
                 return;
             }
-            // Final fallback to hero banner
             img.src = 'hero-banner.jpg';
         }
     </script>
@@ -1078,63 +1156,18 @@
 
     <!-- Slider JS -->
     <script>
-        // 11 Clean Commercial Slides (Slide11 is Primary, Slide6 is Sponsor/Ad Actionable)
         const SLIDES = [
-            {
-                image: 'assets/images/slide-11.jpg',
-                altImage: 'slide-11.jpg',
-                isSponsor: false
-            },
-            {
-                image: 'assets/images/slide-1.jpg',
-                altImage: 'slide-1.jpg',
-                isSponsor: false
-            },
-            {
-                image: 'assets/images/slide-2.jpg',
-                altImage: 'slide-2.jpg',
-                isSponsor: false
-            },
-            {
-                image: 'assets/images/slide-3.jpg',
-                altImage: 'slide-3.jpg',
-                isSponsor: false
-            },
-            {
-                image: 'assets/images/slide-4.jpg',
-                altImage: 'slide-4.jpg',
-                isSponsor: false
-            },
-            {
-                image: 'assets/images/slide-5.jpg',
-                altImage: 'slide-5.jpg',
-                isSponsor: false
-            },
-            {
-                image: 'assets/images/slide-6.jpg',
-                altImage: 'slide-6.jpg',
-                isSponsor: true
-            },
-            {
-                image: 'assets/images/slide-7.jpg',
-                altImage: 'slide-7.jpg',
-                isSponsor: false
-            },
-            {
-                image: 'assets/images/slide-8.jpg',
-                altImage: 'slide-8.jpg',
-                isSponsor: false
-            },
-            {
-                image: 'assets/images/slide-9.jpg',
-                altImage: 'slide-9.jpg',
-                isSponsor: false
-            },
-            {
-                image: 'assets/images/slide-10.jpg',
-                altImage: 'slide-10.jpg',
-                isSponsor: false
-            }
+            { image: 'assets/images/slide-11.jpg', altImage: 'slide-11.jpg', isSponsor: false },
+            { image: 'assets/images/slide-1.jpg', altImage: 'slide-1.jpg', isSponsor: false },
+            { image: 'assets/images/slide-2.jpg', altImage: 'slide-2.jpg', isSponsor: false },
+            { image: 'assets/images/slide-3.jpg', altImage: 'slide-3.jpg', isSponsor: false },
+            { image: 'assets/images/slide-4.jpg', altImage: 'slide-4.jpg', isSponsor: false },
+            { image: 'assets/images/slide-5.jpg', altImage: 'slide-5.jpg', isSponsor: false },
+            { image: 'assets/images/slide-6.jpg', altImage: 'slide-6.jpg', isSponsor: true },
+            { image: 'assets/images/slide-7.jpg', altImage: 'slide-7.jpg', isSponsor: false },
+            { image: 'assets/images/slide-8.jpg', altImage: 'slide-8.jpg', isSponsor: false },
+            { image: 'assets/images/slide-9.jpg', altImage: 'slide-9.jpg', isSponsor: false },
+            { image: 'assets/images/slide-10.jpg', altImage: 'slide-10.jpg', isSponsor: false }
         ];
 
         let currentSlideIndex = 0;
@@ -1183,19 +1216,11 @@
             const dots = document.querySelectorAll('.custom-dot');
 
             items.forEach((item, idx) => {
-                if (idx === index) {
-                    item.classList.add('active');
-                } else {
-                    item.classList.remove('active');
-                }
+                item.classList.toggle('active', idx === index);
             });
 
             dots.forEach((dot, idx) => {
-                if (idx === index) {
-                    dot.classList.add('active');
-                } else {
-                    dot.classList.remove('active');
-                }
+                dot.classList.toggle('active', idx === index);
             });
 
             currentSlideIndex = index;
@@ -1248,7 +1273,7 @@
         }
     </script>
 
-    <!-- Main Logic Engine -->
+    <!-- Main Logic Engine with AXIS COLA Reveal Transition & Dynamic State -->
     <script>
         const PRODUCTS = [
             {
@@ -1261,6 +1286,7 @@
                 priceSingle: 1500,
                 priceBundle: 30000,
                 image: 'assets/images/zico-60.png',
+                bgColorHex: '#831843',
                 color: 'from-pink-900/40 to-slate-900',
                 borderColor: 'border-pink-500/40',
                 badgeBg: 'bg-pink-500/20 text-pink-300',
@@ -1279,6 +1305,7 @@
                 priceSingle: 1500,
                 priceBundle: 30000,
                 image: 'assets/images/zico-55.png',
+                bgColorHex: '#334155',
                 color: 'from-slate-700/40 to-slate-900',
                 borderColor: 'border-slate-400/40',
                 badgeBg: 'bg-slate-400/20 text-slate-200',
@@ -1298,6 +1325,7 @@
                 priceSingle: 1500,
                 priceBundle: 30000,
                 image: 'assets/images/zico-66.png',
+                bgColorHex: '#1e3a8a',
                 color: 'from-blue-900/40 to-slate-900',
                 borderColor: 'border-blue-500/40',
                 badgeBg: 'bg-blue-500/20 text-blue-300',
@@ -1316,6 +1344,7 @@
                 priceSingle: 1500,
                 priceBundle: 30000,
                 image: 'assets/images/zico-63.png',
+                bgColorHex: '#581c87',
                 color: 'from-purple-900/40 to-slate-900',
                 borderColor: 'border-purple-500/40',
                 badgeBg: 'bg-purple-500/20 text-purple-300',
@@ -1334,6 +1363,7 @@
                 priceSingle: 1500,
                 priceBundle: 30000,
                 image: 'assets/images/zico-69.png',
+                bgColorHex: '#7c2d12',
                 color: 'from-orange-900/40 to-slate-900',
                 borderColor: 'border-orange-500/40',
                 badgeBg: 'bg-orange-500/20 text-orange-300',
@@ -1352,6 +1382,7 @@
                 priceSingle: 1500,
                 priceBundle: 30000,
                 image: 'assets/images/zico-65.png',
+                bgColorHex: '#064e3b',
                 color: 'from-emerald-900/40 to-slate-900',
                 borderColor: 'border-emerald-500/40',
                 badgeBg: 'bg-emerald-500/20 text-emerald-300',
@@ -1371,11 +1402,29 @@
             cardState[p.id] = { type: 'bundle', qty: 1 };
         });
 
+        /* Trigger clip-path circular reveal and 3d rotation when selecting flavors */
         function setThemeFlavor(prodId) {
             const prod = PRODUCTS.find(p => p.id === prodId);
-            if (prod) {
-                document.getElementById('ambient-glow').style.setProperty('--glow-color', prod.glowColor);
-                playFizzSound();
+            if (!prod) return;
+
+            document.getElementById('ambient-glow').style.setProperty('--glow-color', prod.glowColor);
+            playFizzSound();
+
+            const cardBgLayer = document.getElementById(`reveal-layer-${prodId}`);
+            const canImg = document.getElementById(`can-img-${prodId}`);
+
+            if (cardBgLayer) {
+                cardBgLayer.classList.add('is-open');
+                setTimeout(() => {
+                    cardBgLayer.classList.remove('is-open');
+                }, 1300);
+            }
+
+            if (canImg) {
+                canImg.classList.add('swapping');
+                setTimeout(() => {
+                    canImg.classList.remove('swapping');
+                }, 600);
             }
         }
 
@@ -1387,9 +1436,7 @@
 
             Object.keys(dict).forEach(key => {
                 const el = document.getElementById(key);
-                if (el) {
-                    el.innerText = dict[key];
-                }
+                if (el) el.innerText = dict[key];
             });
 
             renderProducts();
@@ -1428,9 +1475,8 @@
                 let cardHtml;
 
                 if (prod.soldOut) {
-                    // SOLD OUT CARD (grayscale, disabled, no cart actions)
                     cardHtml = `
-                        <div class="glass-card border ${prod.borderColor} rounded-3xl overflow-hidden flex flex-col justify-between relative group opacity-60 grayscale-[40%]">
+                        <div class="glass-card flavor-card-container border ${prod.borderColor} rounded-3xl overflow-hidden flex flex-col justify-between relative group opacity-60 grayscale-[40%]">
                             <div class="absolute inset-0 bg-gradient-to-b ${prod.color} opacity-30"></div>
 
                             <div class="absolute top-4 left-4 z-20 bg-rose-600 text-white text-[10px] font-black px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1">
@@ -1466,9 +1512,11 @@
                         </div>
                     `;
                 } else {
-                    // NORMAL AVAILABLE CARD
                     cardHtml = `
-                        <div class="glass-card border ${prod.borderColor} rounded-3xl overflow-hidden flex flex-col justify-between relative group">
+                        <div class="glass-card flavor-card-container border ${prod.borderColor} rounded-3xl overflow-hidden flex flex-col justify-between relative group">
+                            
+                            <!-- Dynamic Circular Reveal Layer (Axis Cola Animation Style) -->
+                            <div id="reveal-layer-${prod.id}" class="flavor-bg-layer" style="background-color: ${prod.bgColorHex}; opacity: 0.9;"></div>
                             <div class="absolute inset-0 bg-gradient-to-b ${prod.color} opacity-40 group-hover:opacity-75 transition-opacity"></div>
 
                             <div class="p-6 relative z-10">
@@ -1477,8 +1525,8 @@
                                     <span class="text-[10px] font-bold text-slate-300 bg-slate-900/80 px-2 py-0.5 rounded-md border border-slate-800">🇸🇪 SWEDEN</span>
                                 </div>
 
-                                <div class="h-60 flex items-center justify-center my-2 cursor-pointer" onclick="setThemeFlavor('${prod.id}')">
-                                    <img src="${prod.image}" alt="${prod.name}" class="h-52 object-contain filter drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)] group-hover:scale-110 transition-transform duration-500" onerror="handleMultiSrcImgError(this, '${prod.id}', '${prod.name}')">
+                                <div class="h-60 can-wrapper flex items-center justify-center my-2 cursor-pointer" onclick="setThemeFlavor('${prod.id}')">
+                                    <img id="can-img-${prod.id}" src="${prod.image}" alt="${prod.name}" class="can-img-anim h-52 object-contain filter drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)]" onerror="handleMultiSrcImgError(this, '${prod.id}', '${prod.name}')">
                                 </div>
 
                                 <h4 class="text-xl font-black text-white mt-2">${prod.name}</h4>
@@ -1514,8 +1562,11 @@
                                 <button onclick="showProductDetails('${prod.id}')" class="flex-1 py-3 bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700/80 font-bold rounded-xl text-xs transition-all text-center">
                                     ${dict.detailsBtnText}
                                 </button>
-                                <button onclick="addToCart('${prod.id}')" class="flex-1 py-3 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold rounded-xl text-xs transition-all text-center shadow-lg shadow-orange-500/20 active:scale-95">
-                                    ${dict.addCartBtnText}
+                                
+                                <!-- Animated Truck Add to Cart Button -->
+                                <button id="add-btn-${prod.id}" onclick="addToCartWithAnimation('${prod.id}')" class="truck-btn flex-1 py-3 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold rounded-xl text-xs transition-all text-center shadow-lg shadow-orange-500/20 active:scale-95">
+                                    <span class="truck-icon text-lg">🚚</span>
+                                    <span class="btn-text-content">${dict.addCartBtnText}</span>
                                 </button>
                             </div>
                         </div>
@@ -1543,6 +1594,22 @@
             renderProducts();
         }
 
+        /* Delivery Truck Animated Action logic */
+        function addToCartWithAnimation(prodId) {
+            const btn = document.getElementById(`add-btn-${prodId}`);
+            if (btn) {
+                btn.classList.add('is-shipping');
+                playFizzSound();
+
+                setTimeout(() => {
+                    addToCart(prodId);
+                    btn.classList.remove('is-shipping');
+                }, 1000);
+            } else {
+                addToCart(prodId);
+            }
+        }
+
         function addToCart(prodId) {
             const prod = PRODUCTS.find(p => p.id === prodId);
             if (!prod || prod.soldOut) return;
@@ -1566,7 +1633,6 @@
                 });
             }
 
-            playFizzSound();
             updateCartUI();
             toggleCartModal(true);
         }
@@ -1666,19 +1732,15 @@
                 const mobBtn = document.getElementById(`mob-nav-${n}`);
                 
                 if (btn) {
-                    if (n === tabName) {
-                        btn.className = "px-5 py-2 rounded-xl text-xs font-bold transition-all bg-orange-500 text-white shadow-lg shadow-orange-500/30";
-                    } else {
-                        btn.className = "px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white";
-                    }
+                    btn.className = (n === tabName) ? 
+                        "px-5 py-2 rounded-xl text-xs font-bold transition-all bg-orange-500 text-white shadow-lg shadow-orange-500/30" : 
+                        "px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white";
                 }
 
                 if (mobBtn) {
-                    if (n === tabName) {
-                        mobBtn.className = "pb-1 text-orange-400 border-b-2 border-orange-400";
-                    } else {
-                        mobBtn.className = "pb-1 text-slate-400";
-                    }
+                    mobBtn.className = (n === tabName) ? 
+                        "pb-1 text-orange-400 border-b-2 border-orange-400" : 
+                        "pb-1 text-slate-400";
                 }
             });
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1746,7 +1808,7 @@
                 detailBtn.disabled = false;
                 detailBtn.className = "w-full py-3.5 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-black rounded-2xl text-sm transition-all shadow-lg shadow-orange-500/20 active:scale-95";
                 detailBtn.onclick = function() {
-                    addToCart(prodId);
+                    addToCartWithAnimation(prodId);
                     toggleDetailModal(false);
                 };
             }
@@ -1793,7 +1855,6 @@
             const skipBtn = document.getElementById('ad-skip-btn');
             if (!overlay) return;
 
-            // Lock page scroll while ad is showing
             document.body.style.overflow = 'hidden';
 
             let secondsLeft = 5;
@@ -1826,7 +1887,6 @@
                 }, 400);
             }
 
-            // Stop video playback by clearing the iframe src
             if (iframe) {
                 iframe.src = '';
             }
@@ -1834,3 +1894,4 @@
     </script>
 </body>
 </html>
+
