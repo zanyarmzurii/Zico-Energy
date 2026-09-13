@@ -222,6 +222,18 @@
         .animate-pulse-ring {
             animation: pulse-ring 3s infinite ease-in-out;
         }
+    
+        /* ZICO V2 Premium Upgrade */
+        html { scroll-behavior: smooth; }
+        header { position: sticky; top: 0; z-index: 40; background: rgba(3,4,8,.82); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); }
+        .zico-quickbar { box-shadow: 0 18px 55px rgba(0,0,0,.28); }
+        .zico-quick-btn { min-height: 48px; border-radius: 14px; background: rgba(255,255,255,.025); border: 1px solid rgba(255,255,255,.06); display:flex; align-items:center; justify-content:center; gap:8px; color:#e5e7eb; font-weight:800; font-size:12px; transition: transform .25s ease, background .25s ease, border-color .25s ease; }
+        .zico-quick-btn:hover { transform: translateY(-2px); background: rgba(255,102,0,.08); border-color: rgba(255,102,0,.25); }
+        .zico-quick-btn:active { transform: scale(.98); }
+        @media (max-width: 640px) { .zico-quick-btn { font-size:10px; gap:6px; min-height:44px; } .zico-quickbar { border-radius:18px; } }
+        .slide-item img { user-select:none; -webkit-user-drag:none; }
+        .modal-open { overflow:hidden !important; }
+
     </style>
 </head>
 <body class="min-h-screen flex flex-col relative selection:bg-orange-500 selection:text-white">
@@ -295,13 +307,13 @@
 
             <!-- Desktop Navigation Links -->
             <nav class="hidden md:flex items-center gap-1 bg-slate-950/80 p-1.5 rounded-2xl border border-slate-800/80">
-                <button id="navShop" onclick="switchTab('shop')" class="px-5 py-2 rounded-xl text-xs font-bold transition-all bg-orange-500 text-white shadow-lg shadow-orange-500/30">
+                <button id="nav-shop" onclick="switchTab('shop')" class="px-5 py-2 rounded-xl text-xs font-bold transition-all bg-orange-500 text-white shadow-lg shadow-orange-500/30">
                     بەرهەمەکان (Shopping)
                 </button>
-                <button id="navAgents" onclick="switchTab('distributors')" class="px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white">
+                <button id="nav-distributors" onclick="switchTab('distributors')" class="px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white">
                     بریکارێن سەرەکی
                 </button>
-                <button id="navDev" onclick="switchTab('developer')" class="px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white">
+                <button id="nav-developer" onclick="switchTab('developer')" class="px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white">
                     پەڕێ دێڤلۆپەری ⚡
                 </button>
             </nav>
@@ -330,13 +342,13 @@
 
         <!-- Mobile Quick Navigation Bar -->
         <div class="flex md:hidden items-center justify-around mt-2 pt-2 border-t border-slate-800/60 text-xs font-bold">
-            <button id="mobNavShop" onclick="switchTab('shop')" class="pb-1 text-orange-400 border-b-2 border-orange-400">
+            <button id="mob-nav-shop" onclick="switchTab('shop')" class="pb-1 text-orange-400 border-b-2 border-orange-400">
                 بەرهەمەکان
             </button>
-            <button id="mobNavAgents" onclick="switchTab('distributors')" class="pb-1 text-slate-400">
+            <button id="mob-nav-distributors" onclick="switchTab('distributors')" class="pb-1 text-slate-400">
                 بریکارێن سەرەکی
             </button>
-            <button id="mobNavDev" onclick="switchTab('developer')" class="pb-1 text-slate-400">
+            <button id="mob-nav-developer" onclick="switchTab('developer')" class="pb-1 text-slate-400">
                 دێڤلۆپەر ⚡
             </button>
         </div>
@@ -368,6 +380,21 @@
                     <div id="slide-dots" class="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 z-20 glass-panel px-3 py-1.5 rounded-full border border-slate-700/80">
                         <!-- Dots rendered by JS -->
                     </div>
+                </div>
+            </div>
+
+            <!-- PREMIUM QUICK ACTION BAR -->
+            <div class="max-w-6xl mx-auto px-4 lg:px-8 pb-5">
+                <div class="zico-quickbar glass-panel rounded-2xl border border-orange-500/15 p-2 md:p-3 grid grid-cols-3 gap-2">
+                    <button onclick="document.getElementById('products-grid')?.scrollIntoView({behavior:'smooth'});" class="zico-quick-btn">
+                        <i class="fa-solid fa-bolt text-orange-400"></i><span>بەرهەمەکان</span>
+                    </button>
+                    <button onclick="switchTab('distributors')" class="zico-quick-btn">
+                        <i class="fa-solid fa-location-dot text-blue-400"></i><span>شوێنی داواکردن</span>
+                    </button>
+                    <button onclick="toggleCartModal(true)" class="zico-quick-btn">
+                        <i class="fa-solid fa-cart-shopping text-emerald-400"></i><span>سەبەتە</span>
+                    </button>
                 </div>
             </div>
 
@@ -1395,7 +1422,7 @@
 
         let currentLanguage = 'badini';
         let currentTab = 'shop';
-        let cart = [];
+        let cart = JSON.parse(localStorage.getItem('zico_cart_v2') || '[]');
         let cardState = {};
 
         PRODUCTS.forEach(p => {
@@ -1638,6 +1665,7 @@
         }
 
         function updateCartUI() {
+            localStorage.setItem('zico_cart_v2', JSON.stringify(cart));
             const badge = document.getElementById('cart-count-badge');
             const totalQty = cart.reduce((acc, item) => acc + item.qty, 0);
 
@@ -1755,6 +1783,7 @@
                 modal.classList.add('hidden');
                 modal.classList.remove('flex');
             }
+            document.body.classList.toggle('modal-open', show);
         }
 
         function toggleAgentModal(show) {
@@ -1838,9 +1867,28 @@
             toggleCartModal(false);
         }
 
+        function showZicoToast(message) {
+            let toast = document.getElementById('zico-toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'zico-toast';
+                toast.className = 'fixed bottom-5 left-1/2 -translate-x-1/2 z-[100] px-5 py-3 rounded-2xl bg-slate-950/95 border border-orange-500/30 text-white text-xs font-bold shadow-2xl backdrop-blur-xl opacity-0 pointer-events-none transition-all duration-300';
+                document.body.appendChild(toast);
+            }
+            toast.textContent = message;
+            toast.classList.remove('opacity-0'); toast.classList.add('opacity-100');
+            clearTimeout(window.__zicoToastTimer);
+            window.__zicoToastTimer = setTimeout(()=>{ toast.classList.remove('opacity-100'); toast.classList.add('opacity-0'); }, 2200);
+        }
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === 'Escape') { toggleCartModal(false); toggleAgentModal(false); toggleDetailModal(false); }
+        });
+
         document.addEventListener("DOMContentLoaded", function() {
             initSwiperSlider();
             changeLanguage('badini');
+            updateCartUI();
             initYoutubeAdOverlay();
         });
     </script>
