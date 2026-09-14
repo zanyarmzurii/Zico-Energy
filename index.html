@@ -259,7 +259,8 @@
 
         .platform-tile{min-height:112px;border:1px solid rgba(255,255,255,.07);background:rgba(2,6,23,.62);border-radius:1.25rem;padding:1rem;text-align:left;display:flex;flex-direction:column;gap:.35rem;transition:.25s}.platform-tile:hover{transform:translateY(-3px);border-color:rgba(255,102,0,.35);background:rgba(15,23,42,.9)}.platform-tile b{font-size:.8rem;color:#fff}.platform-tile span{font-size:.65rem;color:#64748b}.platform-mini{display:flex;align-items:center;gap:.8rem;border:1px solid rgba(255,255,255,.06);background:rgba(2,6,23,.45);border-radius:1.1rem;padding:.9rem}.platform-mini>span{font-size:1.5rem}.platform-mini div{flex:1}.platform-mini b{font-size:.72rem}.platform-mini p{font-size:.6rem;color:#64748b;margin-top:.2rem}.platform-mini button{font-size:.62rem;font-weight:900;color:#fb923c}.experience-step{padding:1rem;border-radius:1rem;background:rgba(2,6,23,.6);border:1px solid rgba(255,255,255,.06)}.experience-step strong{display:block;font-size:.65rem;color:#fb923c}.experience-step span{display:block;font-weight:900;margin-top:.4rem}.experience-step small{display:block;color:#64748b;font-size:.58rem;margin-top:.3rem}.ai-choice{width:100%;padding:.9rem 1rem;border-radius:1rem;background:rgba(2,6,23,.75);border:1px solid rgba(255,255,255,.07);text-align:left;font-size:.75rem;font-weight:800;color:#e2e8f0;transition:.2s}.ai-choice:hover{border-color:rgba(168,85,247,.55);transform:translateX(-2px)}
 
-    </style>
+        .reward-filter{padding:.65rem 1rem;border-radius:.8rem;background:#0f172a;border:1px solid #1e293b;color:#94a3b8;font-size:11px;font-weight:900}.reward-filter.active{background:#f97316;color:#0b0d12;border-color:#f97316}
+</style>
     <script type="application/ld+json">
     {
       "@context":"https://schema.org",
@@ -292,37 +293,6 @@
 
 </head>
 <body class="min-h-screen flex flex-col relative selection:bg-orange-500 selection:text-white">
-
-    <!-- FULL-SCREEN YOUTUBE AD OVERLAY -->
-    <div id="youtube-ad-overlay" class="fixed inset-0 z-[999] bg-black flex items-center justify-center">
-        <!-- Video Player Container -->
-        <div class="absolute inset-0 w-full h-full">
-            <iframe id="youtube-ad-iframe"
-                class="w-full h-full"
-                src="https://www.youtube.com/embed/Ge9bfuYx44g?autoplay=1&mute=0&controls=0&rel=0&playsinline=1&modestbranding=1&enablejsapi=1"
-                title="ZICO Energy Drink Ad"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-            </iframe>
-        </div>
-
-        <!-- Top-right controls: Ad label + Countdown/Skip -->
-        <div class="absolute top-4 right-4 z-10 flex items-center gap-2">
-            <span class="bg-black/70 text-white text-[10px] font-bold px-3 py-1.5 rounded-lg border border-white/20">
-                📢 ڕیکلام / Ad
-            </span>
-
-            <div id="ad-countdown-badge" class="w-9 h-9 rounded-full bg-black/70 border border-white/30 text-white text-xs font-bold flex items-center justify-center">
-                5
-            </div>
-
-            <button id="ad-skip-btn" onclick="closeYoutubeAd()" class="hidden items-center gap-2 bg-white/95 hover:bg-white text-slate-900 text-xs font-black px-4 py-2 rounded-lg shadow-xl transition-all active:scale-95">
-                <span>تێپەڕاندن / Skip</span>
-                <span class="text-base leading-none">✕</span>
-            </button>
-        </div>
-    </div>
 
     <!-- Dynamic Canvas Particle Background -->
     <canvas id="liquid-canvas"></canvas>
@@ -371,6 +341,9 @@
                 <button id="navDev" onclick="switchTab('developer')" class="px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white">
                     پەڕێ دێڤلۆپەری ⚡
                 </button>
+                <button id="navRewards" onclick="openZicoRewards()" class="px-5 py-2 rounded-xl text-xs font-bold transition-all text-amber-300 hover:text-white">
+                    Rewards 🎁
+                </button>
             </nav>
 
             <!-- Right Actions: Language Selector & Floating Cart -->
@@ -416,6 +389,7 @@
             <button id="mobNavDev" onclick="switchTab('developer')" class="pb-1 text-slate-400">
                 دێڤلۆپەر ⚡
             </button>
+            <button id="mobNavRewards" onclick="openZicoRewards()" class="pb-1 text-amber-300">Rewards 🎁</button>
         </div>
     </header>
 
@@ -2285,14 +2259,14 @@
         function saveClub(c){ localStorage.setItem(CLUB_KEY, JSON.stringify(c)); updateClubUI(); }
         function updateClubUI(){ const c=getClub(); ['clubPoints','clubVisits','clubReferrals'].forEach((id,i)=>{const el=document.getElementById(id); if(el) el.innerText=[c.points,c.visits,c.shares][i]||0;}); const code=document.getElementById('referralCode'); if(code){ if(!c.code){c.code='ZICO-'+Math.random().toString(36).slice(2,8).toUpperCase(); localStorage.setItem(CLUB_KEY,JSON.stringify(c));} code.innerText=c.code; } }
         async function registerVisit(){ if(sessionStorage.getItem('zicoVisitV6')) return; sessionStorage.setItem('zicoVisitV6','1'); const c=getClub(); c.visits=(c.visits||0)+1; saveClub(c); try{await ZICO_API.post('/club/events',{type:'visit',code:c.code});}catch(e){} }
-        async function shareZico(){ const c=getClub(); c.shares=(c.shares||0)+1; c.points=(c.points||0)+10; saveClub(c); const url=location.href.split('#')[0]+'?ref='+encodeURIComponent(c.code); try{ if(navigator.share){await navigator.share({title:'ZICO Energy',text:'ZICO Energy Drink — Sweden 🇸🇪 • Kurdistan',url});} else {await navigator.clipboard.writeText(url); showStatus(currentLanguage==='english'?'ZICO link copied.':'لینکێ ZICO هاتە کوپیکرن.');} await ZICO_API.post('/club/events',{type:'share',code:c.code}); }catch(e){} }
+        async function shareZico(){ const c=getClub(); c.shares=(c.shares||0)+1; saveClub(c); const url=location.href.split('#')[0]+'?ref='+encodeURIComponent(c.code); try{ if(navigator.share){await navigator.share({title:'ZICO Energy',text:'ZICO Energy Drink — Sweden 🇸🇪 • Kurdistan',url});} else {await navigator.clipboard.writeText(url); showStatus(currentLanguage==='english'?'ZICO link copied.':'لینکێ ZICO هاتە کوپیکرن.');} await ZICO_API.post('/club/events',{type:'share',code:c.code}); }catch(e){} }
         function copyReferralCode(){ const c=getClub(); navigator.clipboard?.writeText(c.code); showStatus(currentLanguage==='english'?'Referral code copied.':'کۆدێ هاوبەشکرنێ هاتە کوپیکرن.'); }
         function openClubInfo(){ showStatus(currentLanguage==='english'?'ZICO Club is ready for server-side points and rewards when the API is connected.':'ZICO Club ئامادەی خاڵ و خەڵاتێن server ـە کاتێک API پێکەوە کرایە.'); }
         function openReviewBox(){ const m=document.getElementById('review-modal'); if(!m)return; const sel=document.getElementById('reviewFlavor'); sel.innerHTML=PRODUCTS.map(p=>`<option value="${cleanText(p.id,50)}">${cleanText(p.name,100)}</option>`).join(''); m.classList.remove('hidden'); m.classList.add('flex'); renderReviews(); }
         function closeReviewBox(){ const m=document.getElementById('review-modal'); if(m){m.classList.add('hidden');m.classList.remove('flex');} }
         function setReviewStars(n){ reviewStars=n; document.querySelectorAll('#reviewStars button').forEach(b=>{const on=Number(b.dataset.star)<=n;b.classList.toggle('text-yellow-400',on);b.classList.toggle('text-slate-600',!on);}); }
         function getReviews(){return safeJson('zicoReviewsV7',[]);}
-        async function saveReview(){ const text=cleanText(document.getElementById('reviewText')?.value,1000); const flavor=cleanText(document.getElementById('reviewFlavor')?.value,50); if(!reviewStars||!text){showStatus(currentLanguage==='english'?'Choose stars and write a review.':'تکایە ستێرە هەڵبژێرە و ڕایەک بنڤیسە.','error');return;} const r={id:makeId('REV'),flavor,stars:reviewStars,text,date:new Date().toISOString(),status:'pending'}; try{await ZICO_API.post('/reviews',r); showStatus(currentLanguage==='english'?'Review submitted for moderation.':'ڕاکەت هاتە ناردن بۆ پشکنین.');}catch(e){const a=getReviews();a.unshift(r);localStorage.setItem('zicoReviewsV7',JSON.stringify(a.slice(0,50)));showStatus(currentLanguage==='english'?'Review saved on this device.':'ڕاکەت ل سەر ئەڤ ئامێرە هاتە پاراستن.');} document.getElementById('reviewText').value=''; setReviewStars(0); renderReviews(); const c=getClub(); c.points=(c.points||0)+5; saveClub(c); }
+        async function saveReview(){ const text=cleanText(document.getElementById('reviewText')?.value,1000); const flavor=cleanText(document.getElementById('reviewFlavor')?.value,50); if(!reviewStars||!text){showStatus(currentLanguage==='english'?'Choose stars and write a review.':'تکایە ستێرە هەڵبژێرە و ڕایەک بنڤیسە.','error');return;} const r={id:makeId('REV'),flavor,stars:reviewStars,text,date:new Date().toISOString(),status:'pending'}; try{await ZICO_API.post('/reviews',r); showStatus(currentLanguage==='english'?'Review submitted for moderation.':'ڕاکەت هاتە ناردن بۆ پشکنین.');}catch(e){const a=getReviews();a.unshift(r);localStorage.setItem('zicoReviewsV7',JSON.stringify(a.slice(0,50)));showStatus(currentLanguage==='english'?'Review saved on this device.':'ڕاکەت ل سەر ئەڤ ئامێرە هاتە پاراستن.');} document.getElementById('reviewText').value=''; setReviewStars(0); renderReviews(); const c=getClub(); saveClub(c); if(window.ZICO_REWARDS?.user) ZICO_REWARDS.post('review').catch(()=>{}); }
         async function renderReviews(){ const box=document.getElementById('reviewList'); if(!box)return; let rs=getReviews(); try{const remote=await ZICO_API.get('/reviews?status=approved&limit=20');if(Array.isArray(remote?.items))rs=remote.items;}catch(e){} box.innerHTML=rs.length?rs.map(r=>`<div class="rounded-xl bg-slate-950 border border-slate-800 p-3"><div class="flex justify-between text-[10px]"><b class="text-white">${Number(r.stars)||0}/5 ★</b><span class="text-slate-600">${new Date(r.date || r.created_at).toLocaleDateString()}</span></div><p class="text-[10px] text-slate-400 mt-1">${cleanText(r.text,1000)}</p></div>`).join(''):'<p class="text-[10px] text-slate-600 text-center">No reviews yet.</p>'; }
         window.addEventListener('keydown',e=>{if(e.key==='Escape'){closeReviewBox();toggleDetailModal(false);toggleAgentModal(false);toggleCartModal(false);closeDemandModal();closeDistributorApplication();}});
 
@@ -2300,58 +2274,9 @@
             initSwiperSlider();
             changeLanguage('badini');
             selectOrderRegion(orderRegion);
-            initYoutubeAdOverlay();
             registerVisit();
             updateClubUI();
         });
-    </script>
-
-    <!-- YouTube Ad Overlay Logic -->
-    <script>
-        let adCountdownInterval = null;
-
-        function initYoutubeAdOverlay() {
-            const overlay = document.getElementById('youtube-ad-overlay');
-            const badge = document.getElementById('ad-countdown-badge');
-            const skipBtn = document.getElementById('ad-skip-btn');
-            if (!overlay) return;
-
-            document.body.style.overflow = 'hidden';
-
-            let secondsLeft = 5;
-            badge.innerText = secondsLeft;
-
-            adCountdownInterval = setInterval(() => {
-                secondsLeft -= 1;
-                if (secondsLeft > 0) {
-                    badge.innerText = secondsLeft;
-                } else {
-                    clearInterval(adCountdownInterval);
-                    badge.classList.add('hidden');
-                    skipBtn.classList.remove('hidden');
-                    skipBtn.classList.add('flex');
-                }
-            }, 1000);
-        }
-
-        function closeYoutubeAd() {
-            const overlay = document.getElementById('youtube-ad-overlay');
-            const iframe = document.getElementById('youtube-ad-iframe');
-            if (adCountdownInterval) clearInterval(adCountdownInterval);
-
-            if (overlay) {
-                overlay.style.transition = 'opacity 0.4s ease';
-                overlay.style.opacity = '0';
-                setTimeout(() => {
-                    overlay.remove();
-                    document.body.style.overflow = '';
-                }, 400);
-            }
-
-            if (iframe) {
-                iframe.src = '';
-            }
-        }
     </script>
 
     <script>
@@ -2372,16 +2297,28 @@
       if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
     </script>
 
-    <!-- ZICO v7 Account Modal -->
+    <!-- ZICO Rewards / Account -->
     <div id="zico-account-modal" class="hidden fixed inset-0 z-[95] bg-black/80 backdrop-blur-md items-center justify-center p-4">
-      <div class="glass-card w-full max-w-lg rounded-3xl p-6 border border-blue-500/20">
-        <div class="flex items-start justify-between"><div><span class="text-[10px] font-black tracking-widest text-blue-400">MY ZICO</span><h3 class="text-2xl font-black mt-1">هەژماری ZICO</h3></div><button onclick="closeZicoAccount()" aria-label="Close account" class="w-10 h-10 rounded-xl bg-slate-900">×</button></div>
-        <div class="grid grid-cols-2 gap-3 mt-5">
-          <div class="rounded-2xl bg-slate-950 p-4"><small class="text-slate-500">Club Points</small><b id="accountPoints" class="block text-2xl text-orange-400 mt-1">0</b></div>
-          <div class="rounded-2xl bg-slate-950 p-4"><small class="text-slate-500">Orders</small><b id="accountOrders" class="block text-2xl text-blue-400 mt-1">0</b></div>
+      <div class="glass-card w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-3xl p-6 border border-orange-500/20">
+        <div class="flex items-start justify-between gap-4"><div><span class="text-[10px] font-black tracking-widest text-orange-400">MY ZICO · REWARDS</span><h3 class="text-2xl font-black mt-1">هەژماری ZICO 🏆</h3></div><button onclick="closeZicoAccount()" aria-label="Close account" class="w-10 h-10 rounded-xl bg-slate-900">×</button></div>
+        <div id="zico-auth-panel" class="mt-5 rounded-2xl border border-slate-800 p-4">
+          <p class="text-sm font-black">بۆ ZICO Rewards، هەژمارەکەت پشتڕاست بکەوە.</p>
+          <div class="flex gap-2 mt-3"><input id="zicoAuthEmail" type="email" autocomplete="email" placeholder="you@example.com" class="flex-1 rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm outline-none focus:border-orange-500"><button onclick="zicoSendOTP()" class="px-4 rounded-xl bg-orange-500 text-slate-950 font-black text-xs">Send code</button></div>
+          <div id="zicoOtpRow" class="hidden flex gap-2 mt-3"><input id="zicoAuthOtp" inputmode="numeric" maxlength="8" placeholder="Verification code" class="flex-1 rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm outline-none focus:border-emerald-500"><button onclick="zicoVerifyOTP()" class="px-4 rounded-xl bg-emerald-500 text-slate-950 font-black text-xs">Verify</button></div>
+          <p id="zicoAuthStatus" class="text-[10px] text-slate-500 mt-3"></p>
         </div>
-        <div class="mt-4 rounded-2xl border border-slate-800 p-4"><p class="text-xs text-slate-400">Profile status</p><div class="flex justify-between mt-2"><b class="text-sm">Guest Member</b><span class="text-[10px] px-2 py-1 rounded-full bg-emerald-500/10 text-emerald-400">Ready</span></div></div>
-        <button onclick="showStatus('لە وەشانی backend ـدا login و OTP دێتە کارکردن.')" class="w-full mt-4 py-3 rounded-xl bg-blue-600 font-black text-xs">Sign in / Create account</button>
+        <div id="zico-member-panel" class="hidden">
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-5">
+            <div class="rounded-2xl bg-slate-950 p-4"><small class="text-slate-500">Points</small><b id="accountPoints" class="block text-2xl text-orange-400 mt-1">0</b></div>
+            <div class="rounded-2xl bg-slate-950 p-4"><small class="text-slate-500">Level</small><b id="accountLevel" class="block text-xl text-amber-300 mt-1 uppercase">STARTER</b></div>
+            <div class="rounded-2xl bg-slate-950 p-4"><small class="text-slate-500">Referrals</small><b id="accountReferrals" class="block text-2xl text-emerald-400 mt-1">0</b></div>
+            <div class="rounded-2xl bg-slate-950 p-4"><small class="text-slate-500">Orders</small><b id="accountOrders" class="block text-2xl text-blue-400 mt-1">0</b></div>
+          </div>
+          <div class="mt-4 rounded-2xl border border-orange-500/20 bg-orange-500/5 p-4"><div class="flex justify-between gap-3 items-center"><div><small class="text-slate-500">Your referral link</small><b id="zicoReferralCode" class="block text-orange-300 mt-1 tracking-wider">—</b></div><button onclick="copyZicoReferral()" class="px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs font-black">Copy</button></div><button onclick="shareZicoRewards()" class="w-full mt-3 py-3 rounded-xl bg-orange-500 text-slate-950 font-black text-xs">👥 Invite a friend · +10 points</button></div>
+          <div class="mt-4 rounded-2xl bg-slate-950 border border-slate-800 p-4"><div class="flex justify-between text-xs"><span>Progress to next level</span><b id="zicoLevelProgressText">0 / 10,000</b></div><div class="h-2 rounded-full bg-slate-800 mt-3 overflow-hidden"><div id="zicoLevelProgress" class="h-full rounded-full bg-gradient-to-r from-orange-500 to-amber-300" style="width:0%"></div></div></div>
+          <div class="grid sm:grid-cols-3 gap-3 mt-4"><button onclick="openZicoRewards()" class="rounded-2xl border border-slate-800 p-4 text-left hover:border-orange-500/40"><b>🎁 Rewards Shop</b><span class="block text-[10px] text-slate-500 mt-1">Redeem your points</span></button><button onclick="zicoCheckin()" class="rounded-2xl border border-slate-800 p-4 text-left hover:border-emerald-500/40"><b>🔥 Daily Check-in</b><span class="block text-[10px] text-slate-500 mt-1">+10 points · max 7/week</span></button><button onclick="openZicoLeaderboard()" class="rounded-2xl border border-slate-800 p-4 text-left hover:border-blue-500/40"><b>🏆 Leaderboard</b><span class="block text-[10px] text-slate-500 mt-1">Top ZICO Fans</span></button></div>
+          <div class="flex justify-end mt-4"><button onclick="zicoSignOut()" class="text-[10px] text-slate-500 hover:text-white">Sign out</button></div>
+        </div>
       </div>
     </div>
 
@@ -2435,34 +2372,54 @@
 </section>
 <script>
 (function(){
-  const btn=document.getElementById('zicoSpinButton');
-  const wheel=document.getElementById('zicoSpinWheel');
-  const result=document.getElementById('zicoSpinResult');
-  if(!btn||!wheel||!result) return;
-  const rewards=['10% OFF','FREE CAN','5% OFF','BONUS','15% OFF','FREE SHIPPING','TRY AGAIN','ZICO GIFT'];
-  let spinning=false;
-  let used=false;
-  try { used=sessionStorage.getItem('zicoLuckySpinUsed')==='1'; } catch(e){}
-  if(used){btn.disabled=true;result.textContent='You already spun the wheel this session. 🔥';}
-  btn.addEventListener('click',function(){
-    if(spinning||used) return;
-    spinning=true;btn.disabled=true;result.textContent='Spinning…';
-    const index=Math.floor(Math.random()*rewards.length);
-    const segment=360/rewards.length;
-    const target=(360-(index*segment+segment/2)+360)%360;
-    const current=Number(wheel.dataset.rotation||0);
-    const extra=360*6+target;
-    const rotation=current+extra;
-    wheel.dataset.rotation=rotation;
-    wheel.style.transform='rotate('+rotation+'deg)';
-    window.setTimeout(function(){
-      result.textContent='🎉 You won: '+rewards[index]+'!';
-      try{sessionStorage.setItem('zicoLuckySpinUsed','1');}catch(e){}
-      used=true;spinning=false;
-    },4850);
-  });
+  const btn=document.getElementById('zicoSpinButton'),wheel=document.getElementById('zicoSpinWheel'),result=document.getElementById('zicoSpinResult');if(!btn||!wheel||!result)return;let spinning=false;
+  const labels={"10_off":"10% OFF","500_points":"+500 Points","free_zico":"FREE ZICO","2000_points":"+2,000 Points","try_again":"TRY AGAIN","free_shipping":"FREE SHIPPING","mystery":"MYSTERY REWARD"};
+  btn.addEventListener('click',async()=>{if(spinning)return;if(!window.ZICO_REWARDS?.user){result.textContent='Sign in to use Lucky Spin.';openZicoAccount();return;}spinning=true;btn.disabled=true;result.textContent='Spinning…';try{const r=await window.ZICO_REWARDS.post('spin');const key=r.result?.result_key||'try_again';const idx=Object.keys(labels).indexOf(key)%7;const rotation=360*6+(360-((idx+0.5)*(360/7)));wheel.style.transform=`rotate(${rotation}deg)`;setTimeout(async()=>{result.textContent='🎉 You won: '+labels[key]+'!';spinning=false;await loadZicoRewardsSafe();},4850);}catch(e){result.textContent=e.message;spinning=false;btn.disabled=false;}});
+  async function loadZicoRewardsSafe(){try{const t=await window.ZICO_REWARDS.token();if(!t)return;const j=await fetch('/api/rewards?action=summary',{headers:{Authorization:'Bearer '+t}}).then(r=>r.json());window.ZICO_REWARDS.member=j.member;window.ZICO_REWARDS.history=j.history||[];window.ZICO_REWARDS.redemptions=j.redemptions||[];}catch(e){}}
 })();
 </script>
+
+
+    <!-- ZICO Rewards Shop -->
+    <div id="zico-rewards-modal" class="hidden fixed inset-0 z-[97] bg-black/90 backdrop-blur-md items-center justify-center p-4">
+      <div class="glass-card w-full max-w-5xl max-h-[92vh] overflow-y-auto rounded-3xl p-6 border border-orange-500/20">
+        <div class="flex justify-between items-start gap-4"><div><span class="text-[10px] font-black tracking-widest text-orange-400">ZICO REWARDS</span><h3 class="text-3xl font-black mt-1">Earn · Level Up · Redeem 🎁</h3><p class="text-xs text-slate-500 mt-2">Invite friends, buy ZICO, review and check in — then spend your points.</p></div><button onclick="closeZicoRewards()" class="w-10 h-10 rounded-xl bg-slate-900">×</button></div>
+      <div id="zicoRewardsGuest" class="mt-5 rounded-2xl border border-dashed border-slate-700 p-6 text-center"><p class="font-black">Sign in to use ZICO Rewards</p><button onclick="closeZicoRewards();openZicoAccount()" class="mt-3 px-5 py-3 rounded-xl bg-orange-500 text-slate-950 font-black text-xs">Sign in / Create account</button></div>
+      <div id="zicoRewardsMember" class="hidden"><div class="grid md:grid-cols-[1fr_2fr] gap-4 mt-5"><div class="rounded-3xl bg-gradient-to-br from-orange-500/15 to-slate-950 border border-orange-500/20 p-6"><small class="text-slate-500">YOUR BALANCE</small><div id="rewardsBalance" class="text-5xl font-black text-orange-400 mt-2">0</div><p class="text-xs text-slate-500">ZICO Points</p><div class="mt-5 text-xs"><span id="rewardsLevel" class="font-black text-amber-300">STARTER</span><span id="rewardsLevelNext" class="text-slate-500"> · next 10,000</span></div></div><div class="rounded-3xl bg-slate-950 border border-slate-800 p-6"><div class="flex justify-between text-xs"><b>Next milestone</b><span id="rewardsProgressText">0 / 10,000</span></div><div class="h-3 rounded-full bg-slate-800 mt-3 overflow-hidden"><div id="rewardsProgress" class="h-full rounded-full bg-gradient-to-r from-orange-500 to-amber-300" style="width:0%"></div></div><div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-5 text-center text-[10px]"><div>🥉<br>Starter<br><b>0+</b></div><div>🥈<br>Fan<br><b>10k+</b></div><div>🥇<br>Pro<br><b>50k+</b></div><div>🔥<br>Elite<br><b>100k+</b></div></div></div></div>
+        <div class="flex flex-wrap gap-2 mt-6"><button class="reward-filter active" data-filter="all">All</button><button class="reward-filter" data-filter="gift_card">Gift Cards</button><button class="reward-filter" data-filter="product">ZICO</button><button class="reward-filter" data-filter="merch">Merch</button><button class="reward-filter" data-filter="discount">Discounts</button></div><div id="zicoRewardsGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4"></div>
+        <div class="mt-6 rounded-2xl border border-slate-800 p-4"><div class="flex justify-between items-center"><b>Recent activity</b><button onclick="loadZicoRewards()" class="text-[10px] text-orange-400">Refresh</button></div><div id="zicoRewardsHistory" class="mt-3 space-y-2"></div></div></div></div>
+    </div>
+    <div id="zico-leaderboard-modal" class="hidden fixed inset-0 z-[98] bg-black/90 backdrop-blur-md items-center justify-center p-4"><div class="glass-card w-full max-w-xl rounded-3xl p-6"><div class="flex justify-between items-center"><div><span class="text-[10px] font-black tracking-widest text-blue-400">WEEKLY</span><h3 class="text-2xl font-black">TOP ZICO FANS 🏆</h3></div><button onclick="closeZicoLeaderboard()" class="w-10 h-10 rounded-xl bg-slate-900">×</button></div><div id="zicoLeaderboard" class="mt-5 space-y-2"></div><p class="text-[9px] text-slate-600 mt-4">Weekly leaderboard. Top 3 can receive campaign bonus points when enabled by ZICO admin.</p></div></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+    (function(){
+      const LS='zicoRewardsDeviceV1'; if(!localStorage.getItem(LS)) localStorage.setItem(LS,crypto.randomUUID?crypto.randomUUID():('d-'+Date.now()+'-'+Math.random().toString(36).slice(2)));
+      const deviceId=()=>localStorage.getItem(LS)||'';
+      window.ZICO_REWARDS={client:null,user:null,member:null,catalog:[],token:async()=>{const x=await window.ZICO_REWARDS.client?.auth?.getSession();return x?.data?.session?.access_token||''},post:async(action,payload={})=>{const token=await window.ZICO_REWARDS.token();if(!token)throw new Error('Sign in required');const r=await fetch('/api/rewards?action='+encodeURIComponent(action),{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify({...payload,deviceId:deviceId()})});const j=await r.json();if(!r.ok)throw new Error(j.error||'Request failed');return j}};
+      async function initAuth(){try{const cfg=await fetch('/api/config').then(r=>r.json());if(!cfg.supabaseUrl||!cfg.supabaseAnonKey)return;window.ZICO_REWARDS.client=supabase.createClient(cfg.supabaseUrl,cfg.supabaseAnonKey);const {data}=await window.ZICO_REWARDS.client.auth.getSession();if(data.session){window.ZICO_REWARDS.user=data.session.user;await loadSummary();}window.ZICO_REWARDS.client.auth.onAuthStateChange(async(_e,s)=>{window.ZICO_REWARDS.user=s?.user||null;if(s?.user){await loadSummary();}else{window.ZICO_REWARDS.member=null;updateRewardsUI();}});}catch(e){console.warn('ZICO auth unavailable',e)}}
+      async function loadSummary(){const token=await window.ZICO_REWARDS.token(); const r=await fetch('/api/rewards?action=summary',{headers:{Authorization:'Bearer '+token}});if(!r.ok)return;const j=await r.json();window.ZICO_REWARDS.member=j.member;window.ZICO_REWARDS.history=j.history||[];window.ZICO_REWARDS.redemptions=j.redemptions||[];updateRewardsUI();await completeReferralFromUrl();}
+      function updateRewardsUI(){const m=window.ZICO_REWARDS.member, logged=!!m;document.getElementById('zico-auth-panel')?.classList.toggle('hidden',logged);document.getElementById('zico-member-panel')?.classList.toggle('hidden',!logged);document.getElementById('zicoRewardsGuest')?.classList.toggle('hidden',logged);document.getElementById('zicoRewardsMember')?.classList.toggle('hidden',!logged);if(!m)return;const pts=Number(m.points||0);['accountPoints','rewardsBalance'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=pts.toLocaleString();});['accountLevel','rewardsLevel'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=(m.level||'starter').toUpperCase();});const code=document.getElementById('zicoReferralCode');if(code)code.textContent=m.referral_code;const next=pts<10000?10000:pts<50000?50000:pts<100000?100000:null;const base=pts<10000?0:pts<50000?10000:pts<100000?50000:100000;const pct=next?Math.min(100,((pts-base)/(next-base))*100):100;const txt=next?`${pts.toLocaleString()} / ${next.toLocaleString()}`:`${pts.toLocaleString()} · ELITE`;['zicoLevelProgressText','rewardsProgressText'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=txt});['zicoLevelProgress','rewardsProgress'].forEach(id=>{const e=document.getElementById(id);if(e)e.style.width=pct+'%'});renderHistory();}
+      async function completeReferralFromUrl(){const code=new URLSearchParams(location.search).get('ref');if(!code||!window.ZICO_REWARDS.user||sessionStorage.getItem('zicoReferralAttempted'))return;sessionStorage.setItem('zicoReferralAttempted','1');try{const r=await window.ZICO_REWARDS.post('referral',{code});if(r.result?.awarded)showStatus('🎉 Verified referral! The inviter earned +10 ZICO Points.');await loadSummary();}catch(e){if(!/already|not found|self/i.test(e.message))console.warn(e)}}
+      window.zicoSendOTP=async()=>{try{if(!window.ZICO_REWARDS.client)throw new Error('Rewards authentication is not configured yet.');const email=document.getElementById('zicoAuthEmail').value.trim();if(!email)throw new Error('Enter your email.');const {error}=await window.ZICO_REWARDS.client.auth.signInWithOtp({email,options:{shouldCreateUser:true}});if(error)throw error;document.getElementById('zicoOtpRow').classList.remove('hidden');document.getElementById('zicoAuthStatus').textContent='Verification code sent. Check your email.';}catch(e){document.getElementById('zicoAuthStatus').textContent=e.message}};
+      window.zicoVerifyOTP=async()=>{try{const email=document.getElementById('zicoAuthEmail').value.trim(),token=document.getElementById('zicoAuthOtp').value.trim();const {error}=await window.ZICO_REWARDS.client.auth.verifyOtp({email,token,type:'email'});if(error)throw error;showStatus('Welcome to ZICO Rewards 🔥');closeZicoAccount();}catch(e){document.getElementById('zicoAuthStatus').textContent=e.message}};
+      window.zicoSignOut=async()=>{await window.ZICO_REWARDS.client?.auth.signOut();closeZicoAccount();};
+      window.openZicoAccount=async()=>{const m=document.getElementById('zico-account-modal');m.classList.remove('hidden');m.classList.add('flex');if(window.ZICO_REWARDS.user)await loadSummary();else updateRewardsUI();};
+      window.openZicoRewards=async()=>{const m=document.getElementById('zico-rewards-modal');m.classList.remove('hidden');m.classList.add('flex');if(window.ZICO_REWARDS.user){await loadSummary();await loadCatalog();}else updateRewardsUI();};
+      window.closeZicoRewards=()=>{const m=document.getElementById('zico-rewards-modal');m.classList.add('hidden');m.classList.remove('flex')};
+      window.openZicoLeaderboard=async()=>{const m=document.getElementById('zico-leaderboard-modal');m.classList.remove('hidden');m.classList.add('flex');try{const j=await fetch('/api/rewards?action=leaderboard').then(r=>r.json());document.getElementById('zicoLeaderboard').innerHTML=(j.items||[]).map((x,i)=>`<div class="flex items-center justify-between rounded-2xl bg-slate-950 border border-slate-800 p-3"><span class="font-black">${i<3?['🥇','🥈','🥉'][i]:'#'+(i+1)} ${cleanText(x.display_name,30)}</span><span class="text-xs text-orange-400 font-black">${Number(x.points).toLocaleString()} pts · ${x.referrals} invites</span></div>`).join('')||'<p class="text-slate-500 text-sm">No leaderboard data yet.</p>';}catch(e){}};
+      window.closeZicoLeaderboard=()=>{const m=document.getElementById('zico-leaderboard-modal');m.classList.add('hidden');m.classList.remove('flex')};
+      window.copyZicoReferral=()=>{const c=window.ZICO_REWARDS.member?.referral_code;if(!c)return;const url=location.origin+location.pathname+'?ref='+encodeURIComponent(c);navigator.clipboard?.writeText(url);showStatus('Referral link copied 🔗');};
+      window.shareZicoRewards=async()=>{copyZicoReferral();const c=window.ZICO_REWARDS.member?.referral_code,url=location.origin+location.pathname+'?ref='+encodeURIComponent(c||'');try{if(navigator.share)await navigator.share({title:'ZICO Rewards',text:'Join ZICO Rewards 🔥',url});}catch(e){}};
+      window.zicoCheckin=async()=>{try{const r=await window.ZICO_REWARDS.post('checkin');showStatus(r.result?.awarded?'🔥 +10 points!':'Check-in already used / weekly limit reached.');await loadSummary();}catch(e){showStatus(e.message,'error')}};
+      async function loadCatalog(){try{const j=await fetch('/api/rewards?action=catalog').then(r=>r.json());window.ZICO_REWARDS.catalog=j.items||[];renderCatalog('all');}catch(e){}}
+      function renderCatalog(filter){const grid=document.getElementById('zicoRewardsGrid');if(!grid)return;const pts=Number(window.ZICO_REWARDS.member?.points||0);grid.innerHTML=window.ZICO_REWARDS.catalog.filter(r=>filter==='all'||r.reward_type===filter).map(r=>{const available=Number(r.inventory)>0;const enough=pts>=Number(r.points_cost);return `<article class="rounded-3xl bg-slate-950 border border-slate-800 p-5 ${!available?'opacity-60':''}"><div class="flex items-start justify-between"><span class="text-4xl">${cleanText(r.icon,4)}</span><span class="text-[9px] uppercase tracking-widest ${available?'text-emerald-400':'text-red-400'}">${available?'Available':'Sold out'}</span></div><h4 class="font-black mt-4">${cleanText(r.name,100)}</h4><p class="text-[10px] text-slate-500 mt-1 min-h-[30px]">${cleanText(r.description,160)}</p><div class="flex items-center justify-between mt-5"><b class="text-orange-400">${Number(r.points_cost).toLocaleString()} pts</b><button ${(!available||!enough)?'disabled':''} onclick="redeemZicoReward('${r.id}')" class="px-3 py-2 rounded-xl bg-orange-500 disabled:bg-slate-800 disabled:text-slate-600 text-slate-950 font-black text-[10px]">${enough?'REDEEM':'🔒 Need '+Number(r.points_cost-pts).toLocaleString()}</button></div></article>`}).join('');}
+      window.redeemZicoReward=async(id)=>{try{const r=await window.ZICO_REWARDS.post('redeem',{rewardId:id});const out=r.result||{};showStatus(out.code?`🎁 Redeemed! Code: ${out.code}`:'🎁 Reward redeemed!');await loadSummary();await loadCatalog();}catch(e){showStatus(e.message,'error')}};
+      function renderHistory(){const box=document.getElementById('zicoRewardsHistory');if(!box)return;const h=window.ZICO_REWARDS.history||[],r=window.ZICO_REWARDS.redemptions||[];const items=[...h.map(x=>({date:x.created_at,text:x.description,pts:x.points})),...r.map(x=>({date:x.created_at,text:'Reward redeemed',pts:-x.points_spent}))].sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,8);box.innerHTML=items.map(x=>`<div class="flex justify-between rounded-xl bg-slate-900/70 p-3 text-[10px]"><span>${cleanText(x.text,100)}</span><b class="${x.pts>0?'text-emerald-400':'text-red-400'}">${x.pts>0?'+':''}${x.pts}</b></div>`).join('')||'<p class="text-[10px] text-slate-600">No activity yet.</p>';}
+      document.addEventListener('click',e=>{const b=e.target.closest('.reward-filter');if(!b)return;document.querySelectorAll('.reward-filter').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderCatalog(b.dataset.filter)});
+      window.addEventListener('load',initAuth);
+    })();
+    </script>
 
 </body>
 </html>
