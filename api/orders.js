@@ -1,2 +1,13 @@
-const {sb,json}=require('./_store');
-module.exports=async(req,res)=>{try{if(req.method!=='POST')return json(res,405,{error:'Method not allowed'});const b=typeof req.body==='string'?JSON.parse(req.body||'{}'):req.body||{};if(!b.id||!b.region||!b.customer?.name||!b.customer?.phone||!Array.isArray(b.items)||!b.items.length)return json(res,400,{error:'Invalid order'});const row={id:b.id,region:b.region,currency:b.currency||'IQD',customer:b.customer,items:b.items,total:Number(b.total||0),created_at:b.created_at||new Date().toISOString()};const rows=await sb('zico_orders',{method:'POST',body:JSON.stringify(row)});return json(res,201,{ok:true,item:rows?.[0]||row});}catch(e){return json(res,500,{error:e.message});}};
+const {sb,json,preflight,body,text,rateLimit}=require('./_store');
+const {priceFor}=require('./_products');
+module.exports=async(req,res)=>{if(preflight(req,res))return;try{
+  if(req.method!=='POST')return json(res,405,{error:'Method not allowed'},req);
+  if(!rateLimit(req,'orders'))return json(res,429,{error:'Too many requests'},req);
+  const b=body(req); const region=b.region==='sweden'?'sweden':'kurdistan'; const currency=region==='sweden'?'SEK':'IQD';
+  const customer={name:text(b.customer?.name,100),phone:text(b.customer?.phone,40),city:text(b.customer?.city,80),address:text(b.customer?.address,250)};
+  if(!text(b.id,80)||!customer.name||!customer.phone||!customer.city||!Array.isArray(b.items)||!b.items.length)return json(res,400,{error:'Invalid order'},req);
+  const items=b.items.slice(0,50).map(i=>{const id=text(i.id,80);const itemType=i.itemType==='bundle'?'bundle':'single';const qty=Math.max(1,Math.min(Math.floor(Number(i.qty)||1),1000));const unitPrice=priceFor(id,itemType,region);if(unitPrice===null)throw new Error('Invalid product or regional pricing');return {id,name:text(i.name,120),qty,itemType,unitPrice};});
+  const total=items.reduce((sum,i)=>sum+i.unitPrice*i.qty,0);
+  const row={id:text(b.id,80),region,currency,customer,items,total,status:'pending',created_at:new Date().toISOString()};
+  const rows=await sb('zico_orders',{method:'POST',body:JSON.stringify(row)},req); return json(res,201,{ok:true,item:{id:row.id,region,currency,total,status:'pending'}},req);
+}catch(e){return json(res,500,{error:'Order service unavailable'},req);}};
