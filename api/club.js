@@ -1,0 +1,2 @@
+const {sb,json}=require('./_store');
+module.exports=async(req,res)=>{try{if(req.method!=='POST')return json(res,405,{error:'Method not allowed'});const body=typeof req.body==='string'?JSON.parse(req.body||'{}'):req.body;const rows=await sb('zico_club_events',{method:'POST',body:JSON.stringify({type:body.type||'event',code:body.code||null,created_at:new Date().toISOString()})});return json(res,201,{ok:true,item:rows?.[0]||body});}catch(e){return json(res,500,{error:e.message});}};
