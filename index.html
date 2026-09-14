@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ZICO Energy — Sweden 🇸🇪 • Kurdistan</title>
+    <meta name="description" content="ZICO Energy Drink — Sweden to Kurdistan. Explore ZICO flavors, find distributors, order directly, and join ZICO Club." />
+    <meta name="keywords" content="ZICO Energy, ZICO Energy Drink, Sweden, Kurdistan, Duhok, Erbil, energy drink, ZICO Kurdistan" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="theme-color" content="#030408" />
+    <meta property="og:title" content="ZICO Energy — Sweden • Kurdistan" />
+    <meta property="og:description" content="Discover ZICO Energy Drink, flavors, distributors and direct ordering." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/images/hero-banner.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="manifest" href="site.webmanifest" />
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -226,7 +236,19 @@
         .active-region { background: rgba(249,115,22,.16) !important; border-color: rgba(249,115,22,.8) !important; color: #fff !important; box-shadow: 0 0 20px rgba(249,115,22,.12); }
         html[dir="ltr"] body { font-family: 'Poppins', system-ui, -apple-system, sans-serif; }
         @media (max-width: 640px) { .glass-card:hover { transform:none; } #cart-drawer-modal > div { max-width:100%; } }
+        button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid rgba(255,102,0,.8); outline-offset: 2px; }
+        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior:auto !important; animation-duration:.001ms !important; transition-duration:.001ms !important; } }
 </style>
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"Organization",
+      "name":"ZICO Energy",
+      "description":"ZICO Energy Drink — Sweden to Kurdistan",
+      "logo":"assets/images/zico-gold-logo.png.png",
+      "sameAs":["https://www.tiktok.com/@zikoenrgy","https://www.tiktok.com/@zico.company"]
+    }
+    </script>
 </head>
 <body class="min-h-screen flex flex-col relative selection:bg-orange-500 selection:text-white">
 
@@ -483,6 +505,43 @@
         </section>
 
         <!-- SECTION 2: DISTRIBUTORS & AGENTS -->
+        <!-- ZICO GROWTH HUB -->
+        <section id="growth-hub" class="max-w-7xl mx-auto px-4 lg:px-8 py-10">
+            <div class="glass-card rounded-[2rem] p-6 md:p-10 border border-orange-500/20 overflow-hidden relative">
+                <div class="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-orange-500/10 blur-3xl"></div>
+                <div class="relative z-10 grid lg:grid-cols-[1.2fr_.8fr] gap-8 items-center">
+                    <div>
+                        <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-300 text-[10px] font-black uppercase tracking-widest">⚡ ZICO CLUB</span>
+                        <h2 id="clubTitle" class="text-3xl md:text-5xl font-black text-white mt-3">بەشداربە لە ZICO Club</h2>
+                        <p id="clubSub" class="text-slate-400 mt-3 max-w-2xl leading-7">خۆت لە ZICO نزیکتر بکە: خاڵ کۆبکەرەوە، هاوڕێکانت بانگهێشت بکە و ناوی ZICO بڵاوتر بکەوە.</p>
+                        <div class="grid grid-cols-3 gap-3 mt-6 max-w-xl">
+                            <div class="rounded-2xl bg-slate-950/70 border border-slate-800 p-4 text-center"><div id="clubPoints" class="text-2xl font-black text-orange-400">0</div><div id="clubPointsLabel" class="text-[10px] text-slate-500 mt-1">Points</div></div>
+                            <div class="rounded-2xl bg-slate-950/70 border border-slate-800 p-4 text-center"><div id="clubVisits" class="text-2xl font-black text-blue-400">0</div><div id="clubVisitsLabel" class="text-[10px] text-slate-500 mt-1">Visits</div></div>
+                            <div class="rounded-2xl bg-slate-950/70 border border-slate-800 p-4 text-center"><div id="clubReferrals" class="text-2xl font-black text-emerald-400">0</div><div id="clubReferralsLabel" class="text-[10px] text-slate-500 mt-1">Shares</div></div>
+                        </div>
+                        <div class="flex flex-wrap gap-3 mt-6">
+                            <button onclick="shareZico()" class="px-5 py-3 rounded-2xl bg-gradient-to-r from-orange-500 to-amber-500 text-white font-black text-xs shadow-lg shadow-orange-500/20 active:scale-95 transition-all"><i class="fa-solid fa-share-nodes mr-1"></i><span id="shareZicoBtn">Share ZICO</span></button>
+                            <button onclick="openClubInfo()" class="px-5 py-3 rounded-2xl bg-slate-900 text-white font-black text-xs border border-slate-700 hover:border-orange-500/40 transition-all"><i class="fa-solid fa-gift mr-1"></i><span id="clubRewardBtn">Rewards</span></button>
+                        </div>
+                    </div>
+                    <div class="rounded-[1.75rem] bg-slate-950/80 border border-slate-800 p-5">
+                        <div class="flex items-center justify-between mb-4"><h3 id="viralTitle" class="font-black text-white">Tell a friend</h3><span class="text-[10px] text-orange-400 font-black">ZICO #ENERGY</span></div>
+                        <div class="rounded-2xl bg-slate-900 border border-slate-800 p-4">
+                            <p id="referralLabel" class="text-[10px] text-slate-500 mb-2">Your share code</p>
+                            <div class="flex items-center gap-2"><code id="referralCode" class="flex-1 text-sm font-black text-white tracking-widest">ZICO-0000</code><button onclick="copyReferralCode()" class="w-10 h-10 rounded-xl bg-orange-500/10 text-orange-400 border border-orange-500/20"><i class="fa-regular fa-copy"></i></button></div>
+                        </div>
+                        <p id="referralHint" class="text-[10px] text-slate-500 mt-3 leading-5">Share your ZICO link. Referral rewards are tracked on this device until a live backend is connected.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-5 mt-6">
+                <div class="glass-card rounded-3xl p-6 border border-blue-500/15"><i class="fa-solid fa-location-crosshairs text-blue-400 text-2xl"></i><h3 id="findTitle" class="font-black text-white mt-4">Find ZICO</h3><p id="findSub" class="text-xs text-slate-500 mt-2 leading-6">Choose your region and connect to the right distributor.</p><button onclick="switchTab('distributors')" class="mt-4 text-xs font-black text-blue-400 hover:underline" id="findBtn">Find distributor →</button></div>
+                <div class="glass-card rounded-3xl p-6 border border-emerald-500/15"><i class="fa-solid fa-bag-shopping text-emerald-400 text-2xl"></i><h3 id="fastOrderTitle" class="font-black text-white mt-4">Fast Order</h3><p id="fastOrderSub" class="text-xs text-slate-500 mt-2 leading-6">Pick a flavor, add it to your cart and route the order to your region.</p><button onclick="scrollToProducts()" class="mt-4 text-xs font-black text-emerald-400 hover:underline" id="fastOrderBtn">Shop now →</button></div>
+                <div class="glass-card rounded-3xl p-6 border border-purple-500/15"><i class="fa-solid fa-star text-purple-400 text-2xl"></i><h3 id="reviewTitle" class="font-black text-white mt-4">Your ZICO Review</h3><p id="reviewSub" class="text-xs text-slate-500 mt-2 leading-6">Rate your favorite flavor and leave a quick review.</p><button onclick="openReviewBox()" class="mt-4 text-xs font-black text-purple-400 hover:underline" id="reviewBtn">Write review →</button></div>
+            </div>
+        </section>
+
         <section id="tab-distributors" class="hidden">
             <div class="max-w-5xl mx-auto px-4 py-12">
                 <div class="text-center mb-12">
@@ -699,6 +758,21 @@
             </p>
         </div>
     </footer>
+
+    <!-- REVIEW MODAL -->
+    <div id="review-modal" class="hidden fixed inset-0 z-[60] bg-black/80 backdrop-blur-md items-center justify-center p-4">
+        <div class="glass-card rounded-3xl max-w-md w-full p-6 relative border border-purple-500/30">
+            <button onclick="closeReviewBox()" class="absolute top-4 left-4 w-9 h-9 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center">✕</button>
+            <div class="text-center mb-5"><div class="text-3xl">★</div><h3 id="reviewModalTitle" class="text-xl font-black text-white mt-2">Rate ZICO</h3></div>
+            <select id="reviewFlavor" class="w-full px-3 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs mb-3"></select>
+            <div class="flex justify-center gap-2 mb-3" id="reviewStars">
+                <button onclick="setReviewStars(1)" data-star="1" class="text-2xl text-slate-600">★</button><button onclick="setReviewStars(2)" data-star="2" class="text-2xl text-slate-600">★</button><button onclick="setReviewStars(3)" data-star="3" class="text-2xl text-slate-600">★</button><button onclick="setReviewStars(4)" data-star="4" class="text-2xl text-slate-600">★</button><button onclick="setReviewStars(5)" data-star="5" class="text-2xl text-slate-600">★</button>
+            </div>
+            <textarea id="reviewText" rows="4" class="w-full px-3 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs outline-none focus:border-purple-500" placeholder="Write your review..."></textarea>
+            <button onclick="saveReview()" id="reviewSaveBtn" class="w-full mt-3 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-black text-xs">Publish review</button>
+            <div id="reviewList" class="mt-5 space-y-2 max-h-40 overflow-y-auto custom-scrollbar"></div>
+        </div>
+    </div>
 
     <!-- PRODUCT DETAILS MODAL -->
     <div id="product-detail-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md items-center justify-center p-4">
@@ -1068,7 +1142,7 @@
                 lblSize: "قەبارە:",
                 lblSugar: "شەکر:",
                 lblCaffeine: "پێکهاتەکان:",
-                lblBenefits: "مفایێت سەرەکی:"
+                lblBenefits: "مفایێت سەرەکی:", clubTitle:"بەشداربە لە ZICO Club", clubSub:"خۆت لە ZICO نزیکتر بکە: خاڵ کۆبکەرەوە و ZICO بڵاوتر بکەوە.", clubPointsLabel:"خاڵ", clubVisitsLabel:"سەردان", clubReferralsLabel:"هاوبەشکرن", shareZicoBtn:"بڵاڤکرنا ZICO", clubRewardBtn:"خەڵات", viralTitle:"بۆ هاوڕێکەت بنێرە", referralLabel:"کۆدی هاوبەشکرن", referralHint:"کۆدی ZICO ـی خۆت بڵاڤ بکەوە.", findTitle:"ZICO ل کوێیە؟", findSub:"ناوچەکەت هەڵبژێرە و بۆ بریکارێ دروست بڕۆ.", findBtn:"دیتنا بریکار ←", fastOrderTitle:"داواکرنا خێرا", fastOrderSub:"تاما هەڵبژێرە و داواکاریێ بۆ ناوچەکەت بنێرە.", fastOrderBtn:"نوکە بکڕە ←", reviewTitle:"هەڵسەنگاندنا تە", reviewSub:"تاما دڵخواز هەڵسەنگێنە و بۆ ZICO ڕایەک بنڤیسە.", reviewBtn:"نڤیسینا ڕای ←"
             },
             sorani: {
                 navShop: "بەرهەمەکان (Shopping)",
@@ -1130,7 +1204,7 @@
                 lblSize: "قەبارە:",
                 lblSugar: "شەکر:",
                 lblCaffeine: "پێکهاتەکان:",
-                lblBenefits: "سوودە سەرەکییەکان:"
+                lblBenefits: "سوودە سەرەکییەکان:", clubTitle:"بەشداربە لە ZICO Club", clubSub:"خۆت لە ZICO نزیکتر بکە: خاڵ کۆبکەرەوە و ZICO بڵاوتر بکەوە.", clubPointsLabel:"خاڵ", clubVisitsLabel:"سەردان", clubReferralsLabel:"هاوبەشکرن", shareZicoBtn:"بڵاڤکردنەوەی ZICO", clubRewardBtn:"خەڵات", viralTitle:"بۆ هاوڕێیەک بنێرە", referralLabel:"کۆدی هاوبەشکردن", referralHint:"کۆدی ZICO ـی خۆت بڵاو بکەرەوە.", findTitle:"ZICO لە کوێیە؟", findSub:"ناوچەکەت هەڵبژێرە و بۆ بریکاری دروست بڕۆ.", findBtn:"دۆزینەوەی بریکار ←", fastOrderTitle:"داواکاری خێرا", fastOrderSub:"تامت هەڵبژێرە و داواکارییەکەت بۆ ناوچەکەت بنێرە.", fastOrderBtn:"ئێستا بکڕە ←", reviewTitle:"هەڵسەنگاندنی تۆ", reviewSub:"تامی دڵخوازت هەڵبسەنگێنە و ڕایەک بنووسە.", reviewBtn:"نووسینی ڕای ←"
             },
             arabic: {
                 navShop: "المنتجات (Shopping)",
@@ -1192,7 +1266,7 @@
                 lblSize: "الحجم:",
                 lblSugar: "السكر:",
                 lblCaffeine: "المكونات:",
-                lblBenefits: "الفوائد الرئيسية:"
+                lblBenefits: "الفوائد الرئيسية:", clubTitle:"انضم إلى ZICO Club", clubSub:"اجمع النقاط وشارك ZICO مع أصدقائك.", clubPointsLabel:"النقاط", clubVisitsLabel:"الزيارات", clubReferralsLabel:"المشاركات", shareZicoBtn:"شارك ZICO", clubRewardBtn:"المكافآت", viralTitle:"أخبر صديقاً", referralLabel:"رمز المشاركة", referralHint:"شارك رابط ZICO الخاص بك.", findTitle:"أين تجد ZICO؟", findSub:"اختر منطقتك وتواصل مع الوكيل المناسب.", findBtn:"العثور على الوكيل ←", fastOrderTitle:"طلب سريع", fastOrderSub:"اختر النكهة وأرسل الطلب إلى منطقتك.", fastOrderBtn:"تسوق الآن ←", reviewTitle:"تقييمك لـ ZICO", reviewSub:"قيّم نكهتك المفضلة واكتب رأيك.", reviewBtn:"اكتب مراجعة ←"
             },
             english: {
                 navShop: "Products (Shopping)", navAgents: "Distributors", navDev: "Developer", mobNavShop: "Products", mobNavAgents: "Distributors", mobNavDev: "Developer",
@@ -1201,14 +1275,14 @@
                 badgeSwedenStandard: "🇸🇪 Sweden Standard • Kurdistan Supply", badgeGallery: "ZICO LIFESTYLE & MOMENTS", galleryTitle: "Energy everywhere", galCap1: "ZICO Original Blue 66", galCap2: "ZICO Mojito Lime 65", galCap3: "ZICO Fruit Candy 60", galCap4: "ZICO Açaí Berry 63",
                 badgeDistributors: "📍 Official Distribution", distributorsTitle: "Distributors & Contact", distributorsSub: "Choose the distributor that serves your region.", badinanRegionTag: "Badinan / Duhok", badinanAgentName: "Main Distributor — Badinan", badinanTiktokBtn: "TikTok: @zikoenrgy", erbilRegionTag: "Erbil & surrounding areas", erbilAgentName: "Main Distributor — Erbil", erbilTiktokBtn: "TikTok: @zico.company",
                 devBioText: "Modern websites, applications and custom systems built with premium quality.", devServicesTitle: "Services", srvWebTitle: "Web Applications", srvWebDesc: "Modern and fast websites and web apps", srvMobTitle: "Mobile Apps", srvMobDesc: "iOS and Android apps for businesses", srvSysTitle: "Custom Systems", srvSysDesc: "Custom management systems", devSocialTitle: "Social media & direct contact:", footerDevLabel: "Development & Design:",
-                cartDrawerTitle: "Order Cart", btnSendWhatsappText: "Continue Order", selectAgentModalTitle: "Choose your distributor", opt1Label: "Option 1", badinanOptName: "Main Distributor — Badinan", btnBadinanSend: "Send via WhatsApp", opt2Label: "Option 2", erbilOptName: "Main Distributor — Erbil", lblOrigin: "Origin:", lblPriceSingle: "Single can:", lblPriceBundle: "Case (24 cans):", lblSize: "Size:", lblSugar: "Sugar:", lblCaffeine: "Ingredients:", lblBenefits: "Key benefits:",
+                cartDrawerTitle: "Order Cart", btnSendWhatsappText: "Continue Order", selectAgentModalTitle: "Choose your distributor", opt1Label: "Option 1", badinanOptName: "Main Distributor — Badinan", btnBadinanSend: "Send via WhatsApp", opt2Label: "Option 2", erbilOptName: "Main Distributor — Erbil", lblOrigin: "Origin:", lblPriceSingle: "Single can:", lblPriceBundle: "Case (24 cans):", lblSize: "Size:", lblSugar: "Sugar:", lblCaffeine: "Ingredients:", lblBenefits: "Key benefits:", clubTitle:"Join ZICO Club", clubSub:"Collect points, share ZICO and unlock rewards.", clubPointsLabel:"Points", clubVisitsLabel:"Visits", clubReferralsLabel:"Shares", shareZicoBtn:"Share ZICO", clubRewardBtn:"Rewards", viralTitle:"Tell a friend", referralLabel:"Your share code", referralHint:"Share your ZICO link with friends.", findTitle:"Find ZICO", findSub:"Choose your region and connect to the right distributor.", findBtn:"Find distributor →", fastOrderTitle:"Fast Order", fastOrderSub:"Pick a flavor and route your order to your region.", fastOrderBtn:"Shop now →", reviewTitle:"Your ZICO Review", reviewSub:"Rate your favorite flavor and leave a quick review.", reviewBtn:"Write review →",
                 regionLabel: "Where is your order?", regionHint: "We route your order to the correct region.", selectedRegionSub: "Choose a distributor serving your region.", swedenDistributorTitle: "Sweden Distributor", swedenDistributorText: "A Sweden distributor phone number has not been configured yet."
             },
             swedish: {
                 navShop: "Produkter", navAgents: "Distributörer", navDev: "Utvecklare", mobNavShop: "Produkter", mobNavAgents: "Distributörer", mobNavDev: "Utvecklare", unitBundleText: "Kartong (24 burkar)", unitPieceText: "Burk (1)", qtyLabel: "Antal:", totalTextLabel: "Totalt:", detailsBtnText: "Detaljer", addCartBtnText: "Lägg i varukorg", soldOutText: "Slut i lager", soldOutMsg: "Produkten är tillfälligt slut i lager",
                 badgeSwedishOrigin: "🇸🇪 FORMULERAD I SVERIGE • NU I KURDISTAN", ambientSelectorTitle: "Välj din smak", btnSeeAllCans: "Visa alla produkter", ourProductsTitle: "ZICO Energy Drink", ourProductsSub: "Välj smak och beställ direkt", badgeSwedenStandard: "🇸🇪 Sweden Standard • Kurdistan Supply", badgeGallery: "ZICO LIFESTYLE & MOMENTS", galleryTitle: "Energi överallt", galCap1: "ZICO Original Blue 66", galCap2: "ZICO Mojito Lime 65", galCap3: "ZICO Fruit Candy 60", galCap4: "ZICO Açaí Berry 63",
                 badgeDistributors: "📍 Officiell distribution", distributorsTitle: "Distributörer & kontakt", distributorsSub: "Välj distributören som betjänar din region.", badinanRegionTag: "Badinan / Duhok", badinanAgentName: "Huvuddistributör — Badinan", badinanTiktokBtn: "TikTok: @zikoenrgy", erbilRegionTag: "Erbil med omnejd", erbilAgentName: "Huvuddistributör — Erbil", erbilTiktokBtn: "TikTok: @zico.company", devBioText: "Moderna webbplatser, appar och skräddarsydda system med hög kvalitet.", devServicesTitle: "Tjänster", srvWebTitle: "Webbapplikationer", srvWebDesc: "Moderna och snabba webbplatser och webbappar", srvMobTitle: "Mobilappar", srvMobDesc: "iOS- och Android-appar för företag", srvSysTitle: "Anpassade system", srvSysDesc: "Skräddarsydda administrationssystem", devSocialTitle: "Sociala medier & direktkontakt:", footerDevLabel: "Utveckling & design:",
-                cartDrawerTitle: "Varukorg", btnSendWhatsappText: "Fortsätt beställning", selectAgentModalTitle: "Välj distributör", opt1Label: "Alternativ 1", badinanOptName: "Huvuddistributör — Badinan", btnBadinanSend: "Skicka via WhatsApp", opt2Label: "Alternativ 2", erbilOptName: "Huvuddistributör — Erbil", lblOrigin: "Ursprung:", lblPriceSingle: "En burk:", lblPriceBundle: "Kartong (24 burkar):", lblSize: "Storlek:", lblSugar: "Socker:", lblCaffeine: "Ingredienser:", lblBenefits: "Viktiga fördelar:", regionLabel: "Vart ska beställningen skickas?", regionHint: "Vi kopplar beställningen till rätt region.", selectedRegionSub: "Välj en distributör för din region.", swedenDistributorTitle: "Distributör i Sverige", swedenDistributorText: "Telefonnummer till svensk distributör är ännu inte konfigurerat."
+                cartDrawerTitle: "Varukorg", btnSendWhatsappText: "Fortsätt beställning", selectAgentModalTitle: "Välj distributör", opt1Label: "Alternativ 1", badinanOptName: "Huvuddistributör — Badinan", btnBadinanSend: "Skicka via WhatsApp", opt2Label: "Alternativ 2", erbilOptName: "Huvuddistributör — Erbil", lblOrigin: "Ursprung:", lblPriceSingle: "En burk:", lblPriceBundle: "Kartong (24 burkar):", lblSize: "Storlek:", lblSugar: "Socker:", lblCaffeine: "Ingredienser:", lblBenefits: "Viktiga fördelar:", clubTitle:"Gå med i ZICO Club", clubSub:"Samla poäng, dela ZICO och lås upp belöningar.", clubPointsLabel:"Poäng", clubVisitsLabel:"Besök", clubReferralsLabel:"Delningar", shareZicoBtn:"Dela ZICO", clubRewardBtn:"Belöningar", viralTitle:"Tipsa en vän", referralLabel:"Din delningskod", referralHint:"Dela din ZICO-länk med vänner.", findTitle:"Hitta ZICO", findSub:"Välj region och kontakta rätt distributör.", findBtn:"Hitta distributör →", fastOrderTitle:"Snabb beställning", fastOrderSub:"Välj smak och skicka beställningen till din region.", fastOrderBtn:"Handla nu →", reviewTitle:"Din ZICO-recension", reviewSub:"Betygsätt din favoritsmak och skriv en recension.", reviewBtn:"Skriv recension →", regionLabel: "Vart ska beställningen skickas?", regionHint: "Vi kopplar beställningen till rätt region.", selectedRegionSub: "Välj en distributör för din region.", swedenDistributorTitle: "Distributör i Sverige", swedenDistributorText: "Telefonnummer till svensk distributör är ännu inte konfigurerat."
             }
         };
     </script>
@@ -1962,11 +2036,31 @@
             toggleCartModal(false);
         }
 
+        // ZICO Growth / Club / Review tools — device-local until a backend is connected.
+        const CLUB_KEY = 'zicoClubV4';
+        let reviewStars = 0;
+        function getClub(){ return JSON.parse(localStorage.getItem(CLUB_KEY) || '{"points":0,"visits":0,"shares":0,"code":""}'); }
+        function saveClub(c){ localStorage.setItem(CLUB_KEY, JSON.stringify(c)); updateClubUI(); }
+        function updateClubUI(){ const c=getClub(); ['clubPoints','clubVisits','clubReferrals'].forEach((id,i)=>{const el=document.getElementById(id); if(el) el.innerText=[c.points,c.visits,c.shares][i];}); const code=document.getElementById('referralCode'); if(code) code.innerText=c.code || 'ZICO-'+Math.random().toString(36).slice(2,6).toUpperCase(); if(!c.code){c.code=code.innerText; saveClub(c);} }
+        function registerVisit(){ const c=getClub(); c.visits=(c.visits||0)+1; c.points=(c.points||0)+1; saveClub(c); }
+        async function shareZico(){ const c=getClub(); c.shares=(c.shares||0)+1; c.points=(c.points||0)+10; saveClub(c); const url=location.href.split('#')[0]+'?ref='+encodeURIComponent(c.code); const text='ZICO Energy Drink — Sweden 🇸🇪 • Kurdistan'; try{ if(navigator.share){await navigator.share({title:'ZICO Energy',text,url});} else {await navigator.clipboard.writeText(url); alert(currentLanguage==='english'?'ZICO link copied.':'لینکێ ZICO هاتە کوپیکرن.');} }catch(e){} }
+        function copyReferralCode(){ const c=getClub(); navigator.clipboard?.writeText(c.code); alert(currentLanguage==='english'?'Referral code copied.':'کۆدێ هاوبەشکرنێ هاتە کوپیکرن.'); }
+        function openClubInfo(){ alert(currentLanguage==='english'?'ZICO Club: share ZICO to collect device-local points. A future backend can turn these into real rewards.':'ZICO Club: ZICO بڵاڤ بکەوە و خاڵ کۆبکەرەوە. داهاتوودا دەتوانرێت ب backend بکرێتە خەڵاتێن ڕاستەقینە.'); }
+        function openReviewBox(){ const m=document.getElementById('review-modal'); if(!m)return; const sel=document.getElementById('reviewFlavor'); sel.innerHTML=PRODUCTS.map(p=>`<option value="${p.id}">${p.name}</option>`).join(''); m.classList.remove('hidden'); m.classList.add('flex'); renderReviews(); }
+        function closeReviewBox(){ const m=document.getElementById('review-modal'); if(m){m.classList.add('hidden');m.classList.remove('flex');} }
+        function setReviewStars(n){ reviewStars=n; document.querySelectorAll('#reviewStars button').forEach(b=>b.classList.toggle('text-yellow-400',Number(b.dataset.star)<=n)); document.querySelectorAll('#reviewStars button').forEach(b=>b.classList.toggle('text-slate-600',Number(b.dataset.star)>n)); }
+        function getReviews(){return JSON.parse(localStorage.getItem('zicoReviewsV4')||'[]');}
+        function saveReview(){ const text=document.getElementById('reviewText').value.trim(); const flavor=document.getElementById('reviewFlavor').value; if(!reviewStars||!text){alert(currentLanguage==='english'?'Choose stars and write a review.':'تکایە ستێرە هەڵبژێرە و ڕایەک بنڤیسە.');return;} const r=getReviews(); r.unshift({flavor,stars:reviewStars,text,date:new Date().toLocaleDateString()}); localStorage.setItem('zicoReviewsV4',JSON.stringify(r.slice(0,20))); document.getElementById('reviewText').value=''; setReviewStars(0); renderReviews(); const c=getClub(); c.points=(c.points||0)+5; saveClub(c); }
+        function renderReviews(){ const box=document.getElementById('reviewList'); if(!box)return; const rs=getReviews(); box.innerHTML=rs.length?rs.map(r=>`<div class="rounded-xl bg-slate-950 border border-slate-800 p-3"><div class="flex justify-between text-[10px]"><b class="text-white">${r.stars}/5 ★</b><span class="text-slate-600">${r.date}</span></div><p class="text-[10px] text-slate-400 mt-1">${r.text.replace(/[<>]/g,'')}</p></div>`).join(''):'<p class="text-[10px] text-slate-600 text-center">No reviews yet.</p>'; }
+        window.addEventListener('keydown',e=>{if(e.key==='Escape'){closeReviewBox();toggleDetailModal(false);toggleAgentModal(false);toggleCartModal(false);}});
+
         document.addEventListener("DOMContentLoaded", function() {
             initSwiperSlider();
             changeLanguage('badini');
             selectOrderRegion(orderRegion);
             initYoutubeAdOverlay();
+            registerVisit();
+            updateClubUI();
         });
     </script>
 
@@ -2016,6 +2110,9 @@
                 iframe.src = '';
             }
         }
+    </script>
+    <script>
+      if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
     </script>
 </body>
 </html>
