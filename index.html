@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ku" dir="rtl">
 <head>
+<meta name="zico-version" content="ZICO v8 PREMIUM">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, ">
     <title>ZICO Energy — Sweden 🇸🇪 • Kurdistan</title>
@@ -255,7 +256,10 @@
         @media (max-width: 640px) { .glass-card:hover { transform:none; } #cart-drawer-modal > div { max-width:100%; } }
         button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid rgba(255,102,0,.8); outline-offset: 2px; }
         @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior:auto !important; animation-duration:.001ms !important; transition-duration:.001ms !important; } }
-</style>
+
+        .platform-tile{min-height:112px;border:1px solid rgba(255,255,255,.07);background:rgba(2,6,23,.62);border-radius:1.25rem;padding:1rem;text-align:left;display:flex;flex-direction:column;gap:.35rem;transition:.25s}.platform-tile:hover{transform:translateY(-3px);border-color:rgba(255,102,0,.35);background:rgba(15,23,42,.9)}.platform-tile b{font-size:.8rem;color:#fff}.platform-tile span{font-size:.65rem;color:#64748b}.platform-mini{display:flex;align-items:center;gap:.8rem;border:1px solid rgba(255,255,255,.06);background:rgba(2,6,23,.45);border-radius:1.1rem;padding:.9rem}.platform-mini>span{font-size:1.5rem}.platform-mini div{flex:1}.platform-mini b{font-size:.72rem}.platform-mini p{font-size:.6rem;color:#64748b;margin-top:.2rem}.platform-mini button{font-size:.62rem;font-weight:900;color:#fb923c}.experience-step{padding:1rem;border-radius:1rem;background:rgba(2,6,23,.6);border:1px solid rgba(255,255,255,.06)}.experience-step strong{display:block;font-size:.65rem;color:#fb923c}.experience-step span{display:block;font-weight:900;margin-top:.4rem}.experience-step small{display:block;color:#64748b;font-size:.58rem;margin-top:.3rem}.ai-choice{width:100%;padding:.9rem 1rem;border-radius:1rem;background:rgba(2,6,23,.75);border:1px solid rgba(255,255,255,.07);text-align:left;font-size:.75rem;font-weight:800;color:#e2e8f0;transition:.2s}.ai-choice:hover{border-color:rgba(168,85,247,.55);transform:translateX(-2px)}
+
+    </style>
     <script type="application/ld+json">
     {
       "@context":"https://schema.org",
@@ -266,6 +270,26 @@
       "sameAs":["https://www.tiktok.com/@zikoenrgy","https://www.tiktok.com/@zico.company"]
     }
     </script>
+
+<style id="zico-v8-premium-spin">
+.zico-spin-section{padding:72px 20px;position:relative;overflow:hidden}
+.zico-spin-wrap{max-width:1080px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center}
+.zico-spin-card{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);border-radius:28px;padding:30px;backdrop-filter:blur(18px);box-shadow:0 24px 80px rgba(0,0,0,.28)}
+.zico-spin-wheel-wrap{display:flex;justify-content:center;align-items:center;position:relative}
+.zico-spin-wheel{width:min(360px,78vw);height:min(360px,78vw);border-radius:50%;position:relative;display:grid;place-items:center;transition:transform 4.8s cubic-bezier(.12,.78,.15,1);background:conic-gradient(#ff7a00 0deg 45deg,#151922 45deg 90deg,#ff7a00 90deg 135deg,#151922 135deg 180deg,#ff7a00 180deg 225deg,#151922 225deg 270deg,#ff7a00 270deg 315deg,#151922 315deg 360deg);box-shadow:0 0 0 8px rgba(255,255,255,.06),0 30px 90px rgba(0,0,0,.4)}
+.zico-spin-wheel:after{content:"";width:92px;height:92px;border-radius:50%;background:#0b0d12;border:2px solid rgba(255,255,255,.16);box-shadow:0 0 35px rgba(255,122,0,.35)}
+.zico-spin-labels{position:absolute;inset:0;pointer-events:none}
+.zico-spin-label{position:absolute;left:50%;top:50%;transform-origin:0 0;width:45%;text-align:center;font-weight:800;font-size:12px;letter-spacing:.3px;color:#fff}
+.zico-spin-pointer{position:absolute;top:-12px;left:50%;transform:translateX(-50%);z-index:3;width:0;height:0;border-left:15px solid transparent;border-right:15px solid transparent;border-top:28px solid #ff7a00;filter:drop-shadow(0 4px 10px rgba(0,0,0,.4))}
+.zico-spin-btn{border:0;border-radius:999px;padding:14px 24px;font-weight:900;cursor:pointer;background:#ff7a00;color:#0b0d12;box-shadow:0 12px 30px rgba(255,122,0,.25);transition:transform .2s ease,box-shadow .2s ease}
+.zico-spin-btn:hover{transform:translateY(-2px);box-shadow:0 16px 38px rgba(255,122,0,.34)}
+.zico-spin-btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
+.zico-spin-result{min-height:28px;margin-top:18px;font-weight:800}
+.zico-spin-note{font-size:12px;opacity:.68;margin-top:10px}
+@media(max-width:760px){.zico-spin-wrap{grid-template-columns:1fr}.zico-spin-section{padding:52px 16px}.zico-spin-card{padding:22px}}
+@media(prefers-reduced-motion:reduce){.zico-spin-wheel{transition:none}.zico-spin-btn{transition:none}}
+</style>
+
 </head>
 <body class="min-h-screen flex flex-col relative selection:bg-orange-500 selection:text-white">
 
@@ -362,6 +386,14 @@
                         <option value="swedish" class="bg-slate-900 text-white">Svenska</option>
                     </select>
                 </div>
+
+                <!-- Quick Account / AI -->
+                <button onclick="openZicoAccount()" aria-label="Open ZICO account" class="hidden sm:flex p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-blue-500/50 transition-all text-slate-200">
+                    <i class="fa-solid fa-user"></i>
+                </button>
+                <button onclick="openZicoAI()" aria-label="Open ZICO AI guide" class="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-purple-500/50 transition-all text-purple-300">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </button>
 
                 <!-- Shopping Cart Trigger -->
                 <button onclick="toggleCartModal(true)" class="relative p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-orange-500/50 transition-all text-slate-200 active:scale-95 shadow-md">
@@ -521,6 +553,35 @@
             </div>
         </section>
 
+        <!-- ZICO v7 ALL-IN PLATFORM HUB -->
+        <section id="zico-platform" class="max-w-7xl mx-auto px-4 lg:px-8 py-14">
+          <div class="relative overflow-hidden rounded-[2rem] border border-orange-500/20 bg-gradient-to-br from-slate-950 via-slate-900 to-orange-950/20 p-6 md:p-10 shadow-2xl">
+            <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-orange-500/10 blur-3xl"></div>
+            <div class="relative z-10 flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+              <div><span class="text-[10px] font-black tracking-[0.25em] text-orange-400 uppercase">ZICO ENERGY PLATFORM · v7</span><h2 class="text-3xl md:text-5xl font-black mt-3">هەموو ZICO لە یەک شوێن ⚡</h2><p class="text-slate-400 mt-3 max-w-2xl leading-7">Shop، Demand، Club، بریکار، کۆمەڵگا و یاریدەدەری ZICO ـەکەت لە یەک ئەزمووندا.</p></div>
+              <button onclick="openZicoAI()" class="px-5 py-3 rounded-2xl bg-purple-600 hover:bg-purple-500 font-black text-xs"><i class="fa-solid fa-wand-magic-sparkles mr-2"></i>ZICO AI Guide</button>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-8">
+              <button onclick="scrollToProducts()" class="platform-tile"><i class="fa-solid fa-bolt text-orange-400"></i><b>Commerce</b><span>Shop & Orders</span></button>
+              <button onclick="document.getElementById('demand-engine')?.scrollIntoView({behavior:'smooth'})" class="platform-tile"><i class="fa-solid fa-location-crosshairs text-blue-400"></i><b>Demand Engine</b><span>داواکارییەکان</span></button>
+              <button onclick="document.getElementById('growth-hub')?.scrollIntoView({behavior:'smooth'})" class="platform-tile"><i class="fa-solid fa-trophy text-amber-400"></i><b>ZICO Club</b><span>Points & Rewards</span></button>
+              <button onclick="document.getElementById('community-section')?.scrollIntoView({behavior:'smooth'})" class="platform-tile"><i class="fa-solid fa-users text-emerald-400"></i><b>Community</b><span>Stories & Reviews</span></button>
+            </div>
+            <div class="grid md:grid-cols-3 gap-4 mt-4">
+              <div class="platform-mini"><span>👤</span><div><b>My ZICO</b><p>Profile · Orders · Points</p></div><button onclick="openZicoAccount()">Open</button></div>
+              <div class="platform-mini"><span>🤝</span><div><b>Distributor Network</b><p>Apply · Track · Territory</p></div><button onclick="openDistributorApplication()">Apply</button></div>
+              <div class="platform-mini"><span>📊</span><div><b>Market Pulse</b><p>Demand · Regions · Trends</p></div><button onclick="openZicoInsights()">View</button></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="experience-section" class="max-w-7xl mx-auto px-4 lg:px-8 py-10">
+          <div class="grid lg:grid-cols-3 gap-4">
+            <div class="glass-card rounded-3xl p-6 lg:col-span-2"><span class="text-[10px] font-black tracking-widest text-orange-400">THE ZICO EXPERIENCE</span><h2 class="text-2xl md:text-4xl font-black mt-2">لە قوتییەکەوە بۆ کۆمەڵگا ⚡</h2><div class="grid sm:grid-cols-4 gap-3 mt-7"><div class="experience-step"><strong>01</strong><span>Discover</span><small>تاما هەڵبژێرە</small></div><div class="experience-step"><strong>02</strong><span>Order</span><small>داواکاری بنێرە</small></div><div class="experience-step"><strong>03</strong><span>Earn</span><small>Points کۆبکەوە</small></div><div class="experience-step"><strong>04</strong><span>Share</span><small>لەگەڵ هاوڕێکانت</small></div></div></div>
+            <div class="glass-card rounded-3xl p-6"><span class="text-[10px] font-black tracking-widest text-emerald-400">SMART PICK</span><h3 class="text-xl font-black mt-2">کام ZICO بۆ تۆیە؟</h3><p id="smartPickText" class="text-xs text-slate-400 leading-6 mt-3">تامی خۆت هەڵبژێرە و پێشنیاری خۆکار وەربگرە.</p><button onclick="openZicoAI()" class="mt-5 w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-black">دەستپێکردن ✨</button></div>
+          </div>
+        </section>
+
         <!-- SECTION 2: DISTRIBUTORS & AGENTS -->
         <!-- ZICO GROWTH HUB -->
         <section id="growth-hub" class="max-w-7xl mx-auto px-4 lg:px-8 py-10">
@@ -559,6 +620,11 @@
             </div>
         </section>
 
+
+        <section id="community-section" class="max-w-7xl mx-auto px-4 lg:px-8 py-10">
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-5"><div><span class="text-[10px] font-black tracking-widest text-emerald-400">ZICO COMMUNITY</span><h2 class="text-3xl font-black mt-2">کۆمەڵگا و چیرۆکەکان 💬</h2><p class="text-slate-500 text-sm mt-2">ڕا، تاقیکردنەوە و بەشداریکردنی خەڵکی ZICO.</p></div><button onclick="openReviewBox()" class="px-5 py-3 rounded-xl border border-slate-700 text-xs font-black hover:border-purple-500">+ Write a review</button></div>
+          <div id="community-feed" class="grid md:grid-cols-3 gap-4"></div>
+        </section>
 
         <!-- ZICO DEMAND ENGINE -->
         <section id="demand-engine" class="max-w-7xl mx-auto px-4 lg:px-8 py-10">
@@ -964,7 +1030,7 @@
             </div>
             <div id="swedenDistributorNotice" class="hidden mb-4 rounded-2xl border border-yellow-500/20 bg-yellow-500/5 p-4 text-center">
                 <div class="text-2xl mb-2">🇸🇪</div>
-                <p id="swedenDistributorTitle" class="text-sm font-black text-white">Sweden Distributor</p>
+                <p id="swedenDistributorTitle" class="text-sm font-black text-white">Sweden — Coming Soon</p>
                 <p id="swedenDistributorText" class="text-[11px] text-slate-400 mt-1">ژمارا بریکاری سوید هێشتا ل سیستەمێ نەهاتە تۆمارکرن.</p>
                 <button onclick="copyOrderDetails()" class="mt-3 px-4 py-2 rounded-xl bg-slate-800 text-white text-xs font-bold border border-slate-700">Copy Order Details</button>
             </div>
@@ -1358,7 +1424,7 @@
                 badgeDistributors: "📍 Official Distribution", distributorsTitle: "Distributors & Contact", distributorsSub: "Choose the distributor that serves your region.", badinanRegionTag: "Badinan / Duhok", badinanAgentName: "Main Distributor — Badinan", badinanTiktokBtn: "TikTok: @zikoenrgy", erbilRegionTag: "Erbil & surrounding areas", erbilAgentName: "Main Distributor — Erbil", erbilTiktokBtn: "TikTok: @zico.company",
                 devBioText: "Modern websites, applications and custom systems built with premium quality.", devServicesTitle: "Services", srvWebTitle: "Web Applications", srvWebDesc: "Modern and fast websites and web apps", srvMobTitle: "Mobile Apps", srvMobDesc: "iOS and Android apps for businesses", srvSysTitle: "Custom Systems", srvSysDesc: "Custom management systems", devSocialTitle: "Social media & direct contact:", footerDevLabel: "Development & Design:",
                 cartDrawerTitle: "Order Cart", btnSendWhatsappText: "Continue Order", selectAgentModalTitle: "Choose your distributor", opt1Label: "Option 1", badinanOptName: "Main Distributor — Badinan", btnBadinanSend: "Send via WhatsApp", opt2Label: "Option 2", erbilOptName: "Main Distributor — Erbil", lblOrigin: "Origin:", lblPriceSingle: "Single can:", lblPriceBundle: "Case (24 cans):", lblSize: "Size:", lblSugar: "Sugar:", lblCaffeine: "Ingredients:", lblBenefits: "Key benefits:", clubTitle:"Join ZICO Club", clubSub:"Collect points, share ZICO and unlock rewards.", clubPointsLabel:"Points", clubVisitsLabel:"Visits", clubReferralsLabel:"Shares", shareZicoBtn:"Share ZICO", clubRewardBtn:"Rewards", viralTitle:"Tell a friend", referralLabel:"Your share code", referralHint:"Share your ZICO link with friends.", findTitle:"Find ZICO", findSub:"Choose your region and connect to the right distributor.", findBtn:"Find distributor →", fastOrderTitle:"Fast Order", fastOrderSub:"Pick a flavor and route your order to your region.", fastOrderBtn:"Shop now →", reviewTitle:"Your ZICO Review", reviewSub:"Rate your favorite flavor and leave a quick review.", reviewBtn:"Write review →",
-                regionLabel: "Where is your order?", regionHint: "We route your order to the correct region.", selectedRegionSub: "Choose a distributor serving your region.", swedenDistributorTitle: "Sweden Distributor", swedenDistributorText: "A Sweden distributor phone number has not been configured yet."
+                regionLabel: "Where is your order?", regionHint: "We route your order to the correct region.", selectedRegionSub: "Choose a distributor serving your region.", swedenDistributorTitle: "Sweden — Coming Soon", swedenDistributorText: "A Sweden — Coming Soon phone number has not been configured yet."
             },
             swedish: {
                 navShop: "Produkter", navAgents: "Distributörer", navDev: "Utvecklare", mobNavShop: "Produkter", mobNavAgents: "Distributörer", mobNavDev: "Utvecklare", unitBundleText: "Kartong (24 burkar)", unitPieceText: "Burk (1)", qtyLabel: "Antal:", totalTextLabel: "Totalt:", detailsBtnText: "Detaljer", addCartBtnText: "Lägg i varukorg", soldOutText: "Slut i lager", soldOutMsg: "Produkten är tillfälligt slut i lager",
@@ -1489,7 +1555,7 @@
     </script>
 
     <script>
-        // ZICO v6 configuration. Set ZICO_API_BASE to your deployed API when ready.
+        // ZICO v7 production configuration. API is same-origin by default.
         window.ZICO_CONFIG = Object.assign({
             apiBase: '/api',
             currency: { kurdistan: 'IQD', sweden: 'SEK' },
@@ -1910,7 +1976,7 @@
                                 <p class="text-[10px] text-slate-400">${getFlavorText(item)}</p>
                                 <div class="flex items-center gap-2 mt-1">
                                     <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-orange-500/20 text-orange-400">${packText}</span>
-                                    <span class="text-xs font-bold text-emerald-400">${itemTotal.toLocaleString()} IQD</span>
+                                    <span class="text-xs font-bold text-emerald-400">${itemTotal.toLocaleString()} ${getOrderCurrency()}</span>
                                 </div>
                             </div>
 
@@ -1929,7 +1995,7 @@
             }
 
             const totalPriceEl = document.getElementById('cart-total-price');
-            if (totalPriceEl) totalPriceEl.innerText = `${totalPrice.toLocaleString()} IQD`;
+            if (totalPriceEl) totalPriceEl.innerText = `${totalPrice.toLocaleString()} ${getOrderCurrency()}`;
         }
 
         function updateCartItemQty(cartItemId, delta) {
@@ -2132,7 +2198,8 @@
                 items:cart.map(i=>({id:i.id,name:cleanText(i.name,100),qty:Number(i.qty),itemType:i.itemType,unitPrice:Number(i.unitPrice)})),
                 total:cart.reduce((sum,i)=>sum+Number(i.unitPrice)*Number(i.qty),0), created_at:new Date().toISOString()
             };
-            try { await ZICO_API.post('/orders',order); } catch(e) { localStorage.setItem('zicoLastOrderV6',JSON.stringify(order)); }
+            try { await ZICO_API.post('/orders',order); } catch(e) { localStorage.setItem('zicoLastOrderV7',JSON.stringify(order)); }
+            const localOrders=safeJson('zicoOrdersV6',[]); localOrders.push(order); localStorage.setItem('zicoOrdersV6',JSON.stringify(localOrders.slice(-100)));
             const text = buildOrderText();
             window.open(`https://wa.me/${cleanNum}?text=${encodeURIComponent(text)}`, '_blank');
             toggleAgentModal(false); toggleCartModal(false);
@@ -2169,7 +2236,7 @@
             clearTimeout(showStatus.t); showStatus.t=setTimeout(()=>el.remove(),4200);
         }
 
-        const DEMAND_KEY = 'zicoDemandV6';
+        const DEMAND_KEY = 'zicoDemandV7';
         function getDemand(){ return safeJson(DEMAND_KEY,[]); }
         function saveDemand(a){ localStorage.setItem(DEMAND_KEY,JSON.stringify(a.slice(-500))); }
         function openDemandRequest(){ const m=document.getElementById('demand-modal'); if(m){m.classList.remove('hidden');m.classList.add('flex');} }
@@ -2206,13 +2273,13 @@
             if(!name||!phone||!city){showStatus(currentLanguage==='english'?'Please complete name, phone and city.':'تکایە ناڤ، ژمارا تە و شار پڕ بکە.','error');return;}
             const r={id:makeId('DIST'),name,phone,city,business:cleanText(document.getElementById('distBusiness')?.value,200),capacity:cleanText(document.getElementById('distCapacity')?.value,200),status:'pending',date:new Date().toISOString()};
             try { await ZICO_API.post('/distributors',r); showStatus(currentLanguage==='english'?'Application submitted successfully.':'داخوازی بریکاری ب سەرکەفتی هاتە ناردن.'); }
-            catch(e){ const a=safeJson('zicoDistributorApplicationsV6',[]); a.push(r); localStorage.setItem('zicoDistributorApplicationsV6',JSON.stringify(a.slice(-100))); showStatus(currentLanguage==='english'?'Application saved locally; connect the API for admin sync.':'داخوازی هاتە پاراستن؛ بۆ وەرگرتنا admin پێویستە API پێکەوە بکەیت.'); }
+            catch(e){ const a=safeJson('zicoDistributorApplicationsV7',[]); a.push(r); localStorage.setItem('zicoDistributorApplicationsV7',JSON.stringify(a.slice(-100))); showStatus(currentLanguage==='english'?'Application saved locally; connect the API for admin sync.':'داخوازی هاتە پاراستن؛ بۆ وەرگرتنا admin پێویستە API پێکەوە بکەیت.'); }
             closeDistributorApplication();
         }
         document.addEventListener('DOMContentLoaded',()=>renderDemandEngine());
 
         // ZICO Club / Reviews v6 — API-first with safe local fallback.
-        const CLUB_KEY = 'zicoClubV6';
+        const CLUB_KEY = 'zicoClubV7';
         let reviewStars = 0;
         function getClub(){ return safeJson(CLUB_KEY,{points:0,visits:0,shares:0,code:''}); }
         function saveClub(c){ localStorage.setItem(CLUB_KEY, JSON.stringify(c)); updateClubUI(); }
@@ -2224,8 +2291,8 @@
         function openReviewBox(){ const m=document.getElementById('review-modal'); if(!m)return; const sel=document.getElementById('reviewFlavor'); sel.innerHTML=PRODUCTS.map(p=>`<option value="${cleanText(p.id,50)}">${cleanText(p.name,100)}</option>`).join(''); m.classList.remove('hidden'); m.classList.add('flex'); renderReviews(); }
         function closeReviewBox(){ const m=document.getElementById('review-modal'); if(m){m.classList.add('hidden');m.classList.remove('flex');} }
         function setReviewStars(n){ reviewStars=n; document.querySelectorAll('#reviewStars button').forEach(b=>{const on=Number(b.dataset.star)<=n;b.classList.toggle('text-yellow-400',on);b.classList.toggle('text-slate-600',!on);}); }
-        function getReviews(){return safeJson('zicoReviewsV6',[]);}
-        async function saveReview(){ const text=cleanText(document.getElementById('reviewText')?.value,1000); const flavor=cleanText(document.getElementById('reviewFlavor')?.value,50); if(!reviewStars||!text){showStatus(currentLanguage==='english'?'Choose stars and write a review.':'تکایە ستێرە هەڵبژێرە و ڕایەک بنڤیسە.','error');return;} const r={id:makeId('REV'),flavor,stars:reviewStars,text,date:new Date().toISOString(),status:'pending'}; try{await ZICO_API.post('/reviews',r); showStatus(currentLanguage==='english'?'Review submitted for moderation.':'ڕاکەت هاتە ناردن بۆ پشکنین.');}catch(e){const a=getReviews();a.unshift(r);localStorage.setItem('zicoReviewsV6',JSON.stringify(a.slice(0,50)));showStatus(currentLanguage==='english'?'Review saved on this device.':'ڕاکەت ل سەر ئەڤ ئامێرە هاتە پاراستن.');} document.getElementById('reviewText').value=''; setReviewStars(0); renderReviews(); const c=getClub(); c.points=(c.points||0)+5; saveClub(c); }
+        function getReviews(){return safeJson('zicoReviewsV7',[]);}
+        async function saveReview(){ const text=cleanText(document.getElementById('reviewText')?.value,1000); const flavor=cleanText(document.getElementById('reviewFlavor')?.value,50); if(!reviewStars||!text){showStatus(currentLanguage==='english'?'Choose stars and write a review.':'تکایە ستێرە هەڵبژێرە و ڕایەک بنڤیسە.','error');return;} const r={id:makeId('REV'),flavor,stars:reviewStars,text,date:new Date().toISOString(),status:'pending'}; try{await ZICO_API.post('/reviews',r); showStatus(currentLanguage==='english'?'Review submitted for moderation.':'ڕاکەت هاتە ناردن بۆ پشکنین.');}catch(e){const a=getReviews();a.unshift(r);localStorage.setItem('zicoReviewsV7',JSON.stringify(a.slice(0,50)));showStatus(currentLanguage==='english'?'Review saved on this device.':'ڕاکەت ل سەر ئەڤ ئامێرە هاتە پاراستن.');} document.getElementById('reviewText').value=''; setReviewStars(0); renderReviews(); const c=getClub(); c.points=(c.points||0)+5; saveClub(c); }
         async function renderReviews(){ const box=document.getElementById('reviewList'); if(!box)return; let rs=getReviews(); try{const remote=await ZICO_API.get('/reviews?status=approved&limit=20');if(Array.isArray(remote?.items))rs=remote.items;}catch(e){} box.innerHTML=rs.length?rs.map(r=>`<div class="rounded-xl bg-slate-950 border border-slate-800 p-3"><div class="flex justify-between text-[10px]"><b class="text-white">${Number(r.stars)||0}/5 ★</b><span class="text-slate-600">${new Date(r.date || r.created_at).toLocaleDateString()}</span></div><p class="text-[10px] text-slate-400 mt-1">${cleanText(r.text,1000)}</p></div>`).join(''):'<p class="text-[10px] text-slate-600 text-center">No reviews yet.</p>'; }
         window.addEventListener('keydown',e=>{if(e.key==='Escape'){closeReviewBox();toggleDetailModal(false);toggleAgentModal(false);toggleCartModal(false);closeDemandModal();closeDistributorApplication();}});
 
@@ -2286,9 +2353,117 @@
             }
         }
     </script>
+
+    <script>
+      // ZICO v7 ALL-IN experience layer
+      function openZicoAccount(){const m=document.getElementById('zico-account-modal');if(m){const c=getClub();document.getElementById('accountPoints').innerText=c.points||0;document.getElementById('accountOrders').innerText=safeJson('zicoOrdersV6',[]).length||0;m.classList.remove('hidden');m.classList.add('flex')}}
+      function closeZicoAccount(){const m=document.getElementById('zico-account-modal');if(m){m.classList.add('hidden');m.classList.remove('flex')}}
+      function openZicoAI(){const m=document.getElementById('zico-ai-modal');if(m){m.classList.remove('hidden');m.classList.add('flex')}}
+      function closeZicoAI(){const m=document.getElementById('zico-ai-modal');if(m){m.classList.add('hidden');m.classList.remove('flex')}}
+      function zicoRecommend(type){const map={fresh:['zico-65','Mojito Lime 65','فێنک و تازە'],fruit:['zico-63','Açaí Berry 63','میوەیی و جیاواز'],classic:['zico-66','Original Blue 66','کلاسیک و پڕ وزە'],sugarfree:['zico-60','Fruit Candy 60','بێ شەکر']};const r=map[type];const p=PRODUCTS.find(x=>x.id===r[0]);const box=document.getElementById('ai-result');if(!p||!box)return;box.classList.remove('hidden');box.innerHTML=`<div class="flex items-center gap-3"><img src="${p.image}" alt="${cleanText(p.name,100)}" class="w-14 h-20 object-contain"><div><span class="text-[10px] text-purple-400 font-black">PICK FOR YOU</span><b class="block text-sm mt-1">${cleanText(p.name,100)}</b><p class="text-[10px] text-slate-400 mt-1">هەڵبژاردەی ${r[2]}.</p><button onclick="closeZicoAI();showProductDetails('${p.id}')" class="mt-2 text-[10px] font-black text-orange-400">سەیری بەرهەم →</button></div></div>`;document.getElementById('smartPickText').innerText=`پێشنیار: ${p.name}`;}
+      function openZicoInsights(){const m=document.getElementById('zico-insights-modal');if(!m)return;const d=getDemand();const cities=new Set(d.map(x=>x.city).filter(Boolean));const orders=safeJson('zicoOrdersV6',[]);document.getElementById('insights-grid').innerHTML=[['⚡',d.length,'Demand requests'],['📍',cities.size,'Cities'],['🛒',orders.length,'Local orders']].map(x=>`<div class="rounded-2xl bg-slate-950 border border-slate-800 p-4"><span>${x[0]}</span><b class="block text-2xl mt-2">${x[1]}</b><small class="text-slate-500">${x[2]}</small></div>`).join('');m.classList.remove('hidden');m.classList.add('flex');}
+      function closeZicoInsights(){const m=document.getElementById('zico-insights-modal');if(m){m.classList.add('hidden');m.classList.remove('flex')}}
+      function renderCommunityFeed(){const box=document.getElementById('community-feed');if(!box)return;const rs=getReviews();const items=(rs.length?rs.slice(0,3):PRODUCTS.slice(0,3).map(p=>({stars:5,flavor:p.id,text:`${p.name} — تامی ZICO بۆ تۆ.`,date:new Date().toISOString()})));box.innerHTML=items.map(r=>{const p=PRODUCTS.find(x=>x.id===r.flavor);return `<article class="glass-card rounded-3xl p-5"><div class="flex items-center justify-between"><span class="text-amber-400 text-sm">${'★'.repeat(Math.max(1,Math.min(5,Number(r.stars)||5)))}</span><span class="text-[9px] text-slate-600">ZICO Community</span></div><p class="text-sm text-slate-300 leading-7 mt-4">“${cleanText(r.text,240)}”</p><div class="mt-4 text-[10px] text-slate-500">${p?cleanText(p.name,100):'ZICO Energy'}</div></article>`}).join('')}
+      document.addEventListener('DOMContentLoaded',renderCommunityFeed);
+      window.addEventListener('keydown',e=>{if(e.key==='Escape'){closeZicoAI();closeZicoAccount();closeZicoInsights()}});
+    </script>
+
     <script>
       if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
     </script>
+
+    <!-- ZICO v7 Account Modal -->
+    <div id="zico-account-modal" class="hidden fixed inset-0 z-[95] bg-black/80 backdrop-blur-md items-center justify-center p-4">
+      <div class="glass-card w-full max-w-lg rounded-3xl p-6 border border-blue-500/20">
+        <div class="flex items-start justify-between"><div><span class="text-[10px] font-black tracking-widest text-blue-400">MY ZICO</span><h3 class="text-2xl font-black mt-1">هەژماری ZICO</h3></div><button onclick="closeZicoAccount()" aria-label="Close account" class="w-10 h-10 rounded-xl bg-slate-900">×</button></div>
+        <div class="grid grid-cols-2 gap-3 mt-5">
+          <div class="rounded-2xl bg-slate-950 p-4"><small class="text-slate-500">Club Points</small><b id="accountPoints" class="block text-2xl text-orange-400 mt-1">0</b></div>
+          <div class="rounded-2xl bg-slate-950 p-4"><small class="text-slate-500">Orders</small><b id="accountOrders" class="block text-2xl text-blue-400 mt-1">0</b></div>
+        </div>
+        <div class="mt-4 rounded-2xl border border-slate-800 p-4"><p class="text-xs text-slate-400">Profile status</p><div class="flex justify-between mt-2"><b class="text-sm">Guest Member</b><span class="text-[10px] px-2 py-1 rounded-full bg-emerald-500/10 text-emerald-400">Ready</span></div></div>
+        <button onclick="showStatus('لە وەشانی backend ـدا login و OTP دێتە کارکردن.')" class="w-full mt-4 py-3 rounded-xl bg-blue-600 font-black text-xs">Sign in / Create account</button>
+      </div>
+    </div>
+
+    <!-- ZICO v7 AI Guide Modal -->
+    <div id="zico-ai-modal" class="hidden fixed inset-0 z-[96] bg-black/80 backdrop-blur-md items-center justify-center p-4">
+      <div class="glass-card w-full max-w-xl rounded-3xl p-6 border border-purple-500/20">
+        <div class="flex items-start justify-between"><div><span class="text-[10px] font-black tracking-widest text-purple-400">ZICO AI GUIDE</span><h3 class="text-2xl font-black mt-1">یاریدەدەری هەڵبژاردنی ZICO ✨</h3></div><button onclick="closeZicoAI()" aria-label="Close AI guide" class="w-10 h-10 rounded-xl bg-slate-900">×</button></div>
+        <div class="mt-5 space-y-3">
+          <button onclick="zicoRecommend('fresh')" class="ai-choice">🍋 من تامی فێنک و تازە دڤێت</button>
+          <button onclick="zicoRecommend('fruit')" class="ai-choice">🍇 من تامی میوەیی دڤێت</button>
+          <button onclick="zicoRecommend('classic')" class="ai-choice">⚡ من تامی کلاسیک و وزەیی دڤێت</button>
+          <button onclick="zicoRecommend('sugarfree')" class="ai-choice">🧊 من بێ شەکر دڤێت</button>
+        </div>
+        <div id="ai-result" class="hidden mt-5 rounded-2xl bg-purple-950/30 border border-purple-500/20 p-4"></div>
+        <p class="text-[9px] text-slate-600 mt-4">ZICO AI Guide ـی ناوخۆییە؛ پێشنیارەکە لە زانیاریی بەرهەمەکانە و پێویستی بە AI API نییە.</p>
+      </div>
+    </div>
+
+    <!-- Insights Modal -->
+    <div id="zico-insights-modal" class="hidden fixed inset-0 z-[94] bg-black/80 backdrop-blur-md items-center justify-center p-4">
+      <div class="glass-card w-full max-w-2xl rounded-3xl p-6"><div class="flex justify-between items-center"><div><span class="text-[10px] font-black tracking-widest text-emerald-400">LIVE INSIGHTS</span><h3 class="text-2xl font-black">ZICO Market Pulse 📊</h3></div><button onclick="closeZicoInsights()" aria-label="Close insights" class="w-10 h-10 rounded-xl bg-slate-900">×</button></div><div id="insights-grid" class="grid sm:grid-cols-3 gap-3 mt-5"></div><div class="mt-5 rounded-2xl border border-slate-800 p-4"><p class="text-xs text-slate-500">Trend</p><p class="text-sm font-bold mt-2">Demand Engine data becomes global automatically when the API/Database is connected.</p></div></div>
+    </div>
+
+
+<section class="zico-spin-section" id="lucky-spin" aria-labelledby="lucky-spin-title">
+  <div class="zico-spin-wrap">
+    <div class="zico-spin-card">
+      <p style="font-weight:900;letter-spacing:.14em;text-transform:uppercase;opacity:.7;margin:0 0 8px">ZICO Rewards</p>
+      <h2 id="lucky-spin-title" style="font-size:clamp(32px,5vw,54px);line-height:1;margin:0 0 16px">Lucky Spin 🔥</h2>
+      <p style="font-size:17px;line-height:1.6;opacity:.82">Spin the wheel and discover your ZICO reward.</p>
+      <button class="zico-spin-btn" id="zicoSpinButton" type="button" aria-controls="zicoSpinResult">SPIN NOW</button>
+      <div class="zico-spin-result" id="zicoSpinResult" aria-live="polite"></div>
+      <div class="zico-spin-note">One spin per session. Rewards shown here are promotional placeholders until configured.</div>
+    </div>
+    <div class="zico-spin-wheel-wrap" aria-label="Lucky Spin wheel">
+      <div class="zico-spin-pointer" aria-hidden="true"></div>
+      <div class="zico-spin-wheel" id="zicoSpinWheel" role="img" aria-label="ZICO Lucky Spin wheel">
+        <div class="zico-spin-labels" aria-hidden="true">
+          <span class="zico-spin-label" style="transform:rotate(22.5deg) translateX(10%)">10% OFF</span>
+          <span class="zico-spin-label" style="transform:rotate(67.5deg) translateX(10%)">FREE CAN</span>
+          <span class="zico-spin-label" style="transform:rotate(112.5deg) translateX(10%)">5% OFF</span>
+          <span class="zico-spin-label" style="transform:rotate(157.5deg) translateX(10%)">BONUS</span>
+          <span class="zico-spin-label" style="transform:rotate(202.5deg) translateX(10%)">15% OFF</span>
+          <span class="zico-spin-label" style="transform:rotate(247.5deg) translateX(10%)">FREE SHIPPING</span>
+          <span class="zico-spin-label" style="transform:rotate(292.5deg) translateX(10%)">TRY AGAIN</span>
+          <span class="zico-spin-label" style="transform:rotate(337.5deg) translateX(10%)">ZICO GIFT</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  const btn=document.getElementById('zicoSpinButton');
+  const wheel=document.getElementById('zicoSpinWheel');
+  const result=document.getElementById('zicoSpinResult');
+  if(!btn||!wheel||!result) return;
+  const rewards=['10% OFF','FREE CAN','5% OFF','BONUS','15% OFF','FREE SHIPPING','TRY AGAIN','ZICO GIFT'];
+  let spinning=false;
+  let used=false;
+  try { used=sessionStorage.getItem('zicoLuckySpinUsed')==='1'; } catch(e){}
+  if(used){btn.disabled=true;result.textContent='You already spun the wheel this session. 🔥';}
+  btn.addEventListener('click',function(){
+    if(spinning||used) return;
+    spinning=true;btn.disabled=true;result.textContent='Spinning…';
+    const index=Math.floor(Math.random()*rewards.length);
+    const segment=360/rewards.length;
+    const target=(360-(index*segment+segment/2)+360)%360;
+    const current=Number(wheel.dataset.rotation||0);
+    const extra=360*6+target;
+    const rotation=current+extra;
+    wheel.dataset.rotation=rotation;
+    wheel.style.transform='rotate('+rotation+'deg)';
+    window.setTimeout(function(){
+      result.textContent='🎉 You won: '+rewards[index]+'!';
+      try{sessionStorage.setItem('zicoLuckySpinUsed','1');}catch(e){}
+      used=true;spinning=false;
+    },4850);
+  });
+})();
+</script>
+
 </body>
 </html>
 

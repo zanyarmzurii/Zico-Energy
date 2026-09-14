@@ -21,4 +21,4 @@
 The frontend will automatically use `/api`; if the backend is unavailable it falls back to local device storage so the site remains usable.
 
 ## Important
-The current distributor phone numbers already present in v5 are preserved. No unverified Sweden number was invented. Configure the real Sweden distributor before accepting Sweden WhatsApp orders.
+The current distributor phone numbers already present in v5 are preserved. No unverified Sweden number was invented. Configure the real Sweden — Coming Soon before accepting Sweden — Coming Soon orders.
