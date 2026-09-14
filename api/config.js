@@ -1,0 +1,1 @@
+module.exports=async(req,res)=>{res.statusCode=200;res.setHeader('Content-Type','application/json');res.setHeader('Cache-Control','public, max-age=300');res.end(JSON.stringify({supabaseUrl:process.env.SUPABASE_URL||'',supabaseAnonKey:process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY||''}));};
