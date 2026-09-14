@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ZICO Energy Drink Sweden 🇸🇪</title>
+    <title>ZICO Energy — Sweden 🇸🇪 • Kurdistan</title>
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -223,18 +223,10 @@
             animation: pulse-ring 3s infinite ease-in-out;
         }
     
-        /* ZICO V2 Premium Upgrade */
-        html { scroll-behavior: smooth; }
-        header { position: sticky; top: 0; z-index: 40; background: rgba(3,4,8,.82); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); }
-        .zico-quickbar { box-shadow: 0 18px 55px rgba(0,0,0,.28); }
-        .zico-quick-btn { min-height: 48px; border-radius: 14px; background: rgba(255,255,255,.025); border: 1px solid rgba(255,255,255,.06); display:flex; align-items:center; justify-content:center; gap:8px; color:#e5e7eb; font-weight:800; font-size:12px; transition: transform .25s ease, background .25s ease, border-color .25s ease; }
-        .zico-quick-btn:hover { transform: translateY(-2px); background: rgba(255,102,0,.08); border-color: rgba(255,102,0,.25); }
-        .zico-quick-btn:active { transform: scale(.98); }
-        @media (max-width: 640px) { .zico-quick-btn { font-size:10px; gap:6px; min-height:44px; } .zico-quickbar { border-radius:18px; } }
-        .slide-item img { user-select:none; -webkit-user-drag:none; }
-        .modal-open { overflow:hidden !important; }
-
-    </style>
+        .active-region { background: rgba(249,115,22,.16) !important; border-color: rgba(249,115,22,.8) !important; color: #fff !important; box-shadow: 0 0 20px rgba(249,115,22,.12); }
+        html[dir="ltr"] body { font-family: 'Poppins', system-ui, -apple-system, sans-serif; }
+        @media (max-width: 640px) { .glass-card:hover { transform:none; } #cart-drawer-modal > div { max-width:100%; } }
+</style>
 </head>
 <body class="min-h-screen flex flex-col relative selection:bg-orange-500 selection:text-white">
 
@@ -307,13 +299,13 @@
 
             <!-- Desktop Navigation Links -->
             <nav class="hidden md:flex items-center gap-1 bg-slate-950/80 p-1.5 rounded-2xl border border-slate-800/80">
-                <button id="nav-shop" onclick="switchTab('shop')" class="px-5 py-2 rounded-xl text-xs font-bold transition-all bg-orange-500 text-white shadow-lg shadow-orange-500/30">
+                <button id="navShop" onclick="switchTab('shop')" class="px-5 py-2 rounded-xl text-xs font-bold transition-all bg-orange-500 text-white shadow-lg shadow-orange-500/30">
                     بەرهەمەکان (Shopping)
                 </button>
-                <button id="nav-distributors" onclick="switchTab('distributors')" class="px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white">
+                <button id="navAgents" onclick="switchTab('distributors')" class="px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white">
                     بریکارێن سەرەکی
                 </button>
-                <button id="nav-developer" onclick="switchTab('developer')" class="px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white">
+                <button id="navDev" onclick="switchTab('developer')" class="px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white">
                     پەڕێ دێڤلۆپەری ⚡
                 </button>
             </nav>
@@ -327,6 +319,8 @@
                         <option value="badini" class="bg-slate-900 text-white">کوردی (بادینی)</option>
                         <option value="sorani" class="bg-slate-900 text-white">کوردی (سۆرانی)</option>
                         <option value="arabic" class="bg-slate-900 text-white">العربية</option>
+                        <option value="english" class="bg-slate-900 text-white">English</option>
+                        <option value="swedish" class="bg-slate-900 text-white">Svenska</option>
                     </select>
                 </div>
 
@@ -342,13 +336,13 @@
 
         <!-- Mobile Quick Navigation Bar -->
         <div class="flex md:hidden items-center justify-around mt-2 pt-2 border-t border-slate-800/60 text-xs font-bold">
-            <button id="mob-nav-shop" onclick="switchTab('shop')" class="pb-1 text-orange-400 border-b-2 border-orange-400">
+            <button id="mobNavShop" onclick="switchTab('shop')" class="pb-1 text-orange-400 border-b-2 border-orange-400">
                 بەرهەمەکان
             </button>
-            <button id="mob-nav-distributors" onclick="switchTab('distributors')" class="pb-1 text-slate-400">
+            <button id="mobNavAgents" onclick="switchTab('distributors')" class="pb-1 text-slate-400">
                 بریکارێن سەرەکی
             </button>
-            <button id="mob-nav-developer" onclick="switchTab('developer')" class="pb-1 text-slate-400">
+            <button id="mobNavDev" onclick="switchTab('developer')" class="pb-1 text-slate-400">
                 دێڤلۆپەر ⚡
             </button>
         </div>
@@ -380,21 +374,6 @@
                     <div id="slide-dots" class="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 z-20 glass-panel px-3 py-1.5 rounded-full border border-slate-700/80">
                         <!-- Dots rendered by JS -->
                     </div>
-                </div>
-            </div>
-
-            <!-- PREMIUM QUICK ACTION BAR -->
-            <div class="max-w-6xl mx-auto px-4 lg:px-8 pb-5">
-                <div class="zico-quickbar glass-panel rounded-2xl border border-orange-500/15 p-2 md:p-3 grid grid-cols-3 gap-2">
-                    <button onclick="document.getElementById('products-grid')?.scrollIntoView({behavior:'smooth'});" class="zico-quick-btn">
-                        <i class="fa-solid fa-bolt text-orange-400"></i><span>بەرهەمەکان</span>
-                    </button>
-                    <button onclick="switchTab('distributors')" class="zico-quick-btn">
-                        <i class="fa-solid fa-location-dot text-blue-400"></i><span>شوێنی داواکردن</span>
-                    </button>
-                    <button onclick="toggleCartModal(true)" class="zico-quick-btn">
-                        <i class="fa-solid fa-cart-shopping text-emerald-400"></i><span>سەبەتە</span>
-                    </button>
                 </div>
             </div>
 
@@ -772,6 +751,26 @@
             </div>
 
             <div id="cart-footer-area" class="pt-4 border-t border-slate-800 space-y-4">
+                <div class="rounded-2xl border border-orange-500/20 bg-orange-500/5 p-3.5">
+                    <div class="flex items-center justify-between gap-3 mb-2">
+                        <div>
+                            <p id="regionLabel" class="text-xs font-black text-white">🌍 داوا ل کوێیە؟</p>
+                            <p id="regionHint" class="text-[10px] text-slate-500 mt-0.5">بریکار و نرخی گونجاو بەپێی ناوچەکەت هەڵدەبژێرین.</p>
+                        </div>
+                        <span id="regionStatus" class="text-[9px] font-black px-2 py-1 rounded-lg bg-slate-800 text-slate-300">Kurdistan</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button type="button" id="regionIraqBtn" onclick="selectOrderRegion('kurdistan')" class="region-btn active-region px-3 py-2.5 rounded-xl text-xs font-black border transition-all">🇮🇶 Kurdistan / Iraq</button>
+                        <button type="button" id="regionSwedenBtn" onclick="selectOrderRegion('sweden')" class="region-btn px-3 py-2.5 rounded-xl text-xs font-black border border-slate-700 bg-slate-900 text-slate-300 transition-all">🇸🇪 Sweden</button>
+                    </div>
+                </div>
+                <div id="orderCustomerFields" class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <input id="orderCustomerName" type="text" autocomplete="name" placeholder="ناڤێ تە" class="w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs outline-none focus:border-orange-500">
+                    <input id="orderCustomerPhone" type="tel" autocomplete="tel" placeholder="ژمارا تە" class="w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs outline-none focus:border-orange-500" dir="ltr">
+                    <input id="orderCustomerCity" type="text" autocomplete="address-level2" placeholder="شار" class="w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs outline-none focus:border-orange-500">
+                    <input id="orderCustomerAddress" type="text" autocomplete="street-address" placeholder="ناونیشان" class="w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs outline-none focus:border-orange-500">
+                    <input id="orderPostalCode" type="text" autocomplete="postal-code" placeholder="Postal Code (Sweden)" class="hidden w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs outline-none focus:border-orange-500" dir="ltr">
+                </div>
                 <div class="flex items-center justify-between text-sm">
                     <span id="totalTextLabel" class="text-slate-400 font-bold">کۆی گشتی:</span>
                     <span id="cart-total-price" class="font-black text-xl text-emerald-400">0 IQD</span>
@@ -798,7 +797,23 @@
                 <h3 id="selectAgentModalTitle" class="text-xl font-black text-white">بریکارەکێ هەڵبژێرە ژبوو شاندنا داواکاریێ:</h3>
             </div>
 
-            <div class="space-y-4">
+            <div class="mb-4 rounded-2xl border border-blue-500/20 bg-blue-500/5 p-3">
+                <div class="flex items-center justify-between gap-3">
+                    <div>
+                        <p id="selectedRegionTitle" class="text-xs font-black text-white">🇮🇶 Kurdistan / Iraq</p>
+                        <p id="selectedRegionSub" class="text-[10px] text-slate-500">بریکار بەپێی ناوچەکەت هەڵبژێرە.</p>
+                    </div>
+                    <button onclick="toggleAgentModal(false); toggleCartModal(true)" class="text-[10px] font-bold text-orange-400">گۆڕین</button>
+                </div>
+            </div>
+            <div id="swedenDistributorNotice" class="hidden mb-4 rounded-2xl border border-yellow-500/20 bg-yellow-500/5 p-4 text-center">
+                <div class="text-2xl mb-2">🇸🇪</div>
+                <p id="swedenDistributorTitle" class="text-sm font-black text-white">Sweden Distributor</p>
+                <p id="swedenDistributorText" class="text-[11px] text-slate-400 mt-1">ژمارا بریکاری سوید هێشتا ل سیستەمێ نەهاتە تۆمارکرن.</p>
+                <button onclick="copyOrderDetails()" class="mt-3 px-4 py-2 rounded-xl bg-slate-800 text-white text-xs font-bold border border-slate-700">Copy Order Details</button>
+            </div>
+
+            <div id="kurdistanAgentsList" class="space-y-4">
                 <!-- Badinan Agent Option -->
                 <div class="bg-slate-900/90 border border-blue-500/30 rounded-2xl p-4">
                     <div class="flex items-center justify-between mb-3">
@@ -832,6 +847,7 @@
                         </button>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </div>
@@ -1177,6 +1193,22 @@
                 lblSugar: "السكر:",
                 lblCaffeine: "المكونات:",
                 lblBenefits: "الفوائد الرئيسية:"
+            },
+            english: {
+                navShop: "Products (Shopping)", navAgents: "Distributors", navDev: "Developer", mobNavShop: "Products", mobNavAgents: "Distributors", mobNavDev: "Developer",
+                unitBundleText: "Case (24 cans)", unitPieceText: "Can (1)", qtyLabel: "Quantity:", totalTextLabel: "Total:", detailsBtnText: "Details", addCartBtnText: "Add to Cart", soldOutText: "Sold Out", soldOutMsg: "This product is currently unavailable",
+                badgeSwedishOrigin: "🇸🇪 FORMULATED IN SWEDEN • NOW IN KURDISTAN", ambientSelectorTitle: "Choose your flavor", btnSeeAllCans: "View all products", ourProductsTitle: "ZICO Energy Drink Products", ourProductsSub: "Choose your flavor and order directly",
+                badgeSwedenStandard: "🇸🇪 Sweden Standard • Kurdistan Supply", badgeGallery: "ZICO LIFESTYLE & MOMENTS", galleryTitle: "Energy everywhere", galCap1: "ZICO Original Blue 66", galCap2: "ZICO Mojito Lime 65", galCap3: "ZICO Fruit Candy 60", galCap4: "ZICO Açaí Berry 63",
+                badgeDistributors: "📍 Official Distribution", distributorsTitle: "Distributors & Contact", distributorsSub: "Choose the distributor that serves your region.", badinanRegionTag: "Badinan / Duhok", badinanAgentName: "Main Distributor — Badinan", badinanTiktokBtn: "TikTok: @zikoenrgy", erbilRegionTag: "Erbil & surrounding areas", erbilAgentName: "Main Distributor — Erbil", erbilTiktokBtn: "TikTok: @zico.company",
+                devBioText: "Modern websites, applications and custom systems built with premium quality.", devServicesTitle: "Services", srvWebTitle: "Web Applications", srvWebDesc: "Modern and fast websites and web apps", srvMobTitle: "Mobile Apps", srvMobDesc: "iOS and Android apps for businesses", srvSysTitle: "Custom Systems", srvSysDesc: "Custom management systems", devSocialTitle: "Social media & direct contact:", footerDevLabel: "Development & Design:",
+                cartDrawerTitle: "Order Cart", btnSendWhatsappText: "Continue Order", selectAgentModalTitle: "Choose your distributor", opt1Label: "Option 1", badinanOptName: "Main Distributor — Badinan", btnBadinanSend: "Send via WhatsApp", opt2Label: "Option 2", erbilOptName: "Main Distributor — Erbil", lblOrigin: "Origin:", lblPriceSingle: "Single can:", lblPriceBundle: "Case (24 cans):", lblSize: "Size:", lblSugar: "Sugar:", lblCaffeine: "Ingredients:", lblBenefits: "Key benefits:",
+                regionLabel: "Where is your order?", regionHint: "We route your order to the correct region.", selectedRegionSub: "Choose a distributor serving your region.", swedenDistributorTitle: "Sweden Distributor", swedenDistributorText: "A Sweden distributor phone number has not been configured yet."
+            },
+            swedish: {
+                navShop: "Produkter", navAgents: "Distributörer", navDev: "Utvecklare", mobNavShop: "Produkter", mobNavAgents: "Distributörer", mobNavDev: "Utvecklare", unitBundleText: "Kartong (24 burkar)", unitPieceText: "Burk (1)", qtyLabel: "Antal:", totalTextLabel: "Totalt:", detailsBtnText: "Detaljer", addCartBtnText: "Lägg i varukorg", soldOutText: "Slut i lager", soldOutMsg: "Produkten är tillfälligt slut i lager",
+                badgeSwedishOrigin: "🇸🇪 FORMULERAD I SVERIGE • NU I KURDISTAN", ambientSelectorTitle: "Välj din smak", btnSeeAllCans: "Visa alla produkter", ourProductsTitle: "ZICO Energy Drink", ourProductsSub: "Välj smak och beställ direkt", badgeSwedenStandard: "🇸🇪 Sweden Standard • Kurdistan Supply", badgeGallery: "ZICO LIFESTYLE & MOMENTS", galleryTitle: "Energi överallt", galCap1: "ZICO Original Blue 66", galCap2: "ZICO Mojito Lime 65", galCap3: "ZICO Fruit Candy 60", galCap4: "ZICO Açaí Berry 63",
+                badgeDistributors: "📍 Officiell distribution", distributorsTitle: "Distributörer & kontakt", distributorsSub: "Välj distributören som betjänar din region.", badinanRegionTag: "Badinan / Duhok", badinanAgentName: "Huvuddistributör — Badinan", badinanTiktokBtn: "TikTok: @zikoenrgy", erbilRegionTag: "Erbil med omnejd", erbilAgentName: "Huvuddistributör — Erbil", erbilTiktokBtn: "TikTok: @zico.company", devBioText: "Moderna webbplatser, appar och skräddarsydda system med hög kvalitet.", devServicesTitle: "Tjänster", srvWebTitle: "Webbapplikationer", srvWebDesc: "Moderna och snabba webbplatser och webbappar", srvMobTitle: "Mobilappar", srvMobDesc: "iOS- och Android-appar för företag", srvSysTitle: "Anpassade system", srvSysDesc: "Skräddarsydda administrationssystem", devSocialTitle: "Sociala medier & direktkontakt:", footerDevLabel: "Utveckling & design:",
+                cartDrawerTitle: "Varukorg", btnSendWhatsappText: "Fortsätt beställning", selectAgentModalTitle: "Välj distributör", opt1Label: "Alternativ 1", badinanOptName: "Huvuddistributör — Badinan", btnBadinanSend: "Skicka via WhatsApp", opt2Label: "Alternativ 2", erbilOptName: "Huvuddistributör — Erbil", lblOrigin: "Ursprung:", lblPriceSingle: "En burk:", lblPriceBundle: "Kartong (24 burkar):", lblSize: "Storlek:", lblSugar: "Socker:", lblCaffeine: "Ingredienser:", lblBenefits: "Viktiga fördelar:", regionLabel: "Vart ska beställningen skickas?", regionHint: "Vi kopplar beställningen till rätt region.", selectedRegionSub: "Välj en distributör för din region.", swedenDistributorTitle: "Distributör i Sverige", swedenDistributorText: "Telefonnummer till svensk distributör är ännu inte konfigurerat."
             }
         };
     </script>
@@ -1310,6 +1342,7 @@
                 flavorBadini: 'تاما حەلویێن میوا (بێ شەکر 🍬)',
                 flavorSorani: 'تامی شیرینی میوەیی (بێ شەکر 🍬)',
                 flavorArabic: 'نكهة حلويات الفواكه (خالي من السكر 🍬)',
+                flavorEnglish: 'Fruit Candy (Sugar Free)', flavorSwedish: 'Fruktgodis (sockerfri)',
                 priceSingle: 1500,
                 priceBundle: 30000,
                 image: 'assets/images/zico-60.png',
@@ -1329,6 +1362,7 @@
                 flavorBadini: 'تاما ئۆریجینال بێ شەکر⚡',
                 flavorSorani: 'تامی ئۆریجیناڵ بێ شەکر⚡',
                 flavorArabic: 'الطعم الأصلي خالي من السكر⚡',
+                flavorEnglish: 'Original Sugar Free', flavorSwedish: 'Original sockerfri',
                 priceSingle: 1500,
                 priceBundle: 30000,
                 image: 'assets/images/zico-55.png',
@@ -1349,6 +1383,7 @@
                 flavorBadini: 'تاما ئۆریجینال یا کلاسیک 💙',
                 flavorSorani: 'تامی ئۆریجیناڵی کلاسیک 💙',
                 flavorArabic: 'النكهة الأصلية الكلاسيكية 💙',
+                flavorEnglish: 'Classic Original', flavorSwedish: 'Klassisk Original',
                 priceSingle: 1500,
                 priceBundle: 30000,
                 image: 'assets/images/zico-66.png',
@@ -1368,6 +1403,7 @@
                 flavorBadini: 'تاما تایبەتا ئەسایی (Açaí 🍇)',
                 flavorSorani: 'تامی تایبەتی ئەسایی (Açaí 🍇)',
                 flavorArabic: 'نكهة الآساي المميزة (Açaí 🍇)',
+                flavorEnglish: 'Açaí Berry', flavorSwedish: 'Açaí Berry',
                 priceSingle: 1500,
                 priceBundle: 30000,
                 image: 'assets/images/zico-63.png',
@@ -1387,6 +1423,7 @@
                 flavorBadini: 'تاما مانگۆیێ (🥭 Mango)',
                 flavorSorani: 'تامی مانگۆ (🥭 Mango)',
                 flavorArabic: 'نكهة المانجو (🥭 Mango)',
+                flavorEnglish: 'Mango Fresh', flavorSwedish: 'Mango Fresh',
                 priceSingle: 1500,
                 priceBundle: 30000,
                 image: 'assets/images/zico-69.png',
@@ -1406,6 +1443,7 @@
                 flavorBadini: 'تاما موهیتۆ (لیمۆ و نەعناع 🍋🌿)',
                 flavorSorani: 'تامی موهیتۆ (لیمۆ و نەعناع 🍋🌿)',
                 flavorArabic: 'نكهة الموهيتو (ليمون ونعناع 🍋🌿)',
+                flavorEnglish: 'Mojito Lime', flavorSwedish: 'Mojito Lime',
                 priceSingle: 1500,
                 priceBundle: 30000,
                 image: 'assets/images/zico-65.png',
@@ -1422,7 +1460,7 @@
 
         let currentLanguage = 'badini';
         let currentTab = 'shop';
-        let cart = JSON.parse(localStorage.getItem('zico_cart_v2') || '[]');
+        let cart = [];
         let cardState = {};
 
         PRODUCTS.forEach(p => {
@@ -1459,7 +1497,8 @@
             currentLanguage = lang;
             const dict = DICTIONARY[lang];
 
-            document.documentElement.dir = 'rtl';
+            document.documentElement.dir = (lang === 'english' || lang === 'swedish') ? 'ltr' : 'rtl';
+            document.documentElement.lang = lang === 'badini' ? 'ku' : lang;
 
             Object.keys(dict).forEach(key => {
                 const el = document.getElementById(key);
@@ -1473,6 +1512,8 @@
         function getFlavorText(prod) {
             if (currentLanguage === 'badini') return prod.flavorBadini;
             if (currentLanguage === 'sorani') return prod.flavorSorani;
+            if (currentLanguage === 'english') return prod.flavorEnglish || prod.name;
+            if (currentLanguage === 'swedish') return prod.flavorSwedish || prod.name;
             return prod.flavorArabic;
         }
 
@@ -1665,7 +1706,6 @@
         }
 
         function updateCartUI() {
-            localStorage.setItem('zico_cart_v2', JSON.stringify(cart));
             const badge = document.getElementById('cart-count-badge');
             const totalQty = cart.reduce((acc, item) => acc + item.qty, 0);
 
@@ -1777,13 +1817,13 @@
         function toggleCartModal(show) {
             const modal = document.getElementById('cart-drawer-modal');
             if (show) {
+                prepareAgentModal();
                 modal.classList.remove('hidden');
                 modal.classList.add('flex');
             } else {
                 modal.classList.add('hidden');
                 modal.classList.remove('flex');
             }
-            document.body.classList.toggle('modal-open', show);
         }
 
         function toggleAgentModal(show) {
@@ -1845,50 +1885,87 @@
             toggleDetailModal(true);
         }
 
+        let orderRegion = localStorage.getItem('zicoOrderRegion') || 'kurdistan';
+
+        // Add verified distributor numbers here when available. Never invent a number.
+        const DISTRIBUTOR_CONFIG = {
+            sweden: [],
+            kurdistan: [
+                { id: 'badinan', name: 'Badinan', phone: '+9647504696517' },
+                { id: 'erbil-1', name: 'Erbil', phone: '+9647504489125' },
+                { id: 'erbil-2', name: 'Erbil', phone: '+9647502615202' },
+                { id: 'erbil-3', name: 'Erbil', phone: '+9647745445542' }
+            ]
+        };
+
+        function selectOrderRegion(region) {
+            orderRegion = region;
+            localStorage.setItem('zicoOrderRegion', region);
+            const sweden = region === 'sweden';
+            const badge = document.getElementById('regionStatus');
+            if (badge) badge.innerText = sweden ? 'Sweden' : 'Kurdistan';
+            document.getElementById('regionSwedenBtn')?.classList.toggle('active-region', sweden);
+            document.getElementById('regionIraqBtn')?.classList.toggle('active-region', !sweden);
+            document.getElementById('regionSwedenBtn')?.classList.toggle('border-yellow-500', sweden);
+            document.getElementById('regionIraqBtn')?.classList.toggle('border-orange-500', !sweden);
+            document.getElementById('orderPostalCode')?.classList.toggle('hidden', !sweden);
+            if (document.getElementById('orderCustomerName')) document.getElementById('orderCustomerName').placeholder = sweden ? 'Name' : (currentLanguage==='english' ? 'Name' : 'ناڤێ تە');
+            if (document.getElementById('orderCustomerPhone')) document.getElementById('orderCustomerPhone').placeholder = sweden ? 'Phone' : (currentLanguage==='english' ? 'Phone' : 'ژمارا تە');
+            if (document.getElementById('orderCustomerCity')) document.getElementById('orderCustomerCity').placeholder = sweden ? 'City' : (currentLanguage==='english' ? 'City' : 'شار');
+            if (document.getElementById('orderCustomerAddress')) document.getElementById('orderCustomerAddress').placeholder = sweden ? 'Address' : (currentLanguage==='english' ? 'Address' : 'ناونیشان');
+        }
+
+        function buildOrderText() {
+            const dict = DICTIONARY[currentLanguage];
+            let text = `ZICO Energy Order | ${orderRegion === 'sweden' ? 'Sweden' : 'Kurdistan / Iraq'}\n\n`;
+            const fields = [
+                ['Name', document.getElementById('orderCustomerName')?.value || '—'],
+                ['Phone', document.getElementById('orderCustomerPhone')?.value || '—'],
+                ['City', document.getElementById('orderCustomerCity')?.value || '—'],
+                ['Address', document.getElementById('orderCustomerAddress')?.value || '—']
+            ];
+            if (orderRegion === 'sweden') fields.push(['Postal Code', document.getElementById('orderPostalCode')?.value || '—']);
+            fields.forEach(([k,v]) => text += `${k}: ${v}\n`);
+            text += '\nProducts:\n';
+            let grandTotal = 0;
+            cart.forEach((item,index) => {
+                const total = item.unitPrice * item.qty; grandTotal += total;
+                text += `${index+1}. ${item.name} — ${item.qty} ${item.itemType === 'bundle' ? dict.unitBundleText : dict.unitPieceText} — ${total.toLocaleString()} IQD\n`;
+            });
+            text += `\nTotal: ${grandTotal.toLocaleString()} IQD`;
+            return text;
+        }
+
+        function copyOrderDetails() {
+            navigator.clipboard?.writeText(buildOrderText()).then(() => alert(currentLanguage === 'swedish' ? 'Beställningsuppgifterna kopierades.' : currentLanguage === 'english' ? 'Order details copied.' : 'زانیاریێن داواکاریێ هاتنە کوپیکرن.'));
+        }
+
+        function prepareAgentModal() {
+            const isSweden = orderRegion === 'sweden';
+            document.getElementById('kurdistanAgentsList')?.classList.toggle('hidden', isSweden);
+            document.getElementById('swedenDistributorNotice')?.classList.toggle('hidden', !isSweden);
+            const title = document.getElementById('selectedRegionTitle');
+            if (title) title.innerText = isSweden ? '🇸🇪 Sweden' : '🇮🇶 Kurdistan / Iraq';
+        }
+
         function sendOrderViaWhatsApp(phoneNumber) {
             if (cart.length === 0) return;
-            let text = `داواکاری نوێی ZICO Energy Sweden 🇸🇪:%0A%0A`;
-            let grandTotal = 0;
-            const dict = DICTIONARY[currentLanguage];
-
-            cart.forEach((item, index) => {
-                const flavor = getFlavorText(item);
-                const packName = item.itemType === 'bundle' ? dict.unitBundleText : dict.unitPieceText;
-                const totalItemPrice = item.unitPrice * item.qty;
-                grandTotal += totalItemPrice;
-                text += `${index + 1}. ${item.name} (${flavor})%0A   بڕ: ${item.qty} ${packName} - نرخ: ${totalItemPrice.toLocaleString()} IQD%0A%0A`;
-            });
-
-            text += `کۆی گشتی: ${grandTotal.toLocaleString()} IQD`;
-
-            const cleanNum = phoneNumber.replace(/[^0-9]/g, '');
-            window.open(`https://wa.me/${cleanNum}?text=${text}`, '_blank');
+            if (orderRegion === 'sweden' && !phoneNumber) {
+                copyOrderDetails();
+                return;
+            }
+            const text = buildOrderText();
+            const cleanNum = (phoneNumber || '').replace(/[^0-9]/g, '');
+            if (!cleanNum) { copyOrderDetails(); return; }
+            window.open(`https://wa.me/${cleanNum}?text=${encodeURIComponent(text)}`, '_blank');
             toggleAgentModal(false);
             toggleCartModal(false);
         }
 
-        function showZicoToast(message) {
-            let toast = document.getElementById('zico-toast');
-            if (!toast) {
-                toast = document.createElement('div');
-                toast.id = 'zico-toast';
-                toast.className = 'fixed bottom-5 left-1/2 -translate-x-1/2 z-[100] px-5 py-3 rounded-2xl bg-slate-950/95 border border-orange-500/30 text-white text-xs font-bold shadow-2xl backdrop-blur-xl opacity-0 pointer-events-none transition-all duration-300';
-                document.body.appendChild(toast);
-            }
-            toast.textContent = message;
-            toast.classList.remove('opacity-0'); toast.classList.add('opacity-100');
-            clearTimeout(window.__zicoToastTimer);
-            window.__zicoToastTimer = setTimeout(()=>{ toast.classList.remove('opacity-100'); toast.classList.add('opacity-0'); }, 2200);
-        }
-
-        document.addEventListener("keydown", (e) => {
-            if (e.key === 'Escape') { toggleCartModal(false); toggleAgentModal(false); toggleDetailModal(false); }
-        });
-
         document.addEventListener("DOMContentLoaded", function() {
             initSwiperSlider();
             changeLanguage('badini');
-            updateCartUI();
+            selectOrderRegion(orderRegion);
             initYoutubeAdOverlay();
         });
     </script>
