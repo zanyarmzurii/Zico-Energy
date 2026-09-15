@@ -3,7 +3,7 @@
 <head>
 <meta name="zico-version" content="ZICO v8 PREMIUM">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, ">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZICO Energy — Sweden 🇸🇪 • Kurdistan</title>
     <meta name="description" content="ZICO Energy Drink — Sweden to Kurdistan. Discover flavors, request ZICO in your city, find distributors, order directly and join ZICO Club." />
     <meta name="keywords" content="ZICO Energy, ZICO Energy Drink, Sweden, Kurdistan, Duhok, Erbil, energy drink, ZICO Kurdistan" />
@@ -67,7 +67,6 @@
             transition: background-color 0.8s ease;
         }
 
-        /* Ultra Dynamic Glassmorphism UI */
         .glass-panel {
             background: rgba(10, 12, 24, 0.85);
             backdrop-filter: blur(20px);
@@ -99,7 +98,6 @@
             border-radius: 4px;
         }
 
-        /* 16:9 Slide Item Transition */
         .slide-item {
             opacity: 0;
             transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 5s cubic-bezier(0.1, 1, 0.1, 1);
@@ -116,7 +114,6 @@
             position: relative;
         }
 
-        /* Indicators Dots Styling */
         .custom-dot {
             width: 8px;
             height: 8px;
@@ -130,7 +127,6 @@
             background: #ff6600;
         }
 
-        /* Ambient Glow Backdrop Background */
         #ambient-glow {
             position: fixed;
             top: 25%;
@@ -144,7 +140,6 @@
             pointer-events: none;
         }
 
-        /* Canvas Background styling */
         #liquid-canvas {
             position: fixed;
             top: 0;
@@ -155,8 +150,6 @@
             pointer-events: none;
         }
 
-
-        /* ZICO DEMAND ENGINE */
         .demand-pulse { animation: demandPulse 2.4s ease-in-out infinite; }
         @keyframes demandPulse { 0%,100% { transform: scale(1); opacity:.82 } 50% { transform: scale(1.08); opacity:1 } }
         .demand-bar { transition: width .8s cubic-bezier(.16,1,.3,1); }
@@ -164,9 +157,6 @@
         .radar-ring { animation: radarSpin 7s linear infinite; }
         @keyframes radarSpin { to { transform: rotate(360deg); } }
 
-        /* ========================================================
-           AXIS COLA ULTRA ANIMATION & TRUCK BUTTON STYLES 
-           ======================================================== */
         .flavor-card-container {
             position: relative;
             overflow: hidden;
@@ -174,7 +164,6 @@
             transition: transform 0.4s ease, border-color 0.4s ease;
         }
 
-        /* Circular clip-path reveal layer */
         .flavor-bg-layer {
             position: absolute;
             inset: 0;
@@ -188,7 +177,6 @@
             clip-path: circle(160% at 50% 45%);
         }
 
-        /* Dynamic CAN Image animations */
         .can-wrapper {
             perspective: 1000px;
         }
@@ -209,7 +197,6 @@
             filter: drop-shadow(0 25px 30px rgba(255, 102, 0, 0.5));
         }
 
-        /* Delivery Truck Animated Add to Cart Button */
         .truck-btn {
             position: relative;
             overflow: hidden;
@@ -241,7 +228,6 @@
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
-        /* Pulse aura effect */
         @keyframes pulse-ring {
             0% { transform: scale(0.95); opacity: 0.8; }
             50% { transform: scale(1.05); opacity: 0.4; }
@@ -260,7 +246,10 @@
         .platform-tile{min-height:112px;border:1px solid rgba(255,255,255,.07);background:rgba(2,6,23,.62);border-radius:1.25rem;padding:1rem;text-align:left;display:flex;flex-direction:column;gap:.35rem;transition:.25s}.platform-tile:hover{transform:translateY(-3px);border-color:rgba(255,102,0,.35);background:rgba(15,23,42,.9)}.platform-tile b{font-size:.8rem;color:#fff}.platform-tile span{font-size:.65rem;color:#64748b}.platform-mini{display:flex;align-items:center;gap:.8rem;border:1px solid rgba(255,255,255,.06);background:rgba(2,6,23,.45);border-radius:1.1rem;padding:.9rem}.platform-mini>span{font-size:1.5rem}.platform-mini div{flex:1}.platform-mini b{font-size:.72rem}.platform-mini p{font-size:.6rem;color:#64748b;margin-top:.2rem}.platform-mini button{font-size:.62rem;font-weight:900;color:#fb923c}.experience-step{padding:1rem;border-radius:1rem;background:rgba(2,6,23,.6);border:1px solid rgba(255,255,255,.06)}.experience-step strong{display:block;font-size:.65rem;color:#fb923c}.experience-step span{display:block;font-weight:900;margin-top:.4rem}.experience-step small{display:block;color:#64748b;font-size:.58rem;margin-top:.3rem}.ai-choice{width:100%;padding:.9rem 1rem;border-radius:1rem;background:rgba(2,6,23,.75);border:1px solid rgba(255,255,255,.07);text-align:left;font-size:.75rem;font-weight:800;color:#e2e8f0;transition:.2s}.ai-choice:hover{border-color:rgba(168,85,247,.55);transform:translateX(-2px)}
 
         .reward-filter{padding:.65rem 1rem;border-radius:.8rem;background:#0f172a;border:1px solid #1e293b;color:#94a3b8;font-size:11px;font-weight:900}.reward-filter.active{background:#f97316;color:#0b0d12;border-color:#f97316}
-</style>
+
+        /* Region Coming Soon Badge */
+        .region-coming-soon { opacity: 0.7; font-style: italic; }
+    </style>
     <script type="application/ld+json">
     {
       "@context":"https://schema.org",
@@ -294,13 +283,9 @@
 </head>
 <body class="min-h-screen flex flex-col relative selection:bg-orange-500 selection:text-white">
 
-    <!-- Dynamic Canvas Particle Background -->
     <canvas id="liquid-canvas"></canvas>
-    
-    <!-- Ambient Glow Background -->
     <div id="ambient-glow"></div>
 
-    <!-- Sound Control Button -->
     <div class="fixed bottom-20 left-4 z-40">
         <button onclick="toggleSound()" id="sound-btn" class="p-2.5 rounded-full glass-panel border border-slate-700 text-xs font-bold text-slate-300 hover:text-white shadow-xl flex items-center gap-2">
             <span id="sound-icon">🔊</span>
@@ -308,11 +293,9 @@
         </button>
     </div>
 
-    <!-- Header Navigation -->
     <header class="sticky top-0 z-50 glass-panel px-4 lg:px-8 py-2.5 border-b border-slate-800/80">
         <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
             
-            <!-- ZICO Vector Gold Logo -->
             <div class="flex items-center gap-3 cursor-pointer group" onclick="switchTab('shop')">
                 <div class="w-12 h-12 rounded-full overflow-hidden shadow-lg shadow-amber-500/20 group-hover:scale-105 transition-transform border border-amber-500/50 bg-gradient-to-tr from-amber-600 via-yellow-500 to-amber-300 flex items-center justify-center p-2">
                     <svg viewBox="0 0 100 100" class="w-full h-full fill-slate-950 font-black">
@@ -330,7 +313,6 @@
                 </div>
             </div>
 
-            <!-- Desktop Navigation Links -->
             <nav class="hidden md:flex items-center gap-1 bg-slate-950/80 p-1.5 rounded-2xl border border-slate-800/80">
                 <button id="navShop" onclick="switchTab('shop')" class="px-5 py-2 rounded-xl text-xs font-bold transition-all bg-orange-500 text-white shadow-lg shadow-orange-500/30">
                     بەرهەمەکان (Shopping)
@@ -346,9 +328,7 @@
                 </button>
             </nav>
 
-            <!-- Right Actions: Language Selector & Floating Cart -->
             <div class="flex items-center gap-3">
-                <!-- Language Selector -->
                 <div class="relative bg-slate-900/90 border border-slate-800 rounded-xl px-2 py-1 flex items-center text-xs font-bold shadow-inner">
                     <span class="mr-1 text-slate-400">🌐</span>
                     <select id="language-select" onchange="changeLanguage(this.value)" class="bg-transparent text-slate-200 outline-none cursor-pointer py-1 font-bold">
@@ -360,7 +340,6 @@
                     </select>
                 </div>
 
-                <!-- Quick Account / AI -->
                 <button onclick="openZicoAccount()" aria-label="Open ZICO account" class="hidden sm:flex p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-blue-500/50 transition-all text-slate-200">
                     <i class="fa-solid fa-user"></i>
                 </button>
@@ -368,7 +347,6 @@
                     <i class="fa-solid fa-wand-magic-sparkles"></i>
                 </button>
 
-                <!-- Shopping Cart Trigger -->
                 <button onclick="toggleCartModal(true)" class="relative p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-orange-500/50 transition-all text-slate-200 active:scale-95 shadow-md">
                     <span class="text-xl">🛒</span>
                     <span id="cart-count-badge" class="hidden absolute -top-1.5 -right-1.5 bg-gradient-to-r from-orange-500 to-amber-500 text-white text-[10px] font-black w-5.5 h-5.5 rounded-full items-center justify-center animate-bounce shadow-lg shadow-orange-500/50">
@@ -378,7 +356,6 @@
             </div>
         </div>
 
-        <!-- Mobile Quick Navigation Bar -->
         <div class="flex md:hidden items-center justify-around mt-2 pt-2 border-t border-slate-800/60 text-xs font-bold">
             <button id="mobNavShop" onclick="switchTab('shop')" class="pb-1 text-orange-400 border-b-2 border-orange-400">
                 بەرهەمەکان
@@ -393,21 +370,14 @@
         </div>
     </header>
 
-    <!-- Main Dynamic Content -->
     <main class="flex-grow">
         
-        <!-- SECTION 1: SHOPPING & PRODUCTS -->
         <section id="tab-shop" class="block">
             
-            <!-- HERO SLIDESHOW CONTAINER -->
             <div class="relative max-w-6xl mx-auto px-4 lg:px-8 pt-4 pb-2">
                 <div id="slideshow-wrapper" class="relative w-full aspect-[16/9] max-h-[480px] rounded-3xl overflow-hidden glass-card border border-orange-500/30 shadow-2xl shadow-orange-500/10">
-                    
-                    <div id="slides-container" class="w-full h-full relative">
-                        <!-- 11 Clean Commercial Slides -->
-                    </div>
+                    <div id="slides-container" class="w-full h-full relative"></div>
 
-                    <!-- Slide Controls Overlays -->
                     <button onclick="prevSlide()" class="absolute top-1/2 left-3 -translate-y-1/2 w-10 h-10 rounded-xl glass-panel text-white flex items-center justify-center text-sm hover:bg-orange-500/80 hover:border-orange-400 transition-all z-20 active:scale-95">
                         <i class="fa-solid fa-chevron-left"></i>
                     </button>
@@ -415,14 +385,10 @@
                         <i class="fa-solid fa-chevron-right"></i>
                     </button>
 
-                    <!-- Indicators Dots -->
-                    <div id="slide-dots" class="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 z-20 glass-panel px-3 py-1.5 rounded-full border border-slate-700/80">
-                        <!-- Dots rendered by JS -->
-                    </div>
+                    <div id="slide-dots" class="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 z-20 glass-panel px-3 py-1.5 rounded-full border border-slate-700/80"></div>
                 </div>
             </div>
 
-            <!-- INTERACTIVE 3D FLAVOR AMBIENT SELECTOR -->
             <div class="max-w-7xl mx-auto px-4 lg:px-8 py-2">
                 <div class="glass-panel rounded-3xl p-5 lg:p-6 border border-slate-800">
                     <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-4">
@@ -472,7 +438,6 @@
                 </div>
             </div>
 
-            <!-- Products Catalog Grid Section -->
             <div id="catalog-section" class="max-w-7xl mx-auto px-4 lg:px-8 py-10">
                 <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-slate-800">
                     <div>
@@ -487,13 +452,9 @@
                     </div>
                 </div>
 
-                <!-- Product Grid Container -->
-                <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Dynamic Product Cards with Axis Cola Reveal Effect -->
-                </div>
+                <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
             </div>
 
-            <!-- LIFESTYLE GALLERY SECTION -->
             <div class="max-w-7xl mx-auto px-4 lg:px-8 pb-16">
                 <div class="text-center mb-8">
                     <span id="badgeGallery" class="bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold px-3 py-1 rounded-full uppercase">
@@ -527,7 +488,6 @@
             </div>
         </section>
 
-        <!-- ZICO v7 ALL-IN PLATFORM HUB -->
         <section id="zico-platform" class="max-w-7xl mx-auto px-4 lg:px-8 py-14">
           <div class="relative overflow-hidden rounded-[2rem] border border-orange-500/20 bg-gradient-to-br from-slate-950 via-slate-900 to-orange-950/20 p-6 md:p-10 shadow-2xl">
             <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-orange-500/10 blur-3xl"></div>
@@ -556,8 +516,6 @@
           </div>
         </section>
 
-        <!-- SECTION 2: DISTRIBUTORS & AGENTS -->
-        <!-- ZICO GROWTH HUB -->
         <section id="growth-hub" class="max-w-7xl mx-auto px-4 lg:px-8 py-10">
             <div class="glass-card rounded-[2rem] p-6 md:p-10 border border-orange-500/20 overflow-hidden relative">
                 <div class="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-orange-500/10 blur-3xl"></div>
@@ -594,13 +552,11 @@
             </div>
         </section>
 
-
         <section id="community-section" class="max-w-7xl mx-auto px-4 lg:px-8 py-10">
           <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-5"><div><span class="text-[10px] font-black tracking-widest text-emerald-400">ZICO COMMUNITY</span><h2 class="text-3xl font-black mt-2">کۆمەڵگا و چیرۆکەکان 💬</h2><p class="text-slate-500 text-sm mt-2">ڕا، تاقیکردنەوە و بەشداریکردنی خەڵکی ZICO.</p></div><button onclick="openReviewBox()" class="px-5 py-3 rounded-xl border border-slate-700 text-xs font-black hover:border-purple-500">+ Write a review</button></div>
           <div id="community-feed" class="grid md:grid-cols-3 gap-4"></div>
         </section>
 
-        <!-- ZICO DEMAND ENGINE -->
         <section id="demand-engine" class="max-w-7xl mx-auto px-4 lg:px-8 py-10">
             <div class="relative overflow-hidden rounded-[2.25rem] border border-orange-500/25 bg-gradient-to-br from-orange-500/[.08] via-slate-950 to-blue-500/[.07] p-6 md:p-10 shadow-2xl">
                 <div class="absolute -top-32 -left-32 w-80 h-80 rounded-full bg-orange-500/10 blur-3xl"></div>
@@ -633,7 +589,6 @@
             </div>
         </section>
 
-        <!-- Demand Request Modal -->
         <div id="demand-modal" class="hidden fixed inset-0 z-[80] bg-black/80 backdrop-blur-md items-center justify-center p-4">
             <div class="w-full max-w-lg rounded-[2rem] border border-orange-500/25 bg-slate-950 p-6 md:p-8 shadow-2xl">
                 <div class="flex items-start justify-between gap-4"><div><span class="text-[10px] font-black text-orange-400 tracking-widest">ZICO DEMAND</span><h3 id="demandModalTitle" class="text-2xl font-black text-white mt-1">ZICO ل کوێ دڤێت؟</h3></div><button onclick="closeDemandModal()" aria-label="Close demand dialog" class="w-10 h-10 rounded-xl bg-slate-900 text-slate-400">×</button></div>
@@ -649,7 +604,6 @@
             </div>
         </div>
 
-        <!-- Distributor Application Modal -->
         <div id="distributor-application-modal" class="hidden fixed inset-0 z-[80] bg-black/80 backdrop-blur-md items-center justify-center p-4">
             <div class="w-full max-w-lg rounded-[2rem] border border-blue-500/25 bg-slate-950 p-6 md:p-8 shadow-2xl">
                 <div class="flex items-start justify-between"><div><span class="text-[10px] font-black text-blue-400 tracking-widest">ZICO DISTRIBUTOR</span><h3 id="distModalTitle" class="text-2xl font-black text-white mt-1">ببە بریکارێ ZICO</h3></div><button onclick="closeDistributorApplication()" class="w-10 h-10 rounded-xl bg-slate-900 text-slate-400">×</button></div>
@@ -679,7 +633,6 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Badinan Agent -->
                     <div class="glass-card rounded-3xl p-8 relative overflow-hidden flex flex-col justify-between border-blue-500/30">
                         <div class="absolute top-0 right-0 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl"></div>
                         
@@ -700,6 +653,13 @@
                                     </div>
                                     <i class="fa-solid fa-arrow-left text-slate-500 group-hover:text-emerald-400 transition-colors"></i>
                                 </a>
+                                <div class="flex items-center gap-2 p-3 rounded-2xl bg-orange-500/5 border border-orange-500/20">
+                                    <span class="text-xs">💳</span>
+                                    <div class="flex-1">
+                                        <p class="text-[10px] text-slate-400">FIB & FastPay</p>
+                                        <p class="text-xs font-bold text-white" dir="ltr">+964 750 469 6517</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -709,7 +669,6 @@
                         </a>
                     </div>
 
-                    <!-- Erbil Agent -->
                     <div class="glass-card rounded-3xl p-8 relative overflow-hidden flex flex-col justify-between border-orange-500/30">
                         <div class="absolute top-0 right-0 w-40 h-40 bg-orange-500/10 rounded-full blur-3xl"></div>
                         
@@ -750,10 +709,35 @@
                         </a>
                     </div>
                 </div>
+
+                <div class="mt-10 glass-card rounded-3xl p-6 md:p-8 border border-amber-500/20">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-500/20 flex items-center justify-center text-2xl">💳</div>
+                        <div>
+                            <h3 class="text-xl font-black text-white">ڕێکا پارەدانێ — Payment Methods</h3>
+                            <p class="text-xs text-slate-400 mt-1">ل کوردستانێ، ئەم FIB و FastPay قبووڵ دکەین</p>
+                        </div>
+                    </div>
+                    <div class="grid sm:grid-cols-2 gap-3">
+                        <div class="flex items-center gap-3 p-4 rounded-2xl bg-slate-950 border border-slate-800">
+                            <span class="text-2xl">🏦</span>
+                            <div class="flex-1">
+                                <p class="text-xs font-black text-white">FIB — First Iraqi Bank</p>
+                                <p class="text-sm font-bold text-amber-400 mt-1" dir="ltr">+964 750 469 6517</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 p-4 rounded-2xl bg-slate-950 border border-slate-800">
+                            <span class="text-2xl">⚡</span>
+                            <div class="flex-1">
+                                <p class="text-xs font-black text-white">FastPay</p>
+                                <p class="text-sm font-bold text-amber-400 mt-1" dir="ltr">+964 750 469 6517</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- SECTION 3: DEVELOPER PORTFOLIO (Zaniyar Al-Mzurii) -->
         <section id="tab-developer" class="hidden">
             <div class="max-w-4xl mx-auto px-4 py-12">
                 <div class="glass-card rounded-3xl p-8 lg:p-12 relative overflow-hidden border-purple-500/40 shadow-2xl">
@@ -868,7 +852,6 @@
 
     </main>
 
-    <!-- Footer -->
     <footer class="bg-[#020306] border-t border-slate-800/80 py-8 px-4 lg:px-8 mt-12 text-slate-500 text-xs text-center relative z-10">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
             <p>© 2026 ZICO Energy Drinks Sweden 🇸🇪. All Rights Reserved.</p>
@@ -881,7 +864,6 @@
         </div>
     </footer>
 
-    <!-- REVIEW MODAL -->
     <div id="review-modal" class="hidden fixed inset-0 z-[60] bg-black/80 backdrop-blur-md items-center justify-center p-4">
         <div class="glass-card rounded-3xl max-w-md w-full p-6 relative border border-purple-500/30">
             <button onclick="closeReviewBox()" aria-label="Close review dialog" class="absolute top-4 left-4 w-9 h-9 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center">✕</button>
@@ -896,7 +878,6 @@
         </div>
     </div>
 
-    <!-- PRODUCT DETAILS MODAL -->
     <div id="product-detail-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md items-center justify-center p-4">
         <div class="glass-card rounded-3xl max-w-xl w-full p-6 relative border border-slate-700">
             <button onclick="toggleDetailModal(false)" class="absolute top-4 left-4 w-9 h-9 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center font-bold hover:bg-slate-700">
@@ -927,9 +908,11 @@
         </div>
     </div>
 
-    <!-- CART MODAL DRAWER -->
+    <!-- ============================================================
+         CART DRAWER — UPDATED WITH REGION SELECT (7 REGIONS)
+         ============================================================ -->
     <div id="cart-drawer-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md justify-end">
-        <div class="bg-[#090b14] w-full max-w-md h-full border-r border-slate-800 p-6 flex flex-col justify-between">
+        <div class="bg-[#090b14] w-full max-w-md h-full border-r border-slate-800 p-6 flex flex-col justify-between overflow-y-auto">
             <div>
                 <div class="flex items-center justify-between pb-4 border-b border-slate-800 mb-6">
                     <h3 class="text-xl font-bold text-white flex items-center gap-2">
@@ -941,31 +924,50 @@
                     </button>
                 </div>
 
-                <div id="cart-items-container" class="space-y-4 max-h-[55vh] overflow-y-auto custom-scrollbar pr-1">
+                <div id="cart-items-container" class="space-y-4 max-h-[45vh] overflow-y-auto custom-scrollbar pr-1">
                     <!-- Dynamic Cart Items -->
                 </div>
             </div>
 
-            <div id="cart-footer-area" class="pt-4 border-t border-slate-800 space-y-4">
+            <div id="cart-footer-area" class="pt-4 border-t border-slate-800 space-y-4 mt-4">
+                <!-- REGION SELECTOR -->
                 <div class="rounded-2xl border border-orange-500/20 bg-orange-500/5 p-3.5">
-                    <div class="flex items-center justify-between gap-3 mb-2">
+                    <div class="flex items-center justify-between gap-3 mb-3">
                         <div>
-                            <p id="regionLabel" class="text-xs font-black text-white">🌍 داوا ل کوێیە؟</p>
-                            <p id="regionHint" class="text-[10px] text-slate-500 mt-0.5">بریکار و نرخی گونجاو بەپێی ناوچەکەت هەڵدەبژێرین.</p>
+                            <p class="text-xs font-black text-white">🌍 داوا ل کوێیە؟</p>
+                            <p class="text-[10px] text-slate-500 mt-0.5">ناوچەکەت هەلبژێرە دا بریکارێ دروست ببینین.</p>
                         </div>
-                        <span id="regionStatus" class="text-[9px] font-black px-2 py-1 rounded-lg bg-slate-800 text-slate-300">Kurdistan</span>
+                        <span id="regionStatus" class="text-[9px] font-black px-2 py-1 rounded-lg bg-slate-800 text-slate-300">🇮🇶 کوردستان</span>
                     </div>
-                    <div class="grid grid-cols-2 gap-2">
-                        <button type="button" id="regionIraqBtn" onclick="selectOrderRegion('kurdistan')" class="region-btn active-region px-3 py-2.5 rounded-xl text-xs font-black border transition-all">🇮🇶 Kurdistan / Iraq</button>
-                        <button type="button" id="regionSwedenBtn" onclick="selectOrderRegion('sweden')" class="region-btn px-3 py-2.5 rounded-xl text-xs font-black border border-slate-700 bg-slate-900 text-slate-300 transition-all">🇸🇪 Sweden</button>
-                    </div>
+                    <select id="regionSelect" onchange="selectOrderRegion(this.value)" 
+                            class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm font-bold outline-none focus:border-orange-500 cursor-pointer">
+                        <option value="kurdistan" class="bg-slate-900">🇮🇶 کوردستان — Kurdistan</option>
+                        <option value="sweden" class="bg-slate-900 region-coming-soon">🇸🇪 Sweden — Coming Soon</option>
+                        <option value="dubai" class="bg-slate-900 region-coming-soon">🇦🇪 Dubai — Coming Soon</option>
+                        <option value="uk" class="bg-slate-900 region-coming-soon">🇬🇧 UK — Coming Soon</option>
+                        <option value="iraq" class="bg-slate-900 region-coming-soon">🇮🇶 Iraq — Coming Soon</option>
+                        <option value="spain" class="bg-slate-900 region-coming-soon">🇪🇸 Spain — Coming Soon</option>
+                        <option value="syria" class="bg-slate-900 region-coming-soon">🇸🇾 Syria — Coming Soon</option>
+                    </select>
                 </div>
+
+                <!-- PAYMENT METHODS INFO -->
+                <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-3">
+                    <p class="text-[10px] font-black text-amber-300 mb-2">💳 ڕێکا پارەدانێ — Payment</p>
+                    <div class="flex flex-wrap gap-2 text-[10px]">
+                        <span class="px-2 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">🏦 FIB</span>
+                        <span class="px-2 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">⚡ FastPay</span>
+                        <span class="px-2 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">💵 Cash on Delivery</span>
+                    </div>
+                    <p class="text-[9px] text-slate-500 mt-2" dir="ltr">FIB & FastPay: +964 750 469 6517</p>
+                </div>
+
                 <div id="orderCustomerFields" class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     <input id="orderCustomerName" type="text" autocomplete="name" placeholder="ناڤێ تە" class="w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs outline-none focus:border-orange-500">
                     <input id="orderCustomerPhone" type="tel" autocomplete="tel" placeholder="ژمارا تە" class="w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs outline-none focus:border-orange-500" dir="ltr">
                     <input id="orderCustomerCity" type="text" autocomplete="address-level2" placeholder="شار" class="w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs outline-none focus:border-orange-500">
                     <input id="orderCustomerAddress" type="text" autocomplete="street-address" placeholder="ناونیشان" class="w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs outline-none focus:border-orange-500">
-                    <input id="orderPostalCode" type="text" autocomplete="postal-code" placeholder="Postal Code (Sweden)" class="hidden w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs outline-none focus:border-orange-500" dir="ltr">
+                    <input id="orderPostalCode" type="text" autocomplete="postal-code" placeholder="Postal Code" class="hidden sm:col-span-2 w-full px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs outline-none focus:border-orange-500" dir="ltr">
                 </div>
                 <div class="flex items-center justify-between text-sm">
                     <span id="totalTextLabel" class="text-slate-400 font-bold">کۆی گشتی:</span>
@@ -979,9 +981,11 @@
         </div>
     </div>
 
-    <!-- SELECT AGENT WHATSAPP ROUTER MODAL -->
+    <!-- ============================================================
+         AGENT SELECT MODAL — UPDATED FOR DYNAMIC REGIONS
+         ============================================================ -->
     <div id="agent-select-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-lg items-center justify-center p-4">
-        <div class="glass-card border border-emerald-500/40 rounded-3xl max-w-lg w-full p-6 relative shadow-2xl">
+        <div class="glass-card border border-emerald-500/40 rounded-3xl max-w-lg w-full p-6 relative shadow-2xl max-h-[92vh] overflow-y-auto">
             <button onclick="toggleAgentModal(false)" class="absolute top-4 left-4 w-9 h-9 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center font-bold hover:bg-slate-700">
                 ✕
             </button>
@@ -996,59 +1000,26 @@
             <div class="mb-4 rounded-2xl border border-blue-500/20 bg-blue-500/5 p-3">
                 <div class="flex items-center justify-between gap-3">
                     <div>
-                        <p id="selectedRegionTitle" class="text-xs font-black text-white">🇮🇶 Kurdistan / Iraq</p>
+                        <p id="selectedRegionTitle" class="text-xs font-black text-white">🇮🇶 Kurdistan</p>
                         <p id="selectedRegionSub" class="text-[10px] text-slate-500">بریکار بەپێی ناوچەکەت هەڵبژێرە.</p>
                     </div>
                     <button onclick="toggleAgentModal(false); toggleCartModal(true)" class="text-[10px] font-bold text-orange-400">گۆڕین</button>
                 </div>
             </div>
-            <div id="swedenDistributorNotice" class="hidden mb-4 rounded-2xl border border-yellow-500/20 bg-yellow-500/5 p-4 text-center">
-                <div class="text-2xl mb-2">🇸🇪</div>
-                <p id="swedenDistributorTitle" class="text-sm font-black text-white">Sweden — Coming Soon</p>
-                <p id="swedenDistributorText" class="text-[11px] text-slate-400 mt-1">ژمارا بریکاری سوید هێشتا ل سیستەمێ نەهاتە تۆمارکرن.</p>
-                <button onclick="copyOrderDetails()" class="mt-3 px-4 py-2 rounded-xl bg-slate-800 text-white text-xs font-bold border border-slate-700">Copy Order Details</button>
+
+            <div id="swedenDistributorNotice" class="hidden mb-4 rounded-2xl border border-yellow-500/20 bg-yellow-500/5 p-5 text-center">
+                <!-- Dynamic content by prepareAgentModal -->
             </div>
 
             <div id="kurdistanAgentsList" class="space-y-4">
-                <!-- Badinan Agent Option -->
-                <div class="bg-slate-900/90 border border-blue-500/30 rounded-2xl p-4">
-                    <div class="flex items-center justify-between mb-3">
-                        <span id="opt1Label" class="text-xs font-bold text-blue-400 bg-blue-500/10 px-2.5 py-1 rounded-lg">ئۆپشنێ ١</span>
-                        <span id="badinanOptName" class="text-sm font-bold text-white">بریکارێ سەرەکی ل بادینان</span>
-                    </div>
-                    <button onclick="sendOrderViaWhatsApp('+9647504696517')" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-between px-4">
-                        <span dir="ltr" class="font-mono text-sm">+964 750 469 6517</span>
-                        <span id="btnBadinanSend">ناردنا داواکاریێ ب واتسئاپێ 💬</span>
-                    </button>
-                </div>
-
-                <!-- Erbil Agent Options -->
-                <div class="bg-slate-900/90 border border-orange-500/30 rounded-2xl p-4">
-                    <div class="flex items-center justify-between mb-3">
-                        <span id="opt2Label" class="text-xs font-bold text-orange-400 bg-orange-500/10 px-2.5 py-1 rounded-lg">ئۆپشنێ ٢</span>
-                        <span id="erbilOptName" class="text-sm font-bold text-white">بریکارێ سەرەکی ل هەولێر</span>
-                    </div>
-                    <div class="space-y-2">
-                        <button onclick="sendOrderViaWhatsApp('+9647504489125')" class="w-full py-2.5 bg-slate-800 hover:bg-emerald-600/80 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-between px-4 border border-slate-700 hover:border-emerald-500">
-                            <span dir="ltr" class="font-mono text-xs">+964 750 448 9125 (Korek)</span>
-                            <span>واتسئاپ 💬</span>
-                        </button>
-                        <button onclick="sendOrderViaWhatsApp('+9647502615202')" class="w-full py-2.5 bg-slate-800 hover:bg-emerald-600/80 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-between px-4 border border-slate-700 hover:border-emerald-500">
-                            <span dir="ltr" class="font-mono text-xs">+964 750 261 5202 (Korek)</span>
-                            <span>واتسئاپ 💬</span>
-                        </button>
-                        <button onclick="sendOrderViaWhatsApp('+9647745445542')" class="w-full py-2.5 bg-slate-800 hover:bg-emerald-600/80 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-between px-4 border border-slate-700 hover:border-emerald-500">
-                            <span dir="ltr" class="font-mono text-xs">+964 774 544 5542 (Asiacell)</span>
-                            <span>واتسئاپ 💬</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
+                <!-- Dynamic agents rendered by prepareAgentModal -->
             </div>
         </div>
     </div>
 
-    <!-- Canvas Liquid Background Particles Script -->
+    <!-- ============================================================
+         JAVASCRIPT
+         ============================================================ -->
     <script>
         const canvas = document.getElementById('liquid-canvas');
         const ctx = canvas.getContext('2d');
@@ -1098,7 +1069,6 @@
         animateCanvas();
     </script>
 
-    <!-- Sound Synthesizer Engine -->
     <script>
         let isSoundEnabled = true;
         let audioCtx = null;
@@ -1142,12 +1112,9 @@
                 gain.connect(audioCtx.destination);
 
                 noise.start();
-            } catch (e) {
-                // Sound fallback
-            }
+            } catch (e) {}
         }
 
-        // Multi-Source Image Fallback
         function handleMultiSrcImgError(img, baseName, fallbackTitle) {
             img.onerror = null;
             
@@ -1201,7 +1168,6 @@
         }
     </script>
 
-    <!-- TRANSLATIONS DICTIONARY FOR 3 LANGUAGES -->
     <script>
         const DICTIONARY = {
             badini: {
@@ -1264,7 +1230,29 @@
                 lblSize: "قەبارە:",
                 lblSugar: "شەکر:",
                 lblCaffeine: "پێکهاتەکان:",
-                lblBenefits: "مفایێت سەرەکی:", clubTitle:"بەشداربە لە ZICO Club", clubSub:"خۆت لە ZICO نزیکتر بکە: خاڵ کۆبکەرەوە و ZICO بڵاوتر بکەوە.", clubPointsLabel:"خاڵ", clubVisitsLabel:"سەردان", clubReferralsLabel:"هاوبەشکرن", shareZicoBtn:"بڵاڤکرنا ZICO", clubRewardBtn:"خەڵات", viralTitle:"بۆ هاوڕێکەت بنێرە", referralLabel:"کۆدی هاوبەشکرن", referralHint:"کۆدی ZICO ـی خۆت بڵاڤ بکەوە.", findTitle:"ZICO ل کوێیە؟", findSub:"ناوچەکەت هەڵبژێرە و بۆ بریکارێ دروست بڕۆ.", findBtn:"دیتنا بریکار ←", fastOrderTitle:"داواکرنا خێرا", fastOrderSub:"تاما هەڵبژێرە و داواکاریێ بۆ ناوچەکەت بنێرە.", fastOrderBtn:"نوکە بکڕە ←", reviewTitle:"هەڵسەنگاندنا تە", reviewSub:"تاما دڵخواز هەڵسەنگێنە و بۆ ZICO ڕایەک بنڤیسە.", reviewBtn:"نڤیسینا ڕای ←"
+                lblBenefits: "مفایێت سەرەکی:", 
+                clubTitle:"بەشداربە لە ZICO Club", 
+                clubSub:"خۆت لە ZICO نزیکتر بکە: خاڵ کۆبکەرەوە و ZICO بڵاوتر بکەوە.", 
+                clubPointsLabel:"خاڵ", 
+                clubVisitsLabel:"سەردان", 
+                clubReferralsLabel:"هاوبەشکرن", 
+                shareZicoBtn:"بڵاڤکرنا ZICO", 
+                clubRewardBtn:"خەڵات", 
+                viralTitle:"بۆ هاوڕێکەت بنێرە", 
+                referralLabel:"کۆدی هاوبەشکرن", 
+                referralHint:"کۆدی ZICO ـی خۆت بڵاڤ بکەوە.", 
+                findTitle:"ZICO ل کوێیە؟", 
+                findSub:"ناوچەکەت هەڵبژێرە و بۆ بریکارێ دروست بڕۆ.", 
+                findBtn:"دیتنا بریکار ←", 
+                fastOrderTitle:"داواکرنا خێرا", 
+                fastOrderSub:"تاما هەڵبژێرە و داواکاریێ بۆ ناوچەکەت بنێرە.", 
+                fastOrderBtn:"نوکە بکڕە ←", 
+                reviewTitle:"هەڵسەنگاندنا تە", 
+                reviewSub:"تاما دڵخواز هەڵسەنگێنە و بۆ ZICO ڕایەک بنڤیسە.", 
+                reviewBtn:"نڤیسینا ڕای ←",
+                regionLabel: "داوا ل کوێیە؟",
+                regionHint: "ناوچەکەت هەلبژێرە دا بریکارێ دروست ببینین.",
+                selectedRegionSub: "بریکار بەپێی ناوچەکەت هەڵبژێرە."
             },
             sorani: {
                 navShop: "بەرهەمەکان (Shopping)",
@@ -1326,7 +1314,29 @@
                 lblSize: "قەبارە:",
                 lblSugar: "شەکر:",
                 lblCaffeine: "پێکهاتەکان:",
-                lblBenefits: "سوودە سەرەکییەکان:", clubTitle:"بەشداربە لە ZICO Club", clubSub:"خۆت لە ZICO نزیکتر بکە: خاڵ کۆبکەرەوە و ZICO بڵاوتر بکەوە.", clubPointsLabel:"خاڵ", clubVisitsLabel:"سەردان", clubReferralsLabel:"هاوبەشکرن", shareZicoBtn:"بڵاڤکردنەوەی ZICO", clubRewardBtn:"خەڵات", viralTitle:"بۆ هاوڕێیەک بنێرە", referralLabel:"کۆدی هاوبەشکردن", referralHint:"کۆدی ZICO ـی خۆت بڵاو بکەرەوە.", findTitle:"ZICO لە کوێیە؟", findSub:"ناوچەکەت هەڵبژێرە و بۆ بریکاری دروست بڕۆ.", findBtn:"دۆزینەوەی بریکار ←", fastOrderTitle:"داواکاری خێرا", fastOrderSub:"تامت هەڵبژێرە و داواکارییەکەت بۆ ناوچەکەت بنێرە.", fastOrderBtn:"ئێستا بکڕە ←", reviewTitle:"هەڵسەنگاندنی تۆ", reviewSub:"تامی دڵخوازت هەڵبسەنگێنە و ڕایەک بنووسە.", reviewBtn:"نووسینی ڕای ←"
+                lblBenefits: "سوودە سەرەکییەکان:", 
+                clubTitle:"بەشداربە لە ZICO Club", 
+                clubSub:"خۆت لە ZICO نزیکتر بکە: خاڵ کۆبکەرەوە و ZICO بڵاوتر بکەوە.", 
+                clubPointsLabel:"خاڵ", 
+                clubVisitsLabel:"سەردان", 
+                clubReferralsLabel:"هاوبەشکرن", 
+                shareZicoBtn:"بڵاڤکردنەوەی ZICO", 
+                clubRewardBtn:"خەڵات", 
+                viralTitle:"بۆ هاوڕێیەک بنێرە", 
+                referralLabel:"کۆدی هاوبەشکردن", 
+                referralHint:"کۆدی ZICO ـی خۆت بڵاو بکەرەوە.", 
+                findTitle:"ZICO لە کوێیە؟", 
+                findSub:"ناوچەکەت هەڵبژێرە و بۆ بریکاری دروست بڕۆ.", 
+                findBtn:"دۆزینەوەی بریکار ←", 
+                fastOrderTitle:"داواکاری خێرا", 
+                fastOrderSub:"تامت هەڵبژێرە و داواکارییەکەت بۆ ناوچەکەت بنێرە.", 
+                fastOrderBtn:"ئێستا بکڕە ←", 
+                reviewTitle:"هەڵسەنگاندنی تۆ", 
+                reviewSub:"تامی دڵخوازت هەڵبسەنگێنە و ڕایەک بنووسە.", 
+                reviewBtn:"نووسینی ڕای ←",
+                regionLabel: "داوا ل کوێیە؟",
+                regionHint: "ناوچەکەت هەلبژێرە دا بریکارێ دروست ببینین.",
+                selectedRegionSub: "بریکار بەپێی ناوچەکەت هەڵبژێرە."
             },
             arabic: {
                 navShop: "المنتجات (Shopping)",
@@ -1388,7 +1398,29 @@
                 lblSize: "الحجم:",
                 lblSugar: "السكر:",
                 lblCaffeine: "المكونات:",
-                lblBenefits: "الفوائد الرئيسية:", clubTitle:"انضم إلى ZICO Club", clubSub:"اجمع النقاط وشارك ZICO مع أصدقائك.", clubPointsLabel:"النقاط", clubVisitsLabel:"الزيارات", clubReferralsLabel:"المشاركات", shareZicoBtn:"شارك ZICO", clubRewardBtn:"المكافآت", viralTitle:"أخبر صديقاً", referralLabel:"رمز المشاركة", referralHint:"شارك رابط ZICO الخاص بك.", findTitle:"أين تجد ZICO؟", findSub:"اختر منطقتك وتواصل مع الوكيل المناسب.", findBtn:"العثور على الوكيل ←", fastOrderTitle:"طلب سريع", fastOrderSub:"اختر النكهة وأرسل الطلب إلى منطقتك.", fastOrderBtn:"تسوق الآن ←", reviewTitle:"تقييمك لـ ZICO", reviewSub:"قيّم نكهتك المفضلة واكتب رأيك.", reviewBtn:"اكتب مراجعة ←"
+                lblBenefits: "الفوائد الرئيسية:", 
+                clubTitle:"انضم إلى ZICO Club", 
+                clubSub:"اجمع النقاط وشارك ZICO مع أصدقائك.", 
+                clubPointsLabel:"النقاط", 
+                clubVisitsLabel:"الزيارات", 
+                clubReferralsLabel:"المشاركات", 
+                shareZicoBtn:"شارك ZICO", 
+                clubRewardBtn:"المكافآت", 
+                viralTitle:"أخبر صديقاً", 
+                referralLabel:"رمز المشاركة", 
+                referralHint:"شارك رابط ZICO الخاص بك.", 
+                findTitle:"أين تجد ZICO؟", 
+                findSub:"اختر منطقتك وتواصل مع الوكيل المناسب.", 
+                findBtn:"العثور على الوكيل ←", 
+                fastOrderTitle:"طلب سريع", 
+                fastOrderSub:"اختر النكهة وأرسل الطلب إلى منطقتك.", 
+                fastOrderBtn:"تسوق الآن ←", 
+                reviewTitle:"تقييمك لـ ZICO", 
+                reviewSub:"قيّم نكهتك المفضلة واكتب رأيك.", 
+                reviewBtn:"اكتب مراجعة ←",
+                regionLabel: "أين تريد الطلب؟",
+                regionHint: "اختر منطقتك للتوصيل.",
+                selectedRegionSub: "اختر الوكيل حسب منطقتك."
             },
             english: {
                 navShop: "Products (Shopping)", navAgents: "Distributors", navDev: "Developer", mobNavShop: "Products", mobNavAgents: "Distributors", mobNavDev: "Developer",
@@ -1397,19 +1429,23 @@
                 badgeSwedenStandard: "🇸🇪 Sweden Standard • Kurdistan Supply", badgeGallery: "ZICO LIFESTYLE & MOMENTS", galleryTitle: "Energy everywhere", galCap1: "ZICO Original Blue 66", galCap2: "ZICO Mojito Lime 65", galCap3: "ZICO Fruit Candy 60", galCap4: "ZICO Açaí Berry 63",
                 badgeDistributors: "📍 Official Distribution", distributorsTitle: "Distributors & Contact", distributorsSub: "Choose the distributor that serves your region.", badinanRegionTag: "Badinan / Duhok", badinanAgentName: "Main Distributor — Badinan", badinanTiktokBtn: "TikTok: @zikoenrgy", erbilRegionTag: "Erbil & surrounding areas", erbilAgentName: "Main Distributor — Erbil", erbilTiktokBtn: "TikTok: @zico.company",
                 devBioText: "Modern websites, applications and custom systems built with premium quality.", devServicesTitle: "Services", srvWebTitle: "Web Applications", srvWebDesc: "Modern and fast websites and web apps", srvMobTitle: "Mobile Apps", srvMobDesc: "iOS and Android apps for businesses", srvSysTitle: "Custom Systems", srvSysDesc: "Custom management systems", devSocialTitle: "Social media & direct contact:", footerDevLabel: "Development & Design:",
-                cartDrawerTitle: "Order Cart", btnSendWhatsappText: "Continue Order", selectAgentModalTitle: "Choose your distributor", opt1Label: "Option 1", badinanOptName: "Main Distributor — Badinan", btnBadinanSend: "Send via WhatsApp", opt2Label: "Option 2", erbilOptName: "Main Distributor — Erbil", lblOrigin: "Origin:", lblPriceSingle: "Single can:", lblPriceBundle: "Case (24 cans):", lblSize: "Size:", lblSugar: "Sugar:", lblCaffeine: "Ingredients:", lblBenefits: "Key benefits:", clubTitle:"Join ZICO Club", clubSub:"Collect points, share ZICO and unlock rewards.", clubPointsLabel:"Points", clubVisitsLabel:"Visits", clubReferralsLabel:"Shares", shareZicoBtn:"Share ZICO", clubRewardBtn:"Rewards", viralTitle:"Tell a friend", referralLabel:"Your share code", referralHint:"Share your ZICO link with friends.", findTitle:"Find ZICO", findSub:"Choose your region and connect to the right distributor.", findBtn:"Find distributor →", fastOrderTitle:"Fast Order", fastOrderSub:"Pick a flavor and route your order to your region.", fastOrderBtn:"Shop now →", reviewTitle:"Your ZICO Review", reviewSub:"Rate your favorite flavor and leave a quick review.", reviewBtn:"Write review →",
-                regionLabel: "Where is your order?", regionHint: "We route your order to the correct region.", selectedRegionSub: "Choose a distributor serving your region.", swedenDistributorTitle: "Sweden — Coming Soon", swedenDistributorText: "A Sweden — Coming Soon phone number has not been configured yet."
+                cartDrawerTitle: "Order Cart", btnSendWhatsappText: "Continue Order", selectAgentModalTitle: "Choose your distributor", opt1Label: "Option 1", badinanOptName: "Main Distributor — Badinan", btnBadinanSend: "Send via WhatsApp", opt2Label: "Option 2", erbilOptName: "Main Distributor — Erbil", lblOrigin: "Origin:", lblPriceSingle: "Single can:", lblPriceBundle: "Case (24 cans):", lblSize: "Size:", lblSugar: "Sugar:", lblCaffeine: "Ingredients:", lblBenefits: "Key benefits:", 
+                clubTitle:"Join ZICO Club", clubSub:"Collect points, share ZICO and unlock rewards.", clubPointsLabel:"Points", clubVisitsLabel:"Visits", clubReferralsLabel:"Shares", shareZicoBtn:"Share ZICO", clubRewardBtn:"Rewards", viralTitle:"Tell a friend", referralLabel:"Your share code", referralHint:"Share your ZICO link with friends.", findTitle:"Find ZICO", findSub:"Choose your region and connect to the right distributor.", findBtn:"Find distributor →", fastOrderTitle:"Fast Order", fastOrderSub:"Pick a flavor and route your order to your region.", fastOrderBtn:"Shop now →", reviewTitle:"Your ZICO Review", reviewSub:"Rate your favorite flavor and leave a quick review.", reviewBtn:"Write review →",
+                regionLabel: "Where is your order?", regionHint: "We route your order to the correct region.", selectedRegionSub: "Choose a distributor serving your region.",
+                swedenDistributorTitle: "Coming Soon", swedenDistributorText: "ZICO has not arrived in this region yet."
             },
             swedish: {
                 navShop: "Produkter", navAgents: "Distributörer", navDev: "Utvecklare", mobNavShop: "Produkter", mobNavAgents: "Distributörer", mobNavDev: "Utvecklare", unitBundleText: "Kartong (24 burkar)", unitPieceText: "Burk (1)", qtyLabel: "Antal:", totalTextLabel: "Totalt:", detailsBtnText: "Detaljer", addCartBtnText: "Lägg i varukorg", soldOutText: "Slut i lager", soldOutMsg: "Produkten är tillfälligt slut i lager",
                 badgeSwedishOrigin: "🇸🇪 FORMULERAD I SVERIGE • NU I KURDISTAN", ambientSelectorTitle: "Välj din smak", btnSeeAllCans: "Visa alla produkter", ourProductsTitle: "ZICO Energy Drink", ourProductsSub: "Välj smak och beställ direkt", badgeSwedenStandard: "🇸🇪 Sweden Standard • Kurdistan Supply", badgeGallery: "ZICO LIFESTYLE & MOMENTS", galleryTitle: "Energi överallt", galCap1: "ZICO Original Blue 66", galCap2: "ZICO Mojito Lime 65", galCap3: "ZICO Fruit Candy 60", galCap4: "ZICO Açaí Berry 63",
                 badgeDistributors: "📍 Officiell distribution", distributorsTitle: "Distributörer & kontakt", distributorsSub: "Välj distributören som betjänar din region.", badinanRegionTag: "Badinan / Duhok", badinanAgentName: "Huvuddistributör — Badinan", badinanTiktokBtn: "TikTok: @zikoenrgy", erbilRegionTag: "Erbil med omnejd", erbilAgentName: "Huvuddistributör — Erbil", erbilTiktokBtn: "TikTok: @zico.company", devBioText: "Moderna webbplatser, appar och skräddarsydda system med hög kvalitet.", devServicesTitle: "Tjänster", srvWebTitle: "Webbapplikationer", srvWebDesc: "Moderna och snabba webbplatser och webbappar", srvMobTitle: "Mobilappar", srvMobDesc: "iOS- och Android-appar för företag", srvSysTitle: "Anpassade system", srvSysDesc: "Skräddarsydda administrationssystem", devSocialTitle: "Sociala medier & direktkontakt:", footerDevLabel: "Utveckling & design:",
-                cartDrawerTitle: "Varukorg", btnSendWhatsappText: "Fortsätt beställning", selectAgentModalTitle: "Välj distributör", opt1Label: "Alternativ 1", badinanOptName: "Huvuddistributör — Badinan", btnBadinanSend: "Skicka via WhatsApp", opt2Label: "Alternativ 2", erbilOptName: "Huvuddistributör — Erbil", lblOrigin: "Ursprung:", lblPriceSingle: "En burk:", lblPriceBundle: "Kartong (24 burkar):", lblSize: "Storlek:", lblSugar: "Socker:", lblCaffeine: "Ingredienser:", lblBenefits: "Viktiga fördelar:", clubTitle:"Gå med i ZICO Club", clubSub:"Samla poäng, dela ZICO och lås upp belöningar.", clubPointsLabel:"Poäng", clubVisitsLabel:"Besök", clubReferralsLabel:"Delningar", shareZicoBtn:"Dela ZICO", clubRewardBtn:"Belöningar", viralTitle:"Tipsa en vän", referralLabel:"Din delningskod", referralHint:"Dela din ZICO-länk med vänner.", findTitle:"Hitta ZICO", findSub:"Välj region och kontakta rätt distributör.", findBtn:"Hitta distributör →", fastOrderTitle:"Snabb beställning", fastOrderSub:"Välj smak och skicka beställningen till din region.", fastOrderBtn:"Handla nu →", reviewTitle:"Din ZICO-recension", reviewSub:"Betygsätt din favoritsmak och skriv en recension.", reviewBtn:"Skriv recension →", regionLabel: "Vart ska beställningen skickas?", regionHint: "Vi kopplar beställningen till rätt region.", selectedRegionSub: "Välj en distributör för din region.", swedenDistributorTitle: "Distributör i Sverige", swedenDistributorText: "Telefonnummer till svensk distributör är ännu inte konfigurerat."
+                cartDrawerTitle: "Varukorg", btnSendWhatsappText: "Fortsätt beställning", selectAgentModalTitle: "Välj distributör", opt1Label: "Alternativ 1", badinanOptName: "Huvuddistributör — Badinan", btnBadinanSend: "Skicka via WhatsApp", opt2Label: "Alternativ 2", erbilOptName: "Huvuddistributör — Erbil", lblOrigin: "Ursprung:", lblPriceSingle: "En burk:", lblPriceBundle: "Kartong (24 burkar):", lblSize: "Storlek:", lblSugar: "Socker:", lblCaffeine: "Ingredienser:", lblBenefits: "Viktiga fördelar:", 
+                clubTitle:"Gå med i ZICO Club", clubSub:"Samla poäng, dela ZICO och lås upp belöningar.", clubPointsLabel:"Poäng", clubVisitsLabel:"Besök", clubReferralsLabel:"Delningar", shareZicoBtn:"Dela ZICO", clubRewardBtn:"Belöningar", viralTitle:"Tipsa en vän", referralLabel:"Din delningskod", referralHint:"Dela din ZICO-länk med vänner.", findTitle:"Hitta ZICO", findSub:"Välj region och kontakta rätt distributör.", findBtn:"Hitta distributör →", fastOrderTitle:"Snabb beställning", fastOrderSub:"Välj smak och skicka beställningen till din region.", fastOrderBtn:"Handla nu →", reviewTitle:"Din ZICO-recension", reviewSub:"Betygsätt din favoritsmak och skriv en recension.", reviewBtn:"Skriv recension →", 
+                regionLabel: "Vart ska beställningen skickas?", regionHint: "Vi kopplar beställningen till rätt region.", selectedRegionSub: "Välj en distributör för din region.",
+                swedenDistributorTitle: "Kommer snart", swedenDistributorText: "ZICO har inte kommit till denna region än."
             }
         };
     </script>
 
-    <!-- Slider JS -->
     <script>
         const SLIDES = [
             { image: 'assets/images/slide-11.webp', altImage: 'slide-11.jpg', isSponsor: false },
@@ -1418,6 +1454,7 @@
             { image: 'assets/images/slide-3.webp', altImage: 'slide-3.jpg', isSponsor: false },
             { image: 'assets/images/slide-4.webp', altImage: 'slide-4.jpg', isSponsor: false },
             { image: 'assets/images/slide-5.webp', altImage: 'slide-5.jpg', isSponsor: false },
+            { image: 'assets/images/slide-6.webp', altImage: 'slide-6.jpg', isSponsor: true },
             { image: 'assets/images/slide-7.webp', altImage: 'slide-7.jpg', isSponsor: false },
             { image: 'assets/images/slide-8.webp', altImage: 'slide-8.jpg', isSponsor: false },
             { image: 'assets/images/slide-9.webp', altImage: 'slide-9.jpg', isSponsor: false },
@@ -1528,7 +1565,6 @@
     </script>
 
     <script>
-        // ZICO v7 production configuration. API is same-origin by default.
         window.ZICO_CONFIG = Object.assign({
             apiBase: '/api',
             currency: { kurdistan: 'IQD', sweden: 'SEK' },
@@ -1537,7 +1573,6 @@
         }, window.ZICO_CONFIG || {});
     </script>
 
-    <!-- Main Logic Engine with AXIS COLA Reveal Transition & Dynamic State -->
     <script>
         const PRODUCTS = [
             {
@@ -1619,7 +1654,7 @@
                 glowColor: 'rgba(138, 43, 226, 0.25)',
                 sugar: 'Natural Fruit Sugar',
                 caffeine: 'Caffeine | Taurine | Vitamins',
-                benefits: ['عەمباری دژەئۆکسێنەرەکان بە تامی ئەسایی سویدی', 'تايبەت ب كەسێن حەز ب تامیێن میوەیی دکەن', 'بەهێزکەری سیستم و چالاکی مێشک']
+                benefits: ['عەمباری دژەئۆکسێنەرەکان بە تامی ئەسایی سویدی', 'تایبەت ب کەسێن حەز ب تامیێن میوەیی دکەن', 'بەهێزکەری سیستم و چالاکی مێشک']
             },
             {
                 id: 'zico-69',
@@ -1672,7 +1707,62 @@
             cardState[p.id] = { type: 'bundle', qty: 1 };
         });
 
-        /* Trigger clip-path circular reveal and 3d rotation when selecting flavors */
+        // ========================================================
+        // ZICO REGIONS & DISTRIBUTORS CONFIG
+        // ========================================================
+        const REGIONS = {
+            kurdistan: {
+                name: 'کوردستان',
+                nameEn: 'Kurdistan',
+                flag: '🇮🇶',
+                available: true,
+                currency: 'IQD',
+                deliveryNote: 'گەیاندن ل هەمی شارێن کوردستانێ',
+                agents: [
+                    { 
+                        id: 'badinan',
+                        name: 'بریکارێ سەرەکی ل بادینان / دهۆک',
+                        nameEn: 'Badinan / Duhok',
+                        phone: '+9647504696517',
+                        icon: '📍',
+                        color: 'blue'
+                    },
+                    { 
+                        id: 'erbil-1',
+                        name: 'بریکارێ سەرەکی ل هەولێر',
+                        nameEn: 'Erbil (Korek)',
+                        phone: '+9647504489125',
+                        icon: '📍',
+                        color: 'orange'
+                    },
+                    { 
+                        id: 'erbil-2',
+                        name: 'بریکارێ سەرەکی ل هەولێر',
+                        nameEn: 'Erbil (Korek)',
+                        phone: '+9647502615202',
+                        icon: '📍',
+                        color: 'orange'
+                    },
+                    { 
+                        id: 'erbil-3',
+                        name: 'بریکارێ سەرەکی ل هەولێر',
+                        nameEn: 'Erbil (Asiacell)',
+                        phone: '+9647745445542',
+                        icon: '📍',
+                        color: 'orange'
+                    }
+                ]
+            },
+            sweden:  { name: 'Sweden', nameEn: 'Sweden',  flag: '🇸🇪', available: false, currency: 'SEK' },
+            dubai:   { name: 'Dubai',  nameEn: 'Dubai',   flag: '🇦🇪', available: false, currency: 'AED' },
+            uk:      { name: 'UK',     nameEn: 'UK',      flag: '🇬🇧', available: false, currency: 'GBP' },
+            iraq:    { name: 'Iraq',   nameEn: 'Iraq',    flag: '🇮🇶', available: false, currency: 'IQD' },
+            spain:   { name: 'Spain',  nameEn: 'Spain',   flag: '🇪🇸', available: false, currency: 'EUR' },
+            syria:   { name: 'Syria',  nameEn: 'Syria',   flag: '🇸🇾', available: false, currency: 'SYP' }
+        };
+
+        let orderRegion = localStorage.getItem('zicoOrderRegion') || 'kurdistan';
+
         function setThemeFlavor(prodId) {
             const prod = PRODUCTS.find(p => p.id === prodId);
             if (!prod) return;
@@ -1751,29 +1841,23 @@
                     cardHtml = `
                         <div class="glass-card flavor-card-container border ${prod.borderColor} rounded-3xl overflow-hidden flex flex-col justify-between relative group opacity-60 grayscale-[40%]">
                             <div class="absolute inset-0 bg-gradient-to-b ${prod.color} opacity-30"></div>
-
                             <div class="absolute top-4 left-4 z-20 bg-rose-600 text-white text-[10px] font-black px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1">
                                 ⛔ ${dict.soldOutText}
                             </div>
-
                             <div class="p-6 relative z-10">
                                 <div class="flex items-center justify-between mb-4">
                                     <span class="px-3 py-1 rounded-full text-xs font-black ${prod.badgeBg}"># ${prod.number}</span>
                                     <span class="text-[10px] font-bold text-slate-300 bg-slate-900/80 px-2 py-0.5 rounded-md border border-slate-800">🇸🇪 SWEDEN</span>
                                 </div>
-
                                 <div class="h-60 flex items-center justify-center my-2 relative">
                                     <img loading="lazy" decoding="async" src="${prod.image}" alt="${prod.name}" class="h-52 object-contain grayscale filter drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)]" onerror="handleMultiSrcImgError(this, '${prod.id}', '${prod.name}')">
                                 </div>
-
                                 <h4 class="text-xl font-black text-white mt-2">${prod.name}</h4>
                                 <p class="text-orange-400 text-xs font-bold mt-1 mb-4">${getFlavorText(prod)}</p>
-
                                 <div class="bg-slate-950/90 rounded-2xl p-4 border border-rose-900/50 mb-4 text-center">
                                     <span class="text-rose-400 font-bold text-xs">${dict.soldOutMsg}</span>
                                 </div>
                             </div>
-
                             <div class="p-6 pt-0 relative z-10 flex items-center gap-3">
                                 <button onclick="showProductDetails('${prod.id}')" class="flex-1 py-3 bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700/80 font-bold rounded-xl text-xs transition-all text-center">
                                     ${dict.detailsBtnText}
@@ -1787,8 +1871,6 @@
                 } else {
                     cardHtml = `
                         <div class="glass-card flavor-card-container border ${prod.borderColor} rounded-3xl overflow-hidden flex flex-col justify-between relative group">
-                            
-                            <!-- Dynamic Circular Reveal Layer (Axis Cola Animation Style) -->
                             <div id="reveal-layer-${prod.id}" class="flavor-bg-layer" style="background-color: ${prod.bgColorHex}; opacity: 0.9;"></div>
                             <div class="absolute inset-0 bg-gradient-to-b ${prod.color} opacity-40 group-hover:opacity-75 transition-opacity"></div>
 
@@ -1808,10 +1890,10 @@
                                 <div class="bg-slate-950/90 rounded-2xl p-3 border border-slate-800/80 mb-4">
                                     <div class="grid grid-cols-2 gap-1.5 p-1 bg-black/50 rounded-xl mb-3">
                                         <button onclick="setPackType('${prod.id}', 'bundle')" class="py-1.5 rounded-lg text-xs font-bold transition-all ${bundleClass}">
-                                            📦 ${unitBundleText} (30,000 د.ع)
+                                            📦 ${unitBundleText}
                                         </button>
                                         <button onclick="setPackType('${prod.id}', 'piece')" class="py-1.5 rounded-lg text-xs font-bold transition-all ${pieceClass}">
-                                            🥫 ${unitPieceText} (1,500 د.ع)
+                                            🥫 ${unitPieceText}
                                         </button>
                                     </div>
 
@@ -1826,7 +1908,7 @@
 
                                     <div class="flex items-center justify-between pt-2.5 mt-2 border-t border-slate-800 text-xs">
                                         <span class="text-slate-400">${dict.totalTextLabel}</span>
-                                        <span class="font-black text-sm text-emerald-400">${calcTotal.toLocaleString()} IQD</span>
+                                        <span class="font-black text-sm text-emerald-400">${formatMoney(calcTotal)}</span>
                                     </div>
                                 </div>
                             </div>
@@ -1836,7 +1918,6 @@
                                     ${dict.detailsBtnText}
                                 </button>
                                 
-                                <!-- Animated Truck Add to Cart Button -->
                                 <button id="add-btn-${prod.id}" onclick="addToCartWithAnimation('${prod.id}')" class="truck-btn flex-1 py-3 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold rounded-xl text-xs transition-all text-center shadow-lg shadow-orange-500/20 active:scale-95">
                                     <span class="truck-icon text-lg">🚚</span>
                                     <span class="btn-text-content">${dict.addCartBtnText}</span>
@@ -1867,7 +1948,6 @@
             renderProducts();
         }
 
-        /* Delivery Truck Animated Action logic */
         function addToCartWithAnimation(prodId) {
             const btn = document.getElementById(`add-btn-${prodId}`);
             if (btn) {
@@ -1949,7 +2029,7 @@
                                 <p class="text-[10px] text-slate-400">${getFlavorText(item)}</p>
                                 <div class="flex items-center gap-2 mt-1">
                                     <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-orange-500/20 text-orange-400">${packText}</span>
-                                    <span class="text-xs font-bold text-emerald-400">${itemTotal.toLocaleString()} ${getOrderCurrency()}</span>
+                                    <span class="text-xs font-bold text-emerald-400">${formatMoney(itemTotal)}</span>
                                 </div>
                             </div>
 
@@ -1968,7 +2048,7 @@
             }
 
             const totalPriceEl = document.getElementById('cart-total-price');
-            if (totalPriceEl) totalPriceEl.innerText = `${totalPrice.toLocaleString()} ${getOrderCurrency()}`;
+            if (totalPriceEl) totalPriceEl.innerText = formatMoney(totalPrice);
         }
 
         function updateCartItemQty(cartItemId, delta) {
@@ -2025,15 +2105,18 @@
                 prepareAgentModal();
                 modal.classList.remove('hidden');
                 modal.classList.add('flex');
+                document.body.style.overflow = 'hidden';
             } else {
                 modal.classList.add('hidden');
                 modal.classList.remove('flex');
+                document.body.style.overflow = '';
             }
         }
 
         function toggleAgentModal(show) {
             const modal = document.getElementById('agent-select-modal');
             if (show) {
+                prepareAgentModal();
                 modal.classList.remove('hidden');
                 modal.classList.add('flex');
             } else {
@@ -2090,99 +2173,298 @@
             toggleDetailModal(true);
         }
 
-        let orderRegion = localStorage.getItem('zicoOrderRegion') || 'kurdistan';
-
-        // Add verified distributor numbers here when available. Never invent a number.
-        const DISTRIBUTOR_CONFIG = {
-            sweden: [],
-            kurdistan: [
-                { id: 'badinan', name: 'Badinan', phone: '+9647504696517' },
-                { id: 'erbil-1', name: 'Erbil', phone: '+9647504489125' },
-                { id: 'erbil-2', name: 'Erbil', phone: '+9647502615202' },
-                { id: 'erbil-3', name: 'Erbil', phone: '+9647745445542' }
-            ]
-        };
-
+        // ========================================================
+        // REGION & CURRENCY LOGIC
+        // ========================================================
         function selectOrderRegion(region) {
+            if (!REGIONS[region]) return;
             orderRegion = region;
             localStorage.setItem('zicoOrderRegion', region);
-            const sweden = region === 'sweden';
+            
+            const config = REGIONS[region];
             const badge = document.getElementById('regionStatus');
-            if (badge) badge.innerText = sweden ? 'Sweden' : 'Kurdistan';
-            document.getElementById('regionSwedenBtn')?.classList.toggle('active-region', sweden);
-            document.getElementById('regionIraqBtn')?.classList.toggle('active-region', !sweden);
-            document.getElementById('regionSwedenBtn')?.classList.toggle('border-yellow-500', sweden);
-            document.getElementById('regionIraqBtn')?.classList.toggle('border-orange-500', !sweden);
-            document.getElementById('orderPostalCode')?.classList.toggle('hidden', !sweden);
-            if (document.getElementById('orderCustomerName')) document.getElementById('orderCustomerName').placeholder = sweden ? 'Name' : (currentLanguage==='english' ? 'Name' : 'ناڤێ تە');
-            if (document.getElementById('orderCustomerPhone')) document.getElementById('orderCustomerPhone').placeholder = sweden ? 'Phone' : (currentLanguage==='english' ? 'Phone' : 'ژمارا تە');
-            if (document.getElementById('orderCustomerCity')) document.getElementById('orderCustomerCity').placeholder = sweden ? 'City' : (currentLanguage==='english' ? 'City' : 'شار');
-            if (document.getElementById('orderCustomerAddress')) document.getElementById('orderCustomerAddress').placeholder = sweden ? 'Address' : (currentLanguage==='english' ? 'Address' : 'ناونیشان');
+            if (badge) badge.innerText = `${config.flag} ${config.nameEn}`;
+            
+            const select = document.getElementById('regionSelect');
+            if (select) select.value = region;
+            
+            // Show/hide postal code field
+            const showPostal = region === 'sweden' || region === 'uk';
+            document.getElementById('orderPostalCode')?.classList.toggle('hidden', !showPostal);
+            
+            // Update placeholders based on region
+            const isEnglish = currentLanguage === 'english' || currentLanguage === 'swedish';
+            const nameEl = document.getElementById('orderCustomerName');
+            const phoneEl = document.getElementById('orderCustomerPhone');
+            const cityEl = document.getElementById('orderCustomerCity');
+            const addrEl = document.getElementById('orderCustomerAddress');
+            
+            if (nameEl) nameEl.placeholder = isEnglish ? 'Your name' : 'ناڤێ تە';
+            if (phoneEl) phoneEl.placeholder = isEnglish ? 'Your phone' : 'ژمارا تە';
+            if (cityEl) cityEl.placeholder = isEnglish ? 'City' : 'شار';
+            if (addrEl) addrEl.placeholder = isEnglish ? 'Address' : 'ناونیشان';
+            
+            updateCartUI();
         }
 
-        function getOrderCurrency(){ return orderRegion === 'sweden' ? 'SEK' : 'IQD'; }
-        function formatMoney(value){ return `${Number(value||0).toLocaleString(currentLanguage === 'swedish' ? 'sv-SE' : 'en-US')} ${getOrderCurrency()}`; }
+        function getOrderCurrency() {
+            return REGIONS[orderRegion]?.currency || 'IQD';
+        }
 
+        function formatMoney(value) {
+            const currency = getOrderCurrency();
+            return `${Number(value || 0).toLocaleString('en-US')} ${currency}`;
+        }
+
+        function formatPhone(phone) {
+            // +9647504696517 → +964 750 469 6517
+            return phone.replace(/(\+\d{3})(\d{3})(\d{3})(\d{4})/, '$1 $2 $3 $4');
+        }
+
+        // ========================================================
+        // PROFESSIONAL ORDER MESSAGE BUILDER
+        // ========================================================
         function buildOrderText() {
-            let text = `ZICO Energy Order | ${orderRegion === 'sweden' ? 'Sweden' : 'Kurdistan / Iraq'}\n`;
-            text += `Currency: ${getOrderCurrency()}\n\n`;
-            const fields = [
-                ['Name', document.getElementById('orderCustomerName')?.value || '—'],
-                ['Phone', document.getElementById('orderCustomerPhone')?.value || '—'],
-                ['City', document.getElementById('orderCustomerCity')?.value || '—'],
-                ['Address', document.getElementById('orderCustomerAddress')?.value || '—']
-            ];
-            if (orderRegion === 'sweden') fields.push(['Postal Code', document.getElementById('orderPostalCode')?.value || '—']);
-            fields.forEach(([k,v]) => text += `${k}: ${v}\n`);
-            text += '\nProducts:\n';
-            let grandTotal = 0;
-            cart.forEach((item,index) => {
-                const total = Number(item.unitPrice) * Number(item.qty); grandTotal += total;
-                text += `${index+1}. ${item.name} — ${item.qty} ${item.itemType === 'bundle' ? DICTIONARY[currentLanguage].unitBundleText : DICTIONARY[currentLanguage].unitPieceText} — ${formatMoney(total)}\n`;
+            const region = REGIONS[orderRegion];
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('en-GB', { 
+                day: '2-digit', month: 'short', year: 'numeric' 
             });
-            text += `\nTotal: ${formatMoney(grandTotal)}`;
+            const timeStr = now.toLocaleTimeString('en-GB', { 
+                hour: '2-digit', minute: '2-digit' 
+            });
+            const orderId = 'ZICO-' + Date.now().toString(36).toUpperCase().slice(-6);
+
+            // Header
+            let text = `🛒 *ZICO ENERGY — NEW ORDER*\n`;
+            text += `━━━━━━━━━━━━━━━━━━━━━━\n`;
+            text += `📋 *Order ID:* \`${orderId}\`\n`;
+            text += `📅 *Date:* ${dateStr} • ${timeStr}\n`;
+            text += `🌍 *Region:* ${region.flag} ${region.nameEn}\n`;
+            text += `💱 *Currency:* ${region.currency}\n\n`;
+
+            // Customer Info
+            const name = cleanText(document.getElementById('orderCustomerName')?.value, 100) || '—';
+            const phone = cleanText(document.getElementById('orderCustomerPhone')?.value, 40) || '—';
+            const city = cleanText(document.getElementById('orderCustomerCity')?.value, 80) || '—';
+            const address = cleanText(document.getElementById('orderCustomerAddress')?.value, 200) || '—';
+            const postal = cleanText(document.getElementById('orderPostalCode')?.value, 20) || '—';
+
+            text += `👤 *CUSTOMER INFO*\n`;
+            text += `━━━━━━━━━━━━━━━━━━━━━━\n`;
+            text += `• *Name:* ${name}\n`;
+            text += `• *Phone:* ${phone}\n`;
+            text += `• *City:* ${city}\n`;
+            text += `• *Address:* ${address}\n`;
+            if (orderRegion === 'sweden' || orderRegion === 'uk') {
+                text += `• *Postal Code:* ${postal}\n`;
+            }
+            text += `\n`;
+
+            // Products
+            text += `📦 *PRODUCTS*\n`;
+            text += `━━━━━━━━━━━━━━━━━━━━━━\n`;
+            let grandTotal = 0;
+            cart.forEach((item, index) => {
+                const total = Number(item.unitPrice) * Number(item.qty);
+                grandTotal += total;
+                const packText = item.itemType === 'bundle' ? '📦 Carton (24 cans)' : '🥫 Single Can';
+                text += `\n*${index + 1}.* ${item.name}\n`;
+                text += `   Type: ${packText}\n`;
+                text += `   Qty: *${item.qty}*\n`;
+                text += `   Unit: ${formatMoney(item.unitPrice)}\n`;
+                text += `   Subtotal: *${formatMoney(total)}*\n`;
+            });
+
+            // Total
+            text += `\n━━━━━━━━━━━━━━━━━━━━━━\n`;
+            text += `💰 *TOTAL: ${formatMoney(grandTotal)}*\n`;
+            text += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+            // Payment
+            text += `💳 *PAYMENT METHODS*\n`;
+            text += `• 🏦 FIB: \`+964 750 469 6517\`\n`;
+            text += `• ⚡ FastPay: \`+964 750 469 6517\`\n`;
+            text += `• 💵 Cash on Delivery\n\n`;
+
+            // Footer
+            text += `✅ تکایە داواکارییەکە پشتڕاست بکە.\n`;
+            text += `⚡ *ZICO Energy Drink* — Sweden 🇸🇪 • Kurdistan ☀️\n`;
+            text += `🔗 zico-energy.vercel.app`;
+
             return text;
         }
 
         function copyOrderDetails() {
-            navigator.clipboard?.writeText(buildOrderText()).then(() => alert(currentLanguage === 'swedish' ? 'Beställningsuppgifterna kopierades.' : currentLanguage === 'english' ? 'Order details copied.' : 'زانیاریێن داواکاریێ هاتنە کوپیکرن.'));
-        }
-
-        function prepareAgentModal() {
-            const isSweden = orderRegion === 'sweden';
-            document.getElementById('kurdistanAgentsList')?.classList.toggle('hidden', isSweden);
-            document.getElementById('swedenDistributorNotice')?.classList.toggle('hidden', !isSweden);
-            const title = document.getElementById('selectedRegionTitle');
-            if (title) title.innerText = isSweden ? '🇸🇪 Sweden' : '🇮🇶 Kurdistan / Iraq';
-        }
-
-        async function sendOrderViaWhatsApp(phoneNumber) {
-            if (cart.length === 0) return;
-            const customerName=cleanText(document.getElementById('orderCustomerName')?.value,100);
-            const customerPhone=cleanText(document.getElementById('orderCustomerPhone')?.value,40);
-            const customerCity=cleanText(document.getElementById('orderCustomerCity')?.value,80);
-            if(!customerName || !customerPhone || !customerCity){ showStatus(currentLanguage==='english'?'Please complete your name, phone and city.':'تکایە ناڤ، ژمارا تە و شار پڕ بکە.','error'); return; }
-            if (orderRegion === 'sweden' && !phoneNumber) { copyOrderDetails(); return; }
-            const cleanNum = (phoneNumber || '').replace(/[^0-9]/g, '');
-            if (!cleanNum) { copyOrderDetails(); return; }
-            const order={
-                id:makeId('ORD'), region:orderRegion, currency:getOrderCurrency(),
-                customer:{name:cleanText(document.getElementById('orderCustomerName')?.value,100),phone:cleanText(document.getElementById('orderCustomerPhone')?.value,40),city:cleanText(document.getElementById('orderCustomerCity')?.value,80),address:cleanText(document.getElementById('orderCustomerAddress')?.value,200),postalCode:cleanText(document.getElementById('orderPostalCode')?.value,20)},
-                items:cart.map(i=>({id:i.id,name:cleanText(i.name,100),qty:Number(i.qty),itemType:i.itemType,unitPrice:Number(i.unitPrice)})),
-                total:cart.reduce((sum,i)=>sum+Number(i.unitPrice)*Number(i.qty),0), created_at:new Date().toISOString()
-            };
-            try { await ZICO_API.post('/orders',order); } catch(e) { localStorage.setItem('zicoLastOrderV7',JSON.stringify(order)); }
-            const localOrders=safeJson('zicoOrdersV6',[]); localOrders.push(order); localStorage.setItem('zicoOrdersV6',JSON.stringify(localOrders.slice(-100)));
             const text = buildOrderText();
-            window.open(`https://wa.me/${cleanNum}?text=${encodeURIComponent(text)}`, '_blank');
-            toggleAgentModal(false); toggleCartModal(false);
+            navigator.clipboard?.writeText(text).then(() => {
+                const msg = currentLanguage === 'swedish' ? 'Beställningsuppgifterna kopierades.' 
+                    : currentLanguage === 'english' ? 'Order details copied.' 
+                    : 'زانیاریێن داواکاریێ هاتنە کوپیکرن.';
+                showStatus(msg, 'success');
+            });
         }
 
+        // ========================================================
+        // AGENT MODAL RENDERING
+        // ========================================================
+        function prepareAgentModal() {
+            const region = REGIONS[orderRegion];
+            const kurdistanBox = document.getElementById('kurdistanAgentsList');
+            const comingSoonBox = document.getElementById('swedenDistributorNotice');
+            const regionTitle = document.getElementById('selectedRegionTitle');
+
+            // Update title
+            if (regionTitle) {
+                regionTitle.innerText = `${region.flag} ${region.nameEn}`;
+            }
+
+            // If region is Coming Soon
+            if (!region.available) {
+                if (kurdistanBox) kurdistanBox.classList.add('hidden');
+                if (comingSoonBox) {
+                    comingSoonBox.classList.remove('hidden');
+                    comingSoonBox.innerHTML = `
+                        <div class="text-5xl mb-3">${region.flag}</div>
+                        <p class="text-base font-black text-white">${region.nameEn} — Coming Soon 🚀</p>
+                        <p class="text-[11px] text-slate-400 mt-2 leading-6">
+                            ZICO هێشتا ل ${region.nameEn} نەگەهیشتیە.<br>
+                            داواکارییا تە دێ هێتە تۆمارکرن و دێ پەیوەندیی ب تە هێتە کرن دەمێ ئەم گەهیشتین.
+                        </p>
+                        <button onclick="copyOrderDetails()" 
+                                class="mt-4 w-full px-4 py-3 rounded-xl bg-orange-500 hover:bg-orange-600 text-white text-xs font-black transition-all">
+                            📋 کۆپیکرنا زانیاریێن داواکاریێ
+                        </button>
+                        <button onclick="notifyComingSoon('${region.nameEn}')" 
+                                class="mt-2 w-full px-4 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold border border-slate-700 transition-all">
+                            🔔 ئاگەهداریی بکە دەمێ ZICO گەهیشت
+                        </button>
+                    `;
+                }
+                return;
+            }
+
+            // If region is Kurdistan (available)
+            if (kurdistanBox) kurdistanBox.classList.remove('hidden');
+            if (comingSoonBox) comingSoonBox.classList.add('hidden');
+
+            // Render agents dynamically
+            if (kurdistanBox && region.agents) {
+                kurdistanBox.innerHTML = region.agents.map((agent, idx) => `
+                    <div class="bg-slate-900/90 border border-${agent.color}-500/30 rounded-2xl p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-bold text-${agent.color}-400 bg-${agent.color}-500/10 px-2.5 py-1 rounded-lg">
+                                ${agent.icon} ئۆپشنێ ${idx + 1}
+                            </span>
+                            <span class="text-sm font-bold text-white">${agent.name}</span>
+                        </div>
+                        <button onclick="sendOrderViaWhatsApp('${agent.phone}')" 
+                                class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-between px-4">
+                            <span dir="ltr" class="font-mono text-sm">${formatPhone(agent.phone)}</span>
+                            <span>واتسئاپ 💬</span>
+                        </button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function notifyComingSoon(regionName) {
+            const email = prompt('ئیمەیلێ خۆ بنڤیسە دا ئاگەهداریی بکەین:');
+            if (email && email.includes('@')) {
+                localStorage.setItem('zicoNotify_' + regionName, email);
+                showStatus(`✅ سپاس! دێ ئاگەهداریی بکەین دەمێ ZICO گەهیشت ${regionName}`, 'success');
+            }
+        }
 
         // ========================================================
-        // ZICO DEMAND ENGINE — local-first, backend-ready
+        // SEND ORDER VIA WHATSAPP
         // ========================================================
-        // v6 data adapter: tries the real API first, then safely falls back to device storage.
+        async function sendOrderViaWhatsApp(phoneNumber) {
+            if (cart.length === 0) {
+                showStatus('سەبەتەیا تە بەتالە!', 'error');
+                return;
+            }
+            
+            // Validate customer info
+            const customerName = cleanText(document.getElementById('orderCustomerName')?.value, 100);
+            const customerPhone = cleanText(document.getElementById('orderCustomerPhone')?.value, 40);
+            const customerCity = cleanText(document.getElementById('orderCustomerCity')?.value, 80);
+            
+            if (!customerName || !customerPhone || !customerCity) {
+                showStatus('تکایە ناڤ، ژمارا تە و شار پڕ بکە.', 'error');
+                return;
+            }
+            
+            const region = REGIONS[orderRegion];
+            
+            // If region is Coming Soon
+            if (!region.available) {
+                copyOrderDetails();
+                showStatus('📋 داواکاری هاتە کۆپیکرن. دێ پەیوەندیی ب تە هێتە کرن.', 'success');
+                return;
+            }
+            
+            // Validate phone number
+            const cleanNum = (phoneNumber || '').replace(/[^0-9]/g, '');
+            if (!cleanNum) {
+                copyOrderDetails();
+                return;
+            }
+            
+            // Build order object
+            const order = {
+                id: 'ORD-' + Date.now().toString(36).toUpperCase(),
+                region: orderRegion,
+                regionName: region.nameEn,
+                currency: getOrderCurrency(),
+                customer: {
+                    name: customerName,
+                    phone: customerPhone,
+                    city: customerCity,
+                    address: cleanText(document.getElementById('orderCustomerAddress')?.value, 200),
+                    postalCode: cleanText(document.getElementById('orderPostalCode')?.value, 20)
+                },
+                items: cart.map(i => ({
+                    id: i.id,
+                    name: cleanText(i.name, 100),
+                    qty: Number(i.qty),
+                    itemType: i.itemType,
+                    unitPrice: Number(i.unitPrice)
+                })),
+                total: cart.reduce((sum, i) => sum + Number(i.unitPrice) * Number(i.qty), 0),
+                created_at: new Date().toISOString()
+            };
+            
+            // Save locally
+            const localOrders = safeJson('zicoOrdersV6', []);
+            localOrders.push(order);
+            localStorage.setItem('zicoOrdersV6', JSON.stringify(localOrders.slice(-100)));
+            
+            // Try API
+            try {
+                await ZICO_API.post('/orders', order);
+            } catch (e) {
+                localStorage.setItem('zicoLastOrderV7', JSON.stringify(order));
+            }
+            
+            // Open WhatsApp
+            const text = buildOrderText();
+            const waUrl = `https://wa.me/${cleanNum}?text=${encodeURIComponent(text)}`;
+            window.open(waUrl, '_blank');
+            
+            // Close modals
+            toggleAgentModal(false);
+            toggleCartModal(false);
+            
+            // Show success
+            setTimeout(() => {
+                showStatus('✅ داواکاری هاتە ناردن!', 'success');
+            }, 500);
+        }
+
+        // ========================================================
+        // DEMAND ENGINE
+        // ========================================================
         const ZICO_API = {
             base: (window.ZICO_CONFIG?.apiBase || '/api').replace(/\/$/, ''),
             async post(path, payload){
@@ -2204,8 +2486,10 @@
         function cleanText(v,max=500){ return String(v??'').replace(/[<>]/g,'').trim().slice(0,max); }
         function makeId(prefix='ZICO'){ return prefix+'-'+Date.now().toString(36).toUpperCase()+'-'+Math.random().toString(36).slice(2,7).toUpperCase(); }
         function showStatus(message, type='success'){
-            let el=document.getElementById('zicoStatus'); if(!el){el=document.createElement('div');el.id='zicoStatus';el.className='zico-status';document.body.appendChild(el);}
-            el.innerHTML=`<div class="glass-panel rounded-2xl px-4 py-3 text-xs font-bold text-white shadow-2xl">${cleanText(message,220)}</div>`;
+            let el=document.getElementById('zicoStatus'); 
+            if(!el){el=document.createElement('div');el.id='zicoStatus';el.className='fixed top-20 left-1/2 -translate-x-1/2 z-[999] pointer-events-none';document.body.appendChild(el);}
+            const color = type === 'error' ? 'border-rose-500/50 bg-rose-950/80' : 'border-emerald-500/50 bg-emerald-950/80';
+            el.innerHTML=`<div class="glass-panel ${color} rounded-2xl px-4 py-3 text-xs font-bold text-white shadow-2xl">${cleanText(message,220)}</div>`;
             clearTimeout(showStatus.t); showStatus.t=setTimeout(()=>el.remove(),4200);
         }
 
@@ -2215,7 +2499,7 @@
         function openDemandRequest(){ const m=document.getElementById('demand-modal'); if(m){m.classList.remove('hidden');m.classList.add('flex');} }
         function closeDemandModal(){const m=document.getElementById('demand-modal'); if(m){m.classList.add('hidden');m.classList.remove('flex');}}
         async function submitDemandRequest(){
-            const city=cleanText(document.getElementById('demandCity')?.value,80);
+            const city=cleanText(document.getElementById('demandCityInput')?.value,80);
             const country=document.getElementById('demandCountry')?.value||'Iraq';
             const flavor=document.getElementById('demandFlavor')?.value||'';
             const qty=Number(document.getElementById('demandQty')?.value||1);
@@ -2249,14 +2533,23 @@
             catch(e){ const a=safeJson('zicoDistributorApplicationsV7',[]); a.push(r); localStorage.setItem('zicoDistributorApplicationsV7',JSON.stringify(a.slice(-100))); showStatus(currentLanguage==='english'?'Application saved locally; connect the API for admin sync.':'داخوازی هاتە پاراستن؛ بۆ وەرگرتنا admin پێویستە API پێکەوە بکەیت.'); }
             closeDistributorApplication();
         }
-        document.addEventListener('DOMContentLoaded',()=>renderDemandEngine());
 
-        // ZICO Club / Reviews v6 — API-first with safe local fallback.
         const CLUB_KEY = 'zicoClubV7';
         let reviewStars = 0;
         function getClub(){ return safeJson(CLUB_KEY,{points:0,visits:0,shares:0,code:''}); }
         function saveClub(c){ localStorage.setItem(CLUB_KEY, JSON.stringify(c)); updateClubUI(); }
-        function updateClubUI(){ const c=getClub(); ['clubPoints','clubVisits','clubReferrals'].forEach((id,i)=>{const el=document.getElementById(id); if(el) el.innerText=[c.points,c.visits,c.shares][i]||0;}); const code=document.getElementById('referralCode'); if(code){ if(!c.code){c.code='ZICO-'+Math.random().toString(36).slice(2,8).toUpperCase(); localStorage.setItem(CLUB_KEY,JSON.stringify(c));} code.innerText=c.code; } }
+        function updateClubUI(){ 
+            const c=getClub(); 
+            ['clubPoints','clubVisits','clubReferrals'].forEach((id,i)=>{
+                const el=document.getElementById(id); 
+                if(el) el.innerText=[c.points,c.visits,c.shares][i]||0;
+            }); 
+            const code=document.getElementById('referralCode'); 
+            if(code){ 
+                if(!c.code){c.code='ZICO-'+Math.random().toString(36).slice(2,8).toUpperCase(); localStorage.setItem(CLUB_KEY,JSON.stringify(c));} 
+                code.innerText=c.code; 
+            } 
+        }
         async function registerVisit(){ if(sessionStorage.getItem('zicoVisitV6')) return; sessionStorage.setItem('zicoVisitV6','1'); const c=getClub(); c.visits=(c.visits||0)+1; saveClub(c); try{await ZICO_API.post('/club/events',{type:'visit',code:c.code});}catch(e){} }
         async function shareZico(){ const c=getClub(); c.shares=(c.shares||0)+1; saveClub(c); const url=location.href.split('#')[0]+'?ref='+encodeURIComponent(c.code); try{ if(navigator.share){await navigator.share({title:'ZICO Energy',text:'ZICO Energy Drink — Sweden 🇸🇪 • Kurdistan',url});} else {await navigator.clipboard.writeText(url); showStatus(currentLanguage==='english'?'ZICO link copied.':'لینکێ ZICO هاتە کوپیکرن.');} await ZICO_API.post('/club/events',{type:'share',code:c.code}); }catch(e){} }
         function copyReferralCode(){ const c=getClub(); navigator.clipboard?.writeText(c.code); showStatus(currentLanguage==='english'?'Referral code copied.':'کۆدێ هاوبەشکرنێ هاتە کوپیکرن.'); }
@@ -2265,9 +2558,19 @@
         function closeReviewBox(){ const m=document.getElementById('review-modal'); if(m){m.classList.add('hidden');m.classList.remove('flex');} }
         function setReviewStars(n){ reviewStars=n; document.querySelectorAll('#reviewStars button').forEach(b=>{const on=Number(b.dataset.star)<=n;b.classList.toggle('text-yellow-400',on);b.classList.toggle('text-slate-600',!on);}); }
         function getReviews(){return safeJson('zicoReviewsV7',[]);}
-        async function saveReview(){ const text=cleanText(document.getElementById('reviewText')?.value,1000); const flavor=cleanText(document.getElementById('reviewFlavor')?.value,50); if(!reviewStars||!text){showStatus(currentLanguage==='english'?'Choose stars and write a review.':'تکایە ستێرە هەڵبژێرە و ڕایەک بنڤیسە.','error');return;} const r={id:makeId('REV'),flavor,stars:reviewStars,text,date:new Date().toISOString(),status:'pending'}; try{await ZICO_API.post('/reviews',r); showStatus(currentLanguage==='english'?'Review submitted for moderation.':'ڕاکەت هاتە ناردن بۆ پشکنین.');}catch(e){const a=getReviews();a.unshift(r);localStorage.setItem('zicoReviewsV7',JSON.stringify(a.slice(0,50)));showStatus(currentLanguage==='english'?'Review saved on this device.':'ڕاکەت ل سەر ئەڤ ئامێرە هاتە پاراستن.');} document.getElementById('reviewText').value=''; setReviewStars(0); renderReviews(); const c=getClub(); saveClub(c); if(window.ZICO_REWARDS?.user) ZICO_REWARDS.post('review').catch(()=>{}); }
+        async function saveReview(){ const text=cleanText(document.getElementById('reviewText')?.value,1000); const flavor=cleanText(document.getElementById('reviewFlavor')?.value,50); if(!reviewStars||!text){showStatus(currentLanguage==='english'?'Choose stars and write a review.':'تکایە ستێرە هەڵبژێرە و ڕایەک بنڤیسە.','error');return;} const r={id:makeId('REV'),flavor,stars:reviewStars,text,date:new Date().toISOString(),status:'pending'}; try{await ZICO_API.post('/reviews',r); showStatus(currentLanguage==='english'?'Review submitted for moderation.':'ڕاکەت هاتە ناردن بۆ پشکنین.');}catch(e){const a=getReviews();a.unshift(r);localStorage.setItem('zicoReviewsV7',JSON.stringify(a.slice(0,50)));showStatus(currentLanguage==='english'?'Review saved on this device.':'ڕاکەت ل سەر ئەڤ ئامێرە هاتە پاراستن.');} document.getElementById('reviewText').value=''; setReviewStars(0); renderReviews(); }
         async function renderReviews(){ const box=document.getElementById('reviewList'); if(!box)return; let rs=getReviews(); try{const remote=await ZICO_API.get('/reviews?status=approved&limit=20');if(Array.isArray(remote?.items))rs=remote.items;}catch(e){} box.innerHTML=rs.length?rs.map(r=>`<div class="rounded-xl bg-slate-950 border border-slate-800 p-3"><div class="flex justify-between text-[10px]"><b class="text-white">${Number(r.stars)||0}/5 ★</b><span class="text-slate-600">${new Date(r.date || r.created_at).toLocaleDateString()}</span></div><p class="text-[10px] text-slate-400 mt-1">${cleanText(r.text,1000)}</p></div>`).join(''):'<p class="text-[10px] text-slate-600 text-center">No reviews yet.</p>'; }
-        window.addEventListener('keydown',e=>{if(e.key==='Escape'){closeReviewBox();toggleDetailModal(false);toggleAgentModal(false);toggleCartModal(false);closeDemandModal();closeDistributorApplication();}});
+        
+        window.addEventListener('keydown',e=>{
+            if(e.key==='Escape'){
+                closeReviewBox();
+                toggleDetailModal(false);
+                toggleAgentModal(false);
+                toggleCartModal(false);
+                closeDemandModal();
+                closeDistributorApplication();
+            }
+        });
 
         document.addEventListener("DOMContentLoaded", function() {
             initSwiperSlider();
@@ -2275,11 +2578,11 @@
             selectOrderRegion(orderRegion);
             registerVisit();
             updateClubUI();
+            renderDemandEngine();
         });
     </script>
 
     <script>
-      // ZICO v7 ALL-IN experience layer
       function openZicoAccount(){const m=document.getElementById('zico-account-modal');if(m){const c=getClub();document.getElementById('accountPoints').innerText=c.points||0;document.getElementById('accountOrders').innerText=safeJson('zicoOrdersV6',[]).length||0;m.classList.remove('hidden');m.classList.add('flex')}}
       function closeZicoAccount(){const m=document.getElementById('zico-account-modal');if(m){m.classList.add('hidden');m.classList.remove('flex')}}
       function openZicoAI(){const m=document.getElementById('zico-ai-modal');if(m){m.classList.remove('hidden');m.classList.add('flex')}}
@@ -2287,7 +2590,7 @@
       function zicoRecommend(type){const map={fresh:['zico-65','Mojito Lime 65','فێنک و تازە'],fruit:['zico-63','Açaí Berry 63','میوەیی و جیاواز'],classic:['zico-66','Original Blue 66','کلاسیک و پڕ وزە'],sugarfree:['zico-60','Fruit Candy 60','بێ شەکر']};const r=map[type];const p=PRODUCTS.find(x=>x.id===r[0]);const box=document.getElementById('ai-result');if(!p||!box)return;box.classList.remove('hidden');box.innerHTML=`<div class="flex items-center gap-3"><img src="${p.image}" alt="${cleanText(p.name,100)}" class="w-14 h-20 object-contain"><div><span class="text-[10px] text-purple-400 font-black">PICK FOR YOU</span><b class="block text-sm mt-1">${cleanText(p.name,100)}</b><p class="text-[10px] text-slate-400 mt-1">هەڵبژاردەی ${r[2]}.</p><button onclick="closeZicoAI();showProductDetails('${p.id}')" class="mt-2 text-[10px] font-black text-orange-400">سەیری بەرهەم →</button></div></div>`;document.getElementById('smartPickText').innerText=`پێشنیار: ${p.name}`;}
       function openZicoInsights(){const m=document.getElementById('zico-insights-modal');if(!m)return;const d=getDemand();const cities=new Set(d.map(x=>x.city).filter(Boolean));const orders=safeJson('zicoOrdersV6',[]);document.getElementById('insights-grid').innerHTML=[['⚡',d.length,'Demand requests'],['📍',cities.size,'Cities'],['🛒',orders.length,'Local orders']].map(x=>`<div class="rounded-2xl bg-slate-950 border border-slate-800 p-4"><span>${x[0]}</span><b class="block text-2xl mt-2">${x[1]}</b><small class="text-slate-500">${x[2]}</small></div>`).join('');m.classList.remove('hidden');m.classList.add('flex');}
       function closeZicoInsights(){const m=document.getElementById('zico-insights-modal');if(m){m.classList.add('hidden');m.classList.remove('flex')}}
-      function renderCommunityFeed(){const box=document.getElementById('community-feed');if(!box)return;const rs=getReviews();const items=(rs.length?rs.slice(0,3):PRODUCTS.slice(0,3).map(p=>({stars:5,flavor:p.id,text:`${p.name} — تامی ZICO بۆ تۆ.`,date:new Date().toISOString()})));box.innerHTML=items.map(r=>{const p=PRODUCTS.find(x=>x.id===r.flavor);return `<article class="glass-card rounded-3xl p-5"><div class="flex items-center justify-between"><span class="text-amber-400 text-sm">${'★'.repeat(Math.max(1,Math.min(5,Number(r.stars)||5)))}</span><span class="text-[9px] text-slate-600">ZICO Community</span></div><p class="text-sm text-slate-300 leading-7 mt-4">“${cleanText(r.text,240)}”</p><div class="mt-4 text-[10px] text-slate-500">${p?cleanText(p.name,100):'ZICO Energy'}</div></article>`}).join('')}
+      function renderCommunityFeed(){const box=document.getElementById('community-feed');if(!box)return;const rs=getReviews();const items=(rs.length?rs.slice(0,3):PRODUCTS.slice(0,3).map(p=>({stars:5,flavor:p.id,text:`${p.name} — تامی ZICO بۆ تۆ.`,date:new Date().toISOString()})));box.innerHTML=items.map(r=>{const p=PRODUCTS.find(x=>x.id===r.flavor);return `<article class="glass-card rounded-3xl p-5"><div class="flex items-center justify-between"><span class="text-amber-400 text-sm">${'★'.repeat(Math.max(1,Math.min(5,Number(r.stars)||5)))}</span><span class="text-[9px] text-slate-600">ZICO Community</span></div><p class="text-sm text-slate-300 leading-7 mt-4">"${cleanText(r.text,240)}"</p><div class="mt-4 text-[10px] text-slate-500">${p?cleanText(p.name,100):'ZICO Energy'}</div></article>`}).join('')}
       document.addEventListener('DOMContentLoaded',renderCommunityFeed);
       window.addEventListener('keydown',e=>{if(e.key==='Escape'){closeZicoAI();closeZicoAccount();closeZicoInsights()}});
     </script>
@@ -2296,7 +2599,7 @@
       if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
     </script>
 
-    <!-- ZICO Rewards / Account -->
+    <!-- ZICO Account Modal -->
     <div id="zico-account-modal" class="hidden fixed inset-0 z-[95] bg-black/80 backdrop-blur-md items-center justify-center p-4">
       <div class="glass-card w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-3xl p-6 border border-orange-500/20">
         <div class="flex items-start justify-between gap-4"><div><span class="text-[10px] font-black tracking-widest text-orange-400">MY ZICO · REWARDS</span><h3 class="text-2xl font-black mt-1">هەژماری ZICO 🏆</h3></div><button onclick="closeZicoAccount()" aria-label="Close account" class="w-10 h-10 rounded-xl bg-slate-900">×</button></div>
@@ -2313,15 +2616,11 @@
             <div class="rounded-2xl bg-slate-950 p-4"><small class="text-slate-500">Referrals</small><b id="accountReferrals" class="block text-2xl text-emerald-400 mt-1">0</b></div>
             <div class="rounded-2xl bg-slate-950 p-4"><small class="text-slate-500">Orders</small><b id="accountOrders" class="block text-2xl text-blue-400 mt-1">0</b></div>
           </div>
-          <div class="mt-4 rounded-2xl border border-orange-500/20 bg-orange-500/5 p-4"><div class="flex justify-between gap-3 items-center"><div><small class="text-slate-500">Your referral link</small><b id="zicoReferralCode" class="block text-orange-300 mt-1 tracking-wider">—</b></div><button onclick="copyZicoReferral()" class="px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs font-black">Copy</button></div><button onclick="shareZicoRewards()" class="w-full mt-3 py-3 rounded-xl bg-orange-500 text-slate-950 font-black text-xs">👥 Invite a friend · +10 points</button></div>
-          <div class="mt-4 rounded-2xl bg-slate-950 border border-slate-800 p-4"><div class="flex justify-between text-xs"><span>Progress to next level</span><b id="zicoLevelProgressText">0 / 10,000</b></div><div class="h-2 rounded-full bg-slate-800 mt-3 overflow-hidden"><div id="zicoLevelProgress" class="h-full rounded-full bg-gradient-to-r from-orange-500 to-amber-300" style="width:0%"></div></div></div>
-          <div class="grid sm:grid-cols-3 gap-3 mt-4"><button onclick="openZicoRewards()" class="rounded-2xl border border-slate-800 p-4 text-left hover:border-orange-500/40"><b>🎁 Rewards Shop</b><span class="block text-[10px] text-slate-500 mt-1">Redeem your points</span></button><button onclick="zicoCheckin()" class="rounded-2xl border border-slate-800 p-4 text-left hover:border-emerald-500/40"><b>🔥 Daily Check-in</b><span class="block text-[10px] text-slate-500 mt-1">+10 points · max 7/week</span></button><button onclick="openZicoLeaderboard()" class="rounded-2xl border border-slate-800 p-4 text-left hover:border-blue-500/40"><b>🏆 Leaderboard</b><span class="block text-[10px] text-slate-500 mt-1">Top ZICO Fans</span></button></div>
-          <div class="flex justify-end mt-4"><button onclick="zicoSignOut()" class="text-[10px] text-slate-500 hover:text-white">Sign out</button></div>
         </div>
       </div>
     </div>
 
-    <!-- ZICO v7 AI Guide Modal -->
+    <!-- ZICO AI Modal -->
     <div id="zico-ai-modal" class="hidden fixed inset-0 z-[96] bg-black/80 backdrop-blur-md items-center justify-center p-4">
       <div class="glass-card w-full max-w-xl rounded-3xl p-6 border border-purple-500/20">
         <div class="flex items-start justify-between"><div><span class="text-[10px] font-black tracking-widest text-purple-400">ZICO AI GUIDE</span><h3 class="text-2xl font-black mt-1">یاریدەدەری هەڵبژاردنی ZICO ✨</h3></div><button onclick="closeZicoAI()" aria-label="Close AI guide" class="w-10 h-10 rounded-xl bg-slate-900">×</button></div>
@@ -2332,94 +2631,41 @@
           <button onclick="zicoRecommend('sugarfree')" class="ai-choice">🧊 من بێ شەکر دڤێت</button>
         </div>
         <div id="ai-result" class="hidden mt-5 rounded-2xl bg-purple-950/30 border border-purple-500/20 p-4"></div>
-        <p class="text-[9px] text-slate-600 mt-4">ZICO AI Guide ـی ناوخۆییە؛ پێشنیارەکە لە زانیاریی بەرهەمەکانە و پێویستی بە AI API نییە.</p>
       </div>
     </div>
 
     <!-- Insights Modal -->
     <div id="zico-insights-modal" class="hidden fixed inset-0 z-[94] bg-black/80 backdrop-blur-md items-center justify-center p-4">
-      <div class="glass-card w-full max-w-2xl rounded-3xl p-6"><div class="flex justify-between items-center"><div><span class="text-[10px] font-black tracking-widest text-emerald-400">LIVE INSIGHTS</span><h3 class="text-2xl font-black">ZICO Market Pulse 📊</h3></div><button onclick="closeZicoInsights()" aria-label="Close insights" class="w-10 h-10 rounded-xl bg-slate-900">×</button></div><div id="insights-grid" class="grid sm:grid-cols-3 gap-3 mt-5"></div><div class="mt-5 rounded-2xl border border-slate-800 p-4"><p class="text-xs text-slate-500">Trend</p><p class="text-sm font-bold mt-2">Demand Engine data becomes global automatically when the API/Database is connected.</p></div></div>
+      <div class="glass-card w-full max-w-2xl rounded-3xl p-6"><div class="flex justify-between items-center"><div><span class="text-[10px] font-black tracking-widest text-emerald-400">LIVE INSIGHTS</span><h3 class="text-2xl font-black">ZICO Market Pulse 📊</h3></div><button onclick="closeZicoInsights()" aria-label="Close insights" class="w-10 h-10 rounded-xl bg-slate-900">×</button></div><div id="insights-grid" class="grid sm:grid-cols-3 gap-3 mt-5"></div></div>
     </div>
 
-
-<section class="zico-spin-section" id="lucky-spin" aria-labelledby="lucky-spin-title">
-  <div class="zico-spin-wrap">
-    <div class="zico-spin-card">
-      <p style="font-weight:900;letter-spacing:.14em;text-transform:uppercase;opacity:.7;margin:0 0 8px">ZICO Rewards</p>
-      <h2 id="lucky-spin-title" style="font-size:clamp(32px,5vw,54px);line-height:1;margin:0 0 16px">Lucky Spin 🔥</h2>
-      <p style="font-size:17px;line-height:1.6;opacity:.82">Spin the wheel and discover your ZICO reward.</p>
-      <button class="zico-spin-btn" id="zicoSpinButton" type="button" aria-controls="zicoSpinResult">SPIN NOW</button>
-      <div class="zico-spin-result" id="zicoSpinResult" aria-live="polite"></div>
-      <div class="zico-spin-note">One spin per session. Rewards shown here are promotional placeholders until configured.</div>
-    </div>
-    <div class="zico-spin-wheel-wrap" aria-label="Lucky Spin wheel">
-      <div class="zico-spin-pointer" aria-hidden="true"></div>
-      <div class="zico-spin-wheel" id="zicoSpinWheel" role="img" aria-label="ZICO Lucky Spin wheel">
-        <div class="zico-spin-labels" aria-hidden="true">
-          <span class="zico-spin-label" style="transform:rotate(22.5deg) translateX(10%)">10% OFF</span>
-          <span class="zico-spin-label" style="transform:rotate(67.5deg) translateX(10%)">FREE CAN</span>
-          <span class="zico-spin-label" style="transform:rotate(112.5deg) translateX(10%)">5% OFF</span>
-          <span class="zico-spin-label" style="transform:rotate(157.5deg) translateX(10%)">BONUS</span>
-          <span class="zico-spin-label" style="transform:rotate(202.5deg) translateX(10%)">15% OFF</span>
-          <span class="zico-spin-label" style="transform:rotate(247.5deg) translateX(10%)">FREE SHIPPING</span>
-          <span class="zico-spin-label" style="transform:rotate(292.5deg) translateX(10%)">TRY AGAIN</span>
-          <span class="zico-spin-label" style="transform:rotate(337.5deg) translateX(10%)">ZICO GIFT</span>
+    <section class="zico-spin-section" id="lucky-spin" aria-labelledby="lucky-spin-title">
+      <div class="zico-spin-wrap">
+        <div class="zico-spin-card">
+          <p style="font-weight:900;letter-spacing:.14em;text-transform:uppercase;opacity:.7;margin:0 0 8px">ZICO Rewards</p>
+          <h2 id="lucky-spin-title" style="font-size:clamp(32px,5vw,54px);line-height:1;margin:0 0 16px">Lucky Spin 🔥</h2>
+          <p style="font-size:17px;line-height:1.6;opacity:.82">Spin the wheel and discover your ZICO reward.</p>
+          <button class="zico-spin-btn" id="zicoSpinButton" type="button" aria-controls="zicoSpinResult">SPIN NOW</button>
+          <div class="zico-spin-result" id="zicoSpinResult" aria-live="polite"></div>
+          <div class="zico-spin-note">One spin per session. Rewards shown here are promotional placeholders until configured.</div>
+        </div>
+        <div class="zico-spin-wheel-wrap" aria-label="Lucky Spin wheel">
+          <div class="zico-spin-pointer" aria-hidden="true"></div>
+          <div class="zico-spin-wheel" id="zicoSpinWheel" role="img" aria-label="ZICO Lucky Spin wheel">
+            <div class="zico-spin-labels" aria-hidden="true">
+              <span class="zico-spin-label" style="transform:rotate(22.5deg) translateX(10%)">10% OFF</span>
+              <span class="zico-spin-label" style="transform:rotate(67.5deg) translateX(10%)">FREE CAN</span>
+              <span class="zico-spin-label" style="transform:rotate(112.5deg) translateX(10%)">5% OFF</span>
+              <span class="zico-spin-label" style="transform:rotate(157.5deg) translateX(10%)">BONUS</span>
+              <span class="zico-spin-label" style="transform:rotate(202.5deg) translateX(10%)">15% OFF</span>
+              <span class="zico-spin-label" style="transform:rotate(247.5deg) translateX(10%)">FREE SHIPPING</span>
+              <span class="zico-spin-label" style="transform:rotate(292.5deg) translateX(10%)">TRY AGAIN</span>
+              <span class="zico-spin-label" style="transform:rotate(337.5deg) translateX(10%)">ZICO GIFT</span>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-<script>
-(function(){
-  const btn=document.getElementById('zicoSpinButton'),wheel=document.getElementById('zicoSpinWheel'),result=document.getElementById('zicoSpinResult');if(!btn||!wheel||!result)return;let spinning=false;
-  const labels={"10_off":"10% OFF","500_points":"+500 Points","free_zico":"FREE ZICO","2000_points":"+2,000 Points","try_again":"TRY AGAIN","free_shipping":"FREE SHIPPING","mystery":"MYSTERY REWARD"};
-  btn.addEventListener('click',async()=>{if(spinning)return;if(!window.ZICO_REWARDS?.user){result.textContent='Sign in to use Lucky Spin.';openZicoAccount();return;}spinning=true;btn.disabled=true;result.textContent='Spinning…';try{const r=await window.ZICO_REWARDS.post('spin');const key=r.result?.result_key||'try_again';const idx=Object.keys(labels).indexOf(key)%7;const rotation=360*6+(360-((idx+0.5)*(360/7)));wheel.style.transform=`rotate(${rotation}deg)`;setTimeout(async()=>{result.textContent='🎉 You won: '+labels[key]+'!';spinning=false;await loadZicoRewardsSafe();},4850);}catch(e){result.textContent=e.message;spinning=false;btn.disabled=false;}});
-  async function loadZicoRewardsSafe(){try{const t=await window.ZICO_REWARDS.token();if(!t)return;const j=await fetch('/api/rewards?action=summary',{headers:{Authorization:'Bearer '+t}}).then(r=>r.json());window.ZICO_REWARDS.member=j.member;window.ZICO_REWARDS.history=j.history||[];window.ZICO_REWARDS.redemptions=j.redemptions||[];}catch(e){}}
-})();
-</script>
-
-
-    <!-- ZICO Rewards Shop -->
-    <div id="zico-rewards-modal" class="hidden fixed inset-0 z-[97] bg-black/90 backdrop-blur-md items-center justify-center p-4">
-      <div class="glass-card w-full max-w-5xl max-h-[92vh] overflow-y-auto rounded-3xl p-6 border border-orange-500/20">
-        <div class="flex justify-between items-start gap-4"><div><span class="text-[10px] font-black tracking-widest text-orange-400">ZICO REWARDS</span><h3 class="text-3xl font-black mt-1">Earn · Level Up · Redeem 🎁</h3><p class="text-xs text-slate-500 mt-2">Invite friends, buy ZICO, review and check in — then spend your points.</p></div><button onclick="closeZicoRewards()" class="w-10 h-10 rounded-xl bg-slate-900">×</button></div>
-      <div id="zicoRewardsGuest" class="mt-5 rounded-2xl border border-dashed border-slate-700 p-6 text-center"><p class="font-black">Sign in to use ZICO Rewards</p><button onclick="closeZicoRewards();openZicoAccount()" class="mt-3 px-5 py-3 rounded-xl bg-orange-500 text-slate-950 font-black text-xs">Sign in / Create account</button></div>
-      <div id="zicoRewardsMember" class="hidden"><div class="grid md:grid-cols-[1fr_2fr] gap-4 mt-5"><div class="rounded-3xl bg-gradient-to-br from-orange-500/15 to-slate-950 border border-orange-500/20 p-6"><small class="text-slate-500">YOUR BALANCE</small><div id="rewardsBalance" class="text-5xl font-black text-orange-400 mt-2">0</div><p class="text-xs text-slate-500">ZICO Points</p><div class="mt-5 text-xs"><span id="rewardsLevel" class="font-black text-amber-300">STARTER</span><span id="rewardsLevelNext" class="text-slate-500"> · next 10,000</span></div></div><div class="rounded-3xl bg-slate-950 border border-slate-800 p-6"><div class="flex justify-between text-xs"><b>Next milestone</b><span id="rewardsProgressText">0 / 10,000</span></div><div class="h-3 rounded-full bg-slate-800 mt-3 overflow-hidden"><div id="rewardsProgress" class="h-full rounded-full bg-gradient-to-r from-orange-500 to-amber-300" style="width:0%"></div></div><div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-5 text-center text-[10px]"><div>🥉<br>Starter<br><b>0+</b></div><div>🥈<br>Fan<br><b>10k+</b></div><div>🥇<br>Pro<br><b>50k+</b></div><div>🔥<br>Elite<br><b>100k+</b></div></div></div></div>
-        <div class="flex flex-wrap gap-2 mt-6"><button class="reward-filter active" data-filter="all">All</button><button class="reward-filter" data-filter="gift_card">Gift Cards</button><button class="reward-filter" data-filter="product">ZICO</button><button class="reward-filter" data-filter="merch">Merch</button><button class="reward-filter" data-filter="discount">Discounts</button></div><div id="zicoRewardsGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4"></div>
-        <div class="mt-6 rounded-2xl border border-slate-800 p-4"><div class="flex justify-between items-center"><b>Recent activity</b><button onclick="loadZicoRewards()" class="text-[10px] text-orange-400">Refresh</button></div><div id="zicoRewardsHistory" class="mt-3 space-y-2"></div></div></div></div>
-    </div>
-    <div id="zico-leaderboard-modal" class="hidden fixed inset-0 z-[98] bg-black/90 backdrop-blur-md items-center justify-center p-4"><div class="glass-card w-full max-w-xl rounded-3xl p-6"><div class="flex justify-between items-center"><div><span class="text-[10px] font-black tracking-widest text-blue-400">WEEKLY</span><h3 class="text-2xl font-black">TOP ZICO FANS 🏆</h3></div><button onclick="closeZicoLeaderboard()" class="w-10 h-10 rounded-xl bg-slate-900">×</button></div><div id="zicoLeaderboard" class="mt-5 space-y-2"></div><p class="text-[9px] text-slate-600 mt-4">Weekly leaderboard. Top 3 can receive campaign bonus points when enabled by ZICO admin.</p></div></div>
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>
-    (function(){
-      const LS='zicoRewardsDeviceV1'; if(!localStorage.getItem(LS)) localStorage.setItem(LS,crypto.randomUUID?crypto.randomUUID():('d-'+Date.now()+'-'+Math.random().toString(36).slice(2)));
-      const deviceId=()=>localStorage.getItem(LS)||'';
-      window.ZICO_REWARDS={client:null,user:null,member:null,catalog:[],token:async()=>{const x=await window.ZICO_REWARDS.client?.auth?.getSession();return x?.data?.session?.access_token||''},post:async(action,payload={})=>{const token=await window.ZICO_REWARDS.token();if(!token)throw new Error('Sign in required');const r=await fetch('/api/rewards?action='+encodeURIComponent(action),{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify({...payload,deviceId:deviceId()})});const j=await r.json();if(!r.ok)throw new Error(j.error||'Request failed');return j}};
-      async function initAuth(){try{const cfg=await fetch('/api/config').then(r=>r.json());if(!cfg.supabaseUrl||!cfg.supabaseAnonKey)return;window.ZICO_REWARDS.client=supabase.createClient(cfg.supabaseUrl,cfg.supabaseAnonKey);const {data}=await window.ZICO_REWARDS.client.auth.getSession();if(data.session){window.ZICO_REWARDS.user=data.session.user;await loadSummary();}window.ZICO_REWARDS.client.auth.onAuthStateChange(async(_e,s)=>{window.ZICO_REWARDS.user=s?.user||null;if(s?.user){await loadSummary();}else{window.ZICO_REWARDS.member=null;updateRewardsUI();}});}catch(e){console.warn('ZICO auth unavailable',e)}}
-      async function loadSummary(){const token=await window.ZICO_REWARDS.token(); const r=await fetch('/api/rewards?action=summary',{headers:{Authorization:'Bearer '+token}});if(!r.ok)return;const j=await r.json();window.ZICO_REWARDS.member=j.member;window.ZICO_REWARDS.history=j.history||[];window.ZICO_REWARDS.redemptions=j.redemptions||[];updateRewardsUI();await completeReferralFromUrl();}
-      function updateRewardsUI(){const m=window.ZICO_REWARDS.member, logged=!!m;document.getElementById('zico-auth-panel')?.classList.toggle('hidden',logged);document.getElementById('zico-member-panel')?.classList.toggle('hidden',!logged);document.getElementById('zicoRewardsGuest')?.classList.toggle('hidden',logged);document.getElementById('zicoRewardsMember')?.classList.toggle('hidden',!logged);if(!m)return;const pts=Number(m.points||0);['accountPoints','rewardsBalance'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=pts.toLocaleString();});['accountLevel','rewardsLevel'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=(m.level||'starter').toUpperCase();});const code=document.getElementById('zicoReferralCode');if(code)code.textContent=m.referral_code;const next=pts<10000?10000:pts<50000?50000:pts<100000?100000:null;const base=pts<10000?0:pts<50000?10000:pts<100000?50000:100000;const pct=next?Math.min(100,((pts-base)/(next-base))*100):100;const txt=next?`${pts.toLocaleString()} / ${next.toLocaleString()}`:`${pts.toLocaleString()} · ELITE`;['zicoLevelProgressText','rewardsProgressText'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=txt});['zicoLevelProgress','rewardsProgress'].forEach(id=>{const e=document.getElementById(id);if(e)e.style.width=pct+'%'});renderHistory();}
-      async function completeReferralFromUrl(){const code=new URLSearchParams(location.search).get('ref');if(!code||!window.ZICO_REWARDS.user||sessionStorage.getItem('zicoReferralAttempted'))return;sessionStorage.setItem('zicoReferralAttempted','1');try{const r=await window.ZICO_REWARDS.post('referral',{code});if(r.result?.awarded)showStatus('🎉 Verified referral! The inviter earned +10 ZICO Points.');await loadSummary();}catch(e){if(!/already|not found|self/i.test(e.message))console.warn(e)}}
-      window.zicoSendOTP=async()=>{try{if(!window.ZICO_REWARDS.client)throw new Error('Rewards authentication is not configured yet.');const email=document.getElementById('zicoAuthEmail').value.trim();if(!email)throw new Error('Enter your email.');const {error}=await window.ZICO_REWARDS.client.auth.signInWithOtp({email,options:{shouldCreateUser:true}});if(error)throw error;document.getElementById('zicoOtpRow').classList.remove('hidden');document.getElementById('zicoAuthStatus').textContent='Verification code sent. Check your email.';}catch(e){document.getElementById('zicoAuthStatus').textContent=e.message}};
-      window.zicoVerifyOTP=async()=>{try{const email=document.getElementById('zicoAuthEmail').value.trim(),token=document.getElementById('zicoAuthOtp').value.trim();const {error}=await window.ZICO_REWARDS.client.auth.verifyOtp({email,token,type:'email'});if(error)throw error;showStatus('Welcome to ZICO Rewards 🔥');closeZicoAccount();}catch(e){document.getElementById('zicoAuthStatus').textContent=e.message}};
-      window.zicoSignOut=async()=>{await window.ZICO_REWARDS.client?.auth.signOut();closeZicoAccount();};
-      window.openZicoAccount=async()=>{const m=document.getElementById('zico-account-modal');m.classList.remove('hidden');m.classList.add('flex');if(window.ZICO_REWARDS.user)await loadSummary();else updateRewardsUI();};
-      window.openZicoRewards=async()=>{const m=document.getElementById('zico-rewards-modal');m.classList.remove('hidden');m.classList.add('flex');if(window.ZICO_REWARDS.user){await loadSummary();await loadCatalog();}else updateRewardsUI();};
-      window.closeZicoRewards=()=>{const m=document.getElementById('zico-rewards-modal');m.classList.add('hidden');m.classList.remove('flex')};
-      window.openZicoLeaderboard=async()=>{const m=document.getElementById('zico-leaderboard-modal');m.classList.remove('hidden');m.classList.add('flex');try{const j=await fetch('/api/rewards?action=leaderboard').then(r=>r.json());document.getElementById('zicoLeaderboard').innerHTML=(j.items||[]).map((x,i)=>`<div class="flex items-center justify-between rounded-2xl bg-slate-950 border border-slate-800 p-3"><span class="font-black">${i<3?['🥇','🥈','🥉'][i]:'#'+(i+1)} ${cleanText(x.display_name,30)}</span><span class="text-xs text-orange-400 font-black">${Number(x.points).toLocaleString()} pts · ${x.referrals} invites</span></div>`).join('')||'<p class="text-slate-500 text-sm">No leaderboard data yet.</p>';}catch(e){}};
-      window.closeZicoLeaderboard=()=>{const m=document.getElementById('zico-leaderboard-modal');m.classList.add('hidden');m.classList.remove('flex')};
-      window.copyZicoReferral=()=>{const c=window.ZICO_REWARDS.member?.referral_code;if(!c)return;const url=location.origin+location.pathname+'?ref='+encodeURIComponent(c);navigator.clipboard?.writeText(url);showStatus('Referral link copied 🔗');};
-      window.shareZicoRewards=async()=>{copyZicoReferral();const c=window.ZICO_REWARDS.member?.referral_code,url=location.origin+location.pathname+'?ref='+encodeURIComponent(c||'');try{if(navigator.share)await navigator.share({title:'ZICO Rewards',text:'Join ZICO Rewards 🔥',url});}catch(e){}};
-      window.zicoCheckin=async()=>{try{const r=await window.ZICO_REWARDS.post('checkin');showStatus(r.result?.awarded?'🔥 +10 points!':'Check-in already used / weekly limit reached.');await loadSummary();}catch(e){showStatus(e.message,'error')}};
-      async function loadCatalog(){try{const j=await fetch('/api/rewards?action=catalog').then(r=>r.json());window.ZICO_REWARDS.catalog=j.items||[];renderCatalog('all');}catch(e){}}
-      function renderCatalog(filter){const grid=document.getElementById('zicoRewardsGrid');if(!grid)return;const pts=Number(window.ZICO_REWARDS.member?.points||0);grid.innerHTML=window.ZICO_REWARDS.catalog.filter(r=>filter==='all'||r.reward_type===filter).map(r=>{const available=Number(r.inventory)>0;const enough=pts>=Number(r.points_cost);return `<article class="rounded-3xl bg-slate-950 border border-slate-800 p-5 ${!available?'opacity-60':''}"><div class="flex items-start justify-between"><span class="text-4xl">${cleanText(r.icon,4)}</span><span class="text-[9px] uppercase tracking-widest ${available?'text-emerald-400':'text-red-400'}">${available?'Available':'Sold out'}</span></div><h4 class="font-black mt-4">${cleanText(r.name,100)}</h4><p class="text-[10px] text-slate-500 mt-1 min-h-[30px]">${cleanText(r.description,160)}</p><div class="flex items-center justify-between mt-5"><b class="text-orange-400">${Number(r.points_cost).toLocaleString()} pts</b><button ${(!available||!enough)?'disabled':''} onclick="redeemZicoReward('${r.id}')" class="px-3 py-2 rounded-xl bg-orange-500 disabled:bg-slate-800 disabled:text-slate-600 text-slate-950 font-black text-[10px]">${enough?'REDEEM':'🔒 Need '+Number(r.points_cost-pts).toLocaleString()}</button></div></article>`}).join('');}
-      window.redeemZicoReward=async(id)=>{try{const r=await window.ZICO_REWARDS.post('redeem',{rewardId:id});const out=r.result||{};showStatus(out.code?`🎁 Redeemed! Code: ${out.code}`:'🎁 Reward redeemed!');await loadSummary();await loadCatalog();}catch(e){showStatus(e.message,'error')}};
-      function renderHistory(){const box=document.getElementById('zicoRewardsHistory');if(!box)return;const h=window.ZICO_REWARDS.history||[],r=window.ZICO_REWARDS.redemptions||[];const items=[...h.map(x=>({date:x.created_at,text:x.description,pts:x.points})),...r.map(x=>({date:x.created_at,text:'Reward redeemed',pts:-x.points_spent}))].sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,8);box.innerHTML=items.map(x=>`<div class="flex justify-between rounded-xl bg-slate-900/70 p-3 text-[10px]"><span>${cleanText(x.text,100)}</span><b class="${x.pts>0?'text-emerald-400':'text-red-400'}">${x.pts>0?'+':''}${x.pts}</b></div>`).join('')||'<p class="text-[10px] text-slate-600">No activity yet.</p>';}
-      document.addEventListener('click',e=>{const b=e.target.closest('.reward-filter');if(!b)return;document.querySelectorAll('.reward-filter').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderCatalog(b.dataset.filter)});
-      window.addEventListener('load',initAuth);
-    })();
-    </script>
+    </section>
 
 </body>
 </html>
-
