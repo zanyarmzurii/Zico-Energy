@@ -1,2 +1,0 @@
-const {sb,json,preflight}=require('./_store');
-module.exports=async(req,res)=>{if(preflight(req,res))return;try{if(!process.env.SUPABASE_URL||!process.env.SUPABASE_SERVICE_ROLE_KEY)return json(res,503,{ok:false,service:'zico-v7-api',database:'not_configured'},req);await sb('zico_demand?select=id&limit=1',{},req);return json(res,200,{ok:true,service:'zico-v7-api',database:'connected',time:new Date().toISOString()},req);}catch(e){return json(res,503,{ok:false,service:'zico-v7-api',database:'error',error:'Database connection failed'},req);}};
